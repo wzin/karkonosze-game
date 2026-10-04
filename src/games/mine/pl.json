@@ -1,1 +1,49 @@
-{ "mine": { "title": "Sztolnia" } }
+{
+  "mine": {
+    "title": "Sztolnia",
+    "intro": {
+      "h": "Sztolnie w Kowarach",
+      "p": "W korytarzu jest zupełnie ciemno. Przeciągaj palcem lampę i szukaj żył rudy. Gdy żyła jest w świetle, stuknij w nią trzy razy, żeby ją wykuć. Uważaj na kapiącą wodę i nietoperze, a olej w lampie powoli się kończy!",
+      "start": "Zapal lampę"
+    },
+    "levels": [
+      {
+        "name": "Sztolnia z XII wieku",
+        "year": "około 1150 roku",
+        "h": "Pierwsi górnicy szukają rdzawej rudy żelaza."
+      },
+      {
+        "name": "Sztolnia z XIX wieku",
+        "year": "około 1850 roku",
+        "h": "Kopiesz żelazo, ale w skale kryje się też uran. Licznik Geigera zatrzeszczy, gdy będziesz blisko."
+      },
+      {
+        "name": "Sztolnia R-1, rok 1948",
+        "year": "1948",
+        "h": "Tajna kopalnia uranu. Słuchaj licznika Geigera i szukaj zielonej poświaty."
+      }
+    ],
+    "hud": {
+      "oil": "Olej",
+      "mined": "Wykute: {m} z {n}"
+    },
+    "level": {
+      "done": "Wszystkie żyły wykute!",
+      "dark": "Lampa zgasła"
+    },
+    "sum": {
+      "h": "Koniec szychty"
+    },
+    "titles": {
+      "3": "Sztygar z Kowar",
+      "2": "Górnik z Kowar",
+      "1": "Pomocnik górnika"
+    },
+    "facts": [
+      "Stare podanie mówi, że już w 1148 roku Laurentius Angel znalazł tu rudę żelaza. Przy kopalniach osiedlili się kowale, a od nich wzięła się nazwa miasta: Kowary.",
+      "Od 1854 roku Kowary słynęły nie tylko z kopalń, ale też z dywanów. W tutejszej fabryce tkano je ręcznie, a sprzedawano w całej Europie.",
+      "W latach 1948–1963 w Kowarach w wielkiej tajemnicy wydobywano uran. Pracowały tu Zakłady Przemysłowe R-1, a rudę wywożono do Związku Radzieckiego.",
+      "Dziś Sztolnie Kowary to podziemna trasa turystyczna. W kasku i z przewodnikiem można przejść korytarzami, w których kiedyś kopano uran."
+    ]
+  }
+}
