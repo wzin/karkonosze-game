@@ -1,0 +1,7 @@
+node_modules
+dist
+docs/screenshots
+tools/assets/raw/*
+!tools/assets/raw/manifest.lock.json
+tools/assets/.venv
+tools/smoke/test-results

@@ -1,0 +1,197 @@
+{
+  "app": {
+    "title": "Baśnie Karkonoszy",
+    "subtitle": "Seria mini gier o Karkonoszach",
+    "viewpoint": "Widok z Grodnej na południe: Śnieżka po lewej, Szrenica po prawej"
+  },
+  "ui": {
+    "back": "Wróć na panoramę",
+    "play": "Zagraj",
+    "soon": "Wkrótce",
+    "next": "Dalej",
+    "again": "Zagraj jeszcze raz",
+    "rotate": "Obróć urządzenie poziomo",
+    "noWebgl": "Twoja przeglądarka nie obsługuje grafiki WebGL. Opis gier znajdziesz w katalogu.",
+    "loading": "Ładowanie",
+    "mute": "Dźwięk",
+    "didYouKnow": "Czy wiesz, że",
+    "stars": "{n} z 3 gwiazdek"
+  },
+  "places": [
+    {
+      "id": "szklarska",
+      "name": "Szklarska Poręba",
+      "title": "Hutnik z Józefiny",
+      "region": "ridge",
+      "lore": "Szkło topiono tu już w średniowieczu. Huty pożerały lasy, bo do wytopu trzeba było potażu z popiołu drzewnego, stąd „poręba” w nazwie. W 1842 roku Franz Pohl założył hutę Józefina, a jej kryształy jeździły na dwory całej Europy.",
+      "mech": "klienci składają zamówienia na naczynie. Rozgrzewasz szkło w piecu w dobrym momencie, dmuchasz je do właściwej wielkości, barwisz tlenkiem metalu i formujesz. Kolor zależy od minerału: kobalt daje błękit, złoto rubin, uran zielonkawą poświatę.",
+      "x": 1488,
+      "y": 600,
+      "game": "glass"
+    },
+    {
+      "id": "walonowie",
+      "name": "Góry Izerskie, Chata Walońska",
+      "title": "Znaki Walonów",
+      "region": "ridge",
+      "lore": "Od średniowiecza po Izerach chodzili Walonowie, poszukiwacze złota, kamieni i rud. Drogi do skarbów znaczyli tajemnymi znakami kutymi w skałach i zapisywali w „księgach walońskich”.",
+      "mech": "odczytujesz znaki na głazach i wybierasz, w którą stronę iść. Dobra ścieżka kończy się kryształem górskim lub ametystem, zła prowadzi w mgłę.",
+      "x": 1792,
+      "y": 565
+    },
+    {
+      "id": "jakuszyce",
+      "name": "Jakuszyce",
+      "title": "Bieg Piastów",
+      "region": "ridge",
+      "lore": "Na Polanie Jakuszyckiej od 1976 roku odbywa się największy bieg narciarski w Polsce. Śnieg leży tu najdłużej w Sudetach.",
+      "mech": "rytmiczne stukanie w dwa boki ekranu to odpychanie kijkami. Trafiasz w rytm, biegniesz szybciej. Mijasz Halę Szrenicką i gonisz Ducha Gór na nartach.",
+      "x": 1616,
+      "y": 472
+    },
+    {
+      "id": "chojnik",
+      "name": "Sobieszów, zamek Chojnik",
+      "title": "Zakład Kunegundy",
+      "region": "ridge",
+      "lore": "Legenda mówi, że księżniczka Kunegunda obiecała rękę temu, kto objedzie konno mury zamku nad przepaścią. Udało się tylko jednemu rycerzowi, który potem… odjechał.",
+      "mech": "przechylając ekran lub przesuwając palcem utrzymujesz równowagę konia na wąskim murze. Wiatr od Śnieżki wieje coraz mocniej.",
+      "x": 1288,
+      "y": 642
+    },
+    {
+      "id": "sniezka",
+      "name": "Śnieżka, 1603 m",
+      "title": "Liczyrzepa i księżniczka Emma",
+      "region": "sniezka",
+      "lore": "Duch Gór porwał na szczyt księżniczkę Emmę. Żeby uciec, poprosiła, by policzył wszystkie rzepy na polu. Gdy liczył, zbiegła w dolinę. Od tej pory wołają na niego Liczyrzepa, choć on tego nie znosi.",
+      "mech": "grasz Duchem Gór. Rzepy wyskakują z ziemi i chowają się, Ty je liczysz i podajesz wynik. Emma w tle ucieka, a pogoda na szczycie zmienia się co kilka sekund.",
+      "x": 400,
+      "y": 376,
+      "game": "turnips"
+    },
+    {
+      "id": "karpacz",
+      "name": "Karpacz",
+      "title": "Laborant",
+      "region": "sniezka",
+      "lore": "Laboranci karkonoscy zbierali zioła na zboczach i robili z nich leki, które sprzedawano w całych Prusach. Ostatni z nich, Ernst August Zölfel, zmarł w 1884 roku.",
+      "mech": "dostajesz receptę i wspinasz się po zboczu, zbierając właściwe rośliny: arnikę, goryczkę, dziewięćsił. Potem mieszasz je w moździerzu w dobrej kolejności.",
+      "x": 544,
+      "y": 620,
+      "game": "herbs"
+    },
+    {
+      "id": "wang",
+      "name": "Karpacz Górny",
+      "title": "Kościół z Norwegii",
+      "region": "sniezka",
+      "lore": "Drewniany kościół Wang zbudowano w XII wieku nad norweskim jeziorem Vang. W 1842 roku rozebrano go, przewieziono statkiem i wozami i złożono na nowo pod Śnieżką.",
+      "mech": "układanka. Ponumerowane belki i smocze głowy przyjeżdżają na wozach, Ty je przeciągasz na właściwe miejsca. Pod koniec wschodzi słońce nad gotowym kościołem.",
+      "x": 419,
+      "y": 591
+    },
+    {
+      "id": "lomniczka",
+      "name": "Łomniczka",
+      "title": "Z Kotła do Bobru",
+      "region": "sniezka",
+      "lore": "Łomniczka rodzi się w Kotle Łomniczki pod Śnieżką, skacze przez Dziki Wodospad w Karpaczu i w dolinie łączy się z Łomnicą, a potem z Bobrem. Jedna rzeka przechodzi przez pół panoramy.",
+      "mech": "prowadzisz łódeczkę z kory w dół rzeki. Omijasz głazy, łapiesz liście i mijasz prawdziwe miejsca po drodze. Łączy ze sobą inne gry z panoramy.",
+      "x": 499,
+      "y": 527
+    },
+    {
+      "id": "staniszow",
+      "name": "Staniszów, Grodna",
+      "title": "Luneta Księcia Henryka",
+      "region": "kotlina",
+      "lore": "Henryk XXXVIII Reuss postawił w 1806 roku na Grodnej sztuczną ruinę zamku, żeby mieć skąd patrzeć na góry. To stąd rozciąga się ta panorama i tu zaczyna się gra terenowa.",
+      "mech": "przez lunetę szukasz na panoramie podpowiedzianych miejsc: „kaplica na najwyższym szczycie”, „zamek na skale”. Trafione miejsce odblokowuje jego grę.",
+      "x": 897,
+      "y": 668,
+      "hub": true
+    },
+    {
+      "id": "jelenia",
+      "name": "Jelenia Góra",
+      "title": "Tkacze woali",
+      "region": "kotlina",
+      "lore": "W XVII i XVIII wieku miasto bogaciło się na cienkich woalach z lnu, które kupcy zwani „Schleierherren” wysyłali aż do Ameryki. Herb miasta to jeleń, od legendy o Bolesławie Krzywoustym.",
+      "mech": "krosno. Przeciągasz nitki wątku w rytmie wzoru, który pokazuje się na chwilę. Im równiejsza tkanina, tym dalej płynie statek z Twoim woalem.",
+      "x": 1024,
+      "y": 828
+    },
+    {
+      "id": "cieplice",
+      "name": "Cieplice Śląskie-Zdrój",
+      "title": "Gorące źródła",
+      "region": "kotlina",
+      "lore": "Najgorętsze źródła w Polsce. Legenda mówi, że ranny jeleń księcia wszedł do ciepłej wody i wyszedł zdrowy. Potem kąpali się tu joannici, Schaffgotschowie i goście z całej Europy.",
+      "mech": "mieszasz gorącą wodę ze źródła z zimną z Kamiennej tak, żeby każdy gość miał swoją temperaturę. Jeleń lubi gorąco, hrabina letnio, dzieci chłodno.",
+      "x": 1184,
+      "y": 751
+    },
+    {
+      "id": "siedlecin",
+      "name": "Siedlęcin",
+      "title": "Fresk Lancelota",
+      "region": "kotlina",
+      "lore": "W wieży książęcej z XIV wieku zachowały się jedyne na świecie średniowieczne malowidła o rycerzu Lancelocie. Siedemset lat czekały pod tynkiem.",
+      "mech": "delikatnie ścierasz palcem tynk, odsłaniając fresk. Zbyt mocno, a farba się kruszy. Odsłonięte sceny opowiadają historię Lancelota kawałek po kawałku.",
+      "x": 1216,
+      "y": 840
+    },
+    {
+      "id": "myslakowice",
+      "name": "Mysłakowice",
+      "title": "Tyrolczycy",
+      "region": "kotlina",
+      "lore": "W 1837 roku do Mysłakowic przybyli protestanci z Zillertal w Tyrolu, wygnani z domów za wiarę. Król pruski dał im ziemię, a oni zbudowali tu swoje tyrolskie domy, które stoją do dziś.",
+      "mech": "prowadzisz wędrowną rodzinę z Alp przez mapę. Na postojach budujesz dom z klocków: balkon, szeroki dach, kamienie na gontach, żeby wiatr nie zerwał.",
+      "x": 627,
+      "y": 706
+    },
+    {
+      "id": "palace",
+      "name": "Łomnica, Wojanów, Bukowiec",
+      "title": "Dolina Pałaców i Ogrodów",
+      "region": "kotlina",
+      "lore": "W Kotlinie stoi ponad trzydzieści pałaców i dworów. W XIX wieku przyjeżdżała tu pruska arystokracja, a hrabia von Reden w Bukowcu założył park, który udawał dziką naturę.",
+      "mech": "projektujesz park. Sadzisz aleje, ustawiasz altany i mostki tak, żeby z okien pałacu zawsze było widać Śnieżkę. Gość ocenia widok z każdego okna.",
+      "x": 752,
+      "y": 764
+    },
+    {
+      "id": "kowary",
+      "name": "Kowary",
+      "title": "Sztolnia",
+      "region": "east",
+      "lore": "Od XII wieku kopano tu rudę żelaza, a nazwa miasta pochodzi od kowali. Po wojnie, w latach 1948–1963, w tajemnicy wydobywano uran. Dziś sztolnie można zwiedzać z lampą w ręku.",
+      "mech": "w ciemnym korytarzu widzisz tylko krąg światła lampy. Szukasz żył rudy, uważasz na kapiącą wodę i strop. Licznik Geigera trzeszczy coraz głośniej, gdy jesteś blisko.",
+      "x": 284,
+      "y": 696,
+      "game": "mine"
+    },
+    {
+      "id": "jeziorka",
+      "name": "Wieściszowice, Rudawy Janowickie",
+      "title": "Kolorowe Jeziorka",
+      "region": "east",
+      "lore": "Cztery jeziorka w dawnych wyrobiskach pirytu mają różne kolory: Purpurowe, Błękitne, Zielone i Żółte. Barwi je to, co zostało w skale po kopalni.",
+      "mech": "mieszanie kolorów. Dolewasz do wody minerały i dobierasz odcień do prawdziwego jeziorka. To ta sama chemia, co barwienie szkła w Szklarskiej.",
+      "x": 204,
+      "y": 532
+    },
+    {
+      "id": "kamienna",
+      "name": "Kamienna Góra, Chełmsko Śląskie",
+      "title": "Len",
+      "region": "east",
+      "lore": "Cały wschód Kotliny żył z lnu. W Chełmsku Śląskim stoi rząd drewnianych domów tkaczy z 1707 roku, zwanych „Dwunastu Apostołów”. W każdym mieszkała rodzina z krosnem.",
+      "mech": "od pola do płótna. Układasz we właściwej kolejności etapy: siew, roszenie, międlenie, przędzenie, tkanie, bielenie na łące. Każdy etap to jeden gest palcem.",
+      "x": 99,
+      "y": 600
+    }
+  ]
+}

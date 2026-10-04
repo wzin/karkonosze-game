@@ -1,0 +1,51 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: #141a26;
+}
+
+body {
+  overflow: hidden;
+  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+}
+
+#app canvas {
+  display: block;
+  touch-action: none;
+}
+
+/* "rotate your device" hint, shown by main.ts when the fitted scene gets too narrow */
+#rotate {
+  display: none;
+}
+
+.portrait #rotate {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  padding: 2rem;
+  background: rgb(20 26 38 / 0.8);
+  color: #f3ead8;
+  font: 700 1.5rem/1.3 Nunito, system-ui, sans-serif;
+  text-align: center;
+  pointer-events: none;
+}
+
+#nowebgl {
+  max-width: 32rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  color: #f3ead8;
+  font: 600 1.25rem/1.5 Nunito, system-ui, sans-serif;
+  text-align: center;
+}
