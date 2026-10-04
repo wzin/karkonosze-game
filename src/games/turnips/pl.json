@@ -1,1 +1,45 @@
-{ "turnips": { "title": "Liczyrzepa i księżniczka Emma" } }
+{
+  "turnips": {
+    "title": "Liczyrzepa i księżniczka Emma",
+    "spirit": "Duch Gór",
+    "intro": {
+      "h": "Policz, Duchu Gór",
+      "p": "Porwałeś na Śnieżkę księżniczkę Emmę. Obiecała zostać, jeśli policzysz wszystkie rzepy na polu. Licz uważnie: rzepy wyskakują i chowają się, a pogoda na szczycie zmienia się co chwilę.",
+      "line": "Phi, policzę je w mig! Kamienie się nie liczą, tylko rzepy. A Emma niech grzecznie czeka przy kaplicy.",
+      "start": "Liczymy!"
+    },
+    "round": {
+      "n": "Runda {n} z {total}",
+      "h": "Policz rzepy",
+      "q": "Ile rzep wyskoczyło?",
+      "correct": "Dobrze! Tyle właśnie było.",
+      "wrong": "Było {n}",
+      "late": "Czas minął! Było {n}"
+    },
+    "weather": {
+      "0": "Pogodnie",
+      "1": "Mgła",
+      "2": "Deszcz i burza",
+      "3": "Śnieżyca",
+      "4": "Pełne słońce"
+    },
+    "sum": {
+      "h": "Emma uciekła w dolinę",
+      "line": "Liczyłem uczciwie! I nie nazywajcie mnie Liczyrzepą.",
+      "score": "Dobrze policzone rundy: {n} z {total}"
+    },
+    "titles": {
+      "3": "Rachmistrz Gór",
+      "2": "Duch z głową do liczb",
+      "1": "Rozkojarzony olbrzym"
+    },
+    "facts": [
+      "Duch Gór ma wiele imion. Czesi mówią na niego Krakonoš, od czeskiej nazwy Karkonoszy, a Niemcy Rübezahl. „Rübe” to po niemiecku rzepa, a „Zahl” to liczba. Stąd nasz Liczyrzepa.",
+      "Kaplicę św. Wawrzyńca na szczycie Śnieżki ukończono w 1681 roku. Zbudowali ją hrabiowie Schaffgotschowie, a materiały na budowę trzeba było wnosić aż na szczyt.",
+      "Śnieżka ma 1603 metry. To najwyższy szczyt Karkonoszy i całych Sudetów. Pogoda zmienia się tu w kilka minut, a mgła i silny wiatr zdarzają się bardzo często.",
+      "Obserwatorium meteorologiczne na Śnieżce otwarto w 1974 roku. Składa się z trzech okrągłych tarcz, dlatego mówi się na nie „spodki”, jak na latające talerze.",
+      "Grzbietem Karkonoszy biegnie granica polsko-czeska. Na szczycie Śnieżki możesz stanąć jedną nogą w Polsce, a drugą w Czechach."
+    ],
+    "again": "Policz jeszcze raz"
+  }
+}
