@@ -37,7 +37,7 @@ Adres czytany jest raz, przy starcie (brak obsługi `hashchange`).
 - `#gra=<id miejsca>` (np. `#gra=kowary`): ta sama gra, zapis historyczny, nadal działa;
 - nieznany hash, literówka albo miejsce bez gry (np. `#cieplice`): hub, nigdy pusty ekran;
 - gra otwarta z hasha to gra terenowa: wynik zapisuje się z `field: true` (flaga zostaje na stałe). Gra wybrana
-  w panoramie nie ustawia flagi;
+  w panoramie nie ustawia flagi, tak samo gra z hasha w kiosku (`/?kiosk=1#kowary` to gra w muzeum);
 - `?kiosk=1` włącza tryb kiosku i łączy się z hashem (`/?kiosk=1#kowary`): cele dotykowe co najmniej 96 px (poza
   kioskiem 64 px), po 60 s bez dotyku w grze powrót do panoramy (zapis zostaje, w panoramie licznik nie działa),
   brak linków zewnętrznych. Strona nigdy się nie przewija, także poza kioskiem.

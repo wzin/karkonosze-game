@@ -22,8 +22,12 @@ export function parseRoute(hash: string, search: string, knownPlaces: string[]):
   };
 }
 
-/** The first scene for a route: a routed game starts as field play; anything else opens the hub. */
+/**
+ * The first scene for a route: a routed game starts as field play (a QR code on the trail), except
+ * on the kiosk (`/?kiosk=1#kowary`), where it is a museum play like any other; anything else opens the hub.
+ */
 export function routeTarget(route: Route, games: readonly { id: string; placeId: string }[]): SceneTarget {
   const game = games.find((g) => g.placeId === route.game);
-  return game ? { sceneId: `game:${game.id}`, params: { field: '1' } } : { sceneId: 'hub', params: {} };
+  if (!game) return { sceneId: 'hub', params: {} };
+  return { sceneId: `game:${game.id}`, params: route.kiosk ? {} : { field: '1' } };
 }

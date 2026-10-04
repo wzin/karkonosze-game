@@ -30,6 +30,8 @@ it('needs kiosk=1, not any value', () => expect(parseRoute('', '?kiosk=0', known
 
 it('starts a routed game as field play', () =>
   expect(routeTarget({ game: 'kowary', kiosk: false }, games)).toEqual({ sceneId: 'game:mine', params: { field: '1' } }));
+it('starts a kiosk deep link (/?kiosk=1#kowary) as a museum play, not a field one', () =>
+  expect(routeTarget({ game: 'kowary', kiosk: true }, games)).toEqual({ sceneId: 'game:mine', params: {} }));
 it('falls back to the hub, without params, for a place that has no game', () => {
   expect(routeTarget({ game: 'staniszow', kiosk: false }, games)).toEqual({ sceneId: 'hub', params: {} });
   expect(routeTarget({ game: null, kiosk: true }, games)).toEqual({ sceneId: 'hub', params: {} });
