@@ -2,7 +2,7 @@ import { Container, Graphics, Sprite } from 'pixi.js';
 import { sprite, type AssetRegistry } from '../../core/Assets';
 import { FIELD } from './rules';
 
-/** Sizes in slot-local px, i.e. on the front row; rows further back are scaled down. */
+/** Sizes in slot-local px; rowScale() then sizes each row (0.92 at the back, 1.12 at the front). */
 const MOUND = { w: 190, h: 53 };
 const TURNIP = { w: 100, h: 170 };
 const STONE = { w: 104, h: 88 };
