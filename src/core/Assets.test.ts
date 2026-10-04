@@ -46,7 +46,7 @@ it('builds a tinted placeholder sprite for a missing alias', () => {
   expect(sprite(r, 'mine/bat', { w: 10, h: 10, tint: 0xff0000 }).tint).toBe(0xff0000);
 });
 
-it('loads one prefix as a bundle of /assets/ urls, once', async () => {
+it('loads one prefix as a bundle of page-relative assets/ urls, once', async () => {
   const addBundle = vi.spyOn(Assets, 'addBundle').mockImplementation(() => {});
   const load = vi.spyOn(Assets, 'load').mockResolvedValue({});
   const r = new AssetRegistry({
@@ -60,8 +60,8 @@ it('loads one prefix as a bundle of /assets/ urls, once', async () => {
   await Promise.all([r.loadGroup('hub'), r.loadGroup('hub')]);
   expect(addBundle).toHaveBeenCalledOnce();
   expect(addBundle).toHaveBeenCalledWith('hub', [
-    { alias: 'hub/sky', src: '/assets/gfx/hub/sky.webp' },
-    { alias: 'hub/ridge', src: '/assets/gfx/hub/ridge.webp' },
+    { alias: 'hub/sky', src: 'assets/gfx/hub/sky.webp' },
+    { alias: 'hub/ridge', src: 'assets/gfx/hub/ridge.webp' },
   ]);
   expect(load).toHaveBeenCalledOnce();
 });

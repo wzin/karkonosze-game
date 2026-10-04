@@ -21,19 +21,22 @@ export class Audio {
 
   constructor(
     private readonly moments: Record<Moment, string[]>,
-    private readonly baseUrl = '/assets/audio/',
+    private readonly baseUrl = 'assets/audio/',
     private readonly available: Set<string>,
   ) {
     this.isMuted = readMuted();
     Howler.mute(this.isMuted);
   }
 
+  /** Settings apply to this sound id only: a clip shared by several moments keeps no caller's options. */
   play(moment: Moment, opts: PlayOptions = {}): number | undefined {
     const name = this.resolve(moment);
     if (!name) return undefined;
-    const howl = this.howl(name, opts);
+    const howl = this.howl(name);
     const id = howl.play();
-    if (opts.rate !== undefined) howl.rate(opts.rate, id);
+    howl.volume(opts.volume ?? 1, id);
+    howl.loop(opts.loop ?? false, id);
+    howl.rate(opts.rate ?? 1, id);
     return id;
   }
 
@@ -64,14 +67,12 @@ export class Audio {
     return this.moments[moment]?.find((name) => this.available.has(name)) ?? null;
   }
 
-  /** One lazily created Howl per clip; loop and volume come from the first play() of that clip. */
-  private howl(name: string, opts: PlayOptions): Howl {
+  /** One lazily created Howl per clip, shared by every moment that resolves to it. */
+  private howl(name: string): Howl {
     let howl = this.howls.get(name);
     if (!howl) {
       howl = new Howl({
         src: [`${this.baseUrl}${name}.mp3`],
-        loop: opts.loop ?? false,
-        volume: opts.volume ?? 1,
         onloaderror: (_id, err) => console.warn(`[audio] failed to load "${name}"`, err),
       });
       this.howls.set(name, howl);

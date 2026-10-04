@@ -6,7 +6,7 @@ import { Audio } from './core/Audio';
 import { I18n } from './core/I18n';
 import { IdleTimer } from './core/Kiosk';
 import { DESIGN, fitScale } from './core/Layout';
-import { parseRoute } from './core/Router';
+import { parseRoute, routeTarget } from './core/Router';
 import { Save } from './core/Save';
 import type { SceneContext } from './core/Scene';
 import { SceneManager } from './core/SceneManager';
@@ -21,7 +21,7 @@ interface AudioManifest {
   clips: Record<string, { src: string; seconds: number; loop: boolean }>;
 }
 
-const AUDIO_BASE = '/assets/audio/';
+const AUDIO_BASE = 'assets/audio/';
 const IDLE_SECONDS = 60;
 /** Below this on-screen width (CSS px) the fitted scene is too small: ask to rotate the device. */
 const MIN_SCENE_WIDTH = 700;
@@ -62,8 +62,8 @@ async function main(): Promise<void> {
 
   const [, gfx, sounds] = await Promise.all([
     loadFonts(),
-    fetchJson<GfxManifest>('/assets/gfx/manifest.json'),
-    fetchJson<AudioManifest>('/assets/audio/manifest.json'),
+    fetchJson<GfxManifest>('assets/gfx/manifest.json'),
+    fetchJson<AudioManifest>('assets/audio/manifest.json'),
   ]);
 
   const places = i18n.get<{ id: string }[]>('places');
@@ -99,8 +99,8 @@ async function main(): Promise<void> {
     scenes.register(`game:${game.id}`, async (c) => new (await game.load()).default(c));
   }
 
-  const start = GAMES.find((g) => g.placeId === route.game);
-  ctx.go(start ? `game:${start.id}` : 'hub');
+  const start = routeTarget(route, GAMES);
+  ctx.go(start.sceneId, start.params);
 }
 
 function fitToWindow(root: Container): void {
@@ -115,7 +115,7 @@ async function loadFonts(): Promise<void> {
     weights.flatMap((weight) =>
       Object.entries(FONT_SUBSETS).map(([subset, unicodeRange]) => ({
         alias: `${file}-${subset}-${weight}`,
-        src: `/fonts/${file}-${subset}-${weight}-normal.woff2`,
+        src: `fonts/${file}-${subset}-${weight}-normal.woff2`,
         data: { family, weights: [weight], unicodeRange },
       })),
     ),

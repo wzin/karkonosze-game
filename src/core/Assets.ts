@@ -4,8 +4,8 @@ export interface GfxManifest {
   assets: Record<string, { src: string; w: number; h: number }>;
 }
 
-/** Manifest `src` paths are relative to this URL (public/assets/). */
-const ASSET_BASE = '/assets/';
+/** Manifest `src` paths resolve against this page-relative base (public/assets/), so any sub-path works. */
+const ASSET_BASE = 'assets/';
 const PLACEHOLDER_TINT = 0x8899aa;
 const PLACEHOLDER_SIZE = { w: 128, h: 128 };
 
