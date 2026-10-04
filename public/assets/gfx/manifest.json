@@ -153,12 +153,12 @@
   "turnips/emma_1": {
    "src": "gfx/turnips/emma_1.webp",
    "w": 505,
-   "h": 695
+   "h": 691
   },
   "turnips/emma_2": {
    "src": "gfx/turnips/emma_2.webp",
    "w": 505,
-   "h": 695
+   "h": 691
   },
   "mine/bg_1": {
    "src": "gfx/mine/bg_1.webp",
@@ -277,12 +277,12 @@
   },
   "herbs/laborant_1": {
    "src": "gfx/herbs/laborant_1.webp",
-   "w": 525,
+   "w": 524,
    "h": 915
   },
   "herbs/laborant_2": {
    "src": "gfx/herbs/laborant_2.webp",
-   "w": 525,
+   "w": 524,
    "h": 915
   },
   "herbs/mortar": {

@@ -1,15 +1,19 @@
-"""Cut out every `cutout: true` asset with fal-ai/birefnet.
+"""Cut out every `cutout: true` asset.
 
     .venv/bin/python cutout.py [--only PREFIX] [--force ID ...]
 
 raw/<id>.png -> raw/<id>.cut.png (RGBA, same size as the raw image).
 
-After birefnet we guard against its known failure on dark subjects: it turns
-parts of the interior semi-transparent. If more than 20 % of the pixels inside
-the convex hull of the mask have alpha < 128 (the brief's trigger), or there
-are enclosed holes whose raw colour is clearly not the background, enclosed
-holes are refilled with alpha 255 and the raw colour. Holes that look like the
-flat background (e.g. inside a basket handle) stay transparent.
+Objects go through fal-ai/birefnet, then we guard against its known failure on
+dark subjects: parts of the interior turn semi-transparent. An enclosed hole
+(alpha < 128, not connected to the border) is refilled with alpha 255 and the
+raw colour when its colour is clearly not the background (> 60 away) and
+birefnet left it semi-transparent (mean alpha >= 12). The brief's trigger
+(> 20 % of the convex hull below alpha 128) is computed and also enables the
+fill, but on concave plants and figures it is always met, so the per-hole test
+decides. Background-coloured holes (inside a basket handle) and holes birefnet
+cut confidently to zero (inside a cable loop) stay transparent.
+Landscape bands (kind: band) are keyed instead: birefnet finds no object in them.
 Edge pixels are un-mixed from the background colour to avoid a grey halo.
 """
 import argparse, datetime, io, os, sys, traceback
@@ -123,22 +127,22 @@ def repair(rgb: np.ndarray, alpha: np.ndarray) -> tuple[np.ndarray, dict]:
     lab, n = label(~solid)
     border_labels = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]])).tolist()) - {0}
     obj_px = max(int(solid.sum()), 1)
-    fill = np.zeros_like(solid)
-    enclosed_px = kept_px = 0
-    for comp in range(1, n + 1):
-        if comp in border_labels:
-            continue
-        m = lab == comp
-        cnt = int(m.sum())
-        enclosed_px += cnt
-        dist = float(np.linalg.norm(rgb[m].astype(np.float32).mean(axis=0) - bg))
-        # birefnet's failure leaves *semi*-transparent interiors; a hole it cut to
-        # ~0 with confidence is real background (e.g. inside a cable loop)
-        if dist < BG_DIST or float(alpha[m].mean()) < HOLE_MIN_ALPHA:
-            kept_px += cnt
-        else:
-            fill |= m
+    flat = lab.ravel()
+    cnt = np.bincount(flat, minlength=n + 1).astype(np.float64)
+    safe = np.maximum(cnt, 1)
+    mean_rgb = np.stack([np.bincount(flat, weights=rgb[..., c].ravel().astype(np.float64), minlength=n + 1)
+                         for c in range(3)], axis=1) / safe[:, None]
+    mean_alpha = np.bincount(flat, weights=alpha.ravel().astype(np.float64), minlength=n + 1) / safe
+    enclosed = np.ones(n + 1, bool)
+    enclosed[0] = False
+    enclosed[list(border_labels)] = False
+    # birefnet's failure leaves *semi*-transparent interiors; a hole it cut to
+    # ~0 with confidence is real background (e.g. inside a cable loop)
+    eaten = enclosed & (np.linalg.norm(mean_rgb - bg, axis=1) >= BG_DIST) & (mean_alpha >= HOLE_MIN_ALPHA)
+    fill = eaten[lab]
+    enclosed_px = int(cnt[enclosed].sum())
     fill_px = int(fill.sum())
+    kept_px = enclosed_px - fill_px
     triggered = hull_low > HULL_TRIGGER or fill_px > HOLE_MIN_FRAC * obj_px
     out = alpha.copy()
     if triggered and fill_px:

@@ -67,11 +67,14 @@ def pack_objects(group: list[dict]) -> dict[str, Image.Image]:
     tw, th = target_size(group[0])
     raws = {a["id"]: Image.open(source(a)).convert("RGBA") for a in group}
     norm = {i: min(tw / im.width, th / im.height) for i, im in raws.items()}  # raw -> common canvas
+    # members are centred on the canvas (edit outputs can differ slightly in aspect)
+    off = {i: ((tw - im.width * norm[i]) / 2, (th - im.height * norm[i]) / 2) for i, im in raws.items()}
     boxes = []
     for i, im in raws.items():
         b = alpha_bbox(im)
         if b:
-            boxes.append(tuple(v * norm[i] for v in b))
+            ox, oy = off[i]
+            boxes.append((b[0] * norm[i] + ox, b[1] * norm[i] + oy, b[2] * norm[i] + ox, b[3] * norm[i] + oy))
     if not boxes:
         return {i: im for i, im in raws.items()}
     x0, y0 = min(b[0] for b in boxes), min(b[1] for b in boxes)
@@ -81,8 +84,8 @@ def pack_objects(group: list[dict]) -> dict[str, Image.Image]:
     cw, ch = max(1, round(bw * f)), max(1, round(bh * f))
     out = {}
     for i, im in raws.items():
-        n = norm[i]
-        crop = im.crop((round(x0 / n), round(y0 / n), round(x1 / n), round(y1 / n)))
+        n, (ox, oy) = norm[i], off[i]
+        crop = im.crop((round((x0 - ox) / n), round((y0 - oy) / n), round((x1 - ox) / n), round((y1 - oy) / n)))
         canvas = Image.new("RGBA", (cw + 2 * MARGIN, ch + 2 * MARGIN), (0, 0, 0, 0))
         canvas.alpha_composite(resize_rgba(crop, (cw, ch)), (MARGIN, MARGIN))
         out[i] = canvas
