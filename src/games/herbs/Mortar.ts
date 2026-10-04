@@ -143,10 +143,12 @@ export class Mortar extends Container {
     const tilt = 0.6;
     tweens.add({
       dur: 0.25,
+      targets: [this],
       update: (p) => (this.pestle.alpha = 1 - p),
     });
     tweens.add({
       dur: 0.5,
+      targets: [this, flask],
       update: (p) => {
         const e = ease.inOutSine(p);
         this.position.set(lerp(from.x, to.x, e), lerp(from.y, to.y, e));
@@ -158,6 +160,7 @@ export class Mortar extends Container {
         const mouth = () => flask.mouthGlobal();
         tweens.add({
           dur: 1.4,
+          targets: [this, flask, stream],
           update: (p) => {
             const head = Math.min(1, p / 0.18);
             const tail = Math.max(0, (p - 0.82) / 0.18);
@@ -168,6 +171,7 @@ export class Mortar extends Container {
             stream.destroy();
             tweens.add({
               dur: 0.45,
+              targets: [this, flask],
               update: (p) => {
                 const e = ease.inOutSine(p);
                 this.position.set(lerp(to.x, from.x, e), lerp(to.y, from.y, e));

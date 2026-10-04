@@ -67,14 +67,14 @@ export class RecipePanel extends Container {
     });
     this.setTime(1);
     this.alpha = 0;
-    this.tweens.add({ dur: 0.35, update: (p) => (this.alpha = p) });
+    this.tweens.add({ dur: 0.35, targets: [this], update: (p) => (this.alpha = p) });
   }
 
   tick(id: PlantId): void {
     const tick = this.ticks.get(id);
     if (!tick || tick.visible) return;
     tick.visible = true;
-    this.tweens.add({ dur: 0.4, update: (p) => tick.scale.set(ease.outBack(p)) });
+    this.tweens.add({ dur: 0.4, targets: [tick], update: (p) => tick.scale.set(ease.outBack(p)) });
   }
 
   /** `left` = share of the gathering time still left (1 → 0). */

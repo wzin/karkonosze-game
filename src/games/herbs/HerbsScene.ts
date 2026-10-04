@@ -342,6 +342,7 @@ export default class HerbsScene extends Scene {
     const s0 = view.scale.x;
     this.tweens.add({
       dur: FLY_SECONDS,
+      targets: [view],
       update: (p) => {
         const e = ease.inOutSine(p);
         view.position.set(bezier(from.x, ctrl.x, to.x, e), bezier(from.y, ctrl.y, to.y, e));
@@ -367,6 +368,7 @@ export default class HerbsScene extends Scene {
     }
     this.tweens.add({
       dur: 0.3,
+      targets: [this.basket],
       update: (p) => {
         const s = Math.sin(p * Math.PI);
         this.basket.scale.set(1 + s * 0.08, 1 - s * 0.1);
@@ -379,10 +381,11 @@ export default class HerbsScene extends Scene {
     plant.done = true;
     plant.view.eventMode = 'none';
     this.flash.alpha = 0.38;
-    this.tweens.add({ dur: FLASH_SECONDS, update: (p) => (this.flash.alpha = 0.38 * (1 - p)) });
+    this.tweens.add({ dur: FLASH_SECONDS, targets: [this.flash], update: (p) => (this.flash.alpha = 0.38 * (1 - p)) });
     this.tweens.add({ dur: 0.36, update: (p) => (this.hop = Math.sin(p * Math.PI) * LABORANT.hop) });
     this.tweens.add({
       dur: 0.5,
+      targets: [plant.view],
       update: (p) => {
         plant.view.rotation = Math.sin(p * Math.PI * 6) * 0.12 * (1 - p);
         plant.view.alpha = 1 - p * 0.6;
@@ -405,6 +408,7 @@ export default class HerbsScene extends Scene {
     this.fly.addChild(text);
     this.tweens.add({
       dur: 0.9,
+      targets: [text],
       update: (p) => {
         text.scale.set(ease.outBack(Math.min(1, p * 3)));
         text.y = LABORANT.y - LABORANT.h / 2 - 10 - p * 50;
@@ -426,6 +430,7 @@ export default class HerbsScene extends Scene {
     this.tweens.add({
       dur: 0.5,
       delay: 0.2,
+      targets: fading.map((pl) => pl.view),
       update: (p) => fading.forEach((pl) => (pl.view.alpha = Math.min(pl.view.alpha, 1 - p))),
       done: () => fading.forEach((pl) => pl.view.destroy({ children: true })),
     });
@@ -478,7 +483,7 @@ export default class HerbsScene extends Scene {
 
   private pour(mortar: Mortar, flask: Flask, grindSeconds: number, texts: Text[]): void {
     this.phase = 'pour';
-    this.tweens.add({ dur: 0.3, update: (p) => texts.forEach((t) => (t.alpha = 1 - p)) });
+    this.tweens.add({ dur: 0.3, targets: texts, update: (p) => texts.forEach((t) => (t.alpha = 1 - p)) });
     mortar.pour(this.tweens, flask, () => this.showResult(mortar, flask, grindSeconds));
   }
 
@@ -529,11 +534,14 @@ export default class HerbsScene extends Scene {
     card.addChild(panel(W, h, 0.92), title, name, row, why, fact, next);
     card.position.set((DESIGN.w - W) / 2, Math.max(TopBar.HEIGHT + 60, (DESIGN.h - h) / 2 + 40));
     card.alpha = 0;
+    // no taps until the card has faded in: an early "next" would clear it under its own tweens
+    card.interactiveChildren = false;
     this.overlay.addChild(card, flask); // the flask stays in front of the card
 
     // the bowl steps back, the flask comes over into the card
     this.tweens.add({
       dur: 0.4,
+      targets: [mortar],
       update: (p) => (mortar.alpha = 1 - p),
       done: () => {
         mortar.destroy({ children: true });
@@ -544,6 +552,7 @@ export default class HerbsScene extends Scene {
     const to = { x: card.x + SIDE / 2 + 10, y: card.y + h - 48 };
     this.tweens.add({
       dur: 0.6,
+      targets: [flask],
       update: (p) => {
         const e = ease.outCubic(p);
         flask.position.set(lerp(from.x, to.x, e), lerp(from.y, to.y, e));
@@ -553,8 +562,12 @@ export default class HerbsScene extends Scene {
     this.tweens.add({
       dur: 0.35,
       delay: 0.3,
+      targets: [card, row],
       update: (p) => (card.alpha = p),
-      done: () => row.set(stars),
+      done: () => {
+        card.interactiveChildren = true;
+        row.set(stars);
+      },
     });
   }
 
@@ -644,7 +657,7 @@ export default class HerbsScene extends Scene {
     back.position.set(again.x + again.box.w + gap, by);
     this.overlay.addChild(fact, again, back);
     this.fadeIn(this.overlay);
-    this.tweens.after(0.4, () => stars.set(total));
+    this.tweens.after(0.4, () => stars.set(total), [stars]);
   }
 
   // ---------------------------------------------------------------- helpers
@@ -687,6 +700,7 @@ export default class HerbsScene extends Scene {
     this.overlay.addChild(holder);
     this.tweens.add({
       dur: seconds,
+      targets: [holder],
       update: (p) => {
         holder.alpha = p < 0.15 ? p / 0.15 : p > 0.8 ? (1 - p) / 0.2 : 1;
         holder.scale.set(p < 0.15 ? ease.outBack(p / 0.15) : 1);
@@ -695,9 +709,16 @@ export default class HerbsScene extends Scene {
     });
   }
 
+  /** Fades `c` in; its children take taps only once it is fully shown. */
   private fadeIn(c: Container): void {
     c.alpha = 0;
-    this.tweens.add({ dur: 0.3, update: (p) => (c.alpha = p) });
+    c.interactiveChildren = false;
+    this.tweens.add({
+      dur: 0.3,
+      targets: [c],
+      update: (p) => (c.alpha = p),
+      done: () => (c.interactiveChildren = true),
+    });
   }
 
   private clearOverlay(): void {
@@ -705,6 +726,7 @@ export default class HerbsScene extends Scene {
       this.mortar.silence();
       this.mortar = null;
     }
+    // tweens aimed at these objects drop themselves once they see them destroyed (anim.ts)
     this.overlay.removeChildren().forEach((c) => c.destroy({ children: true }));
     this.overlay.alpha = 1;
   }
