@@ -1,6 +1,6 @@
 # Synthetic checks for the birefnet repair step (no network).
 import numpy as np
-from cutout import label, convex_hull_mask, repair, defringe, key_sky
+from cutout import label, convex_hull_mask, repair, defringe, key_sky, peel_rim
 
 BG = (200, 200, 200)
 
@@ -65,6 +65,34 @@ def test_key_sky_removes_flat_sky_and_keeps_land_band():
     alpha, s = key_sky(rgb)
     assert alpha[2, 80] == 0 and alpha[h - 1, 5] == 255 and alpha[h - 1, w - 5] == 255
     assert 0.3 < s["sky_ratio"] < 0.55
+
+
+def _band_with_rim():
+    h, w = 160, 240
+    rgb = np.zeros((h, w, 3), np.uint8); rgb[:] = (205, 205, 208)            # flat grey sky
+    rgb[60:, :] = (60, 80, 100)                                              # dark land
+    rgb[54:60, :] = (232, 232, 236)                                          # 6 px light paper rim
+    rgb[10:60, 100:170] = (225, 226, 230)                                    # big light object on the ridge
+    return rgb
+
+
+def test_peel_rim_removes_thin_light_rim_but_keeps_big_light_object():
+    rgb = _band_with_rim()
+    alpha, s = key_sky(rgb)
+    a, removed = peel_rim(rgb, alpha, s["bg"])
+    assert removed > 0
+    assert a[57, 20] == 0 and a[57, 220] == 0          # rim gone (left and right of the object)
+    assert a[30, 135] == 255                            # 70x50 light object kept
+    assert a[100, 20] == 255                            # land kept
+
+
+def test_key_sky_also_removes_enclosed_sky_pockets():
+    rgb = np.zeros((120, 200, 3), np.uint8); rgb[:] = (205, 205, 208)
+    rgb[50:, :] = (60, 90, 60)
+    rgb[30:50, 60:140] = (60, 90, 60)                   # a bridge of land that encloses a pocket
+    rgb[50:75, 80:120] = (205, 205, 208)                # 40x25 sky pocket under it
+    alpha, s = key_sky(rgb)
+    assert alpha[62, 100] == 0 and s["sky_pocket_px"] > 0
 
 
 def test_defringe_removes_grey_from_half_transparent_edge():

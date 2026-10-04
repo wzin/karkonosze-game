@@ -93,9 +93,16 @@ def pack_objects(group: list[dict]) -> dict[str, Image.Image]:
 
 
 def pack() -> int:
+    """Repack every asset whose raw source exists and merge into the existing manifest.json.
+
+    raw/ is not committed, so on a clean clone (or with a partial raw/) entries
+    without a source keep their committed WebP and manifest entry. Animation
+    frames are repacked only when every frame of the group has a source, so they
+    keep sharing one bbox. Entries for ids no longer in manifest.yaml are dropped.
+    """
     assets = load_manifest()["assets"]
     by_id = {a["id"]: a for a in assets}
-    missing = [a["id"] for a in assets if not source(a).exists()]
+    existing = json.loads(MANIFEST_JSON.read_text())["assets"] if MANIFEST_JSON.exists() else {}
     # animation frames: an edit-route asset and its ref are packed together
     group_of: dict[str, list[str]] = {}
     for a in assets:
@@ -103,10 +110,12 @@ def pack() -> int:
             g = group_of.setdefault(a["ref"], [a["ref"]])
             g.append(a["id"])
             group_of[a["id"]] = g
+    has_src = {a["id"] for a in assets if source(a).exists()}
+    available = {i for i in has_src if all(m in has_src for m in group_of.get(i, [i]))}
     images: dict[str, Image.Image] = {}
     for a in assets:
         aid = a["id"]
-        if aid in missing or aid in images:
+        if aid not in available or aid in images:
             continue
         m = mode(a)
         if m == "scene":
@@ -114,12 +123,16 @@ def pack() -> int:
         elif m == "band":
             images[aid] = pack_band(a)
         else:
-            ids = [i for i in group_of.get(aid, [aid]) if i not in missing]
-            images.update(pack_objects([by_id[i] for i in ids]))
-    entries = {}
+            images.update(pack_objects([by_id[i] for i in group_of.get(aid, [aid])]))
+    entries, kept, missing = {}, [], []
     for a in assets:
         aid = a["id"]
         if aid not in images:
+            if aid in existing:
+                entries[aid] = existing[aid]
+                kept.append(aid)
+            else:
+                missing.append(aid)
             continue
         im = images[aid]
         dest = OUT / f"{aid}.webp"
@@ -130,9 +143,13 @@ def pack() -> int:
             im.save(dest, "WEBP", quality=88, method=6)
         entries[aid] = {"src": f"gfx/{aid}.webp", "w": im.width, "h": im.height}
         print(f"{aid:34s} {im.width:5d}x{im.height:<5d} {dest.stat().st_size / 1024:8.1f} KB")
+    dropped = sorted(set(existing) - set(by_id))
+    MANIFEST_JSON.parent.mkdir(parents=True, exist_ok=True)
     MANIFEST_JSON.write_text(json.dumps({"assets": entries}, indent=1, ensure_ascii=False) + "\n")
+    print(f"\nrepacked {len(images)}, kept {len(kept)} existing entries (no raw source)"
+          + (f", dropped {len(dropped)} not in manifest.yaml: {', '.join(dropped)}" if dropped else ""))
     if missing:
-        print(f"\nMISSING raw for {len(missing)} assets: {', '.join(missing)}")
+        print(f"MISSING: no raw source and no existing entry for {len(missing)} assets: {', '.join(missing)}")
     return 1 if missing else 0
 
 

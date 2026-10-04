@@ -35,7 +35,10 @@ HOLE_MIN_FRAC = 0.002      # enclosed non-background holes larger than this shar
 BG_DIST = 60.0
 HOLE_MIN_ALPHA = 12.0      # mean birefnet alpha of a hole for it to count as "eaten interior"
 # Landscape bands are keyed: the sky must be a flat light colour connected to the top edge.
-KEY_BLUR, KEY_GRAD, KEY_DIST = 2.0, 5.0, 45.0
+KEY_BLUR, KEY_GRAD, KEY_DIST, KEY_POCKET = 2.0, 5.0, 45.0, 150
+# Light paper rim along the keyed skyline (raw px): see peel_rim.
+RIM_DEPTH, RIM_DIST, RIM_CHROMA, RIM_OPEN, RIM_ERODE, RIM_ISLAND, RIM_SPECK = 16, 65.0, 20.0, 7, 3, 2500, 400
+RIM_KEEP_AREA = 3000       # a light, neutral region thicker than 2*RIM_OPEN and this big is content
 
 
 def label(mask: np.ndarray) -> tuple[np.ndarray, int]:
@@ -182,9 +185,13 @@ def key_sky(rgb: np.ndarray) -> tuple[np.ndarray, dict]:
     noise = float(np.percentile(np.linalg.norm(top - bg, axis=1), 90))
     tol = float(np.clip(3 * noise + 6, 8, KEY_DIST))
     cand = (grad < KEY_GRAD) & (np.linalg.norm(s - bg, axis=2) < tol)
-    lab, _ = label(cand)
-    top_labels = np.setdiff1d(np.unique(lab[0]), [0])
-    sky = np.isin(lab, top_labels)
+    lab, n = label(cand)
+    area = np.bincount(lab.ravel(), minlength=n + 1)
+    is_sky = area >= KEY_POCKET              # enclosed sky pockets between trees / grass blades
+    is_sky[np.unique(lab[0])] = True         # everything connected to the top edge
+    is_sky[0] = False
+    sky = is_sky[lab]
+    pocket_px = int((sky & ~np.isin(lab, np.unique(lab[0]))).sum())
     # soft edge from the un-blurred distance in a thin band around the sky
     zone = sky.copy()
     for _ in range(int(KEY_BLUR * 2) + 1):
@@ -196,7 +203,68 @@ def key_sky(rgb: np.ndarray) -> tuple[np.ndarray, dict]:
     alpha = np.where(sky, 0, 255).astype(np.float32)
     alpha[zone] = 255 * np.clip((d_raw[zone] - tol) / 24, 0, 1)
     return alpha.astype(np.uint8), {"method": "key", "bg": [int(v) for v in bg], "tolerance": round(tol, 1),
-                                    "sky_ratio": round(float(sky.mean()), 4)}
+                                    "sky_ratio": round(float(sky.mean()), 4), "sky_pocket_px": pocket_px}
+
+
+def grow(mask: np.ndarray, r: int) -> np.ndarray:
+    """4-neighbour binary dilation by r px."""
+    out = mask.copy()
+    for _ in range(r):
+        z = out.copy()
+        z[1:] |= out[:-1]; z[:-1] |= out[1:]; z[:, 1:] |= out[:, :-1]; z[:, :-1] |= out[:, 1:]
+        out = z
+    return out
+
+
+def peel_rim(rgb: np.ndarray, alpha: np.ndarray, bg) -> tuple[np.ndarray, int]:
+    """Remove the light paper edge left along a keyed skyline, then erode the alpha.
+
+    Paper-cut layers have a light, almost neutral rim (up to ~15 px at raw size)
+    that is close to the grey sky; over a dark backdrop it reads as a halo.
+    Candidates are opaque pixels near the sky, close to the sky colour and low in
+    chroma. Candidate regions that are both thicker than 2*RIM_OPEN px (opening)
+    and larger than RIM_KEEP_AREA are kept as content; everything else (thin rim,
+    small sheen patches on fir tips) is cleared. Small floating islands are
+    dropped, tiny holes inside the land are restored, and the alpha is eroded by
+    RIM_ERODE px from the sky side only (4-neighbour, so no square notches).
+    """
+    c = rgb.astype(np.float32)
+    sky = alpha == 0
+    near = grow(sky, RIM_DEPTH) & (alpha > 0)
+    chroma = c.max(axis=2) - c.min(axis=2)
+    cand = near & (np.linalg.norm(c - np.asarray(bg, np.float32), axis=2) < RIM_DIST) & (chroma < RIM_CHROMA)
+    thick = grow(~grow(~cand, RIM_OPEN), RIM_OPEN) & cand      # opening of cand
+    tl, tn = label(thick)                                      # only big light objects are kept;
+    keep = np.bincount(tl.ravel(), minlength=tn + 1) >= RIM_KEEP_AREA   # small thick bits are sheen
+    keep[0] = False
+    rim = cand & ~keep[tl]
+    a = alpha.copy()
+    a[rim] = 0
+    # small sky-coloured islands left floating after the peel (e.g. a white speck above a spire)
+    lab, n = label(a >= 128)
+    if n:
+        flat = lab.ravel()
+        area = np.bincount(flat, minlength=n + 1)
+        mean = np.stack([np.bincount(flat, weights=c[..., k].ravel(), minlength=n + 1) for k in range(3)], 1) \
+            / np.maximum(area, 1)[:, None]
+        drop = ((area < RIM_ISLAND) & (np.linalg.norm(mean - np.asarray(bg, np.float32), axis=1) < RIM_DIST)) \
+            | (area < RIM_SPECK)                                   # any tiny debris in the sky
+        drop[0] = False
+        rim |= drop[lab]
+        a[drop[lab]] = 0
+    # erode from the sky only (top-connected sky and pockets), 4-neighbour so no square
+    # notches; tiny holes the peel punched inside the land are restored instead of grown
+    hl, m = label(a == 0)
+    big = np.bincount(hl.ravel(), minlength=m + 1) >= RIM_SPECK
+    big[0] = False
+    seed = big[hl]
+    tiny = (a == 0) & ~seed & (alpha > 0)
+    a[tiny] = alpha[tiny]
+    inner = grow(seed, RIM_ERODE)
+    a[inner] = 0
+    soft = grow(inner, 1) & ~inner
+    a[soft] = np.minimum(a[soft], 128)
+    return a, int((rim & ~tiny).sum())
 
 
 def cut_one(asset: dict) -> dict:
@@ -205,6 +273,8 @@ def cut_one(asset: dict) -> dict:
     if kind(asset) == "band":
         rgb = np.asarray(Image.open(src).convert("RGB"))
         a, stats = key_sky(rgb)
+        a, stats["rim_px_removed"] = peel_rim(rgb, a, stats["bg"])
+        stats["eroded_px"] = RIM_ERODE
         rgb = defringe(rgb, a, np.array(stats["bg"], np.float32))
         Image.fromarray(np.dstack([rgb, a]), "RGBA").save(dest)
         info = {"model": "local sky key (cutout.py)", **stats,

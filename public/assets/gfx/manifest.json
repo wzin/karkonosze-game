@@ -18,7 +18,7 @@
   "hub/valley": {
    "src": "gfx/hub/valley.webp",
    "w": 1920,
-   "h": 477
+   "h": 469
   },
   "hub/cloud_1": {
    "src": "gfx/hub/cloud_1.webp",
@@ -292,7 +292,7 @@
   },
   "herbs/pestle": {
    "src": "gfx/herbs/pestle.webp",
-   "w": 300,
+   "w": 205,
    "h": 640
   },
   "herbs/basket": {
