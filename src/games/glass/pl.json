@@ -96,8 +96,8 @@
       "apprentice": "Każdy mistrz zaczynał od pękniętych baniek."
     },
     "notes": {
-      "color": "Kolor: zamówienie na {want}, wyszło {got}.",
-      "shape": "Forma: zamówienie na {want}, wyszło {got}.",
+      "color": "Kolor: miało być {want}, wyszło {got}.",
+      "shape": "Forma: miało być {want}, wyszło {got}.",
       "size": "Wielkość nie całkiem taka, jak trzeba.",
       "heat": "Szkło było za zimne albo za gorące."
     }
