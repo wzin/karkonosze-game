@@ -1,0 +1,304 @@
+{
+ "assets": {
+  "hub/sky": {
+   "src": "gfx/hub/sky.webp",
+   "w": 1920,
+   "h": 1080
+  },
+  "hub/ridge_far": {
+   "src": "gfx/hub/ridge_far.webp",
+   "w": 1920,
+   "h": 768
+  },
+  "hub/ridge_mid": {
+   "src": "gfx/hub/ridge_mid.webp",
+   "w": 1920,
+   "h": 640
+  },
+  "hub/valley": {
+   "src": "gfx/hub/valley.webp",
+   "w": 1920,
+   "h": 477
+  },
+  "hub/cloud_1": {
+   "src": "gfx/hub/cloud_1.webp",
+   "w": 855,
+   "h": 427
+  },
+  "hub/cloud_2": {
+   "src": "gfx/hub/cloud_2.webp",
+   "w": 1024,
+   "h": 306
+  },
+  "hub/duch_gor": {
+   "src": "gfx/hub/duch_gor.webp",
+   "w": 728,
+   "h": 1152
+  },
+  "glass/bg": {
+   "src": "gfx/glass/bg.webp",
+   "w": 1920,
+   "h": 1080
+  },
+  "glass/pipe": {
+   "src": "gfx/glass/pipe.webp",
+   "w": 1230,
+   "h": 88
+  },
+  "glass/shape_puchar": {
+   "src": "gfx/glass/shape_puchar.webp",
+   "w": 355,
+   "h": 850
+  },
+  "glass/shape_butla": {
+   "src": "gfx/glass/shape_butla.webp",
+   "w": 308,
+   "h": 952
+  },
+  "glass/shape_flakon": {
+   "src": "gfx/glass/shape_flakon.webp",
+   "w": 210,
+   "h": 468
+  },
+  "glass/shape_kula": {
+   "src": "gfx/glass/shape_kula.webp",
+   "w": 654,
+   "h": 707
+  },
+  "glass/shape_wazon": {
+   "src": "gfx/glass/shape_wazon.webp",
+   "w": 448,
+   "h": 785
+  },
+  "glass/glob": {
+   "src": "gfx/glass/glob.webp",
+   "w": 528,
+   "h": 529
+  },
+  "glass/mold": {
+   "src": "gfx/glass/mold.webp",
+   "w": 768,
+   "h": 549
+  },
+  "glass/jar_kobalt": {
+   "src": "gfx/glass/jar_kobalt.webp",
+   "w": 495,
+   "h": 751
+  },
+  "glass/jar_zelazo": {
+   "src": "gfx/glass/jar_zelazo.webp",
+   "w": 479,
+   "h": 768
+  },
+  "glass/jar_zloto": {
+   "src": "gfx/glass/jar_zloto.webp",
+   "w": 294,
+   "h": 486
+  },
+  "glass/jar_mangan": {
+   "src": "gfx/glass/jar_mangan.webp",
+   "w": 383,
+   "h": 635
+  },
+  "glass/jar_uran": {
+   "src": "gfx/glass/jar_uran.webp",
+   "w": 333,
+   "h": 508
+  },
+  "glass/portrait_hrabina": {
+   "src": "gfx/glass/portrait_hrabina.webp",
+   "w": 559,
+   "h": 768
+  },
+  "glass/portrait_walon": {
+   "src": "gfx/glass/portrait_walon.webp",
+   "w": 634,
+   "h": 768
+  },
+  "glass/portrait_laborant": {
+   "src": "gfx/glass/portrait_laborant.webp",
+   "w": 618,
+   "h": 768
+  },
+  "glass/portrait_duch": {
+   "src": "gfx/glass/portrait_duch.webp",
+   "w": 659,
+   "h": 768
+  },
+  "glass/portrait_pohl": {
+   "src": "gfx/glass/portrait_pohl.webp",
+   "w": 582,
+   "h": 768
+  },
+  "turnips/bg": {
+   "src": "gfx/turnips/bg.webp",
+   "w": 1920,
+   "h": 1080
+  },
+  "turnips/turnip": {
+   "src": "gfx/turnips/turnip.webp",
+   "w": 377,
+   "h": 640
+  },
+  "turnips/mound": {
+   "src": "gfx/turnips/mound.webp",
+   "w": 512,
+   "h": 143
+  },
+  "turnips/stone": {
+   "src": "gfx/turnips/stone.webp",
+   "w": 477,
+   "h": 400
+  },
+  "turnips/emma_1": {
+   "src": "gfx/turnips/emma_1.webp",
+   "w": 505,
+   "h": 695
+  },
+  "turnips/emma_2": {
+   "src": "gfx/turnips/emma_2.webp",
+   "w": 505,
+   "h": 695
+  },
+  "mine/bg_1": {
+   "src": "gfx/mine/bg_1.webp",
+   "w": 1920,
+   "h": 1080
+  },
+  "mine/bg_2": {
+   "src": "gfx/mine/bg_2.webp",
+   "w": 1920,
+   "h": 1080
+  },
+  "mine/bg_3": {
+   "src": "gfx/mine/bg_3.webp",
+   "w": 1920,
+   "h": 1080
+  },
+  "mine/vein_iron": {
+   "src": "gfx/mine/vein_iron.webp",
+   "w": 512,
+   "h": 356
+  },
+  "mine/vein_uranium": {
+   "src": "gfx/mine/vein_uranium.webp",
+   "w": 379,
+   "h": 400
+  },
+  "mine/lamp": {
+   "src": "gfx/mine/lamp.webp",
+   "w": 417,
+   "h": 768
+  },
+  "mine/pickaxe": {
+   "src": "gfx/mine/pickaxe.webp",
+   "w": 308,
+   "h": 640
+  },
+  "mine/bat": {
+   "src": "gfx/mine/bat.webp",
+   "w": 600,
+   "h": 400
+  },
+  "mine/cart": {
+   "src": "gfx/mine/cart.webp",
+   "w": 578,
+   "h": 393
+  },
+  "mine/geiger": {
+   "src": "gfx/mine/geiger.webp",
+   "w": 448,
+   "h": 453
+  },
+  "herbs/bg_far": {
+   "src": "gfx/herbs/bg_far.webp",
+   "w": 1920,
+   "h": 1080
+  },
+  "herbs/strip_mid": {
+   "src": "gfx/herbs/strip_mid.webp",
+   "w": 2048,
+   "h": 640
+  },
+  "herbs/strip_near": {
+   "src": "gfx/herbs/strip_near.webp",
+   "w": 2048,
+   "h": 448
+  },
+  "herbs/plant_arnika": {
+   "src": "gfx/herbs/plant_arnika.webp",
+   "w": 512,
+   "h": 520
+  },
+  "herbs/plant_goryczka": {
+   "src": "gfx/herbs/plant_goryczka.webp",
+   "w": 410,
+   "h": 640
+  },
+  "herbs/plant_dziewieciesil": {
+   "src": "gfx/herbs/plant_dziewieciesil.webp",
+   "w": 512,
+   "h": 351
+  },
+  "herbs/plant_podbial": {
+   "src": "gfx/herbs/plant_podbial.webp",
+   "w": 432,
+   "h": 640
+  },
+  "herbs/plant_pierwiosnek": {
+   "src": "gfx/herbs/plant_pierwiosnek.webp",
+   "w": 382,
+   "h": 640
+  },
+  "herbs/plant_prawoslaz": {
+   "src": "gfx/herbs/plant_prawoslaz.webp",
+   "w": 370,
+   "h": 640
+  },
+  "herbs/plant_piolun": {
+   "src": "gfx/herbs/plant_piolun.webp",
+   "w": 424,
+   "h": 640
+  },
+  "herbs/plant_mieta": {
+   "src": "gfx/herbs/plant_mieta.webp",
+   "w": 512,
+   "h": 603
+  },
+  "herbs/plant_muchomor": {
+   "src": "gfx/herbs/plant_muchomor.webp",
+   "w": 476,
+   "h": 640
+  },
+  "herbs/plant_pokrzywa": {
+   "src": "gfx/herbs/plant_pokrzywa.webp",
+   "w": 288,
+   "h": 640
+  },
+  "herbs/laborant_1": {
+   "src": "gfx/herbs/laborant_1.webp",
+   "w": 525,
+   "h": 915
+  },
+  "herbs/laborant_2": {
+   "src": "gfx/herbs/laborant_2.webp",
+   "w": 525,
+   "h": 915
+  },
+  "herbs/mortar": {
+   "src": "gfx/herbs/mortar.webp",
+   "w": 640,
+   "h": 422
+  },
+  "herbs/pestle": {
+   "src": "gfx/herbs/pestle.webp",
+   "w": 300,
+   "h": 640
+  },
+  "herbs/basket": {
+   "src": "gfx/herbs/basket.webp",
+   "w": 549,
+   "h": 512
+  }
+ }
+}

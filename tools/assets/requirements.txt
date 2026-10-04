@@ -1,0 +1,6 @@
+fal-client
+pyyaml
+pillow
+requests
+numpy
+pytest

@@ -1,0 +1,4100 @@
+{
+ "glass/bg": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2735639182,
+  "url": "https://v3b.fal.media/files/b/0aad123f/aGeBnvJ2xgbo4da2qiUSM_db641b52d3cc4af8b1437656d84bd490.jpg",
+  "gen_size": [
+   1440,
+   832
+  ],
+  "prompt": "Interior of a 19th century glassworks: a large brick furnace in the center left with a round opening that is dark, cold and empty, a sturdy wooden workbench in the front right, shelves with jars and tools on the back wall, cobblestone floor, softly lit by a few warm wall lanterns, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1920,
+   1080
+  ],
+  "returned_size": [
+   1440,
+   832
+  ],
+  "generated_at": "2026-10-04T20:26:39+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3497391386,
+    "url": "https://v3b.fal.media/files/b/0aad11dd/4sniYqeVYkfY_T_yH5r83_13326a02c8594eb6b21e56bd566b7e43.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Interior of a 19th century glassworks: a large brick furnace with a dark round opening in the center left, a sturdy wooden workbench in the front right, shelves with jars and tools on the back wall, cobblestone floor, warm lantern lit, no people, no fire visible. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:10:13+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2735639182,
+    "url": "https://v3b.fal.media/files/b/0aad123f/aGeBnvJ2xgbo4da2qiUSM_db641b52d3cc4af8b1437656d84bd490.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Interior of a 19th century glassworks: a large brick furnace in the center left with a round opening that is dark, cold and empty, a sturdy wooden workbench in the front right, shelves with jars and tools on the back wall, cobblestone floor, softly lit by a few warm wall lanterns, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:26:39+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ]
+ },
+ "glass/glob": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 167885834,
+  "url": "https://v3b.fal.media/files/b/0aad11de/odueFfcnwCunfeYCYVdmt_00d52d989d494392ab5daae94624b1ca.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "A soft blob of molten glass, warm orange fading to pale yellow at the center, smooth and rounded. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   768,
+   768
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:10:29+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 167885834,
+    "url": "https://v3b.fal.media/files/b/0aad11de/odueFfcnwCunfeYCYVdmt_00d52d989d494392ab5daae94624b1ca.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A soft blob of molten glass, warm orange fading to pale yellow at the center, smooth and rounded. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:29+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1266/KypzMthpQAVkVWKSF8B1F_Yh6c1Euw.png",
+   "hull_low_ratio": 0.0176,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 181374,
+   "bg": [
+    73,
+    79,
+    87
+   ],
+   "generated_at": "2026-10-04T20:33:06+00:00"
+  }
+ },
+ "glass/jar_kobalt": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3714971000,
+  "url": "https://v3b.fal.media/files/b/0aad11de/xgsutPMs1Co8U6YQZfS_V_473e2f650088413b9076d836815d14f7.jpg",
+  "gen_size": [
+   1088,
+   1312
+  ],
+  "prompt": "A small glass apothecary jar with a cork, filled with deep blue mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   640,
+   768
+  ],
+  "returned_size": [
+   1088,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:10:31+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3714971000,
+    "url": "https://v3b.fal.media/files/b/0aad11de/xgsutPMs1Co8U6YQZfS_V_473e2f650088413b9076d836815d14f7.jpg",
+    "gen_size": [
+     1088,
+     1312
+    ],
+    "prompt": "A small glass apothecary jar with a cork, filled with deep blue mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     640,
+     768
+    ],
+    "returned_size": [
+     1088,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:10:31+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1266/whGKplMg_79HOLlMP54BM_QgBm3mWu.png",
+   "hull_low_ratio": 0.0332,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 310284,
+   "bg": [
+    235,
+    239,
+    241
+   ],
+   "generated_at": "2026-10-04T20:33:09+00:00"
+  }
+ },
+ "glass/jar_mangan": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 844407823,
+  "url": "https://v3b.fal.media/files/b/0aad11df/2GG4zCSr-WGDQ8tBYyQyt_878f7b2ad6054c4b8605c45943a2004d.jpg",
+  "gen_size": [
+   1088,
+   1312
+  ],
+  "prompt": "A small glass apothecary jar with a cork, filled with violet mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   640,
+   768
+  ],
+  "returned_size": [
+   1088,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:10:39+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 844407823,
+    "url": "https://v3b.fal.media/files/b/0aad11df/2GG4zCSr-WGDQ8tBYyQyt_878f7b2ad6054c4b8605c45943a2004d.jpg",
+    "gen_size": [
+     1088,
+     1312
+    ],
+    "prompt": "A small glass apothecary jar with a cork, filled with violet mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     640,
+     768
+    ],
+    "returned_size": [
+     1088,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:10:39+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1266/W6e9FKlF-lLxZCxWHhouS_oj0t5gIP.png",
+   "hull_low_ratio": 0.04,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 191499,
+   "bg": [
+    180,
+    190,
+    193
+   ],
+   "generated_at": "2026-10-04T20:33:11+00:00"
+  }
+ },
+ "glass/jar_uran": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 670680807,
+  "url": "https://v3b.fal.media/files/b/0aad11e0/Brr4j_Dvv7pbRTXHS4-mt_433c52df8453409bb5b6b5d7407cf3ce.jpg",
+  "gen_size": [
+   1088,
+   1312
+  ],
+  "prompt": "A small glass apothecary jar with a cork, filled with yellow green mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   640,
+   768
+  ],
+  "returned_size": [
+   1088,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:10:43+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 670680807,
+    "url": "https://v3b.fal.media/files/b/0aad11e0/Brr4j_Dvv7pbRTXHS4-mt_433c52df8453409bb5b6b5d7407cf3ce.jpg",
+    "gen_size": [
+     1088,
+     1312
+    ],
+    "prompt": "A small glass apothecary jar with a cork, filled with yellow green mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     640,
+     768
+    ],
+    "returned_size": [
+     1088,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:10:43+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1267/43SSiQlEiOO8zkuMi2VOR_CK7V8Loq.png",
+   "hull_low_ratio": 0.0393,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 130776,
+   "bg": [
+    130,
+    142,
+    145
+   ],
+   "generated_at": "2026-10-04T20:33:15+00:00"
+  }
+ },
+ "glass/jar_zelazo": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3866454472,
+  "url": "https://v3b.fal.media/files/b/0aad11df/Bt1YEzlLyviBXadFl22-5_0063ef7c2e7b44efa18ad431a53f3db8.jpg",
+  "gen_size": [
+   1088,
+   1312
+  ],
+  "prompt": "A small glass apothecary jar with a cork, filled with dark green mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   640,
+   768
+  ],
+  "returned_size": [
+   1088,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:10:34+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3866454472,
+    "url": "https://v3b.fal.media/files/b/0aad11df/Bt1YEzlLyviBXadFl22-5_0063ef7c2e7b44efa18ad431a53f3db8.jpg",
+    "gen_size": [
+     1088,
+     1312
+    ],
+    "prompt": "A small glass apothecary jar with a cork, filled with dark green mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     640,
+     768
+    ],
+    "returned_size": [
+     1088,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:10:34+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1266/p2TKfI6wnT68VYxQtFcuZ_rh8LSLBn.png",
+   "hull_low_ratio": 0.0428,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 364288,
+   "bg": [
+    249,
+    249,
+    249
+   ],
+   "generated_at": "2026-10-04T20:33:10+00:00"
+  }
+ },
+ "glass/jar_zloto": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2262573298,
+  "url": "https://v3b.fal.media/files/b/0aad11df/jue4PjtZgHm2a1CbN5WIX_2570687164534e74a3f773a5085eca6e.jpg",
+  "gen_size": [
+   1088,
+   1312
+  ],
+  "prompt": "A small glass apothecary jar with a cork, filled with ruby red mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   640,
+   768
+  ],
+  "returned_size": [
+   1088,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:10:40+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2262573298,
+    "url": "https://v3b.fal.media/files/b/0aad11df/jue4PjtZgHm2a1CbN5WIX_2570687164534e74a3f773a5085eca6e.jpg",
+    "gen_size": [
+     1088,
+     1312
+    ],
+    "prompt": "A small glass apothecary jar with a cork, filled with ruby red mineral powder, blank paper label. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     640,
+     768
+    ],
+    "returned_size": [
+     1088,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:10:40+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1266/18q8EhMYRimkFPpeH14zr_P80Z519l.png",
+   "hull_low_ratio": 0.0389,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 112521,
+   "bg": [
+    212,
+    216,
+    217
+   ],
+   "generated_at": "2026-10-04T20:33:10+00:00"
+  }
+ },
+ "glass/mold": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1258/NLLZSFQaCH5DoE1FYiCNZ_nkucWsC5.png",
+  "aspect_ratio": "1:1",
+  "resolution": "1K",
+  "prompt": "An open two part wooden mold for glass blowing: two thick hollowed wooden half-blocks hinged together and opened like a book, held by iron bands, the inner cavities are empty and smooth, dark oiled wood. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+  "route": "nano",
+  "size": [
+   768,
+   768
+  ],
+  "returned_size": [
+   1024,
+   1024
+  ],
+  "generated_at": "2026-10-04T20:31:01+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3708196504,
+    "url": "https://v3b.fal.media/files/b/0aad11df/VYcTS_4WKo4Oe9dUr2MJY_bbc623872b074c4e8b4daa5327c4e1fe.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "An open two part wooden glass blowing mold with iron bands, dark oiled wood. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:34+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 86783587,
+    "url": "https://v3b.fal.media/files/b/0aad1240/5tPHPK3FfgwQ8DNqnY81x_c44742f84f6c4d33bc293bb544b8057f.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "An open two part wooden mold for glass blowing: two thick hollowed wooden half-blocks hinged together and opened like a book, held by iron bands, the inner cavities are empty and smooth, dark oiled wood. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:26:43+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1258/NLLZSFQaCH5DoE1FYiCNZ_nkucWsC5.png",
+    "aspect_ratio": "1:1",
+    "resolution": "1K",
+    "prompt": "An open two part wooden mold for glass blowing: two thick hollowed wooden half-blocks hinged together and opened like a book, held by iron bands, the inner cavities are empty and smooth, dark oiled wood. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1024,
+     1024
+    ],
+    "generated_at": "2026-10-04T20:31:01+00:00",
+    "note": "attempt 3, route nano: flux attempt 2 still had scenery around the goblet / photoreal mold without iron bands / lava-orange ore / a stemmed thistle / a dusk sky instead of a mine"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1266/bFlLnmTIlqJgQW51LABqc_2VLVFAMA.png",
+   "hull_low_ratio": 0.0923,
+   "enclosed_hole_px": 2757,
+   "kept_bg_hole_px": 2757,
+   "filled_px": 0,
+   "object_px": 395648,
+   "bg": [
+    195,
+    195,
+    197
+   ],
+   "generated_at": "2026-10-04T20:33:06+00:00"
+  }
+ },
+ "glass/pipe": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1805829852,
+  "url": "https://v3b.fal.media/files/b/0aad11dc/xzctFc5B6261ssgTJxjRg_01fa83b1246f456dbecf30f6dd5086e2.jpg",
+  "gen_size": [
+   1440,
+   256
+  ],
+  "prompt": "A long iron glassblowing pipe lying horizontally, dark metal with a wooden grip at one end. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1536,
+   256
+  ],
+  "returned_size": [
+   1440,
+   256
+  ],
+  "generated_at": "2026-10-04T20:10:10+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1805829852,
+    "url": "https://v3b.fal.media/files/b/0aad11dc/xzctFc5B6261ssgTJxjRg_01fa83b1246f456dbecf30f6dd5086e2.jpg",
+    "gen_size": [
+     1440,
+     256
+    ],
+    "prompt": "A long iron glassblowing pipe lying horizontally, dark metal with a wooden grip at one end. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1536,
+     256
+    ],
+    "returned_size": [
+     1440,
+     256
+    ],
+    "generated_at": "2026-10-04T20:10:10+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1265/YLaSZM-o_n3AkkStzicYb_rAnrNV3D.png",
+   "hull_low_ratio": 0.3546,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 33039,
+   "bg": [
+    188,
+    197,
+    196
+   ],
+   "generated_at": "2026-10-04T20:32:56+00:00"
+  }
+ },
+ "glass/portrait_duch": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2342520289,
+  "url": "https://v3b.fal.media/files/b/0aad11e0/9vj47ZGw_A87Vm33YcLbx_bf99f2f1325d4a13b9fdc74864d88cd5.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "Bust portrait of an ancient mountain spirit, enormous beard like drifting mist, wide hat, deep set wise eyes, pale blue grey skin, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   768,
+   768
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:10:48+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2342520289,
+    "url": "https://v3b.fal.media/files/b/0aad11e0/9vj47ZGw_A87Vm33YcLbx_bf99f2f1325d4a13b9fdc74864d88cd5.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "Bust portrait of an ancient mountain spirit, enormous beard like drifting mist, wide hat, deep set wise eyes, pale blue grey skin, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:48+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1267/zh-h0-6VQr27dW6nbxxOS_qG9vJ1mf.png",
+   "hull_low_ratio": 0.2299,
+   "enclosed_hole_px": 584,
+   "kept_bg_hole_px": 583,
+   "filled_px": 1,
+   "object_px": 470304,
+   "bg": [
+    207,
+    211,
+    214
+   ],
+   "generated_at": "2026-10-04T20:33:21+00:00"
+  }
+ },
+ "glass/portrait_hrabina": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2340572888,
+  "url": "https://v3b.fal.media/files/b/0aad11df/E9u5_9B-unwwyaMXuFPdA_11c6b8f9f07946f7817df5dbba0d827a.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "Bust portrait of a 19th century countess, elegant dark green dress with lace collar, hair pinned up, proud kind face, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   768,
+   768
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:10:42+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2340572888,
+    "url": "https://v3b.fal.media/files/b/0aad11df/E9u5_9B-unwwyaMXuFPdA_11c6b8f9f07946f7817df5dbba0d827a.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "Bust portrait of a 19th century countess, elegant dark green dress with lace collar, hair pinned up, proud kind face, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:42+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1267/FBCWXJLoEiC7s12W6PQuq_FW3frew7.png",
+   "hull_low_ratio": 0.2669,
+   "enclosed_hole_px": 4237,
+   "kept_bg_hole_px": 4237,
+   "filled_px": 0,
+   "object_px": 389157,
+   "bg": [
+    206,
+    207,
+    199
+   ],
+   "generated_at": "2026-10-04T20:33:15+00:00"
+  }
+ },
+ "glass/portrait_laborant": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3489360374,
+  "url": "https://v3b.fal.media/files/b/0aad11e0/Lp_cmK7q3RQhAoqoy03D2_b378b4ea058647b7935c7d2038db6ff4.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "Bust portrait of an 18th century mountain herbalist in a long coat and wide hat, round spectacles, a bundle of herbs on his shoulder, gentle face, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   768,
+   768
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:10:46+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3489360374,
+    "url": "https://v3b.fal.media/files/b/0aad11e0/Lp_cmK7q3RQhAoqoy03D2_b378b4ea058647b7935c7d2038db6ff4.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "Bust portrait of an 18th century mountain herbalist in a long coat and wide hat, round spectacles, a bundle of herbs on his shoulder, gentle face, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:46+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1267/eIL9XSYjq5Fz1coTn5I_r_nXnfCKLP.png",
+   "hull_low_ratio": 0.2251,
+   "enclosed_hole_px": 1855,
+   "kept_bg_hole_px": 1855,
+   "filled_px": 0,
+   "object_px": 471659,
+   "bg": [
+    245,
+    244,
+    242
+   ],
+   "generated_at": "2026-10-04T20:33:17+00:00"
+  }
+ },
+ "glass/portrait_pohl": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3323470855,
+  "url": "https://v3b.fal.media/files/b/0aad11e0/vC7wH8C8oLtkGk-R0BXGw_91498cf75bdc4b2a9388a498fdc3af8e.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "Bust portrait of an 1840s master glassblower, leather apron, rolled sleeves, thick moustache, confident face, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   768,
+   768
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:10:48+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3323470855,
+    "url": "https://v3b.fal.media/files/b/0aad11e0/vC7wH8C8oLtkGk-R0BXGw_91498cf75bdc4b2a9388a498fdc3af8e.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "Bust portrait of an 1840s master glassblower, leather apron, rolled sleeves, thick moustache, confident face, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:48+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1267/U1rGcxP6Uf9ZP3lCtB1Om_Fnf3prZW.png",
+   "hull_low_ratio": 0.167,
+   "enclosed_hole_px": 7392,
+   "kept_bg_hole_px": 7390,
+   "filled_px": 0,
+   "object_px": 415026,
+   "bg": [
+    251,
+    251,
+    251
+   ],
+   "generated_at": "2026-10-04T20:33:21+00:00"
+  }
+ },
+ "glass/portrait_walon": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2595270748,
+  "url": "https://v3b.fal.media/files/b/0aad11e0/6kh5ALlDc85u5WoNnyRsR_25d9de7ce54349f89782a5f1742de05a.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "Bust portrait of a medieval mountain prospector with a hood, weathered face, leather satchel and a small lantern, secretive smile, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   768,
+   768
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:10:46+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2595270748,
+    "url": "https://v3b.fal.media/files/b/0aad11e0/6kh5ALlDc85u5WoNnyRsR_25d9de7ce54349f89782a5f1742de05a.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "Bust portrait of a medieval mountain prospector with a hood, weathered face, leather satchel and a small lantern, secretive smile, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     768,
+     768
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:46+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1267/PXZxgPf8vwKAPX9T5aDEH_egYHHWnL.png",
+   "hull_low_ratio": 0.2065,
+   "enclosed_hole_px": 530,
+   "kept_bg_hole_px": 530,
+   "filled_px": 0,
+   "object_px": 532619,
+   "bg": [
+    245,
+    245,
+    245
+   ],
+   "generated_at": "2026-10-04T20:33:16+00:00"
+  }
+ },
+ "glass/shape_butla": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3706109765,
+  "url": "https://v3b.fal.media/files/b/0aad11dd/1JADLQAOStftGNT9AlTwA_7de1c4491fc5446098b4100b074b12a7.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "A frosted white glass bottle with a long neck and rounded shoulders, soft highlights, pale neutral white. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1024,
+   1024
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:10:18+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3706109765,
+    "url": "https://v3b.fal.media/files/b/0aad11dd/1JADLQAOStftGNT9AlTwA_7de1c4491fc5446098b4100b074b12a7.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A frosted white glass bottle with a long neck and rounded shoulders, soft highlights, pale neutral white. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:18+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1265/8o82HhUF1GzKhMHn4zy9v_OsCsyz9s.png",
+   "hull_low_ratio": 0.0799,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 203804,
+   "bg": [
+    217,
+    216,
+    212
+   ],
+   "generated_at": "2026-10-04T20:33:01+00:00"
+  }
+ },
+ "glass/shape_flakon": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1176526066,
+  "url": "https://v3b.fal.media/files/b/0aad11dd/RELs2WF0W9e4uj6MZN_-c_917c9beabfcd465a80496da234d83a9c.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "A small frosted white glass apothecary flask with a round stopper, soft highlights, pale neutral white. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1024,
+   1024
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:10:20+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1176526066,
+    "url": "https://v3b.fal.media/files/b/0aad11dd/RELs2WF0W9e4uj6MZN_-c_917c9beabfcd465a80496da234d83a9c.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A small frosted white glass apothecary flask with a round stopper, soft highlights, pale neutral white. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:20+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1265/MIerAjDiwsvD6Q4UPo5FQ_ZaaebgIP.png",
+   "hull_low_ratio": 0.0829,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 66712,
+   "bg": [
+    175,
+    189,
+    191
+   ],
+   "generated_at": "2026-10-04T20:33:01+00:00"
+  }
+ },
+ "glass/shape_kula": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2205214318,
+  "url": "https://v3b.fal.media/files/b/0aad1222/9gtFajXMrWpnO7dwDFNcH_8efb61147a67430ba4a0ab13d2c0b7d9.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "A frosted white glass sphere with a small neck, soft highlights, pale neutral white like milk glass. The sphere is large and fills most of the picture. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1024,
+   1024
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:21:47+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 892500457,
+    "url": "https://v3b.fal.media/files/b/0aad11dd/HRQtV52KAGMUVHx3IXbOs_0ca32e590c3242e4981948c93b6f6145.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A frosted white glass sphere with a small neck, soft highlights, pale neutral white. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:20+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2205214318,
+    "url": "https://v3b.fal.media/files/b/0aad1222/9gtFajXMrWpnO7dwDFNcH_8efb61147a67430ba4a0ab13d2c0b7d9.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A frosted white glass sphere with a small neck, soft highlights, pale neutral white like milk glass. The sphere is large and fills most of the picture. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:21:47+00:00",
+    "note": "attempt 2: object style without 'scene' wording / band framing for strips / rewritten subject (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1266/L9ev74Amlo6tPiF3KpzG8_vQDeqGfc.png",
+   "hull_low_ratio": 0.0231,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 325105,
+   "bg": [
+    196,
+    200,
+    199
+   ],
+   "generated_at": "2026-10-04T20:33:05+00:00"
+  }
+ },
+ "glass/shape_puchar": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1258/sanX6flnaPvJioKil4RBB_vcBcGGCF.png",
+  "aspect_ratio": "1:1",
+  "resolution": "1K",
+  "prompt": "A frosted white glass goblet with a tall stem and round foot, soft highlights, pale neutral white. The goblet is large and fills most of the picture height. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+  "route": "nano",
+  "size": [
+   1024,
+   1024
+  ],
+  "returned_size": [
+   1024,
+   1024
+  ],
+  "generated_at": "2026-10-04T20:31:01+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3518866420,
+    "url": "https://v3b.fal.media/files/b/0aad11dd/pFMPfv3IGnvSmx6AGy-Fo_d561884bd03e42dfa71b34821d715c75.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A frosted white glass goblet with a tall stem and round foot, soft highlights, pale neutral white. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:16+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 900353373,
+    "url": "https://v3b.fal.media/files/b/0aad123f/Q2ZQ-LKfJ73-j73TyOh29_7cb6a265aae041d493f880e7a99018f2.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A frosted white glass goblet with a tall stem and round foot, soft highlights, pale neutral white. The goblet is large and fills most of the picture height. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:26:39+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1258/sanX6flnaPvJioKil4RBB_vcBcGGCF.png",
+    "aspect_ratio": "1:1",
+    "resolution": "1K",
+    "prompt": "A frosted white glass goblet with a tall stem and round foot, soft highlights, pale neutral white. The goblet is large and fills most of the picture height. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1024,
+     1024
+    ],
+    "generated_at": "2026-10-04T20:31:01+00:00",
+    "note": "attempt 3, route nano: flux attempt 2 still had scenery around the goblet / photoreal mold without iron bands / lava-orange ore / a stemmed thistle / a dusk sky instead of a mine"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1265/mPo1o93FuoR5EJoVL80KP_maarC2gc.png",
+   "hull_low_ratio": 0.3798,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 155846,
+   "bg": [
+    203,
+    203,
+    205
+   ],
+   "generated_at": "2026-10-04T20:33:00+00:00"
+  }
+ },
+ "glass/shape_wazon": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3346692374,
+  "url": "https://v3b.fal.media/files/b/0aad123f/sGksHE2pgbZy9iFMt3wwz_0784e24f0a0a4832b736fc6a6955d50e.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "A frosted white glass vase with a wide belly and narrow flared neck, soft highlights, pale neutral white. The vase is large and fills most of the picture height. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1024,
+   1024
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:26:39+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 340474043,
+    "url": "https://v3b.fal.media/files/b/0aad11dd/B-sbEQmgyNn5cvuw9LqsH_192394a12ed049a5829527b3bd3958b0.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A frosted white glass vase with a wide belly and narrow flared neck, soft highlights, pale neutral white. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:10:21+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3346692374,
+    "url": "https://v3b.fal.media/files/b/0aad123f/sGksHE2pgbZy9iFMt3wwz_0784e24f0a0a4832b736fc6a6955d50e.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A frosted white glass vase with a wide belly and narrow flared neck, soft highlights, pale neutral white. The vase is large and fills most of the picture height. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     1024
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:26:39+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1266/NRF2pEanK4q7JytI1E_ff_dATAHQ48.png",
+   "hull_low_ratio": 0.0778,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 242606,
+   "bg": [
+    213,
+    213,
+    208
+   ],
+   "generated_at": "2026-10-04T20:33:05+00:00"
+  }
+ },
+ "herbs/basket": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 40980593,
+  "url": "https://v3b.fal.media/files/b/0aad11e6/scxkwXagYv562N2rP11nB_7ac0879544be4f4ab6c2e91a6731905f.jpg",
+  "gen_size": [
+   1312,
+   1056
+  ],
+  "prompt": "A wicker basket with a handle, empty, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   640,
+   512
+  ],
+  "returned_size": [
+   1312,
+   1056
+  ],
+  "generated_at": "2026-10-04T20:11:50+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 40980593,
+    "url": "https://v3b.fal.media/files/b/0aad11e6/scxkwXagYv562N2rP11nB_7ac0879544be4f4ab6c2e91a6731905f.jpg",
+    "gen_size": [
+     1312,
+     1056
+    ],
+    "prompt": "A wicker basket with a handle, empty, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     640,
+     512
+    ],
+    "returned_size": [
+     1312,
+     1056
+    ],
+    "generated_at": "2026-10-04T20:11:50+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126b/ut2MIiJuP0BrsxLKJAXav_0QQhqyvG.png",
+   "hull_low_ratio": 0.2298,
+   "enclosed_hole_px": 29831,
+   "kept_bg_hole_px": 28429,
+   "filled_px": 1402,
+   "object_px": 228882,
+   "bg": [
+    254,
+    254,
+    254
+   ],
+   "generated_at": "2026-10-04T20:33:56+00:00"
+  }
+ },
+ "herbs/bg_far": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1803294022,
+  "url": "https://v3b.fal.media/files/b/0aad11e3/Pcqrepa0m--ffcdtDDBIr_7148d52b089a430cbd83b89e99282d8c.jpg",
+  "gen_size": [
+   1440,
+   832
+  ],
+  "prompt": "Morning view up a forested mountain slope toward a distant conical summit with a tiny chapel on top, spruce forest, mist in the valley, soft sunlight, no path in the foreground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   1920,
+   1080
+  ],
+  "returned_size": [
+   1440,
+   832
+  ],
+  "generated_at": "2026-10-04T20:11:17+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1803294022,
+    "url": "https://v3b.fal.media/files/b/0aad11e3/Pcqrepa0m--ffcdtDDBIr_7148d52b089a430cbd83b89e99282d8c.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Morning view up a forested mountain slope toward a distant conical summit with a tiny chapel on top, spruce forest, mist in the valley, soft sunlight, no path in the foreground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:11:17+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ]
+ },
+ "herbs/laborant_1": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 792632177,
+  "url": "https://v3b.fal.media/files/b/0aad11e5/7wgDDXEPbLOdFy6a0_ic__eea8d4cb17ba416cacc13c35381d458c.jpg",
+  "gen_size": [
+   1024,
+   1376
+  ],
+  "prompt": "An 18th century mountain herbalist walking to the right with a wicker basket and a walking staff, long coat, wide hat, round spectacles, side view, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   768,
+   1024
+  ],
+  "returned_size": [
+   1024,
+   1376
+  ],
+  "generated_at": "2026-10-04T20:11:41+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 792632177,
+    "url": "https://v3b.fal.media/files/b/0aad11e5/7wgDDXEPbLOdFy6a0_ic__eea8d4cb17ba416cacc13c35381d458c.jpg",
+    "gen_size": [
+     1024,
+     1376
+    ],
+    "prompt": "An 18th century mountain herbalist walking to the right with a wicker basket and a walking staff, long coat, wide hat, round spectacles, side view, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     768,
+     1024
+    ],
+    "returned_size": [
+     1024,
+     1376
+    ],
+    "generated_at": "2026-10-04T20:11:41+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126a/p2j2cf7l-v-sLcmosEFeF_7hFOFp9M.png",
+   "hull_low_ratio": 0.414,
+   "enclosed_hole_px": 56076,
+   "kept_bg_hole_px": 56063,
+   "filled_px": 13,
+   "object_px": 236371,
+   "bg": [
+    253,
+    253,
+    253
+   ],
+   "generated_at": "2026-10-04T20:33:51+00:00"
+  }
+ },
+ "herbs/laborant_2": {
+  "model": "fal-ai/nano-banana-pro/edit",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1241/OeNonL-arm5aBPjiuOu3Y_y1VTbAH7.png",
+  "ref_url": "https://v3b.fal.media/files/b/0aad1241/hhuZQSetHFm74rgqEkLjk_laborant_1.png",
+  "prompt": "Same character, same style and colors, next frame of the walk cycle: other leg forward, staff lifted. Keep exactly the same character design, face, clothing colors, proportions, art style, scale and framing, and the same plain light background, no cast shadow.",
+  "route": "edit",
+  "size": [
+   768,
+   1024
+  ],
+  "returned_size": [
+   896,
+   1200
+  ],
+  "generated_at": "2026-10-04T20:27:18+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/nano-banana-pro/edit",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad11e7/T1bklC4hWmsNsCUaezY5M_VwTHE88r.png",
+    "ref_url": "https://v3b.fal.media/files/b/0aad11e7/aS0oAG3qHPh2ifgTPAvk4_laborant_1.png",
+    "prompt": "Same character, same style and colors, next frame of the walk cycle: other leg forward, staff lifted. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "edit",
+    "size": [
+     768,
+     1024
+    ],
+    "returned_size": [
+     896,
+     1200
+    ],
+    "generated_at": "2026-10-04T20:12:13+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro/edit",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1241/OeNonL-arm5aBPjiuOu3Y_y1VTbAH7.png",
+    "ref_url": "https://v3b.fal.media/files/b/0aad1241/hhuZQSetHFm74rgqEkLjk_laborant_1.png",
+    "prompt": "Same character, same style and colors, next frame of the walk cycle: other leg forward, staff lifted. Keep exactly the same character design, face, clothing colors, proportions, art style, scale and framing, and the same plain light background, no cast shadow.",
+    "route": "edit",
+    "size": [
+     768,
+     1024
+    ],
+    "returned_size": [
+     896,
+     1200
+    ],
+    "generated_at": "2026-10-04T20:27:18+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126b/yqGLg6shTcT5KcCyeaoZm_BlQ6yUjY.png",
+   "hull_low_ratio": 0.4853,
+   "enclosed_hole_px": 844,
+   "kept_bg_hole_px": 842,
+   "filled_px": 2,
+   "object_px": 185970,
+   "bg": [
+    254,
+    254,
+    254
+   ],
+   "generated_at": "2026-10-04T20:33:52+00:00"
+  }
+ },
+ "herbs/mortar": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2320486509,
+  "url": "https://v3b.fal.media/files/b/0aad1241/fhOCnsX5LnJk84TYL3bP1_e4da70368767499da8ae32c69964aec3.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "A grey stone apothecary mortar bowl standing alone, empty, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "flux",
+  "size": [
+   640,
+   640
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:26:55+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3287980334,
+    "url": "https://v3b.fal.media/files/b/0aad11e5/u5ijYFRvyEVCMqFbDyo3N_41137e4c687442499cf5efb8aa00d847.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A grey stone apothecary mortar, empty, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     640,
+     640
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:11:41+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2320486509,
+    "url": "https://v3b.fal.media/files/b/0aad1241/fhOCnsX5LnJk84TYL3bP1_e4da70368767499da8ae32c69964aec3.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A grey stone apothecary mortar bowl standing alone, empty, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     640,
+     640
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:26:55+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126b/oEesfI2NIoX238GQj74pN_I3vBX1Or.png",
+   "hull_low_ratio": 0.0134,
+   "enclosed_hole_px": 61,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 205691,
+   "bg": [
+    254,
+    254,
+    253
+   ],
+   "generated_at": "2026-10-04T20:33:57+00:00"
+  }
+ },
+ "herbs/pestle": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad123b/tqiTCerTmqBvPT_iQ_6Au_OfOikW6Q.png",
+  "aspect_ratio": "9:16",
+  "resolution": "1K",
+  "prompt": "A single grey stone pestle on its own, without a mortar bowl: a short thick club shaped grinding stick standing upright on its wide rounded end, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "nano",
+  "size": [
+   320,
+   640
+  ],
+  "returned_size": [
+   768,
+   1376
+  ],
+  "generated_at": "2026-10-04T20:26:15+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1798665130,
+    "url": "https://v3b.fal.media/files/b/0aad11e6/N6815E7gfjwMvpH3vt8JJ_1d049ab4db564f73aa26b598e8ca1461.jpg",
+    "gen_size": [
+     704,
+     1440
+    ],
+    "prompt": "A grey stone pestle, upright. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     320,
+     640
+    ],
+    "returned_size": [
+     704,
+     1440
+    ],
+    "generated_at": "2026-10-04T20:11:48+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 970520346,
+    "url": "https://v3b.fal.media/files/b/0aad1223/TzGswZN0YfA1prZbUjzaa_bff0bc209a634196827d35aa3a105ab1.jpg",
+    "gen_size": [
+     704,
+     1440
+    ],
+    "prompt": "A single grey stone pestle standing upright on its rounded end, a short thick club shape, on its own, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     320,
+     640
+    ],
+    "returned_size": [
+     704,
+     1440
+    ],
+    "generated_at": "2026-10-04T20:21:52+00:00",
+    "note": "attempt 2: object style without 'scene' wording / band framing for strips / rewritten subject (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad123b/tqiTCerTmqBvPT_iQ_6Au_OfOikW6Q.png",
+    "aspect_ratio": "9:16",
+    "resolution": "1K",
+    "prompt": "A single grey stone pestle on its own, without a mortar bowl: a short thick club shaped grinding stick standing upright on its wide rounded end, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "nano",
+    "size": [
+     320,
+     640
+    ],
+    "returned_size": [
+     768,
+     1376
+    ],
+    "generated_at": "2026-10-04T20:26:15+00:00",
+    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126b/Pv_pdKUegjCFlME724YL4_ZuVTKgzH.png",
+   "hull_low_ratio": 0.1171,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 176544,
+   "bg": [
+    211,
+    211,
+    207
+   ],
+   "generated_at": "2026-10-04T20:33:56+00:00"
+  }
+ },
+ "herbs/plant_arnika": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1739808558,
+  "url": "https://v3b.fal.media/files/b/0aad11e4/QIl-JBaLGe4GHZSAVo9xz_54bdcd2c25cc49cd8dcd82c12af582e8.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole arnica plant with bright yellow orange daisy like flowers and a straight stem. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:11:24+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1739808558,
+    "url": "https://v3b.fal.media/files/b/0aad11e4/QIl-JBaLGe4GHZSAVo9xz_54bdcd2c25cc49cd8dcd82c12af582e8.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole arnica plant with bright yellow orange daisy like flowers and a straight stem. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:24+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1269/_aFXB0_RNDMwpI8p3xpX5_vuyOTdXR.png",
+   "hull_low_ratio": 0.6235,
+   "enclosed_hole_px": 9445,
+   "kept_bg_hole_px": 9307,
+   "filled_px": 138,
+   "object_px": 225335,
+   "bg": [
+    238,
+    238,
+    238
+   ],
+   "generated_at": "2026-10-04T20:33:40+00:00"
+  }
+ },
+ "herbs/plant_dziewieciesil": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad125a/KWOjtp5iSBYejRnLMQ5I9_Xxenpnzu.png",
+  "aspect_ratio": "4:5",
+  "resolution": "1K",
+  "prompt": "One whole stemless carline thistle seen from a low side angle: a large flat silvery white star shaped flower head with a golden center sitting directly on a flat rosette of spiny jagged leaves, with no stem. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "nano",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   928,
+   1152
+  ],
+  "generated_at": "2026-10-04T20:31:24+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2994600993,
+    "url": "https://v3b.fal.media/files/b/0aad11e4/KbHKJlRm2G3ljwB8qdEF7_86e5c3e5ceac4d0b8ab499fbd2ef7d7e.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole stemless carline thistle with a large silvery white flat flower and spiny leaves. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:25+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2948638013,
+    "url": "https://v3b.fal.media/files/b/0aad1240/Y2-OFOsBwiWGxw2nsQAx6_5d576a4fd7274481a622307514a41523.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole stemless carline thistle seen from a low side angle: a large flat silvery white star shaped flower head with a golden center sitting directly on a flat rosette of spiny jagged leaves, with no stem. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:26:51+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad125a/KWOjtp5iSBYejRnLMQ5I9_Xxenpnzu.png",
+    "aspect_ratio": "4:5",
+    "resolution": "1K",
+    "prompt": "One whole stemless carline thistle seen from a low side angle: a large flat silvery white star shaped flower head with a golden center sitting directly on a flat rosette of spiny jagged leaves, with no stem. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "nano",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     928,
+     1152
+    ],
+    "generated_at": "2026-10-04T20:31:24+00:00",
+    "note": "attempt 3, route nano: flux attempt 2 still had scenery around the goblet / photoreal mold without iron bands / lava-orange ore / a stemmed thistle / a dusk sky instead of a mine"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1269/sxezHjAnRy9WOSRdklsPv_TkqoBytl.png",
+   "hull_low_ratio": 0.3621,
+   "enclosed_hole_px": 2031,
+   "kept_bg_hole_px": 1935,
+   "filled_px": 96,
+   "object_px": 173274,
+   "bg": [
+    233,
+    233,
+    233
+   ],
+   "generated_at": "2026-10-04T20:33:40+00:00"
+  }
+ },
+ "herbs/plant_goryczka": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3589634529,
+  "url": "https://v3b.fal.media/files/b/0aad11e4/L43dx-tfn126xP2pbIAba_356c53c0fee548ab83b116dc44c5eff5.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole gentian plant with deep blue trumpet flowers. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:11:25+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3589634529,
+    "url": "https://v3b.fal.media/files/b/0aad11e4/L43dx-tfn126xP2pbIAba_356c53c0fee548ab83b116dc44c5eff5.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole gentian plant with deep blue trumpet flowers. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:25+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1269/qr-Kp3CCdE2tzoNOuwG5t_eieZtaLD.png",
+   "hull_low_ratio": 0.6619,
+   "enclosed_hole_px": 589,
+   "kept_bg_hole_px": 589,
+   "filled_px": 0,
+   "object_px": 202265,
+   "bg": [
+    254,
+    254,
+    254
+   ],
+   "generated_at": "2026-10-04T20:33:40+00:00"
+  }
+ },
+ "herbs/plant_mieta": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 4207268868,
+  "url": "https://v3b.fal.media/files/b/0aad11e5/v5DR2zKlTMT7ZTEqUKurg_77de9c9ca50f4735ad8f1c7f8ab474c0.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole mint plant with bright green toothed leaves and a purple flower spike. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:11:35+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 4207268868,
+    "url": "https://v3b.fal.media/files/b/0aad11e5/v5DR2zKlTMT7ZTEqUKurg_77de9c9ca50f4735ad8f1c7f8ab474c0.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole mint plant with bright green toothed leaves and a purple flower spike. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:35+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126a/VfR3ynYzS8QMD3tS-y2U5_e7pTw2OU.png",
+   "hull_low_ratio": 0.4509,
+   "enclosed_hole_px": 26354,
+   "kept_bg_hole_px": 26352,
+   "filled_px": 2,
+   "object_px": 359133,
+   "bg": [
+    255,
+    255,
+    255
+   ],
+   "generated_at": "2026-10-04T20:33:48+00:00"
+  }
+ },
+ "herbs/plant_muchomor": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1180246892,
+  "url": "https://v3b.fal.media/files/b/0aad11e5/SLtXjynjYcUdPbnySx4Wp_5f45d9aab20344b1b177351b43f11aef.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One red fly agaric mushroom with white spots. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:11:40+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1180246892,
+    "url": "https://v3b.fal.media/files/b/0aad11e5/SLtXjynjYcUdPbnySx4Wp_5f45d9aab20344b1b177351b43f11aef.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One red fly agaric mushroom with white spots. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:40+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126a/XgRa-LYrLSvSSrPgPpkB2_hj6mMAvo.png",
+   "hull_low_ratio": 0.4973,
+   "enclosed_hole_px": 6252,
+   "kept_bg_hole_px": 3265,
+   "filled_px": 2987,
+   "object_px": 279311,
+   "bg": [
+    224,
+    227,
+    221
+   ],
+   "generated_at": "2026-10-04T20:33:50+00:00"
+  }
+ },
+ "herbs/plant_pierwiosnek": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3879950208,
+  "url": "https://v3b.fal.media/files/b/0aad1241/iROka2b_F3FUEVUZ3sJsx_fd75534651bf46dd98f00c0b8bad2cd2.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole cowslip primrose plant: a low rosette of wrinkled oval leaves and a single upright stalk topped by a drooping cluster of small bell shaped yellow flowers. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:26:52+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1563424055,
+    "url": "https://v3b.fal.media/files/b/0aad11e5/89P10XvF7My7mCIIjtNqy_cb10ffc392d34542b572027a9e96f4ba.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole cowslip primrose plant with a cluster of nodding yellow flowers. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:34+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3879950208,
+    "url": "https://v3b.fal.media/files/b/0aad1241/iROka2b_F3FUEVUZ3sJsx_fd75534651bf46dd98f00c0b8bad2cd2.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole cowslip primrose plant: a low rosette of wrinkled oval leaves and a single upright stalk topped by a drooping cluster of small bell shaped yellow flowers. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:26:52+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126a/XITM4rnnpU_1JtlbK2qUX_wkDQ6ofS.png",
+   "hull_low_ratio": 0.5421,
+   "enclosed_hole_px": 27053,
+   "kept_bg_hole_px": 27053,
+   "filled_px": 0,
+   "object_px": 141180,
+   "bg": [
+    254,
+    254,
+    253
+   ],
+   "generated_at": "2026-10-04T20:33:45+00:00"
+  }
+ },
+ "herbs/plant_piolun": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2654247397,
+  "url": "https://v3b.fal.media/files/b/0aad11e5/e2JLYiOkwanWAWzps4cf1_b9974d4ca3bf43e8af52c7695369fe7c.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole wormwood plant with silvery grey feathery leaves and tiny yellow buds. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:11:32+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2654247397,
+    "url": "https://v3b.fal.media/files/b/0aad11e5/e2JLYiOkwanWAWzps4cf1_b9974d4ca3bf43e8af52c7695369fe7c.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole wormwood plant with silvery grey feathery leaves and tiny yellow buds. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:32+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126a/kwJtxjfMHJl0Zop2-wg7i_RTD4kfPz.png",
+   "hull_low_ratio": 0.6726,
+   "enclosed_hole_px": 26386,
+   "kept_bg_hole_px": 24664,
+   "filled_px": 1722,
+   "object_px": 151496,
+   "bg": [
+    254,
+    254,
+    254
+   ],
+   "generated_at": "2026-10-04T20:33:46+00:00"
+  }
+ },
+ "herbs/plant_podbial": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3981633920,
+  "url": "https://v3b.fal.media/files/b/0aad1241/FNpcbDaqoXjPQIultmZ3M_ec10c46098eb498f955c97f5118f16f6.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole coltsfoot plant: a few short reddish scaly stems, each topped with a single bright yellow dandelion like flower head, and a few large round heart shaped leaves at the base. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:26:54+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3397084204,
+    "url": "https://v3b.fal.media/files/b/0aad11e4/DDaVsUCNu_mGjIw_YXlU5_851799ec97214f5593877818fdeba79b.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole coltsfoot plant with yellow dandelion like flowers on scaly stems. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:27+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3981633920,
+    "url": "https://v3b.fal.media/files/b/0aad1241/FNpcbDaqoXjPQIultmZ3M_ec10c46098eb498f955c97f5118f16f6.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole coltsfoot plant: a few short reddish scaly stems, each topped with a single bright yellow dandelion like flower head, and a few large round heart shaped leaves at the base. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:26:54+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1269/oqAndc4gahU1Li5EiyakU_szj3Ih0j.png",
+   "hull_low_ratio": 0.5562,
+   "enclosed_hole_px": 9329,
+   "kept_bg_hole_px": 9101,
+   "filled_px": 228,
+   "object_px": 309248,
+   "bg": [
+    255,
+    255,
+    255
+   ],
+   "generated_at": "2026-10-04T20:33:42+00:00"
+  }
+ },
+ "herbs/plant_pokrzywa": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1107206892,
+  "url": "https://v3b.fal.media/files/b/0aad11e5/WQaE58SKqhka9gEPQOA6a_70cea3015bb44a70802c2cebe5ae6638.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole stinging nettle plant with serrated dark green leaves. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:11:39+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1107206892,
+    "url": "https://v3b.fal.media/files/b/0aad11e5/WQaE58SKqhka9gEPQOA6a_70cea3015bb44a70802c2cebe5ae6638.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole stinging nettle plant with serrated dark green leaves. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:39+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126a/_z_y-XZJh0_mHKFHeqhXO_HQdNXqzN.png",
+   "hull_low_ratio": 0.6585,
+   "enclosed_hole_px": 806,
+   "kept_bg_hole_px": 806,
+   "filled_px": 0,
+   "object_px": 72001,
+   "bg": [
+    220,
+    217,
+    224
+   ],
+   "generated_at": "2026-10-04T20:33:50+00:00"
+  }
+ },
+ "herbs/plant_prawoslaz": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1137924686,
+  "url": "https://v3b.fal.media/files/b/0aad11e4/Ha_MxlVafq9CmDB7SeidN_5cb4a6ddeadb441185e7f8a66c2232fd.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole marshmallow plant with pale pink flowers and velvety leaves. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:11:32+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1137924686,
+    "url": "https://v3b.fal.media/files/b/0aad11e4/Ha_MxlVafq9CmDB7SeidN_5cb4a6ddeadb441185e7f8a66c2232fd.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole marshmallow plant with pale pink flowers and velvety leaves. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:11:32+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad126a/_PJGxGze0YET10j__ZQTd_EJF5Vaxe.png",
+   "hull_low_ratio": 0.4975,
+   "enclosed_hole_px": 54517,
+   "kept_bg_hole_px": 53881,
+   "filled_px": 636,
+   "object_px": 262589,
+   "bg": [
+    245,
+    245,
+    245
+   ],
+   "generated_at": "2026-10-04T20:33:46+00:00"
+  }
+ },
+ "herbs/strip_mid": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad123b/WVUU-5RZJ_rtTkF9AIrfM_itUjjvOB.png",
+  "aspect_ratio": "21:9",
+  "resolution": "2K",
+  "prompt": "A long horizontal band of spruce forest edge with mossy boulders and ferns, seen exactly from the side like a flat theatre backdrop, morning light, no perspective, no distant mountains. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 60 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "nano",
+  "size": [
+   2048,
+   640
+  ],
+  "returned_size": [
+   3168,
+   1344
+  ],
+  "generated_at": "2026-10-04T20:26:21+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 744874935,
+    "url": "https://v3b.fal.media/files/b/0aad11e3/SveKoKgBYdCRFKIGEQQYl_eac87bab2d744c069fff11007ca48304.jpg",
+    "gen_size": [
+     1440,
+     448
+    ],
+    "prompt": "A long horizontal band of spruce forest edge with mossy boulders and ferns, seen from the side, morning light. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     2048,
+     640
+    ],
+    "returned_size": [
+     1440,
+     448
+    ],
+    "generated_at": "2026-10-04T20:11:18+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad123b/WVUU-5RZJ_rtTkF9AIrfM_itUjjvOB.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A long horizontal band of spruce forest edge with mossy boulders and ferns, seen exactly from the side like a flat theatre backdrop, morning light, no perspective, no distant mountains. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 60 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "nano",
+    "size": [
+     2048,
+     640
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-04T20:26:21+00:00",
+    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   }
+  ],
+  "cutout": {
+   "model": "local sky key (cutout.py)",
+   "method": "key",
+   "bg": [
+    219,
+    220,
+    224
+   ],
+   "tolerance": 10.2,
+   "sky_ratio": 0.5472,
+   "generated_at": "2026-10-04T20:33:35+00:00"
+  }
+ },
+ "herbs/strip_near": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad123b/yOiSKHDvwl7oIyh6hlBK-_0v4xIQR4.png",
+  "aspect_ratio": "21:9",
+  "resolution": "2K",
+  "prompt": "A long horizontal band of mountain meadow with a stony footpath running along it, grass tufts and small rocks, seen exactly from the side like a flat theatre backdrop, no perspective, no distant mountains; the top edge of the band is just the tips of the grass. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 40 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "nano",
+  "size": [
+   2048,
+   448
+  ],
+  "returned_size": [
+   3168,
+   1344
+  ],
+  "generated_at": "2026-10-04T20:26:21+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 131179313,
+    "url": "https://v3b.fal.media/files/b/0aad11e3/s6pgV7tGSe2egZELj2qio_6a579368014f43f7b6156c631fefe7f4.jpg",
+    "gen_size": [
+     1440,
+     320
+    ],
+    "prompt": "A long horizontal band of mountain meadow with a stony footpath, grass tufts and small rocks, seen from the side. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     2048,
+     448
+    ],
+    "returned_size": [
+     1440,
+     320
+    ],
+    "generated_at": "2026-10-04T20:11:17+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2651464275,
+    "url": "https://v3b.fal.media/files/b/0aad1223/OyR2a39EFLn_vN4zPINzj_1f9180c1f6294353b596148bafc245dd.jpg",
+    "gen_size": [
+     1440,
+     320
+    ],
+    "prompt": "A long horizontal band of mountain meadow with a stony footpath running along it, grass tufts and small rocks, seen from the side. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     2048,
+     448
+    ],
+    "returned_size": [
+     1440,
+     320
+    ],
+    "generated_at": "2026-10-04T20:21:52+00:00",
+    "note": "attempt 2: object style without 'scene' wording / band framing for strips / rewritten subject (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad123b/yOiSKHDvwl7oIyh6hlBK-_0v4xIQR4.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A long horizontal band of mountain meadow with a stony footpath running along it, grass tufts and small rocks, seen exactly from the side like a flat theatre backdrop, no perspective, no distant mountains; the top edge of the band is just the tips of the grass. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 40 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "nano",
+    "size": [
+     2048,
+     448
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-04T20:26:21+00:00",
+    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   }
+  ],
+  "cutout": {
+   "model": "local sky key (cutout.py)",
+   "method": "key",
+   "bg": [
+    211,
+    212,
+    211
+   ],
+   "tolerance": 10.2,
+   "sky_ratio": 0.5136,
+   "generated_at": "2026-10-04T20:33:35+00:00"
+  }
+ },
+ "hub/cloud_1": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1173285255,
+  "url": "https://v3b.fal.media/files/b/0aad11dc/AaWGyrJotJHFlN94Lhdfx_66be71de1805442fae5dc9468ea79d1e.jpg",
+  "gen_size": [
+   1440,
+   704
+  ],
+  "prompt": "One soft fluffy paper-cut cloud, pale lavender and cream. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1024,
+   512
+  ],
+  "returned_size": [
+   1440,
+   704
+  ],
+  "generated_at": "2026-10-04T20:10:11+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3973666830,
+    "url": "https://v3b.fal.media/files/b/0aad11d6/c8z91dz3ejfQTsUgaHxT-_0822bf058caf4cf09963818bf53002ef.jpg",
+    "gen_size": [
+     1440,
+     704
+    ],
+    "prompt": "Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark. One soft fluffy paper-cut cloud, pale lavender and cream. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground.",
+    "route": "flux",
+    "size": [
+     1024,
+     512
+    ],
+    "returned_size": [
+     1440,
+     704
+    ],
+    "generated_at": "2026-10-04T20:09:04+00:00"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1173285255,
+    "url": "https://v3b.fal.media/files/b/0aad11dc/AaWGyrJotJHFlN94Lhdfx_66be71de1805442fae5dc9468ea79d1e.jpg",
+    "gen_size": [
+     1440,
+     704
+    ],
+    "prompt": "One soft fluffy paper-cut cloud, pale lavender and cream. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     512
+    ],
+    "returned_size": [
+     1440,
+     704
+    ],
+    "generated_at": "2026-10-04T20:10:11+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1265/7u2xQtk-LrRp0QUXMWqv6_4D7wGa8C.png",
+   "hull_low_ratio": 0.1099,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 211495,
+   "bg": [
+    214,
+    220,
+    225
+   ],
+   "generated_at": "2026-10-04T20:32:55+00:00"
+  }
+ },
+ "hub/cloud_2": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2678945854,
+  "url": "https://v3b.fal.media/files/b/0aad123f/9S-e1N77-KdPrHHm1-jNw_6c52396424d54b1f89f5839b688422fe.jpg",
+  "gen_size": [
+   1440,
+   704
+  ],
+  "prompt": "One long thin paper-cut cloud, pale rose and lavender. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1024,
+   512
+  ],
+  "returned_size": [
+   1440,
+   704
+  ],
+  "generated_at": "2026-10-04T20:26:37+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 4039235191,
+    "url": "https://v3b.fal.media/files/b/0aad11d6/o_DZ2iZTl7LNi1dlDaD74_d4f7ab4480a94b25bdfeb367cad1c57d.jpg",
+    "gen_size": [
+     1440,
+     704
+    ],
+    "prompt": "Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark. One long thin paper-cut cloud, pale rose and lavender. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground.",
+    "route": "flux",
+    "size": [
+     1024,
+     512
+    ],
+    "returned_size": [
+     1440,
+     704
+    ],
+    "generated_at": "2026-10-04T20:09:05+00:00"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2678945854,
+    "url": "https://v3b.fal.media/files/b/0aad123f/9S-e1N77-KdPrHHm1-jNw_6c52396424d54b1f89f5839b688422fe.jpg",
+    "gen_size": [
+     1440,
+     704
+    ],
+    "prompt": "One long thin paper-cut cloud, pale rose and lavender. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1024,
+     512
+    ],
+    "returned_size": [
+     1440,
+     704
+    ],
+    "generated_at": "2026-10-04T20:26:37+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1265/oM4WZtybMhyJMT3gPivKJ_cKyOXJBW.png",
+   "hull_low_ratio": 0.1038,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 163074,
+   "bg": [
+    210,
+    214,
+    216
+   ],
+   "generated_at": "2026-10-04T20:32:56+00:00"
+  }
+ },
+ "hub/duch_gor": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1238/3Oe2kIKuQ-6HAlCHAzk9Z_VdUqvIIp.png",
+  "aspect_ratio": "4:5",
+  "resolution": "2K",
+  "prompt": "A full figure of a benevolent mountain spirit standing alone, seen from the front: a tall old man with a very long flowing beard made of mist, a wide flat-brimmed felt hat with a low rounded crown, a long cloak, a knotted staff, translucent pale blue grey, mysterious and kind. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+  "route": "nano",
+  "size": [
+   896,
+   1152
+  ],
+  "returned_size": [
+   1856,
+   2304
+  ],
+  "generated_at": "2026-10-04T20:25:55+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1425136502,
+    "url": "https://v3b.fal.media/files/b/0aad11d6/NKvgfqIsDyHZpBmEtDDJb_82e299f9dd784b8980e20c31580de1b8.jpg",
+    "gen_size": [
+     1056,
+     1344
+    ],
+    "prompt": "Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark. Silhouette of a benevolent mountain spirit: a tall old man with a very long flowing beard made of mist, wide brimmed hat, long cloak, a knotted staff, translucent pale blue grey, mysterious and kind. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground.",
+    "route": "flux",
+    "size": [
+     896,
+     1152
+    ],
+    "returned_size": [
+     1056,
+     1344
+    ],
+    "generated_at": "2026-10-04T20:09:08+00:00"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2995289456,
+    "url": "https://v3b.fal.media/files/b/0aad11dd/s4sTpdfS3mgi1FdS6iw_F_bdfb1123c1c0462c95e8222b62473c4d.jpg",
+    "gen_size": [
+     1056,
+     1344
+    ],
+    "prompt": "Silhouette of a benevolent mountain spirit: a tall old man with a very long flowing beard made of mist, wide brimmed hat, long cloak, a knotted staff, translucent pale blue grey, mysterious and kind. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     896,
+     1152
+    ],
+    "returned_size": [
+     1056,
+     1344
+    ],
+    "generated_at": "2026-10-04T20:10:12+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1238/3Oe2kIKuQ-6HAlCHAzk9Z_VdUqvIIp.png",
+    "aspect_ratio": "4:5",
+    "resolution": "2K",
+    "prompt": "A full figure of a benevolent mountain spirit standing alone, seen from the front: a tall old man with a very long flowing beard made of mist, a wide flat-brimmed felt hat with a low rounded crown, a long cloak, a knotted staff, translucent pale blue grey, mysterious and kind. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     896,
+     1152
+    ],
+    "returned_size": [
+     1856,
+     2304
+    ],
+    "generated_at": "2026-10-04T20:25:55+00:00",
+    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1265/G6vmtcbM5VtxTNnoAs7WS_R4lUEWVG.png",
+   "hull_low_ratio": 0.2183,
+   "enclosed_hole_px": 609,
+   "kept_bg_hole_px": 609,
+   "filled_px": 0,
+   "object_px": 1381114,
+   "bg": [
+    208,
+    205,
+    204
+   ],
+   "generated_at": "2026-10-04T20:33:01+00:00"
+  }
+ },
+ "hub/ridge_far": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1238/z9vD_pb0YWsCp539xDVNQ_LpE0sgCb.png",
+  "aspect_ratio": "21:9",
+  "resolution": "2K",
+  "prompt": "A very wide, long mountain ridge seen from far away across a valley to the north, shaped like the real Karkonosze main ridge: a long ridge with a gently rounded, almost level plateau top and smooth soft slopes running from the left edge to the right edge. In the left third of the image rises one smooth, broad conical summit like Snezka, clearly higher than the ridge, topped with a tiny round stone chapel and two small saucer shaped towers. No rocky cliffs, no jagged alpine peaks, no other mountains behind. Dark spruce forest at the foot, hazy blue distance. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 75 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "nano",
+  "size": [
+   1920,
+   768
+  ],
+  "returned_size": [
+   3168,
+   1344
+  ],
+  "generated_at": "2026-10-04T20:25:54+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3866887850,
+    "url": "https://v3b.fal.media/files/b/0aad11d5/cnnwk2w3tfFcutVHwFQ33_0df65e6ca9f448ef9ab5f4465fe977be.jpg",
+    "gen_size": [
+     1440,
+     576
+    ],
+    "prompt": "Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark. A very wide, long mountain ridge with a gently rounded plateau top and smooth slopes, one conical summit on the left third of the image topped with a tiny round stone chapel and two small saucer shaped towers, dark spruce forest at the foot, seen from a valley to the north, hazy blue distance. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground.",
+    "route": "flux",
+    "size": [
+     1920,
+     768
+    ],
+    "returned_size": [
+     1440,
+     576
+    ],
+    "generated_at": "2026-10-04T20:09:00+00:00"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3445039233,
+    "url": "https://v3b.fal.media/files/b/0aad1222/U8wFSpnO2oy2wp05-mbg7_ae9cceb65310441dab6c3193b52e67d2.jpg",
+    "gen_size": [
+     1440,
+     576
+    ],
+    "prompt": "A very wide, long mountain ridge seen from far away across a valley to the north. In the left third of the image rises one smooth, broad conical summit, clearly higher than the rest, topped with a tiny round stone chapel and a small observatory of two stacked saucer shaped discs. From it a long ridge with a gently rounded, almost level plateau top and smooth soft slopes runs all the way to the right edge, like the back of a sleeping giant, no rocky cliffs, no jagged peaks. Dark spruce forest at the foot of the slopes, hazy blue distance. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1920,
+     768
+    ],
+    "returned_size": [
+     1440,
+     576
+    ],
+    "generated_at": "2026-10-04T20:21:45+00:00",
+    "note": "attempt 2: object style without 'scene' wording / band framing for strips / rewritten subject (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1238/z9vD_pb0YWsCp539xDVNQ_LpE0sgCb.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A very wide, long mountain ridge seen from far away across a valley to the north, shaped like the real Karkonosze main ridge: a long ridge with a gently rounded, almost level plateau top and smooth soft slopes running from the left edge to the right edge. In the left third of the image rises one smooth, broad conical summit like Snezka, clearly higher than the ridge, topped with a tiny round stone chapel and two small saucer shaped towers. No rocky cliffs, no jagged alpine peaks, no other mountains behind. Dark spruce forest at the foot, hazy blue distance. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 75 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     768
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-04T20:25:54+00:00",
+    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   }
+  ],
+  "repairs": [
+   {
+    "model": "fal-ai/nano-banana-pro/edit",
+    "prompt": "The tiny round stone chapel on top of the summit had its roof cut off by the picture's top edge; there is now empty sky above it. Paint the chapel's missing small conical roof in exactly the same paper-cut gouache style and colors. Change nothing else: keep every shape, color, texture and the plain flat light grey sky exactly as they are.",
+    "shift_down": 110,
+    "input_url": "https://v3b.fal.media/files/b/0aad125f/so4Uo8OyjoSAVk05JFv9r_ridge_far.shifted.png",
+    "url": "https://v3b.fal.media/files/b/0aad1260/ZUusACSqxMuM--V6EPgV5_HGstE72m.png",
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-04T20:32:32+00:00"
+   }
+  ],
+  "cutout": {
+   "model": "local sky key (cutout.py)",
+   "method": "key",
+   "bg": [
+    220,
+    220,
+    225
+   ],
+   "tolerance": 10.2,
+   "sky_ratio": 0.2637,
+   "generated_at": "2026-10-04T20:32:52+00:00"
+  }
+ },
+ "hub/ridge_mid": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1238/FWwv6CtC5mkXOw__jaKAx_V6WuDxMI.png",
+  "aspect_ratio": "21:9",
+  "resolution": "2K",
+  "prompt": "A band of low, rounded forested foothills seen from the side like a flat theatre backdrop, spruce and beech forest in evening light. Right of center, a small medieval castle ruin with broken walls and one roofless round tower stands on a rocky granite outcrop. Left of center, a tiny ruined stone tower stands on a rounded wooded hill. No mountains behind the hills. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 65 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "nano",
+  "size": [
+   1920,
+   640
+  ],
+  "returned_size": [
+   3168,
+   1344
+  ],
+  "generated_at": "2026-10-04T20:25:53+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1318813717,
+    "url": "https://v3b.fal.media/files/b/0aad11d5/ddg_JILUaDx9qTYM8MOzL_789addc3c95b4f7cbb735e388ea7dcdd.jpg",
+    "gen_size": [
+     1440,
+     480
+    ],
+    "prompt": "Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark. A band of low forested foothills in front of mountains, a small medieval castle ruin on a rocky outcrop right of center, a tiny tower ruin on a rounded wooded hill left of center, spruce and beech forest, evening light. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground.",
+    "route": "flux",
+    "size": [
+     1920,
+     640
+    ],
+    "returned_size": [
+     1440,
+     480
+    ],
+    "generated_at": "2026-10-04T20:08:58+00:00"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1238/FWwv6CtC5mkXOw__jaKAx_V6WuDxMI.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A band of low, rounded forested foothills seen from the side like a flat theatre backdrop, spruce and beech forest in evening light. Right of center, a small medieval castle ruin with broken walls and one roofless round tower stands on a rocky granite outcrop. Left of center, a tiny ruined stone tower stands on a rounded wooded hill. No mountains behind the hills. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 65 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     640
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-04T20:25:53+00:00",
+    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   }
+  ],
+  "cutout": {
+   "model": "local sky key (cutout.py)",
+   "method": "key",
+   "bg": [
+    193,
+    193,
+    197
+   ],
+   "tolerance": 10.2,
+   "sky_ratio": 0.4303,
+   "generated_at": "2026-10-04T20:32:52+00:00"
+  }
+ },
+ "hub/sky": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2727959415,
+  "url": "https://v3b.fal.media/files/b/0aad1222/vuVyUh7O-EUYI7v0aL-AJ_99ee775f1a434b2fae2d776d928a649c.jpg",
+  "gen_size": [
+   1440,
+   832
+  ],
+  "prompt": "A clear evening sky just after sunset filling the entire picture from edge to edge: a smooth gradient from deep indigo at the top through violet to warm apricot along the bottom edge, a few thin wispy high clouds, a small pale full moon in the upper right. Nothing but sky, no land, no hills, no trees. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1920,
+   1080
+  ],
+  "returned_size": [
+   1440,
+   832
+  ],
+  "generated_at": "2026-10-04T20:21:45+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2880230786,
+    "url": "https://v3b.fal.media/files/b/0aad11d5/hUAIOIdUnmtKNRDB5-sd9_ae84afc957364c329f6e55079d319862.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark. Evening sky over mountains just after sunset, soft gradient from deep indigo at the top through violet to warm apricot at the horizon, a few thin high clouds, a small pale full moon in the upper right, no land, no mountains.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:08:59+00:00"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2727959415,
+    "url": "https://v3b.fal.media/files/b/0aad1222/vuVyUh7O-EUYI7v0aL-AJ_99ee775f1a434b2fae2d776d928a649c.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "A clear evening sky just after sunset filling the entire picture from edge to edge: a smooth gradient from deep indigo at the top through violet to warm apricot along the bottom edge, a few thin wispy high clouds, a small pale full moon in the upper right. Nothing but sky, no land, no hills, no trees. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:21:45+00:00",
+    "note": "attempt 2: object style without 'scene' wording / band framing for strips / rewritten subject (see README Decyzje)"
+   }
+  ]
+ },
+ "hub/valley": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1238/E5y7QR4iVNaF8eyS5lgH2_yKWRBaha.png",
+  "aspect_ratio": "21:9",
+  "resolution": "2K",
+  "prompt": "Foreground of a wide valley at dusk: meadows and fields, a winding river, a small old town with red roofs and a tall church tower in the center, orchards and country roads, warm window lights. Seen from a low hill, the valley forms one horizontal band whose far edge is a low, gentle line of trees and meadows, with no hills or mountains behind it. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 55 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "nano",
+  "size": [
+   1920,
+   560
+  ],
+  "returned_size": [
+   3168,
+   1344
+  ],
+  "generated_at": "2026-10-04T20:25:58+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1930734793,
+    "url": "https://v3b.fal.media/files/b/0aad11d5/fNPDocKO7doyJSBLX6Q6C_499a69f5bd7b456b9c38f086b264129c.jpg",
+    "gen_size": [
+     1440,
+     416
+    ],
+    "prompt": "Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark. Foreground of a wide valley at dusk: meadows and fields, a winding river, a small old town with red roofs and a tall church tower in the center, orchards and country roads, warm window lights. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground.",
+    "route": "flux",
+    "size": [
+     1920,
+     560
+    ],
+    "returned_size": [
+     1440,
+     416
+    ],
+    "generated_at": "2026-10-04T20:08:59+00:00"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1238/E5y7QR4iVNaF8eyS5lgH2_yKWRBaha.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "Foreground of a wide valley at dusk: meadows and fields, a winding river, a small old town with red roofs and a tall church tower in the center, orchards and country roads, warm window lights. Seen from a low hill, the valley forms one horizontal band whose far edge is a low, gentle line of trees and meadows, with no hills or mountains behind it. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 55 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     560
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-04T20:25:58+00:00",
+    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   }
+  ],
+  "cutout": {
+   "model": "local sky key (cutout.py)",
+   "method": "key",
+   "bg": [
+    228,
+    229,
+    235
+   ],
+   "tolerance": 13.3,
+   "sky_ratio": 0.526,
+   "generated_at": "2026-10-04T20:32:52+00:00"
+  }
+ },
+ "mine/bat": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3528277793,
+  "url": "https://v3b.fal.media/files/b/0aad11e3/HFdE3EYtTPwx2d6NktJpJ_c1dbfedc48ab4bb3a31e595cd9ecf5c8.jpg",
+  "gen_size": [
+   1440,
+   896
+  ],
+  "prompt": "A small brown bat with wings spread, flying, friendly storybook look. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   640,
+   400
+  ],
+  "returned_size": [
+   1440,
+   896
+  ],
+  "generated_at": "2026-10-04T20:11:12+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3528277793,
+    "url": "https://v3b.fal.media/files/b/0aad11e3/HFdE3EYtTPwx2d6NktJpJ_c1dbfedc48ab4bb3a31e595cd9ecf5c8.jpg",
+    "gen_size": [
+     1440,
+     896
+    ],
+    "prompt": "A small brown bat with wings spread, flying, friendly storybook look. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     640,
+     400
+    ],
+    "returned_size": [
+     1440,
+     896
+    ],
+    "generated_at": "2026-10-04T20:11:12+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1268/-B0saWjm23BcPVx9lOWRs_T6tBqPlQ.png",
+   "hull_low_ratio": 0.3875,
+   "enclosed_hole_px": 46,
+   "kept_bg_hole_px": 0,
+   "filled_px": 46,
+   "object_px": 160337,
+   "bg": [
+    239,
+    230,
+    219
+   ],
+   "generated_at": "2026-10-04T20:33:31+00:00"
+  }
+ },
+ "mine/bg_1": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1815703012,
+  "url": "https://v3b.fal.media/files/b/0aad1222/vJ7WpB7jVqH8FVvjt-RzR_bd1d9a7d690849e39461483f4d64530e.jpg",
+  "gen_size": [
+   1440,
+   832
+  ],
+  "prompt": "Side view cross-section of a 12th century mine tunnel, like a slice through the mountain in a picture book: a low horizontal tunnel runs straight across the whole image from the left edge to the right edge, rough grey rock walls, heavy wooden support beams, scattered stones on the floor, solid rock above and below the tunnel. Flat, even, dim light everywhere, bare walls, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   1920,
+   1080
+  ],
+  "returned_size": [
+   1440,
+   832
+  ],
+  "generated_at": "2026-10-04T20:21:48+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 198295641,
+    "url": "https://v3b.fal.media/files/b/0aad11e1/EqXMzInlBzWCGxB9STKjf_42aff024424642a4836906ed62bc7dc7.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Cross section of a 12th century mine tunnel, rough grey rock walls, heavy wooden support beams, a low ceiling, scattered stones on the floor, evenly dim lit, no people, no lamps. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:10:59+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1815703012,
+    "url": "https://v3b.fal.media/files/b/0aad1222/vJ7WpB7jVqH8FVvjt-RzR_bd1d9a7d690849e39461483f4d64530e.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Side view cross-section of a 12th century mine tunnel, like a slice through the mountain in a picture book: a low horizontal tunnel runs straight across the whole image from the left edge to the right edge, rough grey rock walls, heavy wooden support beams, scattered stones on the floor, solid rock above and below the tunnel. Flat, even, dim light everywhere, bare walls, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:21:48+00:00",
+    "note": "attempt 2: object style without 'scene' wording / band framing for strips / rewritten subject (see README Decyzje)"
+   }
+  ]
+ },
+ "mine/bg_2": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1344044269,
+  "url": "https://v3b.fal.media/files/b/0aad1240/Z7A1xEMH6P4a91xRkSvXR_0c123ca93edf46d09e3c90265d91967c.jpg",
+  "gen_size": [
+   1440,
+   832
+  ],
+  "prompt": "Side view cross-section of a 19th century mine gallery, like a slice through the mountain in a picture book: a horizontal gallery runs across the whole image from the left edge to the right edge, rock walls with timber supports, iron rails on the floor, a wooden ladder leaning on the wall, solid rock above and below. Flat, even, dim light everywhere, bare walls, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   1920,
+   1080
+  ],
+  "returned_size": [
+   1440,
+   832
+  ],
+  "generated_at": "2026-10-04T20:26:43+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3079020172,
+    "url": "https://v3b.fal.media/files/b/0aad11e2/ALLMVmV8TYINTv0EWLwWU_9ee2f09505bf493cb0320ae50401cf8b.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Cross section of a 19th century mine gallery, rock walls with timber supports, iron rails on the floor, a wooden ladder, evenly dim lit, no people, no lamps. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:11:04+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1344044269,
+    "url": "https://v3b.fal.media/files/b/0aad1240/Z7A1xEMH6P4a91xRkSvXR_0c123ca93edf46d09e3c90265d91967c.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Side view cross-section of a 19th century mine gallery, like a slice through the mountain in a picture book: a horizontal gallery runs across the whole image from the left edge to the right edge, rock walls with timber supports, iron rails on the floor, a wooden ladder leaning on the wall, solid rock above and below. Flat, even, dim light everywhere, bare walls, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:26:43+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ]
+ },
+ "mine/bg_3": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1258/MY7rO5GR6TS2KBVVpn6s8_006H2L5A.png",
+  "aspect_ratio": "16:9",
+  "resolution": "2K",
+  "prompt": "Side view cross-section of a 1950s uranium mine, like a slice through the mountain in a picture book: a horizontal tunnel runs across the whole image from the left edge to the right edge, concrete and steel supports, cables along the wall, a ventilation pipe under the ceiling, solid rock above and below. Flat, even, dim light everywhere, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "nano",
+  "size": [
+   1920,
+   1080
+  ],
+  "returned_size": [
+   2752,
+   1536
+  ],
+  "generated_at": "2026-10-04T20:31:12+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3405832594,
+    "url": "https://v3b.fal.media/files/b/0aad11e2/VkxWGlErEUQbld-aZgVub_f2cc0f4480f14adca0813cdeacbf436c.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Cross section of a 1950s uranium mine, concrete and steel supports, cables along the wall, ventilation pipe, evenly dim lit, no people, no lamps. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:11:04+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 939466158,
+    "url": "https://v3b.fal.media/files/b/0aad1240/lLf83-4wQHED7LcOnbsQ__283cae1046104d9c86d0c0be75588322.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Side view cross-section of a 1950s uranium mine, like a slice through the mountain in a picture book: a horizontal tunnel runs across the whole image from the left edge to the right edge, concrete and steel supports, cables along the wall, a ventilation pipe under the ceiling, solid rock above and below. Flat, even, dim light everywhere, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:26:46+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1258/MY7rO5GR6TS2KBVVpn6s8_006H2L5A.png",
+    "aspect_ratio": "16:9",
+    "resolution": "2K",
+    "prompt": "Side view cross-section of a 1950s uranium mine, like a slice through the mountain in a picture book: a horizontal tunnel runs across the whole image from the left edge to the right edge, concrete and steel supports, cables along the wall, a ventilation pipe under the ceiling, solid rock above and below. Flat, even, dim light everywhere, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "nano",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     2752,
+     1536
+    ],
+    "generated_at": "2026-10-04T20:31:12+00:00",
+    "note": "attempt 3, route nano: flux attempt 2 still had scenery around the goblet / photoreal mold without iron bands / lava-orange ore / a stemmed thistle / a dusk sky instead of a mine"
+   }
+  ]
+ },
+ "mine/cart": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3325774046,
+  "url": "https://v3b.fal.media/files/b/0aad11e3/09WUP0vAJQGsVWAy8vzPv_187a2bf974b64750b32fccb85d0bc55d.jpg",
+  "gen_size": [
+   1408,
+   992
+  ],
+  "prompt": "A wooden mine cart on iron wheels filled with ore. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   896,
+   640
+  ],
+  "returned_size": [
+   1408,
+   992
+  ],
+  "generated_at": "2026-10-04T20:11:12+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3325774046,
+    "url": "https://v3b.fal.media/files/b/0aad11e3/09WUP0vAJQGsVWAy8vzPv_187a2bf974b64750b32fccb85d0bc55d.jpg",
+    "gen_size": [
+     1408,
+     992
+    ],
+    "prompt": "A wooden mine cart on iron wheels filled with ore. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     896,
+     640
+    ],
+    "returned_size": [
+     1408,
+     992
+    ],
+    "generated_at": "2026-10-04T20:11:12+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1269/3KYVoBonNjMaR9QAg3a7i_FV5OxEh5.png",
+   "hull_low_ratio": 0.1741,
+   "enclosed_hole_px": 9619,
+   "kept_bg_hole_px": 5591,
+   "filled_px": 4028,
+   "object_px": 139238,
+   "bg": [
+    170,
+    151,
+    141
+   ],
+   "generated_at": "2026-10-04T20:33:35+00:00"
+  }
+ },
+ "mine/geiger": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1293/zuYt_vUAJqCBNuAV9OUKn_CAyeBVFF.png",
+  "aspect_ratio": "4:5",
+  "resolution": "1K",
+  "prompt": "A 1950s handheld Geiger counter: a small metal box with a carrying handle on top, a round dial with only a needle and plain tick marks, without any numbers or letters, and a cylindrical probe wand connected by a coiled cable. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "nano",
+  "size": [
+   448,
+   512
+  ],
+  "returned_size": [
+   928,
+   1152
+  ],
+  "generated_at": "2026-10-04T20:41:00+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3883027106,
+    "url": "https://v3b.fal.media/files/b/0aad11e3/0FM6UKvWSuAORCksa4hMC_d79e4bafd42e4c5894240afeb115fd8b.jpg",
+    "gen_size": [
+     1120,
+     1280
+    ],
+    "prompt": "A 1950s handheld Geiger counter with a round dial and a wand. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     448,
+     512
+    ],
+    "returned_size": [
+     1120,
+     1280
+    ],
+    "generated_at": "2026-10-04T20:11:15+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 4161187016,
+    "url": "https://v3b.fal.media/files/b/0aad1223/7QRSQrkD_CD5oUpCh25Zo_f38069aea43e4a91b37325cf0f971e6a.jpg",
+    "gen_size": [
+     1120,
+     1280
+    ],
+    "prompt": "A 1950s handheld Geiger counter: a small metal box with a carrying handle on top, a round dial with a needle and tick marks on the front, and a cylindrical probe wand connected by a coiled cable. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     448,
+     512
+    ],
+    "returned_size": [
+     1120,
+     1280
+    ],
+    "generated_at": "2026-10-04T20:21:53+00:00",
+    "note": "attempt 2: object style without 'scene' wording / band framing for strips / rewritten subject (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1293/zuYt_vUAJqCBNuAV9OUKn_CAyeBVFF.png",
+    "aspect_ratio": "4:5",
+    "resolution": "1K",
+    "prompt": "A 1950s handheld Geiger counter: a small metal box with a carrying handle on top, a round dial with only a needle and plain tick marks, without any numbers or letters, and a cylindrical probe wand connected by a coiled cable. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "nano",
+    "size": [
+     448,
+     512
+    ],
+    "returned_size": [
+     928,
+     1152
+    ],
+    "generated_at": "2026-10-04T20:41:00+00:00",
+    "note": "attempt 3, route nano: attempt 2 had illegible pseudo-letters on the dial"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1296/L17PjqnTKjzi3cIEfhrJa_tkWDjztw.png",
+   "hull_low_ratio": 0.1669,
+   "enclosed_hole_px": 11418,
+   "kept_bg_hole_px": 11418,
+   "filled_px": 0,
+   "object_px": 222519,
+   "bg": [
+    221,
+    221,
+    223
+   ],
+   "generated_at": "2026-10-04T20:41:06+00:00"
+  }
+ },
+ "mine/lamp": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 162284342,
+  "url": "https://v3b.fal.media/files/b/0aad1240/uRh3yUkDOK2Uq1Iroa937_0d31fd1f70b74c34a33e11f90628e42d.jpg",
+  "gen_size": [
+   960,
+   1440
+  ],
+  "prompt": "An old brass miner's oil lamp with a glass window and a hook, unlit, the glass window is dark and empty. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   768
+  ],
+  "returned_size": [
+   960,
+   1440
+  ],
+  "generated_at": "2026-10-04T20:26:48+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1109446382,
+    "url": "https://v3b.fal.media/files/b/0aad11e2/iEIX5mAaRozInlhyv68qM_a7fca29ac999404ebbd3a695a42a19eb.jpg",
+    "gen_size": [
+     960,
+     1440
+    ],
+    "prompt": "An old brass miner's oil lamp with a glass window and a hook, unlit. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     768
+    ],
+    "returned_size": [
+     960,
+     1440
+    ],
+    "generated_at": "2026-10-04T20:11:08+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 162284342,
+    "url": "https://v3b.fal.media/files/b/0aad1240/uRh3yUkDOK2Uq1Iroa937_0d31fd1f70b74c34a33e11f90628e42d.jpg",
+    "gen_size": [
+     960,
+     1440
+    ],
+    "prompt": "An old brass miner's oil lamp with a glass window and a hook, unlit, the glass window is dark and empty. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     768
+    ],
+    "returned_size": [
+     960,
+     1440
+    ],
+    "generated_at": "2026-10-04T20:26:48+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1268/kH6iY1vA_48AYA6hG-hZ6_5ceZK7TE.png",
+   "hull_low_ratio": 0.2203,
+   "enclosed_hole_px": 90481,
+   "kept_bg_hole_px": 90481,
+   "filled_px": 0,
+   "object_px": 436482,
+   "bg": [
+    201,
+    199,
+    195
+   ],
+   "generated_at": "2026-10-04T20:33:31+00:00"
+  }
+ },
+ "mine/pickaxe": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1622191165,
+  "url": "https://v3b.fal.media/files/b/0aad1240/5pEC30gvaJ1Sa2PggxGVZ_5d92207d31f14bd7b910d8d43a761f79.jpg",
+  "gen_size": [
+   1184,
+   1184
+  ],
+  "prompt": "A miner's pickaxe with a worn wooden handle and a curved iron head pointed at both ends, mounted crosswise on top of the handle. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "flux",
+  "size": [
+   640,
+   640
+  ],
+  "returned_size": [
+   1184,
+   1184
+  ],
+  "generated_at": "2026-10-04T20:26:48+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3576329348,
+    "url": "https://v3b.fal.media/files/b/0aad11e2/wqXWrCjVGTw1soPme8p83_3b3dbe106eb04484aa8287e388115ff3.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A miner's pickaxe with a worn wooden handle. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     640,
+     640
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:11:10+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1622191165,
+    "url": "https://v3b.fal.media/files/b/0aad1240/5pEC30gvaJ1Sa2PggxGVZ_5d92207d31f14bd7b910d8d43a761f79.jpg",
+    "gen_size": [
+     1184,
+     1184
+    ],
+    "prompt": "A miner's pickaxe with a worn wooden handle and a curved iron head pointed at both ends, mounted crosswise on top of the handle. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     640,
+     640
+    ],
+    "returned_size": [
+     1184,
+     1184
+    ],
+    "generated_at": "2026-10-04T20:26:48+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1268/mir-J9j5HKL3zqm8cxg04_qd4KgPic.png",
+   "hull_low_ratio": 0.5841,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 109626,
+   "bg": [
+    216,
+    214,
+    202
+   ],
+   "generated_at": "2026-10-04T20:33:31+00:00"
+  }
+ },
+ "mine/vein_iron": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad1258/nLudNjPZY7w3ECF9ccevB_evBplMRw.png",
+  "aspect_ratio": "5:4",
+  "resolution": "1K",
+  "prompt": "A chunk of grey rock with dull rusty red brown iron ore streaks, matte. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "route": "nano",
+  "size": [
+   512,
+   400
+  ],
+  "returned_size": [
+   1152,
+   928
+  ],
+  "generated_at": "2026-10-04T20:31:01+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 4175127096,
+    "url": "https://v3b.fal.media/files/b/0aad11e2/c-e5zS9P4ZPJHLsK1rsyA_6645f07b92cd4312880c80438c8087e1.jpg",
+    "gen_size": [
+     1344,
+     1056
+    ],
+    "prompt": "A chunk of grey rock with rusty red brown iron ore streaks. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     400
+    ],
+    "returned_size": [
+     1344,
+     1056
+    ],
+    "generated_at": "2026-10-04T20:11:06+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3688183375,
+    "url": "https://v3b.fal.media/files/b/0aad1240/W18hgps8mwIQ9KvjHgWj9_325ebb85373045109755b727f0eebc39.jpg",
+    "gen_size": [
+     1344,
+     1056
+    ],
+    "prompt": "A chunk of grey rock with dull rusty red brown iron ore streaks, matte. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     400
+    ],
+    "returned_size": [
+     1344,
+     1056
+    ],
+    "generated_at": "2026-10-04T20:26:48+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1258/nLudNjPZY7w3ECF9ccevB_evBplMRw.png",
+    "aspect_ratio": "5:4",
+    "resolution": "1K",
+    "prompt": "A chunk of grey rock with dull rusty red brown iron ore streaks, matte. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "nano",
+    "size": [
+     512,
+     400
+    ],
+    "returned_size": [
+     1152,
+     928
+    ],
+    "generated_at": "2026-10-04T20:31:01+00:00",
+    "note": "attempt 3, route nano: flux attempt 2 still had scenery around the goblet / photoreal mold without iron bands / lava-orange ore / a stemmed thistle / a dusk sky instead of a mine"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1268/x4tpaFefqSBP-f6kcJUqY_yFomE7xa.png",
+   "hull_low_ratio": 0.0515,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 402651,
+   "bg": [
+    205,
+    205,
+    205
+   ],
+   "generated_at": "2026-10-04T20:33:27+00:00"
+  }
+ },
+ "mine/vein_uranium": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2214540673,
+  "url": "https://v3b.fal.media/files/b/0aad11e2/UfWYpbmnFe9Krhz5Kfaiy_1a3c358ec5a74616862d4501b852e466.jpg",
+  "gen_size": [
+   1344,
+   1056
+  ],
+  "prompt": "A chunk of dark rock with a crust of yellow green mineral crystals, matte, no glow. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "route": "flux",
+  "size": [
+   512,
+   400
+  ],
+  "returned_size": [
+   1344,
+   1056
+  ],
+  "generated_at": "2026-10-04T20:11:05+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2214540673,
+    "url": "https://v3b.fal.media/files/b/0aad11e2/UfWYpbmnFe9Krhz5Kfaiy_1a3c358ec5a74616862d4501b852e466.jpg",
+    "gen_size": [
+     1344,
+     1056
+    ],
+    "prompt": "A chunk of dark rock with a crust of yellow green mineral crystals, matte, no glow. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm lantern accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     512,
+     400
+    ],
+    "returned_size": [
+     1344,
+     1056
+    ],
+    "generated_at": "2026-10-04T20:11:05+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1268/gSF2iC8yjPN6AB1Zi7dmr_I1FwhxCq.png",
+   "hull_low_ratio": 0.0278,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 358152,
+   "bg": [
+    215,
+    215,
+    215
+   ],
+   "generated_at": "2026-10-04T20:33:31+00:00"
+  }
+ },
+ "turnips/bg": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2525783781,
+  "url": "https://v3b.fal.media/files/b/0aad1240/DsJhXj7mdKldGjVW021Sn_37c8b6e433214288bf8f510d12bb7c9f.jpg",
+  "gen_size": [
+   1440,
+   832
+  ],
+  "prompt": "A high mountain meadow on a broad, almost flat plateau at dusk. On a rounded hilltop in the upper left stands a small round stone chapel with a domed roof, and beside it a small observatory of two stacked saucer shaped discs. A stone path winds up across the meadow from the lower left toward the hilltop. The whole lower third of the picture is an empty vegetable field of dark soil furrows running across the image. Dramatic clouds. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   1920,
+   1080
+  ],
+  "returned_size": [
+   1440,
+   832
+  ],
+  "generated_at": "2026-10-04T20:26:43+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2371009771,
+    "url": "https://v3b.fal.media/files/b/0aad11e0/IdtJkIqIPYKQyC5eBqYDM_8b1fc57ec79d4907bb972a52ae06d389.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "A high mountain meadow on a broad plateau at dusk, a small round stone chapel on the hilltop in the upper left and two saucer shaped towers beside it, a stone path winding up, empty dark soil furrows of a vegetable field in the foreground, dramatic clouds. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:10:51+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2525783781,
+    "url": "https://v3b.fal.media/files/b/0aad1240/DsJhXj7mdKldGjVW021Sn_37c8b6e433214288bf8f510d12bb7c9f.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "A high mountain meadow on a broad, almost flat plateau at dusk. On a rounded hilltop in the upper left stands a small round stone chapel with a domed roof, and beside it a small observatory of two stacked saucer shaped discs. A stone path winds up across the meadow from the lower left toward the hilltop. The whole lower third of the picture is an empty vegetable field of dark soil furrows running across the image. Dramatic clouds. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T20:26:43+00:00",
+    "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   }
+  ]
+ },
+ "turnips/emma_1": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 1414560229,
+  "url": "https://v3b.fal.media/files/b/0aad11e1/xsSs_LswP1-Bz_7KCg9fF_35d5647778e048eca150589fdccbd839.jpg",
+  "gen_size": [
+   960,
+   1440
+  ],
+  "prompt": "A young princess in a flowing medieval blue gown running to the right, long blond braid flying, small golden circlet, storybook character, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   640,
+   960
+  ],
+  "returned_size": [
+   960,
+   1440
+  ],
+  "generated_at": "2026-10-04T20:10:58+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 1414560229,
+    "url": "https://v3b.fal.media/files/b/0aad11e1/xsSs_LswP1-Bz_7KCg9fF_35d5647778e048eca150589fdccbd839.jpg",
+    "gen_size": [
+     960,
+     1440
+    ],
+    "prompt": "A young princess in a flowing medieval blue gown running to the right, long blond braid flying, small golden circlet, storybook character, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     640,
+     960
+    ],
+    "returned_size": [
+     960,
+     1440
+    ],
+    "generated_at": "2026-10-04T20:10:58+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1268/yKfQaHe2zxOyo_YeEiq2h_nk4xQWay.png",
+   "hull_low_ratio": 0.4452,
+   "enclosed_hole_px": 2391,
+   "kept_bg_hole_px": 2390,
+   "filled_px": 1,
+   "object_px": 173929,
+   "bg": [
+    228,
+    228,
+    221
+   ],
+   "generated_at": "2026-10-04T20:33:26+00:00"
+  }
+ },
+ "turnips/emma_2": {
+  "model": "fal-ai/nano-banana-pro/edit",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad11e7/QYfAjlDgcL8eVHnaHoCSy_xb251L27.png",
+  "ref_url": "https://v3b.fal.media/files/b/0aad11e7/diYQZL5t-RwlCkKmESeDq_emma_1.png",
+  "prompt": "Same character, same style and colors, next frame of the run cycle: other leg forward, arms swapped. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "edit",
+  "size": [
+   640,
+   960
+  ],
+  "returned_size": [
+   848,
+   1264
+  ],
+  "generated_at": "2026-10-04T20:12:10+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/nano-banana-pro/edit",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad11e7/QYfAjlDgcL8eVHnaHoCSy_xb251L27.png",
+    "ref_url": "https://v3b.fal.media/files/b/0aad11e7/diYQZL5t-RwlCkKmESeDq_emma_1.png",
+    "prompt": "Same character, same style and colors, next frame of the run cycle: other leg forward, arms swapped. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "edit",
+    "size": [
+     640,
+     960
+    ],
+    "returned_size": [
+     848,
+     1264
+    ],
+    "generated_at": "2026-10-04T20:12:10+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1268/_BJOVlaEYW_8LVnTc7KHt_m6BjLWVh.png",
+   "hull_low_ratio": 0.4533,
+   "enclosed_hole_px": 5838,
+   "kept_bg_hole_px": 5838,
+   "filled_px": 0,
+   "object_px": 138842,
+   "bg": [
+    227,
+    227,
+    219
+   ],
+   "generated_at": "2026-10-04T20:33:25+00:00"
+  }
+ },
+ "turnips/mound": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 130958249,
+  "url": "https://v3b.fal.media/files/b/0aad11e1/qqEqNuR2Do2Dwncxd2AYR_d96c81d8107642b584bd4b936f05f1a7.jpg",
+  "gen_size": [
+   1440,
+   704
+  ],
+  "prompt": "A small mound of dark soil with a hole in the middle. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   512,
+   256
+  ],
+  "returned_size": [
+   1440,
+   704
+  ],
+  "generated_at": "2026-10-04T20:10:54+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 130958249,
+    "url": "https://v3b.fal.media/files/b/0aad11e1/qqEqNuR2Do2Dwncxd2AYR_d96c81d8107642b584bd4b936f05f1a7.jpg",
+    "gen_size": [
+     1440,
+     704
+    ],
+    "prompt": "A small mound of dark soil with a hole in the middle. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     512,
+     256
+    ],
+    "returned_size": [
+     1440,
+     704
+    ],
+    "generated_at": "2026-10-04T20:10:54+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1267/mfiPqAjUCUMTOt3x05MdV_t8qMZwFy.png",
+   "hull_low_ratio": 0.3302,
+   "enclosed_hole_px": 9,
+   "kept_bg_hole_px": 9,
+   "filled_px": 0,
+   "object_px": 101625,
+   "bg": [
+    161,
+    173,
+    172
+   ],
+   "generated_at": "2026-10-04T20:33:21+00:00"
+  }
+ },
+ "turnips/stone": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 3600218446,
+  "url": "https://v3b.fal.media/files/b/0aad11e1/r5eEmrsDHLJqN2ZO6UIdy_6355a776348d49edae7d1cc1c6a5f7e2.jpg",
+  "gen_size": [
+   1344,
+   1056
+  ],
+  "prompt": "A rounded grey granite stone with patches of yellow lichen. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   512,
+   400
+  ],
+  "returned_size": [
+   1344,
+   1056
+  ],
+  "generated_at": "2026-10-04T20:10:54+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 3600218446,
+    "url": "https://v3b.fal.media/files/b/0aad11e1/r5eEmrsDHLJqN2ZO6UIdy_6355a776348d49edae7d1cc1c6a5f7e2.jpg",
+    "gen_size": [
+     1344,
+     1056
+    ],
+    "prompt": "A rounded grey granite stone with patches of yellow lichen. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     512,
+     400
+    ],
+    "returned_size": [
+     1344,
+     1056
+    ],
+    "generated_at": "2026-10-04T20:10:54+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1268/LFFOOEO2OSKod0P06WsvO_5O7pCMRB.png",
+   "hull_low_ratio": 0.005,
+   "enclosed_hole_px": 0,
+   "kept_bg_hole_px": 0,
+   "filled_px": 0,
+   "object_px": 354559,
+   "bg": [
+    225,
+    225,
+    225
+   ],
+   "generated_at": "2026-10-04T20:33:26+00:00"
+  }
+ },
+ "turnips/turnip": {
+  "model": "fal-ai/flux-pro/v1.1",
+  "seed": 2307162206,
+  "url": "https://v3b.fal.media/files/b/0aad11e1/zhSQja4rr73EAusHybL9b_6a4cf5d9bf5a4be783f4b079028bce80.jpg",
+  "gen_size": [
+   1056,
+   1312
+  ],
+  "prompt": "One whole turnip, purple top fading to white bottom, with a tuft of green leaves. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "route": "flux",
+  "size": [
+   512,
+   640
+  ],
+  "returned_size": [
+   1056,
+   1312
+  ],
+  "generated_at": "2026-10-04T20:10:52+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2307162206,
+    "url": "https://v3b.fal.media/files/b/0aad11e1/zhSQja4rr73EAusHybL9b_6a4cf5d9bf5a4be783f4b079028bce80.jpg",
+    "gen_size": [
+     1056,
+     1312
+    ],
+    "prompt": "One whole turnip, purple top fading to white bottom, with a tuft of green leaves. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+    "route": "flux",
+    "size": [
+     512,
+     640
+    ],
+    "returned_size": [
+     1056,
+     1312
+    ],
+    "generated_at": "2026-10-04T20:10:52+00:00",
+    "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   }
+  ],
+  "cutout": {
+   "model": "fal-ai/birefnet",
+   "url": "https://v3b.fal.media/files/b/0aad1267/g92TzGvp8-D4KYyQBMeEy_nPUdPYIx.png",
+   "hull_low_ratio": 0.371,
+   "enclosed_hole_px": 688,
+   "kept_bg_hole_px": 688,
+   "filled_px": 0,
+   "object_px": 247620,
+   "bg": [
+    224,
+    227,
+    229
+   ],
+   "generated_at": "2026-10-04T20:33:21+00:00"
+  }
+ }
+}
