@@ -1,1 +1,105 @@
-{ "glass": { "title": "Hutnik z Józefiny" } }
+{
+  "glass": {
+    "title": "Hutnik z Józefiny",
+    "intro": {
+      "h": "Witaj w hucie Józefina",
+      "p": "Jest rok 1842. Mistrz Pohl wyjechał do Cieplic, a przed hutą stoi kolejka klientów. Zrób trzy naczynia. Każde zamówienie to cztery ruchy: rozgrzej, dmuchnij, zabarw, uformuj.",
+      "start": "Zaczynamy"
+    },
+    "heat": {
+      "h": "Rozgrzej szkło",
+      "p": "Wskazówka wędruje po piecu. Stuknij, gdy będzie w żarze, nie w popiele i nie w ogniu.",
+      "btn": "Wyjmij z pieca"
+    },
+    "blow": {
+      "h": "Dmuchaj przez piszczel",
+      "p": "Przytrzymaj przycisk, żeby bańka rosła. Puść, gdy dotknie przerywanej linii. Za dużo i pęknie.",
+      "btn": "Przytrzymaj i dmuchaj",
+      "pop": "Pękło! Szkło wraca do pieca. Spróbuj jeszcze raz, delikatniej."
+    },
+    "color": {
+      "h": "Zabarw tlenkiem metalu",
+      "p": "Każdy słoik to inny minerał i inny kolor. Który pasuje do zamówienia?"
+    },
+    "shape": {
+      "h": "Uformuj naczynie",
+      "p": "Wybierz formę, w którą wdmuchniesz bańkę."
+    },
+    "timeUp": "Czas minął!",
+    "next": "Następny klient",
+    "finish": "Zobacz, co powiedzą w Cieplicach",
+    "again": "Zagraj jeszcze raz",
+    "sum": { "h": "Koniec zmiany w hucie" },
+    "orderNo": "Zamówienie {i} z {n}",
+    "customers": {
+      "hrabina": {
+        "name": "Hrabina Schaffgotsch",
+        "line": "Na bal w Cieplicach potrzebuję dużego rubinowego pucharu.",
+        "ok": "Doskonale. Będzie stał na honorowym miejscu.",
+        "meh": "Hm. Ujdzie, jeśli nikt nie przyjrzy się z bliska.",
+        "bad": "To nie jest to, o co prosiłam."
+      },
+      "walon": {
+        "name": "Walon z Izerów",
+        "line": "Małą butelkę na wodę ze źródła. Zieloną jak las, żeby nikt nie zauważył.",
+        "ok": "Znikam z nią w gęstwinie. Dziękuję, hutniku.",
+        "meh": "Trochę widać pod światło, ale wezmę.",
+        "bad": "Z tym mnie każdy wypatrzy na milę."
+      },
+      "laborant": {
+        "name": "Laborant z Karpacza",
+        "line": "Mały fioletowy flakon na nalewkę z dziewięćsiłu. Fiolet chroni zioła przed słońcem.",
+        "ok": "Nalewka przetrwa w nim zimę. Pięknie.",
+        "meh": "Pomieści, ale słońce trochę przejdzie.",
+        "bad": "W tym zioła zwietrzeją w tydzień."
+      },
+      "duch": {
+        "name": "Duch Gór",
+        "line": "Dużą kulę, niebieską jak niebo nad Śnieżką. I nie nazywaj mnie Liczyrzepą.",
+        "ok": "Postawię ją na szczycie, niech się chmury przeglądają.",
+        "meh": "Niebo nad Śnieżką bywa i takie. Biorę.",
+        "bad": "Grzmot! Tak wygląda niebo? Chyba nad Kowarami."
+      },
+      "pohl": {
+        "name": "Mistrz Franz Pohl",
+        "line": "Zanim wrócę: zrób duży wazon ze szkła uranowego. Ma świecić jak latarnia.",
+        "ok": "Świeci! Z Ciebie będzie prawdziwy hutnik.",
+        "meh": "Nieźle, ale jeszcze poćwiczysz przy piecu.",
+        "bad": "Wracaj do pieca, czeladniku."
+      }
+    },
+    "minerals": {
+      "kobalt": { "label": "Kobalt", "name": "błękit" },
+      "zelazo": { "label": "Żelazo", "name": "leśna zieleń" },
+      "zloto": { "label": "Złoto", "name": "rubin" },
+      "mangan": { "label": "Mangan", "name": "fiolet" },
+      "uran": { "label": "Uran", "name": "uranowa zieleń" }
+    },
+    "shapes": {
+      "puchar": "Puchar",
+      "butla": "Butla",
+      "flakon": "Flakon",
+      "kula": "Kula",
+      "wazon": "Wazon"
+    },
+    "zones": { "ash": "popiół", "heat": "żar", "fire": "ogień" },
+    "facts": [
+      "szkło barwi się tlenkami metali? Kobalt daje błękit, złoto rubinową czerwień, mangan fiolet, a żelazo zieleń. Szkło uranowe świeci zielono w ultrafiolecie.",
+      "huty w Karkonoszach zużywały tyle drewna, że wycinały całe lasy? Popiół dawał potaż potrzebny do wytopu. Stąd „poręba” w nazwie Szklarskiej Poręby.",
+      "hutę Józefina założył w 1842 roku Franz Pohl dla rodu Schaffgotschów? Jej kryształy zdobywały medale na wystawach światowych w Londynie i Paryżu.",
+      "hutnik dmucha szkło przez długą rurę zwaną piszczelą? Rozgrzane do ponad 1000 stopni szkło jest miękkie jak miód i trzeba cały czas nim obracać."
+    ],
+    "titles": { "master": "Mistrz huty", "glassblower": "Hutnik", "apprentice": "Czeladnik" },
+    "subs": {
+      "master": "Mistrz Pohl zostawia Ci klucze do pieca.",
+      "glassblower": "Klienci wrócą. Większość z nich.",
+      "apprentice": "Każdy mistrz zaczynał od pękniętych baniek."
+    },
+    "notes": {
+      "color": "Kolor: miało być {want}, wyszło {got}.",
+      "shape": "Forma: miało być {want}, wyszło {got}.",
+      "size": "Wielkość nie całkiem taka, jak trzeba.",
+      "heat": "Szkło było za zimne albo za gorące."
+    }
+  }
+}
