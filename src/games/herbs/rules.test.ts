@@ -2,10 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { mulberry32 } from '../../core/Rng';
 import {
   DECOYS,
+  GRIND_LIMIT_S,
   HERBS,
   RECIPES,
   basketComplete,
   grindProgress,
+  grindTimeLeft,
+  grindTimedOut,
   pickResult,
   purity,
   spawnPlan,
@@ -146,6 +149,32 @@ describe('grindProgress', () => {
     expect(grindProgress(-2 * Math.PI, 0.25)).toBe(0.5);
     expect(grindProgress(Math.PI, 0.9)).toBe(1);
     expect(grindProgress(0, 0.3)).toBe(0.3);
+  });
+});
+
+describe('grind time limit', () => {
+  it('ends the grind by itself 30 s after the mortar comes up', () => {
+    expect(GRIND_LIMIT_S).toBe(30);
+    expect(grindTimedOut(0)).toBe(false);
+    expect(grindTimedOut(29.9)).toBe(false);
+    expect(grindTimedOut(30)).toBe(true);
+    expect(grindTimedOut(31.5)).toBe(true);
+  });
+
+  it('shows the time left as a share from 1 down to 0', () => {
+    expect(grindTimeLeft(0)).toBe(1);
+    expect(grindTimeLeft(15)).toBeCloseTo(0.5);
+    expect(grindTimeLeft(30)).toBe(0);
+    expect(grindTimeLeft(40)).toBe(0);
+  });
+
+  it('still scores a timed-out grind: 1 or 2 stars, never 3, and calls a clean basket slow', () => {
+    for (const p of [0, 0.3, 0.59, 0.6, 0.9, 1]) {
+      const stars = starsFor(p, GRIND_LIMIT_S);
+      expect(stars, `purity ${p}`).toBeGreaterThanOrEqual(1);
+      expect(stars, `purity ${p}`).toBeLessThanOrEqual(2);
+    }
+    expect(verdict([...kaszel.herbs], ['needed', 'needed', 'needed'], kaszel, GRIND_LIMIT_S)).toBe('slow');
   });
 });
 

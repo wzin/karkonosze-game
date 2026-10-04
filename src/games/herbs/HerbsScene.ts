@@ -475,7 +475,11 @@ export default class HerbsScene extends Scene {
     flask.position.set(1500, 990);
     const mortar = new Mortar(assets, audio, this.recipe.herbs.filter((h) => this.basketHerbs.includes(h)));
     mortar.position.set(DESIGN.w / 2, 700);
-    mortar.onGround = (seconds) => this.pour(mortar, flask, seconds, [head, hint]);
+    mortar.onGround = (seconds, timedOut) => {
+      // the heading and hint fade out for the pour: the time-up line takes their place
+      if (timedOut) this.toast(i18n.t('herbs.grind.timeUp'), 2, hint.y + 20);
+      this.pour(mortar, flask, seconds, [head, hint]);
+    };
     this.mortar = mortar;
     this.overlay.addChild(dim, head, hint, flask, mortar);
     this.fadeIn(this.overlay);
@@ -686,7 +690,7 @@ export default class HerbsScene extends Scene {
     return t;
   }
 
-  private toast(text: string, seconds: number): void {
+  private toast(text: string, seconds: number, y = 470): void {
     const style = Theme.text.body(34);
     style.fontWeight = '800';
     style.align = 'center';
@@ -696,7 +700,7 @@ export default class HerbsScene extends Scene {
     box.position.set(-(t.width + 80) / 2, -(t.height + 44) / 2);
     const holder = new Container();
     holder.addChild(box, t);
-    holder.position.set(DESIGN.w / 2, 470);
+    holder.position.set(DESIGN.w / 2, y);
     this.overlay.addChild(holder);
     this.tweens.add({
       dur: seconds,

@@ -123,6 +123,21 @@ export function grindProgress(angleDeltaRad: number, current: number): number {
 /** Grinding at most this long (seconds) can still earn 3 stars. */
 export const GRIND_FAST = 8;
 
+/**
+ * The grind ends by itself this many seconds after the mortar comes up (not after the first stir: a
+ * child who never finds the circling gesture must be moved on too) and pours what is ground so far.
+ */
+export const GRIND_LIMIT_S = 30;
+
+export function grindTimedOut(elapsedS: number): boolean {
+  return elapsedS >= GRIND_LIMIT_S;
+}
+
+/** Share of the grinding time still left, 1 → 0, for the time bar. */
+export function grindTimeLeft(elapsedS: number): number {
+  return Math.max(0, 1 - elapsedS / GRIND_LIMIT_S);
+}
+
 export function starsFor(purity: number, grindSeconds: number): 1 | 2 | 3 {
   if (purity >= 0.9 && grindSeconds <= GRIND_FAST) return 3;
   if (purity >= 0.6) return 2;

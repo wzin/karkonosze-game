@@ -4,7 +4,7 @@ import type { Audio } from '../../core/Audio';
 import { Theme } from '../../ui/Theme';
 import { ease, lerp, type Tweens } from './anim';
 import { fit } from './parts';
-import { grindProgress, type PlantId } from './rules';
+import { GRIND_LIMIT_S, grindProgress, grindTimeLeft, grindTimedOut, type PlantId } from './rules';
 
 /** The mortar is drawn 420 px wide: its 640 px texture scaled by K. */
 const MORTAR_W = 420;
@@ -17,6 +17,10 @@ const OPEN_RY = 26 * K;
 const RING_Y = -40;
 const RING_R = 300;
 const RING_W = 22;
+/** The time-left bar under the ring (local px): it shrinks over GRIND_LIMIT_S and turns red at the end. */
+const TIME_BAR = { y: RING_Y + RING_R + RING_W / 2 + 24, w: 560, h: 10, late: 0.25 };
+/** A grind cut short by the time limit still pours at least this much into the flask. */
+const MIN_POUR = 0.25;
 /** Finger guide radius, and the dead zone where the angle would jump about. */
 const GUIDE_R = 200;
 const DEAD_R = 30;
@@ -30,11 +34,13 @@ const FLASK_TINT = 0x7d4fa3;
 
 /**
  * Grinding view centred on (0, 0): stone mortar with the gathered herbs, the pestle following the
- * finger round the bowl, a progress ring and a guide dot until the first turn. Dragging round the
- * centre feeds `grindProgress`; at 1 it calls `onGround(seconds)` (timed from the first movement).
+ * finger round the bowl, a progress ring, a time-left bar and a guide dot until the first turn.
+ * Dragging round the centre feeds `grindProgress`; at 1 it calls `onGround(seconds, false)` (timed
+ * from the first movement). GRIND_LIMIT_S after the mortar comes up it stops by itself and calls
+ * `onGround(GRIND_LIMIT_S, true)`; the pour then fills the flask only as far as the herbs were ground.
  */
 export class Mortar extends Container {
-  onGround?: (grindSeconds: number) => void;
+  onGround?: (grindSeconds: number, timedOut: boolean) => void;
   /** Mortar body, contents and pestle; tilted as one piece for the pour. */
   private readonly bowl = new Container();
   private readonly contents = new Container();
@@ -42,6 +48,8 @@ export class Mortar extends Container {
   private readonly pestle: Sprite;
   private readonly ring = new Graphics();
   private readonly guide = new Container();
+  private readonly timeBar = new Container();
+  private readonly timeFill = new Graphics();
   private readonly herbSprites: { s: Sprite; base: number }[] = [];
   private progress = 0;
   private pestleAngle = -Math.PI / 2;
@@ -50,6 +58,8 @@ export class Mortar extends Container {
   private started = false;
   private finished = false;
   private elapsed = 0;
+  /** Seconds since the mortar came up, for the time limit. */
+  private shown = 0;
   private quiet = Infinity;
   private grinding = false;
   private t = 0;
@@ -82,8 +92,9 @@ export class Mortar extends Container {
     this.pestle.anchor.set(0.5, 0.85);
 
     this.bowl.addChild(back, this.contents, this.pestle, front, frontMask);
-    this.addChild(this.ring, this.bowl, this.guide);
+    this.addChild(this.ring, this.timeBar, this.bowl, this.guide);
     this.drawGuide();
+    this.buildTimeBar();
     this.placePestle();
     this.drawRing();
 
@@ -106,7 +117,12 @@ export class Mortar extends Container {
 
   update(dt: number): void {
     this.t += dt;
-    if (this.started && !this.finished) this.elapsed += dt;
+    if (!this.finished) {
+      if (this.started) this.elapsed += dt;
+      this.shown += dt;
+      this.showTimeLeft();
+      if (grindTimedOut(this.shown)) this.finish(true);
+    }
     this.quiet += dt;
     if (this.grinding && this.quiet > QUIET) {
       this.grinding = false;
@@ -135,6 +151,9 @@ export class Mortar extends Container {
     const layer = this.parent;
     this.eventMode = 'none';
     this.ring.visible = false;
+    this.timeBar.visible = false;
+    // a grind cut short by the time limit fills the flask only as far as it got
+    const fill = Math.max(MIN_POUR, this.progress);
     if (!layer) return done();
     const stream = new Graphics();
     layer.addChild(stream);
@@ -165,7 +184,7 @@ export class Mortar extends Container {
             const head = Math.min(1, p / 0.18);
             const tail = Math.max(0, (p - 0.82) / 0.18);
             drawStream(stream, layer.toLocal(lip()), layer.toLocal(mouth()), tail, head);
-            flask.setLevel(ease.outCubic(Math.max(0, (p - 0.1) / 0.85)));
+            flask.setLevel(fill * ease.outCubic(Math.max(0, (p - 0.1) / 0.85)));
           },
           done: () => {
             stream.destroy();
@@ -230,13 +249,35 @@ export class Mortar extends Container {
     this.placePestle();
     this.mash();
     this.drawRing();
-    if (this.progress >= 1) {
-      this.finished = true;
-      this.silence();
-      this.dragging = null;
-      this.cursor = 'default';
-      this.onGround?.(this.elapsed);
-    }
+    if (this.progress >= 1) this.finish(false);
+  }
+
+  /** Grinding is over: ground through (4 turns) or cut short by the time limit. */
+  private finish(timedOut: boolean): void {
+    this.finished = true;
+    this.silence();
+    this.dragging = null;
+    this.cursor = 'default';
+    this.guide.visible = false;
+    this.onGround?.(timedOut ? GRIND_LIMIT_S : this.elapsed, timedOut);
+  }
+
+  /** Track and fill drawn once; showTimeLeft() only scales and tints the fill. */
+  private buildTimeBar(): void {
+    const { w, h } = TIME_BAR;
+    const track = new Graphics().roundRect(-w / 2, 0, w, h, h / 2).fill({ color: Theme.color.paper, alpha: 0.15 });
+    this.timeFill.roundRect(0, 0, w, h, h / 2).fill(0xffffff);
+    this.timeFill.x = -w / 2;
+    this.timeBar.addChild(track, this.timeFill);
+    this.timeBar.y = TIME_BAR.y;
+    this.showTimeLeft();
+  }
+
+  private showTimeLeft(): void {
+    const left = grindTimeLeft(this.shown);
+    this.timeFill.scale.x = left;
+    this.timeFill.visible = left > 0;
+    this.timeFill.tint = left < TIME_BAR.late ? Theme.color.bad : Theme.color.ember;
   }
 
   /** Angle of the pointer round the ring centre, or null inside the dead zone. */
