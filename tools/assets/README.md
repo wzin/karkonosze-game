@@ -107,6 +107,9 @@ odniesienie): ridge_far 6,9 → 0,0 %, ridge_mid 30,2 → 0,9 %, valley 83,9 →
 (wnętrze 34,7 %), strip_near 52,2 → 40,6 % (wnętrze 36,2 %). Pasy ziół są malowane bladą poranną paletą, więc
 liczba nie spada do zera: krawędź ≈ wnętrze, czyli to kolor papieru, nie obwódka. Wierzchołki świerków i kaplica
 z „talerzami” na Śnieżce zostały nietknięte (sprawdzone na złożeniu z ciemnym tłem).
+Ograniczenie: blade, prawie neutralne detale na linii nieba mniejsze niż ok. 100×60 px w rozdzielczości surowej
+(ok. 60×35 px po spakowaniu) tracą zewnętrzne 16 px albo znikają całkiem (np. iglica 50×8 px), bo wyglądają
+jak krawędź papieru; pięć obecnych pasów sprawdzono wizualnie, a granicę przypinają testy w `test_cutout.py`.
 
 **`hub/ridge_far`, naprawa.** W wybranej próbie dach kaplicy na Śnieżce był ucięty górną krawędzią.
 `repair.py` przesunął obraz o 110 px w dół na tło nieba i `nano-banana-pro/edit` domalował stożkowy dach;

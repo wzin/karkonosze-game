@@ -67,23 +67,50 @@ def test_key_sky_removes_flat_sky_and_keeps_land_band():
     assert 0.3 < s["sky_ratio"] < 0.55
 
 
-def _band_with_rim():
-    h, w = 160, 240
-    rgb = np.zeros((h, w, 3), np.uint8); rgb[:] = (205, 205, 208)            # flat grey sky
-    rgb[60:, :] = (60, 80, 100)                                              # dark land
-    rgb[54:60, :] = (232, 232, 236)                                          # 6 px light paper rim
-    rgb[10:60, 100:170] = (225, 226, 230)                                    # big light object on the ridge
+SKY, LAND, RIM, PALE = (205, 205, 208), (60, 80, 100), (232, 232, 236), (225, 226, 230)
+
+
+def _band(obj=None):
+    """Flat sky over dark land (from y=120) with a 6 px light paper rim on top of the land;
+    optionally a light, neutral object (y0, y1, x0, x1) standing on the rim and touching the sky."""
+    rgb = np.zeros((200, 360, 3), np.uint8); rgb[:] = SKY
+    rgb[120:] = LAND
+    rgb[114:120] = RIM
+    if obj:
+        y0, y1, x0, x1 = obj
+        rgb[y0:y1, x0:x1] = PALE
     return rgb
 
 
-def test_peel_rim_removes_thin_light_rim_but_keeps_big_light_object():
-    rgb = _band_with_rim()
+def _peel(rgb):
     alpha, s = key_sky(rgb)
-    a, removed = peel_rim(rgb, alpha, s["bg"])
+    return peel_rim(rgb, alpha, s["bg"])
+
+
+BIG = (24, 114, 100, 260)            # 160 x 90 light object, e.g. the observatory discs on a summit
+
+
+def test_peel_rim_keeps_big_light_object_inside_the_rim_depth_and_removes_the_rim_beside_it():
+    a, removed = _peel(_band(BIG))
     assert removed > 0
-    assert a[57, 20] == 0 and a[57, 220] == 0          # rim gone (left and right of the object)
-    assert a[30, 135] == 255                            # 70x50 light object kept
-    assert a[100, 20] == 255                            # land kept
+    assert a[117, 30] == 0 and a[117, 330] == 0         # rim strip left and right of the object: gone
+    # probes inside the rim depth (< RIM_DEPTH px from the sky), i.e. real rim candidates
+    assert a[30, 180] == 255                             # 6 px below the object's top edge
+    assert a[70, 106] == 255 and a[70, 253] == 255       # 6 px inside its left / right edge
+    assert a[160, 30] == 255                             # land kept
+
+
+def test_big_light_object_survives_only_because_of_the_keep_rule(monkeypatch):
+    import cutout
+    monkeypatch.setattr(cutout, "RIM_KEEP_AREA", 10 ** 9)   # protection off
+    a, _ = _peel(_band(BIG))
+    assert a[30, 180] == 0 and a[70, 106] == 0              # the same probes are peeled
+
+
+def test_small_light_skyline_detail_is_removed():
+    # documented limit: pale, neutral details narrower than ~120 px (here a 50 x 8 spire) count as rim
+    a, _ = _peel(_band((106, 114, 150, 200)))
+    assert (a[106:114, 150:200] == 0).all()
 
 
 def test_key_sky_also_removes_enclosed_sky_pockets():
