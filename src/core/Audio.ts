@@ -1,6 +1,6 @@
 import { Howl, Howler } from 'howler';
 
-/** A named game moment ("glass.blow", "ui.tap"); the moments table maps it to candidate clips. */
+/** A named game moment ("glass.blow", "ui.tap"); MOMENTS in ./moments maps it to candidate clips. */
 export type Moment = string;
 
 export interface PlayOptions {
