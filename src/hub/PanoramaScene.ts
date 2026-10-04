@@ -1,217 +1,314 @@
-import { Container, FillGradient, Graphics, Text, Texture } from 'pixi.js';
+import { Container, Graphics, Rectangle, Sprite, Text, type DestroyOptions, type FederatedPointerEvent } from 'pixi.js';
+import { sprite } from '../core/Assets';
 import { FogFilter } from '../core/fx/FogFilter';
-import { HeatHazeFilter } from '../core/fx/HeatHazeFilter';
-import { LampLightFilter } from '../core/fx/LampLightFilter';
-import { WeatherFilter, type WeatherMode } from '../core/fx/WeatherFilter';
 import { DESIGN } from '../core/Layout';
+import { mulberry32 } from '../core/Rng';
 import { Scene } from '../core/Scene';
+import { GAMES } from '../games';
 import { Button } from '../ui/Button';
-import { FactCard } from '../ui/FactCard';
-import { HoldButton } from '../ui/HoldButton';
-import { Loader } from '../ui/Loader';
-import { Portrait } from '../ui/Portrait';
-import { RoundProgress } from '../ui/RoundProgress';
-import { SpeechBubble } from '../ui/SpeechBubble';
-import { Stars } from '../ui/Stars';
 import { Theme } from '../ui/Theme';
-import { TopBar } from '../ui/TopBar';
-
-interface Place {
-  id: string;
-  name: string;
-  title: string;
-  lore: string;
-}
-
-type TimedFilter = HeatHazeFilter | FogFilter | LampLightFilter | WeatherFilter;
-
-const SWATCH = { w: 250, h: 210, gap: 20, y: 840 };
+import { ConceptCard } from './ConceptCard';
+import { Markers, type Place } from './Markers';
+import { DEPTH, Parallax, type Depth } from './Parallax';
+import { gameFor, type MarkerKind, type Rect } from './rules';
 
 /**
- * Stub until Task 5. For now a UI-kit demo: every ui/ component and every fx/ filter on a swatch,
- * so the kit can be eyeballed (docs/screenshots/ui-kit.png). Task 5 replaces this scene entirely.
+ * The composition, read off the generated layers: the sky is lifted so its dusk glow shows above the
+ * main ridge (its own painted hills stay hidden behind `ridge_far`); each cut-out layer is centred,
+ * scaled a little past the screen width so the parallax never uncovers an edge, and placed by its top.
+ */
+const SKY_LIFT = 140;
+const LAYERS: Record<Depth, { alias: string; y: number; scale: number }> = {
+  far: { alias: 'hub/ridge_far', y: 330, scale: 1.01 },
+  mid: { alias: 'hub/ridge_mid', y: 440, scale: 1.02 },
+  valley: { alias: 'hub/valley', y: 700, scale: 1.08 },
+};
+/** Duch Gór stands behind Śnieżka (cone summit ≈ x 490): only his upper half shows above the ridge. */
+const GHOST = { x: 500, y: 640, height: 470, alpha: 0.25, breath: 0.02, period: 7 };
+const CLOUDS = [
+  { alias: 'hub/cloud_1', x: 1180, y: 230, scale: 0.46, speed: 14, alpha: 0.32, tint: 0xc4bddc },
+  { alias: 'hub/cloud_2', x: 220, y: 380, scale: 0.5, speed: 19, alpha: 0.5, tint: 0xe8dcec },
+];
+const STAR_COUNT = 60;
+const STAR_FIELD = { top: 10, bottom: 420 };
+/** Dusk fog over the valley floor, tinted to the sky. */
+const FOG = { density: 0.35, bottom: 0.55, color: [0.8, 0.78, 0.88] as [number, number, number] };
+const MARGIN = 32;
+const SOUND_BUTTON_H = 72;
+
+interface Twinkle {
+  view: Graphics;
+  base: number;
+  speed: number;
+  phase: number;
+}
+
+interface Cloud {
+  view: Sprite;
+  speed: number;
+}
+
+/** The first pointerdown anywhere unlocks audio for the whole visit (browser autoplay policy). */
+let gestureSeen = false;
+
+/**
+ * The hub: a dusk panorama of the Karkonosze seen from Grodna. Parallax layers follow the pointer,
+ * clouds drift, stars twinkle, Duch Gór breathes over Śnieżka and fog lies in the valley. Markers
+ * open a game, or a concept card for places whose game is not made yet.
  */
 export default class PanoramaScene extends Scene {
-  private readonly fx: TimedFilter[] = [];
-  private lamp: LampLightFilter | null = null;
-  private loader: Loader | null = null;
-  private hold: HoldButton | null = null;
-  private readonly holdRing = new Graphics();
-  private held = 0;
+  private readonly parallax = new Parallax();
+  private readonly fog = new FogFilter();
+  private readonly twinkles: Twinkle[] = [];
+  private readonly clouds: Cloud[] = [];
+  private ghost: Sprite | null = null;
+  private ghostScale = 1;
+  private markers: Markers | null = null;
+  private card: ConceptCard | null = null;
+  private audioOn = false;
   private t = 0;
 
   async init(): Promise<void> {
-    const { i18n, audio, kiosk } = this.ctx;
-    const tap = () => audio.play('ui.tap');
-    const places = i18n.get<Place[]>('places');
-    const sniezka = places.find((p) => p.id === 'sniezka') ?? places[0];
+    await this.ctx.assets.loadGroup('hub');
+    const { i18n } = this.ctx;
 
-    const sky = new FillGradient({
-      type: 'linear',
-      start: { x: 0, y: 0 },
-      end: { x: 0, y: 1 },
-      colorStops: [
-        { offset: 0, color: 0x1d2a4a },
-        { offset: 0.6, color: 0x6b5a7a },
-        { offset: 1, color: 0xdd8a2c },
-      ],
+    // everything is laid out in design space; the frame keeps overscan out of the letterbox bars
+    const frame = new Graphics().rect(0, 0, DESIGN.w, DESIGN.h).fill(0xffffff);
+    this.addChild(frame);
+    this.mask = frame;
+    this.eventMode = 'static';
+    this.hitArea = new Rectangle(0, 0, DESIGN.w, DESIGN.h);
+
+    const sky = sprite(this.ctx.assets, 'hub/sky', { w: DESIGN.w, h: DESIGN.h, tint: 0x3a4a7a });
+    sky.y = -SKY_LIFT;
+    this.addChild(sky, this.buildStars(), this.buildGhost(), this.buildClouds());
+    this.addChild(this.buildLayer('far'), this.buildLayer('mid'));
+
+    // the fog sits still over the moving valley: its area is the screen, not the layer's bounds
+    const valley = new Container();
+    valley.addChild(this.buildLayer('valley'));
+    this.fog.density = FOG.density;
+    this.fog.bottom = FOG.bottom;
+    this.fog.color = FOG.color;
+    valley.filters = [this.fog];
+    valley.filterArea = new Rectangle(0, 0, DESIGN.w, DESIGN.h);
+    this.addChild(valley);
+
+    const heading = this.buildHeading(i18n.t('app.title'), i18n.t('app.viewpoint'));
+    const sound = this.buildSoundButton();
+    this.markers = new Markers({
+      places: i18n.get<Place[]>('places'),
+      games: GAMES,
+      save: this.ctx.save.load(),
+      obstacles: [grow(rectOf(heading), 12), grow(rectOf(sound), 12)],
+      onTap: () => this.ctx.audio.play('ui.tap'),
+      onPick: (place, kind) => this.pick(place, kind),
     });
-    this.addChild(new Graphics().rect(0, 0, DESIGN.w, DESIGN.h).fill(sky));
+    this.addChild(this.markers, heading, sound);
 
-    const bar = new TopBar({
-      title: i18n.t('app.title'),
-      subtitle: i18n.t('app.subtitle'),
-      backLabel: i18n.t('ui.back'),
-      onBack: () => this.ctx.go('hub'),
-      audio,
-      muteLabel: i18n.t('ui.mute'),
-      kiosk,
+    this.on('pointerdown', (e: FederatedPointerEvent) => {
+      gestureSeen = true;
+      this.startAudio();
+      this.pointAt(e);
     });
-    const progress = new RoundProgress(5, 600);
-    progress.position.set((DESIGN.w - 600) / 2, TopBar.HEIGHT + 20);
-    progress.set(2);
-    this.addChild(bar, progress);
+    this.on('globalpointermove', (e: FederatedPointerEvent) => this.pointAt(e));
+  }
 
-    // row 1: button variants, a disabled one, the hold button, stars
-    const stars = new Stars(3, 56);
-    stars.onStar = () => audio.play('ui.star');
-    let score = 2;
-    const row: Button[] = [
-      new Button(i18n.t('ui.play'), {
-        name: 'demo.play',
-        kiosk,
-        onTap: tap,
-        onPress: () => {
-          score = (score + 1) % 4;
-          stars.set(score);
-          progress.set(score + 1);
-        },
-      }),
-      new Button(i18n.t('ui.next'), { variant: 'quiet', kiosk, onTap: tap }),
-      new Button(i18n.t('ui.soon'), { variant: 'ghost', kiosk, onTap: tap }),
-      new Button(i18n.t('ui.again'), { kiosk, onTap: tap }),
-    ];
-    row[3].enabled = false;
-    this.hold = new HoldButton(i18n.t('ui.next'), { variant: 'quiet', kiosk, name: 'demo.hold', onTap: tap });
-    this.hold.onHoldStart = () => (this.held = 0);
-    row.push(this.hold);
-    let x = 40;
-    for (const b of row) {
-      b.position.set(x, 176);
-      x += b.box.w + 28;
-      this.addChild(b);
-    }
-    this.holdRing.position.set(x + 30, 176 + 48);
-    stars.position.set(x + 100, 184);
-    stars.set(score);
-    const small = new Stars(3, 34);
-    small.position.set(x + 100, 256);
-    small.set(3, false);
-    this.addChild(this.holdRing, stars, small);
-
-    // row 2: speech bubble and fact card
-    const bubble = new SpeechBubble({ portrait: Texture.WHITE, name: sniezka.title, text: sniezka.lore, width: 1040 });
-    bubble.position.set(40, 330);
-    const fact = new FactCard(i18n.t('ui.didYouKnow'), places[0].lore, 790);
-    fact.position.set(1100, 330);
-    this.addChild(bubble, fact);
-
-    // row 3: portrait, loader
-    const portrait = new Portrait(Texture.WHITE, 120);
-    portrait.position.set(110, 720);
-    this.loader = new Loader(i18n.t('ui.loading'));
-    this.loader.position.set(330, 680);
-    this.addChild(portrait, this.loader);
-
-    // row 4: every filter on its own swatch
-    const heat = new HeatHazeFilter();
-    heat.rect = [0.2, 0.25, 0.6, 0.75];
-    const fog = new FogFilter();
-    fog.density = 0.9;
-    fog.bottom = 0.2;
-    fog.drift = 0.12;
-    this.lamp = new LampLightFilter();
-    this.lamp.radius = 0.45;
-    const swatches: [string, () => Graphics, TimedFilter][] = [
-      ['HeatHazeFilter', stripes, heat],
-      ['FogFilter', hills, fog],
-      ['LampLightFilter', bricks, this.lamp],
-      ...([1, 2, 3, 4] as WeatherMode[]).map((mode): [string, () => Graphics, TimedFilter] => {
-        const w = new WeatherFilter();
-        w.mode = mode;
-        w.intensity = 0.9;
-        return [`WeatherFilter ${mode}`, hills, w];
-      }),
-    ];
-    swatches.forEach(([caption, draw, filter], i) => {
-      const sx = 25 + i * (SWATCH.w + SWATCH.gap);
-      const swatch = new Container();
-      swatch.addChild(draw());
-      swatch.filters = [filter];
-      swatch.position.set(sx, SWATCH.y);
-      const label = new Text({
-        text: caption,
-        style: { fontFamily: Theme.font.body, fontWeight: '800', fontSize: 20, fill: Theme.color.paper },
-      });
-      label.position.set(sx + 4, SWATCH.y - 30);
-      this.addChild(swatch, label);
-      this.fx.push(filter);
-    });
+  enter(): void {
+    // back from a game the page has had its gesture already
+    if (gestureSeen) this.startAudio();
   }
 
   update(dt: number): void {
     this.t += dt;
-    for (const f of this.fx) f.time = this.t;
-    if (this.lamp) this.lamp.light = [0.5 + 0.28 * Math.cos(this.t * 0.9), 0.5 + 0.22 * Math.sin(this.t * 1.3)];
-    this.loader?.update(dt);
-    if (this.hold?.holding) this.held = Math.min(this.held + dt / 2, 1);
-    this.holdRing
-      .clear()
-      .circle(0, 0, 22)
-      .stroke({ color: Theme.color.paper, alpha: 0.2, width: 6 })
-      .arc(0, 0, 22, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * Math.max(this.held, 0.001))
-      .stroke({ color: Theme.color.glass, width: 6, cap: 'round' });
-  }
-}
+    const t = this.t;
+    this.parallax.update(dt);
+    this.markers?.update(dt, this.parallax);
+    this.fog.time = t;
 
-/** Vertical bars under a dark furnace arch: shows the heat-haze ripple. */
-function stripes(): Graphics {
-  const g = new Graphics().rect(0, 0, SWATCH.w, SWATCH.h).fill(Theme.color.night);
-  for (let x = 0; x < SWATCH.w; x += 20) g.rect(x, 0, 10, SWATCH.h).fill(Theme.color.emberSoft);
-  return g.roundRect(60, 70, 130, 140, 60).fill({ color: Theme.color.ember, alpha: 0.85 });
-}
+    for (const s of this.twinkles) s.view.alpha = s.base * (0.6 + 0.4 * Math.sin(t * s.speed + s.phase));
+    for (const c of this.clouds) {
+      c.view.x += c.speed * dt;
+      if (c.view.x - c.view.width / 2 > DESIGN.w) c.view.x = -c.view.width / 2;
+    }
+    if (this.ghost) {
+      this.ghost.scale.set(this.ghostScale * (1 + GHOST.breath * Math.sin((t * Math.PI * 2) / GHOST.period)));
+    }
 
-/** Dusk sky with two ridges: shows fog and weather. */
-function hills(): Graphics {
-  const sky = new FillGradient({
-    type: 'linear',
-    start: { x: 0, y: 0 },
-    end: { x: 0, y: 1 },
-    colorStops: [
-      { offset: 0, color: 0x24345c },
-      { offset: 1, color: 0x8a6a7a },
-    ],
-  });
-  const { w, h } = SWATCH;
-  return new Graphics()
-    .rect(0, 0, w, h)
-    .fill(sky)
-    .poly([0, h * 0.55, w * 0.3, h * 0.3, w * 0.55, h * 0.5, w * 0.8, h * 0.25, w, h * 0.45, w, h, 0, h])
-    .fill(Theme.color.dusk)
-    .poly([0, h * 0.8, w * 0.4, h * 0.6, w * 0.7, h * 0.75, w, h * 0.65, w, h, 0, h])
-    .fill(0x2b3346);
-}
-
-/** Bright brick wall: the lamp light reveals it. */
-function bricks(): Graphics {
-  const g = new Graphics().rect(0, 0, SWATCH.w, SWATCH.h).fill(0x6b4a36);
-  for (let row = 0; row * 30 < SWATCH.h; row++) {
-    for (let x = (row % 2) * -30; x < SWATCH.w; x += 60) {
-      // clipped to the swatch: anything outside would widen the filter area
-      const left = Math.max(x + 3, 0);
-      const right = Math.min(x + 57, SWATCH.w);
-      g.rect(left, row * 30 + 3, right - left, 24).fill(0xc9895a);
+    if (this.card) {
+      this.card.update(dt);
+      if (this.card.closed) {
+        this.card.destroy({ children: true });
+        this.card = null;
+      }
     }
   }
-  return g;
+
+  exit(): void {
+    this.ctx.audio.stop('hub.music');
+    this.ctx.audio.stop('hub.wind');
+  }
+
+  override destroy(options?: DestroyOptions): void {
+    super.destroy(options);
+    this.fog.destroy();
+  }
+
+  private pick(place: Place, kind: MarkerKind): void {
+    const gameId = kind === 'game' ? gameFor(GAMES, place.id) : null;
+    if (gameId) {
+      this.ctx.go(`game:${gameId}`);
+      return;
+    }
+    if (this.card && !this.card.closing) return;
+    // a card still fading out gives way to the new one
+    this.card?.destroy({ children: true });
+    this.card = new ConceptCard(place, {
+      soon: this.ctx.i18n.t('ui.soon'),
+      kiosk: this.ctx.kiosk,
+      onTap: () => this.ctx.audio.play('ui.tap'),
+      onClose: () => this.card?.close(),
+    });
+    this.addChild(this.card);
+  }
+
+  private startAudio(): void {
+    if (this.audioOn) return;
+    this.audioOn = true;
+    this.ctx.audio.play('hub.music', { loop: true, volume: 0.5 });
+    this.ctx.audio.play('hub.wind', { loop: true, volume: 0.25 });
+  }
+
+  private pointAt(e: FederatedPointerEvent): void {
+    const p = this.toLocal(e.global);
+    this.parallax.pointAt(p.x, p.y);
+  }
+
+  private buildLayer(depth: Depth): Container {
+    const { alias, y, scale } = LAYERS[depth];
+    const s = sprite(this.ctx.assets, alias);
+    s.anchor.set(0.5, 0);
+    s.scale.set(s.scale.x * scale, s.scale.y * scale);
+    s.position.set(DESIGN.w / 2, y);
+    const view = new Container();
+    view.addChild(s);
+    this.parallax.add(view, DEPTH[depth]);
+    return view;
+  }
+
+  private buildStars(): Container {
+    const field = new Container();
+    const rng = mulberry32(1806);
+    for (let i = 0; i < STAR_COUNT; i++) {
+      const y = STAR_FIELD.top + rng() * (STAR_FIELD.bottom - STAR_FIELD.top);
+      // stars fade out towards the glow above the ridge
+      const depthFade = 1 - Math.max(0, (y - 260) / (STAR_FIELD.bottom - 260)) * 0.7;
+      const view = new Graphics().circle(0, 0, 0.9 + rng() * 1.7).fill(0xfff6d8);
+      view.position.set(rng() * DESIGN.w, y);
+      const twinkle = { view, base: (0.35 + rng() * 0.65) * depthFade, speed: 0.6 + rng() * 1.8, phase: rng() * Math.PI * 2 };
+      view.alpha = twinkle.base;
+      this.twinkles.push(twinkle);
+      field.addChild(view);
+    }
+    return field;
+  }
+
+  private buildGhost(): Container {
+    const view = new Container();
+    if (!this.ctx.assets.has('hub/duch_gor')) return view;
+    const ghost = sprite(this.ctx.assets, 'hub/duch_gor');
+    ghost.anchor.set(0.5, 1);
+    this.ghostScale = GHOST.height / ghost.texture.height;
+    ghost.scale.set(this.ghostScale);
+    ghost.position.set(GHOST.x, GHOST.y);
+    ghost.alpha = GHOST.alpha;
+    view.addChild(ghost);
+    this.ghost = ghost;
+    this.parallax.add(view, DEPTH.far);
+    return view;
+  }
+
+  private buildClouds(): Container {
+    const sky = new Container();
+    for (const c of CLOUDS) {
+      if (!this.ctx.assets.has(c.alias)) continue;
+      const view = sprite(this.ctx.assets, c.alias);
+      view.anchor.set(0.5);
+      view.scale.set(c.scale);
+      view.position.set(c.x, c.y);
+      view.alpha = c.alpha;
+      view.tint = c.tint;
+      this.clouds.push({ view, speed: c.speed });
+      sky.addChild(view);
+    }
+    return sky;
+  }
+
+  private buildHeading(title: string, viewpoint: string): Container {
+    const shadow = { color: Theme.color.night, alpha: 0.65, blur: 10, distance: 3, angle: Math.PI / 2 };
+    const heading = new Container();
+    const titleText = new Text({
+      text: title,
+      style: { fontFamily: Theme.font.display, fontWeight: '900', fontSize: 84, fill: Theme.color.paper, dropShadow: shadow },
+    });
+    const sub = new Text({
+      text: viewpoint,
+      style: { fontFamily: Theme.font.body, fontWeight: '700', fontSize: 26, fill: Theme.color.emberSoft, dropShadow: shadow },
+    });
+    sub.position.set(4, titleText.height - 6);
+    heading.addChild(titleText, sub);
+    heading.position.set(MARGIN + 18, MARGIN - 4);
+    return heading;
+  }
+
+  /** Icon only: a label would run into the moon painted in the sky. */
+  private buildSoundButton(): Button {
+    const { audio, kiosk } = this.ctx;
+    const speaker = new Graphics();
+    drawSpeaker(speaker, audio.muted);
+    const button = new Button('', {
+      variant: 'quiet',
+      height: SOUND_BUTTON_H,
+      icon: speaker,
+      kiosk,
+      name: 'hub.mute',
+      onTap: () => audio.play('ui.tap'),
+      onPress: () => {
+        audio.setMuted(!audio.muted);
+        drawSpeaker(speaker, audio.muted);
+      },
+    });
+    button.position.set(DESIGN.w - MARGIN - button.box.w, MARGIN);
+    return button;
+  }
+}
+
+function rectOf(view: Container): Rect {
+  const b = view.getLocalBounds();
+  return { x: view.x + b.x, y: view.y + b.y, w: b.width, h: b.height };
+}
+
+function grow(r: Rect, by: number): Rect {
+  return { x: r.x - by, y: r.y - by, w: r.w + by * 2, h: r.h + by * 2 };
+}
+
+/** Speaker with sound waves, or crossed out when muted; drawn around (0, 0) like the TopBar's. */
+function drawSpeaker(g: Graphics, muted: boolean): void {
+  const s = 30;
+  g.clear();
+  const body = [-0.5, -0.2, -0.22, -0.2, 0.08, -0.48, 0.08, 0.48, -0.22, 0.2, -0.5, 0.2];
+  g.poly(body.map((v) => v * s)).fill(Theme.color.paper);
+  if (muted) {
+    g.moveTo(s * 0.26, -s * 0.2)
+      .lineTo(s * 0.62, s * 0.2)
+      .moveTo(s * 0.62, -s * 0.2)
+      .lineTo(s * 0.26, s * 0.2)
+      .stroke({ color: Theme.color.bad, width: 5, cap: 'round' });
+    return;
+  }
+  for (const r of [s * 0.3, s * 0.55]) {
+    g.moveTo(s * 0.08 + r * Math.cos(-0.75), r * Math.sin(-0.75))
+      .arc(s * 0.08, 0, r, -0.75, 0.75)
+      .stroke({ color: Theme.color.paper, width: 4, cap: 'round' });
+  }
 }
