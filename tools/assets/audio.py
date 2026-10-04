@@ -12,8 +12,15 @@ Reads audio_manifest.yaml, writes
     ../../public/assets/audio/<id>.mp3 and manifest.json  (committed)
 
 Per clip: model call (primary, fallback on exception) -> silence check (peak < -40 dBFS
-re-rolls, max 3 attempts) -> loops: trim to whole seconds + 150 ms equal-power crossfade of
-the tail onto the head -> ffmpeg loudnorm (two-pass, linear) -> libmp3lame -q:a 3.
+re-rolls, max 3 attempts) -> shaping -> normalisation -> libmp3lame -q:a 3.
+  loops     trim to whole seconds + 150 ms equal-power crossfade of the tail onto the head;
+            measure loudness once and apply ONE constant gain (plain volume= filter) of
+            min(target - integrated LUFS, -3 dBTP - true peak), so head and tail get the same
+            gain; the encoded file is verified (peak, head-vs-tail gain step <= 0.5 dB) and a
+            loop that fails is excluded from the manifest and makes the run exit non-zero.
+  one-shots trim to `seconds` with tiny fades; ffmpeg loudnorm two-pass (linear, or
+            ffmpeg's dynamic mode when linear is impossible; the type is kept in the lock).
+Loudness targets (LUFS): music -20, looped backgrounds -23, ui -18, other effects -16; TP -3.
 """
 from __future__ import annotations
 
@@ -49,6 +56,9 @@ SILENCE_DBFS = -40.0
 MAX_ATTEMPTS = 3
 MAX_TOTAL_BYTES = 10 * 1024 * 1024
 XFADE_S = 0.15
+TP_CEILING = -3.0          # dBTP ceiling for every clip
+MP3_OVERSHOOT_DB = 1.0     # lossy-codec headroom over TP_CEILING tolerated when verifying a loop
+LOOP_STEP_MAX_DB = 0.5     # max level step across a loop point
 TARGETS = {"music": -20.0, "loop": -23.0, "ui": -18.0, "sfx": -16.0}  # LUFS
 
 _print_lock = threading.Lock()
@@ -131,31 +141,79 @@ def _last_json(text: str) -> dict:
     return json.loads(blocks[-1])
 
 
-def encode_mp3(src_wav: pathlib.Path, dst: pathlib.Path, target: float) -> str:
-    """Two-pass loudnorm (linear = one constant gain, so a loop seam stays seamless) ->
-    mp3. Returns the normalization type ffmpeg reported for pass 2 ('linear'/'dynamic')."""
-    base = f"I={target}:TP=-3:LRA=11"
-    p1 = _run(["-i", str(src_wav), "-af", f"loudnorm={base}:print_format=json", "-f", "null", "-"])
-    af = f"loudnorm={base}:print_format=json"
-    try:
-        m = _last_json(p1.stderr)
-        vals = {k: float(m[k]) for k in ("input_i", "input_lra", "input_tp", "input_thresh", "target_offset")}
-        if not all(math.isfinite(v) for v in vals.values()):
-            raise ValueError("non-finite measurement")
-        af = (f"loudnorm={base}:measured_I={vals['input_i']}:measured_LRA={vals['input_lra']}"
-              f":measured_TP={vals['input_tp']}:measured_thresh={vals['input_thresh']}"
-              f":offset={vals['target_offset']}:linear=true:print_format=json")
-    except (ValueError, KeyError):
-        pass  # fall back to single-pass dynamic loudnorm
+def measure_loudness(src_wav: pathlib.Path) -> dict[str, float]:
+    """loudnorm pass 1: integrated loudness (LUFS), true peak (dBTP), LRA, gate threshold."""
+    p = _run(["-i", str(src_wav), "-af", "loudnorm=I=-23:TP=-3:LRA=11:print_format=json",
+              "-f", "null", "-"])
+    m = _last_json(p.stderr)
+    return {k: float(m[k]) for k in ("input_i", "input_lra", "input_tp", "input_thresh", "target_offset")}
+
+
+def loop_gain_db(measured_i: float, measured_tp: float, target: float,
+                 tp_ceiling: float = TP_CEILING) -> float:
+    """The ONE constant gain applied to a loop: as loud as the target allows without the true
+    peak passing the ceiling. Raises if the measurement is unusable (silence)."""
+    if not (math.isfinite(measured_i) and math.isfinite(measured_tp)):
+        raise ValueError(f"cannot measure loudness (I={measured_i}, TP={measured_tp})")
+    return min(target - measured_i, tp_ceiling - measured_tp)
+
+
+def encode_mp3(src_wav: pathlib.Path, dst: pathlib.Path, target: float, loop: bool = False) -> dict:
+    """Normalise and encode to mp3. Returns the lock fields describing the normalisation.
+
+    loop=True: measure once, then apply ONE constant gain with a plain `volume=` filter
+    (loop_gain_db), so the head and the tail of the loop get exactly the same gain and the
+    loop point has no level step. loudnorm is not used for loops: it silently drops to
+    dynamic mode when a clip cannot reach the target within TP/LRA, which is a gain ramp
+    across the clip.
+    One-shots: two-pass loudnorm (linear when possible, otherwise ffmpeg's dynamic mode;
+    the type ffmpeg reports is returned and stored in the lock)."""
+    info: dict = {}
+    if loop:
+        m = measure_loudness(src_wav)
+        gain = loop_gain_db(m["input_i"], m["input_tp"], target)
+        af = f"volume={gain:.3f}dB"
+        info = {"normalization": "constant-gain", "gain_db": round(gain, 2),
+                "measured_lufs": round(m["input_i"], 2), "measured_tp_dbtp": round(m["input_tp"], 2),
+                "measured_lra": round(m["input_lra"], 2),
+                "loudness_shortfall_lu": round(min(0.0, gain - (target - m["input_i"])), 2)}
+    else:
+        base = f"I={target}:TP={TP_CEILING:g}:LRA=11"
+        af = f"loudnorm={base}:print_format=json"  # single-pass dynamic if pass 1 is unusable
+        try:
+            m = measure_loudness(src_wav)
+            if not all(math.isfinite(v) for v in m.values()):
+                raise ValueError("non-finite measurement")
+            af = (f"loudnorm={base}:measured_I={m['input_i']}:measured_LRA={m['input_lra']}"
+                  f":measured_TP={m['input_tp']}:measured_thresh={m['input_thresh']}"
+                  f":offset={m['target_offset']}:linear=true:print_format=json")
+        except (ValueError, KeyError):
+            pass
     dst.parent.mkdir(parents=True, exist_ok=True)
     p2 = _run(["-y", "-i", str(src_wav), "-af", af, "-ar", "44100",
                "-c:a", "libmp3lame", "-q:a", "3", str(dst)])
     if p2.returncode != 0:
         raise RuntimeError(f"ffmpeg encode failed: {p2.stderr[-400:]}")
-    try:
-        return _last_json(p2.stderr).get("normalization_type", "?")
-    except (ValueError, KeyError):
-        return "?"
+    if not loop:
+        try:
+            info["normalization"] = _last_json(p2.stderr).get("normalization_type", "?")
+        except (ValueError, KeyError):
+            info["normalization"] = "?"
+    return info
+
+
+def loop_gain_step_db(shaped: np.ndarray, decoded: np.ndarray, sr: int, win_s: float = 1.0) -> float:
+    """Level step across the loop point: gain (decoded mp3 vs the shaped source) over the last
+    `win_s` minus the same over the first `win_s`. 0 dB = the loop got one constant gain."""
+    n = min(len(shaped), len(decoded))
+    w = min(int(win_s * sr), n // 2)
+
+    def rms(x: np.ndarray) -> float:
+        return float(np.sqrt(np.mean(np.square(x.astype(np.float64))))) + 1e-12
+
+    head = 20 * math.log10(rms(decoded[:w]) / rms(shaped[:w]))
+    tail = 20 * math.log10(rms(decoded[n - w:n]) / rms(shaped[n - w:n]))
+    return round(tail - head, 2)
 
 
 def decodes_ok(path: pathlib.Path) -> bool:
@@ -260,26 +318,40 @@ def generate_raw(clip: dict, route: dict) -> dict:
 
 # ---------------------------------------------------------------- per-clip pipeline
 def process_wav(clip: dict) -> dict:
-    """raw wav -> (loop crossfade | one-shot trim) -> loudnorm -> mp3. Returns metrics."""
+    """raw wav -> (loop crossfade + constant gain | one-shot trim + loudnorm) -> mp3.
+    Returns metrics for the lock. A loop that fails verification has its mp3 deleted
+    (so it drops out of manifest.json) and raises."""
     wav = RAW / f"{clip['id']}.wav"
     data, sr = sf.read(wav, always_2d=True)
     data = data.astype(np.float32)
-    if clip.get("loop"):
-        shaped = make_loop(data, sr)
-    else:
-        shaped = shape_oneshot(data, sr, clip["seconds"])
+    is_loop = bool(clip.get("loop"))
+    shaped = make_loop(data, sr) if is_loop else shape_oneshot(data, sr, clip["seconds"])
     target = loudness_target(clip)
     dst = OUT / f"{clip['id']}.mp3"
+    dst.unlink(missing_ok=True)  # never leave a stale mp3 behind if this run fails
     with tempfile.TemporaryDirectory(prefix="audio-") as td:
         tmp = pathlib.Path(td) / "shaped.wav"
         sf.write(tmp, shaped, sr, subtype="FLOAT")
-        norm = encode_mp3(tmp, dst, target)
+        info = encode_mp3(tmp, dst, target, loop=is_loop)
     if not decodes_ok(dst):
+        dst.unlink(missing_ok=True)
         raise RuntimeError("encoded mp3 does not decode cleanly")
     pcm, psr = decode_pcm(dst)
-    return {"seconds_out": round(len(shaped) / sr, 2), "target_lufs": target,
-            "final_peak_dbfs": peak_dbfs(pcm), "normalization": norm,
-            "size_bytes": dst.stat().st_size}
+    final_peak = peak_dbfs(pcm)
+    info.update({"seconds_out": round(len(shaped) / sr, 2), "target_lufs": target,
+                 "final_peak_dbfs": final_peak, "size_bytes": dst.stat().st_size})
+    if is_loop:
+        # the gain is constant and peak-safe by construction; verify on the encoded file
+        if final_peak > TP_CEILING + MP3_OVERSHOOT_DB:
+            dst.unlink(missing_ok=True)
+            raise RuntimeError(f"loop peaks at {final_peak} dBFS, over the {TP_CEILING} dBTP ceiling")
+        if psr == sr:
+            step = loop_gain_step_db(shaped, pcm, sr)
+            info["loop_head_tail_gain_step_db"] = step
+            if abs(step) > LOOP_STEP_MAX_DB:
+                dst.unlink(missing_ok=True)
+                raise RuntimeError(f"loop has a {step} dB level step across the loop point")
+    return info
 
 
 def run_clip(clip: dict, spec: dict, prev: dict | None) -> dict:
@@ -359,11 +431,30 @@ def generate(args: argparse.Namespace) -> int:
             except Exception as e:  # noqa: BLE001 - tolerate per-clip failures
                 failed.append((c["id"], f"{type(e).__name__}: {e}"))
                 log(f"FAIL {c['id']}: {type(e).__name__}: {str(e)[:200]}")
+                # a failed clip is excluded: no lock entry, no stale mp3, not in manifest.json
+                lock["clips"].pop(c["id"], None)
+                (OUT / f"{c['id']}.mp3").unlink(missing_ok=True)
+                save_lock(lock)
     manifest = write_manifest(spec, lock)
     log(f"manifest: {len(manifest['clips'])}/{len(spec['clips'])} clips")
     for cid, why in failed:
         log(f"  left out: {cid} ({why[:160]})")
     return 1 if failed else 0
+
+
+def manifest_problems(spec: dict, clips: dict) -> list[str]:
+    """Completeness of manifest.json (its `clips` dict) against audio_manifest.yaml."""
+    problems = []
+    by_id = {c["id"]: c for c in spec["clips"]}
+    for cid in by_id:
+        if cid not in clips:
+            problems.append(f"{cid}: in audio_manifest.yaml but missing from manifest.json")
+    for cid, e in clips.items():
+        if cid not in by_id:
+            problems.append(f"{cid}: in manifest.json but not in audio_manifest.yaml")
+        elif bool(e.get("loop")) != bool(by_id[cid].get("loop")):
+            problems.append(f"{cid}: loop flag differs between manifest.json and audio_manifest.yaml")
+    return problems
 
 
 def check() -> int:
@@ -373,7 +464,7 @@ def check() -> int:
         print(f"no manifest at {mpath}")
         return 1
     clips = json.loads(mpath.read_text(encoding="utf-8"))["clips"]
-    problems: list[str] = []
+    problems: list[str] = manifest_problems(spec, clips)
     rows, total = [], 0
     for cid, e in clips.items():
         f = ROOT / "public" / "assets" / e["src"]
@@ -402,9 +493,6 @@ def check() -> int:
     print(f"\n{len(rows)} clips, total {total / 1024 / 1024:.2f} MB (limit {MAX_TOTAL_BYTES // 1024 // 1024} MB)")
     if total > MAX_TOTAL_BYTES:
         problems.append(f"total size {total} B exceeds {MAX_TOTAL_BYTES} B")
-    for c in spec["clips"]:
-        if c["id"] not in clips:
-            print(f"warning: {c['id']} is in audio_manifest.yaml but not in manifest.json")
     for p in problems:
         print(f"PROBLEM: {p}")
     print("check: " + ("FAILED" if problems else "OK"))
