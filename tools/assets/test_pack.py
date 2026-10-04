@@ -41,6 +41,32 @@ def test_animation_frames_share_size_and_alignment(monkeypatch, tmp_path):
     assert out["t/f1"].size == out["t/f2"].size
 
 
+def test_pack_merges_into_existing_manifest_when_raw_is_missing(monkeypatch, tmp_path, capsys):
+    import json
+    _patch(monkeypatch, tmp_path / "raw")
+    out = tmp_path / "public" / "assets" / "gfx"
+    monkeypatch.setattr(pack, "OUT", out)
+    monkeypatch.setattr(pack, "MANIFEST_JSON", out / "manifest.json")
+    assets = [{"id": "t/new", "size": [64, 32]}, {"id": "t/old", "size": [64, 32]}]
+    monkeypatch.setattr(pack, "load_manifest", lambda: {"assets": assets})
+    # committed state: t/old packed earlier, plus an entry for an id that left manifest.yaml
+    (out / "t").mkdir(parents=True)
+    Image.new("RGB", (40, 20), (1, 2, 3)).save(out / "t/old.webp")
+    old = {"src": "gfx/t/old.webp", "w": 40, "h": 20}
+    (out / "manifest.json").write_text(json.dumps({"assets": {"t/old": old, "t/gone": old}}))
+    # raw/ has only t/new
+    (tmp_path / "raw/t").mkdir(parents=True)
+    Image.new("RGB", (128, 64), (200, 100, 50)).save(tmp_path / "raw/t/new.png")
+
+    assert pack.pack() == 0
+    m = json.loads((out / "manifest.json").read_text())["assets"]
+    assert m["t/old"] == old                                    # preserved, not dropped
+    assert m["t/new"] == {"src": "gfx/t/new.webp", "w": 64, "h": 32}
+    assert "t/gone" not in m
+    assert "repacked 1, kept 1" in capsys.readouterr().out
+    assert pack.check() == 0
+
+
 def test_band_spans_full_width_and_drops_sky(monkeypatch, tmp_path):
     _patch(monkeypatch, tmp_path)
     _rgba(tmp_path / "t/band.cut.png", (1000, 400), (0, 150, 1000, 400))

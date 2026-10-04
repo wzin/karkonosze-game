@@ -1536,10 +1536,10 @@
  "herbs/pestle": {
   "model": "fal-ai/nano-banana-pro",
   "seed": null,
-  "url": "https://v3b.fal.media/files/b/0aad123b/tqiTCerTmqBvPT_iQ_6Au_OfOikW6Q.png",
+  "url": "https://v3b.fal.media/files/b/0aad1381/Hr0zXO7LpoKNSZjd4gVdz_9zSCE3ba.png",
   "aspect_ratio": "9:16",
   "resolution": "1K",
-  "prompt": "A single grey stone pestle on its own, without a mortar bowl: a short thick club shaped grinding stick standing upright on its wide rounded end, side view. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+  "prompt": "A single apothecary pestle made of plain grey granite, on its own without a mortar bowl, standing upright: a short thick club with a wide rounded grinding end at the bottom and a narrower smooth handle at the top, side view. The whole pestle is one uniform neutral grey stone colour with a few darker grey speckles, like the grey stone mortar it belongs to; no other colours on it. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
   "route": "nano",
   "size": [
    320,
@@ -1549,7 +1549,7 @@
    768,
    1376
   ],
-  "generated_at": "2026-10-04T20:26:15+00:00",
+  "generated_at": "2026-10-04T21:20:29+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -1611,22 +1611,41 @@
     ],
     "generated_at": "2026-10-04T20:26:15+00:00",
     "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1381/Hr0zXO7LpoKNSZjd4gVdz_9zSCE3ba.png",
+    "aspect_ratio": "9:16",
+    "resolution": "1K",
+    "prompt": "A single apothecary pestle made of plain grey granite, on its own without a mortar bowl, standing upright: a short thick club with a wide rounded grinding end at the bottom and a narrower smooth handle at the top, side view. The whole pestle is one uniform neutral grey stone colour with a few darker grey speckles, like the grey stone mortar it belongs to; no other colours on it. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Paper-cut storybook illustration with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouette, no text, no letters.",
+    "route": "nano",
+    "size": [
+     320,
+     640
+    ],
+    "returned_size": [
+     768,
+     1376
+    ],
+    "generated_at": "2026-10-04T21:20:29+00:00",
+    "note": "controller art check: pestle was a pastel blob (wanted plain grey stone); bg_3 was flat paper style without a readable tunnel (wanted bg_1/bg_2 painted style)"
    }
   ],
   "cutout": {
    "model": "fal-ai/birefnet",
-   "url": "https://v3b.fal.media/files/b/0aad126b/Pv_pdKUegjCFlME724YL4_ZuVTKgzH.png",
-   "hull_low_ratio": 0.1171,
+   "url": "https://v3b.fal.media/files/b/0aad1386/BenrgWca-vFXOnGuRk6B4_vj7bGeOC.png",
+   "hull_low_ratio": 0.1502,
    "enclosed_hole_px": 0,
    "kept_bg_hole_px": 0,
    "filled_px": 0,
-   "object_px": 176544,
+   "object_px": 218375,
    "bg": [
-    211,
-    211,
-    207
+    234,
+    234,
+    234
    ],
-   "generated_at": "2026-10-04T20:33:56+00:00"
+   "generated_at": "2026-10-04T21:21:04+00:00"
   }
  },
  "herbs/plant_arnika": {
@@ -2357,8 +2376,11 @@
     224
    ],
    "tolerance": 10.2,
-   "sky_ratio": 0.5472,
-   "generated_at": "2026-10-04T20:33:35+00:00"
+   "sky_ratio": 0.5488,
+   "sky_pocket_px": 6851,
+   "rim_px_removed": 43137,
+   "eroded_px": 3,
+   "generated_at": "2026-10-04T21:15:19+00:00"
   }
  },
  "herbs/strip_near": {
@@ -2450,8 +2472,11 @@
     211
    ],
    "tolerance": 10.2,
-   "sky_ratio": 0.5136,
-   "generated_at": "2026-10-04T20:33:35+00:00"
+   "sky_ratio": 0.5144,
+   "sky_pocket_px": 3400,
+   "rim_px_removed": 43824,
+   "eroded_px": 3,
+   "generated_at": "2026-10-04T21:15:24+00:00"
   }
  },
  "hub/cloud_1": {
@@ -2808,7 +2833,10 @@
    ],
    "tolerance": 10.2,
    "sky_ratio": 0.2637,
-   "generated_at": "2026-10-04T20:32:52+00:00"
+   "sky_pocket_px": 0,
+   "rim_px_removed": 8908,
+   "eroded_px": 3,
+   "generated_at": "2026-10-04T21:15:20+00:00"
   }
  },
  "hub/ridge_mid": {
@@ -2879,7 +2907,10 @@
    ],
    "tolerance": 10.2,
    "sky_ratio": 0.4303,
-   "generated_at": "2026-10-04T20:32:52+00:00"
+   "sky_pocket_px": 0,
+   "rim_px_removed": 33707,
+   "eroded_px": 3,
+   "generated_at": "2026-10-04T21:15:20+00:00"
   }
  },
  "hub/sky": {
@@ -3013,7 +3044,10 @@
    ],
    "tolerance": 13.3,
    "sky_ratio": 0.526,
-   "generated_at": "2026-10-04T20:32:52+00:00"
+   "sky_pocket_px": 0,
+   "rim_px_removed": 39008,
+   "eroded_px": 3,
+   "generated_at": "2026-10-04T21:15:20+00:00"
   }
  },
  "mine/bat": {
@@ -3203,22 +3237,21 @@
   ]
  },
  "mine/bg_3": {
-  "model": "fal-ai/nano-banana-pro",
+  "model": "fal-ai/nano-banana-pro/edit",
   "seed": null,
-  "url": "https://v3b.fal.media/files/b/0aad1258/MY7rO5GR6TS2KBVVpn6s8_006H2L5A.png",
-  "aspect_ratio": "16:9",
-  "resolution": "2K",
-  "prompt": "Side view cross-section of a 1950s uranium mine, like a slice through the mountain in a picture book: a horizontal tunnel runs across the whole image from the left edge to the right edge, concrete and steel supports, cables along the wall, a ventilation pipe under the ceiling, solid rock above and below. Flat, even, dim light everywhere, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
-  "route": "nano",
+  "url": "https://v3b.fal.media/files/b/0aad1389/lDR8X9MY91B2jwHs7T6wT_cVRONOIh.png",
+  "ref_url": "https://v3b.fal.media/files/b/0aad1389/g6HduFynKP4JFpmwpJ0zh_bg_2.png",
+  "prompt": "Repaint this mine gallery as a later one: a 1950s uranium mine gallery seen in the same side cross-section through the rock. Replace the wooden timbering with concrete arches and steel beams, add thick electric cables and a large ventilation pipe running along the wall, and iron rails on the floor; remove the ladder, the barrels and the hanging lamp. The gallery is evenly and dimly lit by flat soft light with no lamps and no light sources, no people. Keep exactly the same painted storybook style, brushwork, rock texture, palette, framing and side cross-section view as the reference picture; no text, no letters.",
+  "route": "edit",
   "size": [
    1920,
    1080
   ],
   "returned_size": [
-   2752,
-   1536
+   2720,
+   1568
   ],
-  "generated_at": "2026-10-04T20:31:12+00:00",
+  "generated_at": "2026-10-04T21:22:12+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -3280,6 +3313,45 @@
     ],
     "generated_at": "2026-10-04T20:31:12+00:00",
     "note": "attempt 3, route nano: flux attempt 2 still had scenery around the goblet / photoreal mold without iron bands / lava-orange ore / a stemmed thistle / a dusk sky instead of a mine"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1",
+    "seed": 2017711027,
+    "url": "https://v3b.fal.media/files/b/0aad1381/9BncBJeo6NM1ppjtbIFrC_f36e1c82fabc412a9c675cdf79679567.jpg",
+    "gen_size": [
+     1440,
+     832
+    ],
+    "prompt": "Side view cross-section of a 1950s mine gallery, like a slice through the mountain in a picture book: a horizontal gallery runs straight across the whole image from the left edge to the right edge, rough grey rock walls reinforced with concrete arches and steel beams, thick electric cables and a large ventilation pipe running along the wall, iron rails on the floor, the gallery is underground and enclosed by solid dark rock above and below. Flat, even, dim light everywhere, bare walls, no people. Illustrated as a layered paper-cut storybook scene with soft gouache texture, deep umber and slate palette with warm ochre accents, gentle rounded shapes, clean silhouettes, no text, no letters.",
+    "route": "flux",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     1440,
+     832
+    ],
+    "generated_at": "2026-10-04T21:20:15+00:00",
+    "note": "controller art check: pestle was a pastel blob (wanted plain grey stone); bg_3 was flat paper style without a readable tunnel (wanted bg_1/bg_2 painted style)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro/edit",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad1389/lDR8X9MY91B2jwHs7T6wT_cVRONOIh.png",
+    "ref_url": "https://v3b.fal.media/files/b/0aad1389/g6HduFynKP4JFpmwpJ0zh_bg_2.png",
+    "prompt": "Repaint this mine gallery as a later one: a 1950s uranium mine gallery seen in the same side cross-section through the rock. Replace the wooden timbering with concrete arches and steel beams, add thick electric cables and a large ventilation pipe running along the wall, and iron rails on the floor; remove the ladder, the barrels and the hanging lamp. The gallery is evenly and dimly lit by flat soft light with no lamps and no light sources, no people. Keep exactly the same painted storybook style, brushwork, rock texture, palette, framing and side cross-section view as the reference picture; no text, no letters.",
+    "route": "edit",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     2720,
+     1568
+    ],
+    "generated_at": "2026-10-04T21:22:12+00:00",
+    "note": "attempt 5: flux attempt 4 was a 3D render on a flat black wall with lit lamps; repaint mine/bg_2 (route edit) so the style matches bg_1/bg_2"
    }
   ]
  },

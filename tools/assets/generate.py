@@ -59,7 +59,7 @@ def full_prompt(asset: dict, m: dict) -> str:
     """
     p = asset["prompt"]
     if asset.get("route") == "edit":
-        return p + m["edit_suffix"]
+        return p + (m["edit_suffix_scene"] if kind(asset) == "scene" else m["edit_suffix"])
     k = kind(asset)
     if k == "band":
         p += m["band_suffix"]
@@ -159,8 +159,11 @@ def run_edit(asset: dict, prompt: str) -> dict:
         raise RuntimeError(f"ref {asset['ref']} has no raw PNG yet")
     client = fal()
     ref_url = client.upload_file(str(ref))
+    args = {"prompt": prompt, "image_urls": [ref_url], "num_images": 1}
+    if kind(asset) == "scene":  # full-frame backgrounds: keep the ref's aspect, 2K so pack.py downsizes
+        args.update(aspect_ratio="auto", resolution="2K")
     try:
-        res = client.subscribe(EDIT, arguments={"prompt": prompt, "image_urls": [ref_url], "num_images": 1})
+        res = client.subscribe(EDIT, arguments=args)
         return {"model": EDIT, "seed": res.get("seed"), "url": res["images"][0]["url"], "ref_url": ref_url}
     except Exception as e:  # endpoint rejected the request -> documented fallback
         print(f"  {asset['id']}: {EDIT} failed ({e!r:.200}), falling back to {EDIT_FALLBACK}", flush=True)
