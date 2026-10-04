@@ -1,1 +1,64 @@
-{ "herbs": { "title": "Laborant" } }
+{
+  "herbs": {
+    "title": "Laborant",
+    "intro": {
+      "h": "Dzień laboranta",
+      "p": "Słońce wstaje nad Karpaczem. Masz trzy recepty i zbocze pełne ziół. Stukaj tylko w te rośliny, które są na recepcie. Potem utrzyj je w moździerzu i zlej do flakonu.",
+      "start": "Ruszamy w drogę"
+    },
+    "recipes": {
+      "kaszel": {
+        "name": "Na kaszel",
+        "line": "Na kaszel dla dzieci z Miłkowa: podbiał, pierwiosnek, prawoślaz"
+      },
+      "stluczenia": {
+        "name": "Na stłuczenia",
+        "line": "Na stłuczenia dla drwala spod Śnieżki: arnika, dziewięćsił"
+      },
+      "zoladek": {
+        "name": "Na żołądek",
+        "line": "Na żołądek dla karczmarza z Karpacza: goryczka, piołun, mięta"
+      }
+    },
+    "plants": {
+      "arnika": "arnika",
+      "goryczka": "goryczka",
+      "dziewieciesil": "dziewięćsił",
+      "podbial": "podbiał",
+      "pierwiosnek": "pierwiosnek",
+      "prawoslaz": "prawoślaz",
+      "piolun": "piołun",
+      "mieta": "mięta",
+      "muchomor": "muchomor",
+      "pokrzywa": "pokrzywa"
+    },
+    "round": {
+      "label": "Recepta {n} z {total}: {name}",
+      "timeUp": "Słońce już wysoko! Utrzyj to, co masz w koszyku.",
+      "done": "Lek gotowy!",
+      "missing": "Zabrakło w koszyku: {list}",
+      "wrong": "Pomyłki przy zbieraniu: {n}. Od obcych roślin Laborant kicha!",
+      "slow": "Ucieraj szybciej, a lek będzie jeszcze lepszy.",
+      "perfect": "Czysty koszyk i szybkie ucieranie!"
+    },
+    "sneeze": "Apsik!",
+    "grind": {
+      "h": "Utrzyj zioła",
+      "p": "Krąż palcem po moździerzu"
+    },
+    "sum": {
+      "h": "Wszystkie leki gotowe"
+    },
+    "titles": {
+      "3": "Mistrz laborant",
+      "2": "Zielarz",
+      "1": "Pomocnik"
+    },
+    "facts": [
+      "Laboranci z Karpacza i okolic od XVII do XIX wieku zbierali zioła na zboczach Karkonoszy. Robili z nich nalewki, maści i proszki na każdą chorobę.",
+      "W 1843 roku pruskie władze zakazały laborantom robienia leków. Ostatni z nich, Ernst August Zölfel, zmarł w 1884 roku.",
+      "Dziewięćsił ma w nazwie dziewięć sił. Dawniej wierzono, że leczy dziewięć chorób i dodaje sił. Jego srebrny kwiat zamyka się, gdy nadchodzi deszcz.",
+      "Leki laborantów sprzedawano na jarmarkach w całych Prusach. Handlarze nosili je w skrzynkach na plecach, od miasta do miasta."
+    ]
+  }
+}
