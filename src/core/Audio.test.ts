@@ -70,6 +70,29 @@ it('remembers the muted flag in localStorage', () => {
   expect(new Audio({}, undefined, new Set()).muted).toBe(true);
 });
 
+it('keeps a kiosk mute in memory only, without touching localStorage', () => {
+  const setItem = vi.spyOn(Storage.prototype, 'setItem');
+  const a = new Audio({}, undefined, new Set(), { persist: false });
+  a.setMuted(true);
+  expect(a.muted).toBe(true);
+  expect(setItem).not.toHaveBeenCalled();
+  expect(localStorage.getItem('bk.muted')).toBeNull();
+  setItem.mockRestore();
+});
+
+it('starts a kiosk unmuted whatever an earlier visit stored', () => {
+  localStorage.setItem('bk.muted', '1');
+  expect(new Audio({}, undefined, new Set(), { persist: false }).muted).toBe(false);
+});
+
+it('resetMute() unmutes for the next kiosk visitor', () => {
+  const a = new Audio({}, undefined, new Set(), { persist: false });
+  a.setMuted(true);
+  a.resetMute();
+  expect(a.muted).toBe(false);
+  expect(localStorage.getItem('bk.muted')).toBeNull();
+});
+
 it('shares one Howl per clip but applies each play()s own volume, loop and rate', () => {
   const a = new Audio({ hum: ['ui/tap'], tap: ['ui/tap'] }, 'assets/audio/', new Set(['ui/tap']));
   const first = a.play('hum', { loop: true, volume: 0.3 });

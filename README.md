@@ -43,7 +43,9 @@ Adres czytany jest raz, przy starcie (brak obsługi `hashchange`).
   brak linków zewnętrznych. Strona nigdy się nie przewija, także poza kioskiem.
 
 Postęp (najlepsze gwiazdki, data, flaga terenowa) leży w `localStorage` pod `bk.save.v1`, wyciszenie pod
-`bk.muted`. Gdy storage jest niedostępny, aplikacja działa dalej z pamięci.
+`bk.muted`. W kiosku wyciszenie nie trafia do storage'u: trwa tylko w pamięci i znika, gdy licznik bezczynności
+wraca do panoramy, więc następny zwiedzający zaczyna z dźwiękiem. Gdy storage jest niedostępny, aplikacja działa
+dalej z pamięci.
 
 ## Struktura
 

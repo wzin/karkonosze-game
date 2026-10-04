@@ -11,20 +11,31 @@ export interface PlayOptions {
 
 const MUTED_KEY = 'bk.muted';
 
+export interface AudioOptions {
+  /**
+   * Remember the mute flag in localStorage (default true). The kiosk passes false: one child's tap on
+   * the speaker must not silence the installation for every visitor after; see resetMute().
+   */
+  persist?: boolean;
+}
+
 /**
  * Plays moments through Howler. A moment resolves to its first candidate clip present in `available`
  * (the audio manifest), so missing clips fall through to generic ones or play nothing at all.
  */
 export class Audio {
   private readonly howls = new Map<string, Howl>();
+  private readonly persist: boolean;
   private isMuted: boolean;
 
   constructor(
     private readonly moments: Record<Moment, string[]>,
     private readonly baseUrl = 'assets/audio/',
     private readonly available: Set<string>,
+    opts: AudioOptions = {},
   ) {
-    this.isMuted = readMuted();
+    this.persist = opts.persist ?? true;
+    this.isMuted = this.persist ? readMuted() : false;
     Howler.mute(this.isMuted);
   }
 
@@ -52,11 +63,17 @@ export class Audio {
   setMuted(m: boolean): void {
     this.isMuted = m;
     Howler.mute(m);
+    if (!this.persist) return;
     try {
       localStorage.setItem(MUTED_KEY, m ? '1' : '0');
     } catch {
       // storage unavailable: the flag lasts for this visit only
     }
+  }
+
+  /** Sound back on for the next visitor (the kiosk calls it when the idle timer returns to the hub). */
+  resetMute(): void {
+    this.setMuted(false);
   }
 
   get muted(): boolean {
