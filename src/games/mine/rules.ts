@@ -37,6 +37,25 @@ export const HITS = 3;
 export const VEIN_GAP = 220;
 /** Every vein centre lies in here. */
 export const VEIN_AREA: Zone = { x0: 200, y0: 300, x1: 1720, y1: 980 };
+/** Vein art on screen, design px: the 512×356 and 379×400 art drawn at half size. */
+export const VEIN_SIZE: Record<OreType, { w: number; h: number }> = {
+  iron: { w: 256, h: 178 },
+  uranium: { w: 189.5, h: 200 },
+};
+/** The hits-left pips: a strip `h` px tall, its centre `offset` px past the edge of the vein art. */
+export const PIP = { offset: 20, h: 32 };
+/** The pip strip ends above this line (40 px short of the 1080 px screen). */
+export const PIP_FLOOR = 1040;
+
+/**
+ * Centre y of a vein's pips: under the art, or over it when the strip would run past PIP_FLOOR (veins
+ * on the floor strips of bg_2 and bg_3 sit as low as y 970–980, where the pips would leave the screen).
+ */
+export function pipY(veinY: number, type: OreType): number {
+  const half = VEIN_SIZE[type].h / 2;
+  const below = veinY + half + PIP.offset;
+  return below + PIP.h / 2 <= PIP_FLOOR ? below : veinY - half - PIP.offset;
+}
 const MAX_TRIES = 500;
 
 /**
