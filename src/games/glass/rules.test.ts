@@ -7,9 +7,11 @@ import {
   LIMITS,
   MINERALS,
   SHAPES,
+  blowGrows,
   blowScore,
   heatScore,
   needlePos,
+  nextBlowState,
   noteKeys,
   orderScore,
   pickOrders,
@@ -55,10 +57,59 @@ describe('blow', () => {
     expect(blowScore(0, 150, 2)).toBeCloseTo(0.1 * BLOW.popPenalty);
   });
 
-  it('pops above 130 % of the target only', () => {
-    expect(popped(300, 230)).toBe(true);
-    expect(popped(230 * 1.3, 230)).toBe(false);
-    expect(popped(BLOW.target.maly * 1.31, BLOW.target.maly)).toBe(true);
+  it('pops above 150 % of the target only', () => {
+    expect(BLOW.popFactor).toBe(1.5);
+    expect(popped(300, 230)).toBe(false);
+    expect(popped(330, 230)).toBe(false);
+    expect(popped(350, 230)).toBe(true);
+    expect(popped(230 * 1.5, 230)).toBe(false);
+    expect(popped(BLOW.target.maly * 1.51, BLOW.target.maly)).toBe(true);
+  });
+
+  it('leaves a kid at least ~0.45 s between the ring and the burst', () => {
+    // dr/dt = growPerSec (1 + r/600)  →  t = 600/growPerSec · ln((600 + r1) / (600 + r0))
+    const window = (t: number) => (600 / BLOW.growPerSec) * Math.log((600 + t * BLOW.popFactor) / (600 + t));
+    expect(BLOW.growPerSec).toBe(120);
+    expect(window(BLOW.target.maly)).toBeGreaterThan(0.45);
+    expect(window(BLOW.target.duzy)).toBeGreaterThan(0.6);
+  });
+});
+
+describe('blow states', () => {
+  const live = { pops: 0, expired: false };
+
+  it('blows only while held', () => {
+    expect(nextBlowState('ready', 'hold', live)).toBe('blowing');
+    expect(nextBlowState('blowing', 'release', live)).toBe('done');
+    expect(nextBlowState('blowing', 'tap', live)).toBe('ready');
+    expect(blowGrows('blowing')).toBe(true);
+    for (const s of ['ready', 'popped', 'closing', 'done'] as const) expect(blowGrows(s)).toBe(false);
+  });
+
+  it('gives a fresh gather back after the first burst', () => {
+    expect(nextBlowState('blowing', 'burst', live)).toBe('popped');
+    expect(nextBlowState('popped', 'gatherBack', { pops: 1, expired: false })).toBe('ready');
+  });
+
+  it('closes the move after the second burst, without growing on its own', () => {
+    expect(nextBlowState('popped', 'gatherBack', { pops: 2, expired: false })).toBe('closing');
+    expect(nextBlowState('closing', 'hold', { pops: 2, expired: false })).toBe('closing');
+    expect(nextBlowState('closing', 'closed', { pops: 2, expired: false })).toBe('done');
+  });
+
+  it('resolves a time-out at any point, a burst in progress through closing', () => {
+    expect(nextBlowState('ready', 'timeUp', live)).toBe('done');
+    expect(nextBlowState('blowing', 'timeUp', live)).toBe('done');
+    expect(nextBlowState('popped', 'timeUp', { pops: 1, expired: true })).toBe('popped');
+    expect(nextBlowState('popped', 'gatherBack', { pops: 1, expired: true })).toBe('closing');
+    expect(nextBlowState('closing', 'timeUp', { pops: 1, expired: true })).toBe('closing');
+  });
+
+  it('ignores input that does not fit the state', () => {
+    expect(nextBlowState('popped', 'hold', live)).toBe('popped');
+    expect(nextBlowState('ready', 'release', live)).toBe('ready');
+    expect(nextBlowState('done', 'hold', live)).toBe('done');
+    expect(nextBlowState('done', 'timeUp', live)).toBe('done');
   });
 });
 

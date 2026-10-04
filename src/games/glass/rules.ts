@@ -29,8 +29,14 @@ export const CUSTOMERS: Customer[] = [
 
 /** The ember zone is 0.5 ± zoneHalf on the gauge; outside it the glass is ash-cold or burnt. */
 export const HEAT = { zoneHalf: 0.19, missScore: 0.15 };
-/** Bubble radii in design px; above target × popFactor it bursts. */
-export const BLOW = { target: { maly: 150, duzy: 230 }, popFactor: 1.3, growPerSec: 140, popPenalty: 0.7 };
+/**
+ * Bubble radii in design px; above target × popFactor it bursts. popFactor 1.5 and growPerSec 120
+ * (controller ruling over the brief's 1.3 / 140) leave 0.48 s (small) to 0.65 s (large) between
+ * reaching the ring and the burst, instead of 0.25–0.34 s.
+ */
+export const BLOW = { target: { maly: 150, duzy: 230 }, popFactor: 1.5, growPerSec: 120, popPenalty: 0.7 };
+/** A burst may be retried once: the second one ends the move. */
+export const MAX_POPS = 2;
 /** Seconds per step; when one runs out the step resolves with what the player has so far. */
 export const LIMITS = { heat: 12, blow: 20, color: 15, shape: 15 } as const;
 /** Below these part scores the result card explains what went wrong. */
@@ -58,6 +64,37 @@ export function popped(r: number, target: number): boolean {
 /** One frame of blowing: the bubble grows faster the bigger it gets. */
 export function grow(r: number, dt: number): number {
   return r + BLOW.growPerSec * dt * (1 + r / 600);
+}
+
+/**
+ * The blow move as a state machine. Only `blowing` grows the bubble. After a burst (`popped`) the
+ * fresh gather comes back (`gatherBack`) as `ready`, or as `closing` when that was the last allowed
+ * burst or the time ran out meanwhile; `closing` ignores input and only ends (`closed`) in `done`.
+ */
+export type BlowState = 'ready' | 'blowing' | 'popped' | 'closing' | 'done';
+export type BlowEvent = 'hold' | 'release' | 'tap' | 'burst' | 'gatherBack' | 'closed' | 'timeUp';
+
+export function nextBlowState(state: BlowState, event: BlowEvent, ctx: { pops: number; expired: boolean }): BlowState {
+  switch (state) {
+    case 'ready':
+      return event === 'hold' ? 'blowing' : event === 'timeUp' ? 'done' : state;
+    case 'blowing':
+      if (event === 'release' || event === 'timeUp') return 'done';
+      if (event === 'tap') return 'ready';
+      return event === 'burst' ? 'popped' : state;
+    case 'popped':
+      if (event !== 'gatherBack') return state;
+      return ctx.pops >= MAX_POPS || ctx.expired ? 'closing' : 'ready';
+    case 'closing':
+      return event === 'closed' ? 'done' : state;
+    case 'done':
+      return state;
+  }
+}
+
+/** Whether the bubble grows (and the ring reacts) in this state. */
+export function blowGrows(state: BlowState): boolean {
+  return state === 'blowing';
 }
 
 export function orderScore(p: { heat: number; blow: number; mineralOk: boolean; shapeOk: boolean }): number {

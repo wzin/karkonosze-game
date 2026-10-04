@@ -11,6 +11,8 @@ const SHAPE_H = 200;
 const VESSEL_PER_R = 1.1;
 const VESSEL_MIN = 120;
 const VESSEL_MAX = 330;
+/** The mould is drawn 2.9 × the bubble radius, up to this radius. */
+const MOLD_R_MAX = 280;
 
 export function vesselHeight(r: number): number {
   return Math.min(VESSEL_MAX, Math.max(VESSEL_MIN, r * VESSEL_PER_R));
@@ -25,6 +27,8 @@ export class ShapeStep extends Step {
   readonly kind = 'shape';
   private readonly tiles = new Map<ShapeId, Tile>();
   private readonly mold = new Container();
+  /** Frames cut from glass/mold for the two halves; they share its source and are freed on unmount. */
+  private readonly moldFrames: Texture[] = [];
   private chosen: ShapeId | null = null;
 
   constructor(
@@ -60,6 +64,13 @@ export class ShapeStep extends Step {
       this.tiles.set(id, tile);
       this.addChild(tile);
     });
+  }
+
+  override unmount(): void {
+    super.unmount();
+    // destroy(false): the halves are frames of the shared glass/mold texture source
+    for (const t of this.moldFrames) t.destroy(false);
+    this.moldFrames.length = 0;
   }
 
   protected override timeUp(): void {
@@ -136,7 +147,8 @@ export class ShapeStep extends Step {
   /** Left and right halves of glass/mold (or two wooden blocks when it is missing), centre-anchored. */
   private moldHalves(r: number): [Container, Container] {
     const assets = this.env.ctx.assets;
-    const h = r * 2.9;
+    // a bubble blown well past the ring (up to 150 %) must not get a mould taller than the screen
+    const h = Math.min(r, MOLD_R_MAX) * 2.9;
     if (!assets.has('glass/mold')) {
       const block = () =>
         new Graphics().roundRect(-h * 0.35, -h / 2, h * 0.7, h, 18).fill(0x6b4a2c).stroke({ color: 0x2a1a0c, width: 6 });
@@ -146,6 +158,7 @@ export class ShapeStep extends Step {
     const f = tex.frame;
     const half = (side: 0 | 1) => {
       const t = new Texture({ source: tex.source, frame: new Rectangle(f.x + (side * f.width) / 2, f.y, f.width / 2, f.height) });
+      this.moldFrames.push(t);
       const s = new Sprite(t);
       s.anchor.set(0.5);
       s.scale.set(h / f.height);

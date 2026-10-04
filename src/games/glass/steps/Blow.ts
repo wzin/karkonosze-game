@@ -2,7 +2,7 @@ import { Graphics, Sprite } from 'pixi.js';
 import { HoldButton } from '../../../ui/HoldButton';
 import { Theme } from '../../../ui/Theme';
 import { ease, softDotTexture } from '../fx';
-import { BLOW, LIMITS, blowScore, grow, popped } from '../rules';
+import { BLOW, LIMITS, blowGrows, blowScore, grow, nextBlowState, popped, type BlowEvent, type BlowState } from '../rules';
 import { dashedRing } from '../ui';
 import { R0 } from '../Workpiece';
 import { Step, type StepEnv } from './Step';
@@ -13,31 +13,31 @@ export interface BlowResult {
   pops: number;
 }
 
-type State = 'ready' | 'blowing' | 'popped' | 'done';
-
 /** Seconds from a burst to a fresh gather on the pipe (brief: 1.1 s). */
 const RESET_AFTER = 1.1;
-/** One retry with a penalty: the second burst ends the move. */
-const MAX_POPS = 2;
+/** After the last allowed burst (or a time-out during one) the fresh gather shows this long, then the move ends. */
+const CLOSE_AFTER = 0.4;
 /** A tap shorter than this share of the way to the ring does not count as a release. */
 const MIN_GROWTH = 0.25;
 
 /**
- * Dmuchaj: hold to blow the bubble up to the dashed contour. Above 130 % it bursts (shards, sound,
+ * Dmuchaj: hold to blow the bubble up to the dashed contour. Above 150 % it bursts (shards, sound,
  * fresh gather after 1.1 s, one retry with a penalty). Release scores blowScore(); 20 s limit.
+ * The states and their transitions are rules.ts' nextBlowState(); only `blowing` grows the bubble.
  */
 export class BlowStep extends Step {
   readonly kind = 'blow';
   private readonly target: number;
   private readonly ring = new Graphics();
   private button!: HoldButton;
-  private state: State = 'ready';
+  private state: BlowState = 'ready';
   private r = R0;
   private pops = 0;
   private ringLook = '';
   private age = 0;
   private puff = 0;
   private expired = false;
+  private resolved = false;
 
   constructor(
     env: StepEnv,
@@ -78,15 +78,21 @@ export class BlowStep extends Step {
   protected override timeUp(): void {
     this.expired = true;
     this.env.toast.show(this.env.t('glass.timeUp'));
-    // a burst in progress finishes once the fresh gather is back on the pipe
-    if (this.state === 'blowing' || this.state === 'ready') this.finish();
+    // ready / blowing end here with the current radius; a burst in progress (popped) or a closing
+    // move ends once its fresh gather is back, scored from that gather, never from growth
+    if (this.go('timeUp') === 'done') this.resolve();
+  }
+
+  private go(event: BlowEvent): BlowState {
+    this.state = nextBlowState(this.state, event, { pops: this.pops, expired: this.expired });
+    return this.state;
   }
 
   protected override tick(dt: number): void {
     this.age += dt;
     const piece = this.env.piece;
     this.ring.scale.set(1 + Math.sin(this.age * 4) * 0.008);
-    if (this.state !== 'blowing') return;
+    if (!blowGrows(this.state)) return;
 
     this.r = grow(this.r, dt);
     piece.setRadius(this.r);
@@ -100,8 +106,7 @@ export class BlowStep extends Step {
   }
 
   private holdStart(): void {
-    if (this.state !== 'ready') return;
-    this.state = 'blowing';
+    if (this.state !== 'ready' || this.go('hold') !== 'blowing') return;
     this.env.toast.hide();
     this.env.piece.wobble = 1;
     this.env.ctx.audio.play('glass.blow', { loop: true, volume: 0.8 });
@@ -111,21 +116,18 @@ export class BlowStep extends Step {
     if (this.state !== 'blowing') return;
     this.env.ctx.audio.stop('glass.blow');
     this.env.piece.wobble = 0;
-    if (this.r < R0 + (this.target - R0) * MIN_GROWTH && !this.expired) {
-      // a quick test tap: let the player hold again
-      this.state = 'ready';
-      return;
-    }
-    this.finish();
+    // a quick test tap (short of a quarter of the way to the ring) lets the player hold again
+    const tap = this.r < R0 + (this.target - R0) * MIN_GROWTH && !this.expired;
+    if (this.go(tap ? 'tap' : 'release') === 'done') this.resolve();
   }
 
-  private finish(): void {
-    if (this.state === 'done') return;
-    const wasBlowing = this.state === 'blowing';
-    this.state = 'done';
+  /** The move is over (state `done`): score the radius on the pipe and hand it on. */
+  private resolve(): void {
+    if (this.resolved) return;
+    this.resolved = true;
     this.stopClock();
     this.button.enabled = false;
-    if (wasBlowing) this.env.ctx.audio.stop('glass.blow');
+    this.env.ctx.audio.stop('glass.blow');
     this.env.piece.wobble = 0;
     const score = blowScore(this.r, this.target, this.pops);
     const err = Math.abs(this.r - this.target) / this.target;
@@ -140,7 +142,7 @@ export class BlowStep extends Step {
 
   private burst(): void {
     const { piece, fx, ctx, toast, t } = this.env;
-    this.state = 'popped';
+    this.go('burst');
     this.pops += 1;
     ctx.audio.stop('glass.blow');
     ctx.audio.play('glass.pop');
@@ -184,13 +186,15 @@ export class BlowStep extends Step {
     piece.setRadius(0.01);
     piece.bubbleVisible = true;
     this.tw.add(0.35, (p) => piece.setRadius(Math.max(0.01, R0 * p)), { ease: ease.outBack });
-    if (this.pops >= MAX_POPS || this.expired) {
-      this.state = 'blowing'; // finish() treats it as a release
-      this.tw.wait(0.4, () => this.finish());
+    if (this.go('gatherBack') === 'ready') {
+      this.button.enabled = true;
       return;
     }
-    this.state = 'ready';
-    this.button.enabled = true;
+    // closing: the last allowed burst, or the time ran out during it. The gather stays as it is
+    // (tick ignores `closing`) and the move is scored from R0 with the burst penalty.
+    this.tw.wait(CLOSE_AFTER, () => {
+      if (this.go('closed') === 'done') this.resolve();
+    });
   }
 
   private updateRingLook(): void {

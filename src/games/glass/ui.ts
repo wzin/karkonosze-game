@@ -31,9 +31,12 @@ export class InstructionCard extends Container {
   private readonly bg = new Graphics();
   private readonly heading: Text;
   private readonly body: Text;
-  private readonly bar = new Graphics();
+  /** Track and fill are drawn once per layout; the time only scales the fill (no geometry per frame). */
+  private readonly barTrack = new Graphics();
+  private readonly barFill = new Graphics();
   private readonly content = new Container();
   private frac: number | null = null;
+  private urgent = false;
   private appear = 1;
 
   constructor(private readonly w: number) {
@@ -46,7 +49,7 @@ export class InstructionCard extends Container {
     style.wordWrapWidth = w - 56;
     this.body = new Text({ text: '', style });
     this.content.addChild(this.heading, this.body);
-    this.addChild(this.bg, this.content, this.bar);
+    this.addChild(this.bg, this.content, this.barTrack, this.barFill);
   }
 
   set(heading: string, body: string): void {
@@ -59,10 +62,20 @@ export class InstructionCard extends Container {
     this.layout();
   }
 
-  /** Remaining time 1..0, or null to hide the bar. */
+  /** Remaining time 1..0, or null to hide the bar. Called every frame: only scales the fill. */
   setTime(frac: number | null): void {
     this.frac = frac === null ? null : Math.min(1, Math.max(0, frac));
-    this.drawBar();
+    const on = this.frac !== null;
+    this.barTrack.visible = on;
+    this.barFill.visible = on && (this.frac ?? 0) > 0;
+    if (this.frac === null) return;
+    const urgent = this.frac < 0.25;
+    if (urgent !== this.urgent) {
+      this.urgent = urgent;
+      this.drawBar();
+    }
+    const w = this.w - 56;
+    this.barFill.scale.x = Math.max(TIMER_H / w, this.frac);
   }
 
   update(dt: number): void {
@@ -88,19 +101,16 @@ export class InstructionCard extends Container {
     this.drawBar();
   }
 
+  /** Redraws track and full-width fill; setTime() scales the fill from its left end. */
   private drawBar(): void {
-    const g = this.bar.clear();
-    if (this.frac === null) return;
-    const x = 28;
-    const y = this.h - TIMER_H - 18;
     const w = this.w - 56;
-    g.roundRect(x, y, w, TIMER_H, TIMER_H / 2).fill({ color: Theme.color.paper, alpha: 0.14 });
-    if (this.frac > 0) {
-      const urgent = this.frac < 0.25;
-      g.roundRect(x, y, Math.max(TIMER_H, w * this.frac), TIMER_H, TIMER_H / 2).fill({
-        color: urgent ? Theme.color.bad : Theme.color.ember,
-      });
-    }
+    const y = this.h - TIMER_H - 18;
+    this.barTrack.clear().roundRect(28, y, w, TIMER_H, TIMER_H / 2).fill({ color: Theme.color.paper, alpha: 0.14 });
+    this.barFill
+      .clear()
+      .roundRect(0, 0, w, TIMER_H, TIMER_H / 2)
+      .fill({ color: this.urgent ? Theme.color.bad : Theme.color.ember });
+    this.barFill.position.set(28, y);
   }
 }
 
