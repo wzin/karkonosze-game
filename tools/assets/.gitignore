@@ -1,0 +1,6 @@
+raw/*
+!raw/manifest.lock.json
+!raw/audio.lock.json
+.venv/
+__pycache__/
+.pytest_cache/
