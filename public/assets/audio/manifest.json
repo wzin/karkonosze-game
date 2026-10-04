@@ -1,0 +1,169 @@
+{
+  "clips": {
+    "music/hub": {
+      "src": "audio/music/hub.mp3",
+      "seconds": 45.0,
+      "loop": true
+    },
+    "music/glass": {
+      "src": "audio/music/glass.mp3",
+      "seconds": 45.0,
+      "loop": true
+    },
+    "music/turnips": {
+      "src": "audio/music/turnips.mp3",
+      "seconds": 45.0,
+      "loop": true
+    },
+    "music/mine": {
+      "src": "audio/music/mine.mp3",
+      "seconds": 45.0,
+      "loop": true
+    },
+    "music/herbs": {
+      "src": "audio/music/herbs.mp3",
+      "seconds": 45.0,
+      "loop": true
+    },
+    "ui/tap": {
+      "src": "audio/ui/tap.mp3",
+      "seconds": 1.0,
+      "loop": false
+    },
+    "ui/success": {
+      "src": "audio/ui/success.mp3",
+      "seconds": 2.0,
+      "loop": false
+    },
+    "ui/fail": {
+      "src": "audio/ui/fail.mp3",
+      "seconds": 1.5,
+      "loop": false
+    },
+    "ui/star": {
+      "src": "audio/ui/star.mp3",
+      "seconds": 1.2,
+      "loop": false
+    },
+    "glass/furnace": {
+      "src": "audio/glass/furnace.mp3",
+      "seconds": 8.0,
+      "loop": true
+    },
+    "glass/blow": {
+      "src": "audio/glass/blow.mp3",
+      "seconds": 4.0,
+      "loop": true
+    },
+    "glass/pop": {
+      "src": "audio/glass/pop.mp3",
+      "seconds": 1.0,
+      "loop": false
+    },
+    "glass/pigment": {
+      "src": "audio/glass/pigment.mp3",
+      "seconds": 1.5,
+      "loop": false
+    },
+    "glass/mold": {
+      "src": "audio/glass/mold.mp3",
+      "seconds": 1.0,
+      "loop": false
+    },
+    "glass/fanfare": {
+      "src": "audio/glass/fanfare.mp3",
+      "seconds": 3.0,
+      "loop": false
+    },
+    "turnips/pop": {
+      "src": "audio/turnips/pop.mp3",
+      "seconds": 0.8,
+      "loop": false
+    },
+    "turnips/steps": {
+      "src": "audio/turnips/steps.mp3",
+      "seconds": 2.0,
+      "loop": false
+    },
+    "turnips/thunder": {
+      "src": "audio/turnips/thunder.mp3",
+      "seconds": 3.0,
+      "loop": false
+    },
+    "turnips/wind": {
+      "src": "audio/turnips/wind.mp3",
+      "seconds": 8.0,
+      "loop": true
+    },
+    "turnips/grumble": {
+      "src": "audio/turnips/grumble.mp3",
+      "seconds": 2.0,
+      "loop": false
+    },
+    "mine/drip": {
+      "src": "audio/mine/drip.mp3",
+      "seconds": 8.0,
+      "loop": true
+    },
+    "mine/geiger_slow": {
+      "src": "audio/mine/geiger_slow.mp3",
+      "seconds": 4.0,
+      "loop": true
+    },
+    "mine/geiger_fast": {
+      "src": "audio/mine/geiger_fast.mp3",
+      "seconds": 4.0,
+      "loop": true
+    },
+    "mine/pick": {
+      "src": "audio/mine/pick.mp3",
+      "seconds": 1.0,
+      "loop": false
+    },
+    "mine/bat": {
+      "src": "audio/mine/bat.mp3",
+      "seconds": 1.5,
+      "loop": false
+    },
+    "mine/rumble": {
+      "src": "audio/mine/rumble.mp3",
+      "seconds": 2.5,
+      "loop": false
+    },
+    "mine/bell": {
+      "src": "audio/mine/bell.mp3",
+      "seconds": 2.5,
+      "loop": false
+    },
+    "herbs/steps": {
+      "src": "audio/herbs/steps.mp3",
+      "seconds": 4.0,
+      "loop": true
+    },
+    "herbs/pluck": {
+      "src": "audio/herbs/pluck.mp3",
+      "seconds": 0.8,
+      "loop": false
+    },
+    "herbs/sneeze": {
+      "src": "audio/herbs/sneeze.mp3",
+      "seconds": 1.2,
+      "loop": false
+    },
+    "herbs/grind": {
+      "src": "audio/herbs/grind.mp3",
+      "seconds": 4.0,
+      "loop": true
+    },
+    "herbs/pour": {
+      "src": "audio/herbs/pour.mp3",
+      "seconds": 1.5,
+      "loop": false
+    },
+    "herbs/birds": {
+      "src": "audio/herbs/birds.mp3",
+      "seconds": 8.0,
+      "loop": true
+    }
+  }
+}

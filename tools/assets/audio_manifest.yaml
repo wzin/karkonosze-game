@@ -1,0 +1,38 @@
+# audio_manifest.yaml
+routes:
+  sfx:   { model: fal-ai/stable-audio-25/text-to-audio, fallback: cassetteai/sound-effects-generator }
+  music: { model: fal-ai/stable-audio-25/text-to-audio, fallback: cassetteai/music-generator }
+clips:
+  - { id: music/hub,     route: music, seconds: 45, loop: true,  prompt: "gentle mountain folk lullaby, hammered dulcimer and soft wooden flute, slow, mysterious and warm, storybook, seamless loop, no vocals" }
+  - { id: music/glass,   route: music, seconds: 45, loop: true,  prompt: "warm workshop waltz, accordion and plucked strings, cozy, unhurried, storybook, seamless loop, no vocals" }
+  - { id: music/turnips, route: music, seconds: 45, loop: true,  prompt: "playful mischievous folk tune, pizzicato strings, clarinet, light percussion, mountain wind, seamless loop, no vocals" }
+  - { id: music/mine,    route: music, seconds: 45, loop: true,  prompt: "dark ambient drone deep underground, distant metallic echoes, slow low cello, sparse, seamless loop, no vocals" }
+  - { id: music/herbs,   route: music, seconds: 45, loop: true,  prompt: "bright pastoral morning tune, acoustic guitar and recorder, birdsong feel, unhurried, seamless loop, no vocals" }
+  - { id: ui/tap,        route: sfx, seconds: 1,  prompt: "soft wooden tap, short, warm" }
+  - { id: ui/success,    route: sfx, seconds: 2,  prompt: "small bright glockenspiel arpeggio, success chime" }
+  - { id: ui/fail,       route: sfx, seconds: 1.5, prompt: "soft low wooden thud with a short descending tone, gentle failure" }
+  - { id: ui/star,       route: sfx, seconds: 1.2, prompt: "single sparkling bell ding" }
+  - { id: glass/furnace, route: sfx, seconds: 8, loop: true, prompt: "deep roaring furnace loop, steady low rumble of a large brick kiln, air draft" }
+  - { id: glass/blow,    route: sfx, seconds: 4, loop: true, prompt: "steady soft hiss of air blown through a long metal pipe" }
+  - { id: glass/pop,     route: sfx, seconds: 1, prompt: "a thin glass bubble bursting, short pop with light tinkle" }
+  - { id: glass/pigment, route: sfx, seconds: 1.5, prompt: "a pinch of fine powder poured onto hot glass, soft sizzle" }
+  - { id: glass/mold,    route: sfx, seconds: 1, prompt: "two heavy wooden halves clapping shut, dull clack" }
+  - { id: glass/fanfare, route: sfx, seconds: 3, prompt: "short cheerful brass and bell fanfare, storybook" }
+  - { id: turnips/pop,   route: sfx, seconds: 0.8, prompt: "a vegetable popping out of soil, short cartoon pop" }
+  - { id: turnips/steps, route: sfx, seconds: 2, prompt: "quick light running footsteps on a stony path" }
+  - { id: turnips/thunder, route: sfx, seconds: 3, prompt: "distant rolling thunder over mountains" }
+  - { id: turnips/wind,  route: sfx, seconds: 8, loop: true, prompt: "steady high mountain wind loop, airy, no music" }
+  - { id: turnips/grumble, route: sfx, seconds: 2, prompt: "deep grumpy giant grumbling, low, comic, no words" }
+  - { id: mine/drip,     route: sfx, seconds: 8, loop: true, prompt: "water dripping in a cave, echoing, sparse, loop" }
+  - { id: mine/geiger_slow, route: sfx, seconds: 4, loop: true, prompt: "geiger counter clicking slowly, sparse clicks" }
+  - { id: mine/geiger_fast, route: sfx, seconds: 4, loop: true, prompt: "geiger counter clicking very fast, dense crackle" }
+  - { id: mine/pick,     route: sfx, seconds: 1, prompt: "a pickaxe striking rock once, sharp clink with small debris" }
+  - { id: mine/bat,      route: sfx, seconds: 1.5, prompt: "a bat flapping past quickly with a tiny squeak" }
+  - { id: mine/rumble,   route: sfx, seconds: 2.5, prompt: "a low rock rumble underground, falling pebbles" }
+  - { id: mine/bell,     route: sfx, seconds: 2.5, prompt: "an old iron shift bell rung twice, echoing in a tunnel" }
+  - { id: herbs/steps,   route: sfx, seconds: 4, loop: true, prompt: "slow walking footsteps on gravel mountain path, loop" }
+  - { id: herbs/pluck,   route: sfx, seconds: 0.8, prompt: "snapping a plant stem, soft leafy rustle" }
+  - { id: herbs/sneeze,  route: sfx, seconds: 1.2, prompt: "a comic small sneeze, cartoon, no words" }
+  - { id: herbs/grind,   route: sfx, seconds: 4, loop: true, prompt: "stone pestle grinding herbs in a stone mortar, circular scraping, loop" }
+  - { id: herbs/pour,    route: sfx, seconds: 1.5, prompt: "liquid poured into a small glass bottle, gentle gurgle" }
+  - { id: herbs/birds,   route: sfx, seconds: 8, loop: true, prompt: "morning birdsong in a spruce forest, light breeze, loop" }
