@@ -1,4 +1,3 @@
->>>>>>> worktree-agent-a61a0baf54f882d16
 import os, re, pathlib
 def fal_key() -> str:
     if os.environ.get("FAL_KEY"): return os.environ["FAL_KEY"]
