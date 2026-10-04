@@ -53,9 +53,16 @@ export const ROCK_ZONES: Record<MineBg, Zone[]> = {
     { x0: 210, y0: 330, x1: 400, y1: 780 }, // rock face left of the chamber
     { x0: 240, y0: 870, x1: 1640, y1: 970 }, // rock under the floor
   ],
+  // the back wall shows between steel supports (x ≈ 330–460, 700–790, 1170–1270, 1470–1560);
+  // the vent pipe runs at y ≈ 530–660 from x ≈ 900 and the rails at y ≈ 770–830
   'mine/bg_3': [
-    { x0: 340, y0: 430, x1: 1640, y1: 640 }, // rock behind the tunnel lining
-    { x0: 240, y0: 870, x1: 1640, y1: 960 }, // rock under the tunnel
+    { x0: 200, y0: 330, x1: 230, y1: 560 }, // rock face left of the tunnel
+    { x0: 220, y0: 760, x1: 300, y1: 860 }, // boulder at the tunnel mouth
+    { x0: 580, y0: 420, x1: 590, y1: 600 }, // wall bay between the first two supports
+    { x0: 900, y0: 425, x1: 1050, y1: 440 }, // wall bay above the pipe's elbow
+    { x0: 1360, y0: 425, x1: 1380, y1: 440 }, // wall bay above the pipe
+    { x0: 1660, y0: 425, x1: 1700, y1: 440 }, // wall in the right arch, above the pipe
+    { x0: 220, y0: 950, x1: 1640, y1: 980 }, // rock under the rails
   ],
 };
 
