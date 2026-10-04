@@ -3,6 +3,7 @@ import { Application, Assets, Container } from 'pixi.js';
 import content from './content/pl.json';
 import { AssetRegistry, type GfxManifest } from './core/Assets';
 import { Audio } from './core/Audio';
+import { MOMENTS } from './core/moments';
 import { I18n } from './core/I18n';
 import { IdleTimer } from './core/Kiosk';
 import { DESIGN, fitScale } from './core/Layout';
@@ -82,7 +83,7 @@ async function main(): Promise<void> {
     i18n,
     kiosk: route.kiosk,
     assets: new AssetRegistry(gfx ?? { assets: {} }),
-    audio: new Audio({}, AUDIO_BASE, new Set(Object.keys(sounds?.clips ?? {}))),
+    audio: new Audio(MOMENTS, AUDIO_BASE, new Set(Object.keys(sounds?.clips ?? {}))),
     save: new Save(),
     go(sceneId, params) {
       if (route.kiosk && sceneId !== 'hub') idle.start();
