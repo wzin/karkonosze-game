@@ -49,6 +49,7 @@ export class HeatStep extends Step {
     this.buildGauge();
     this.button = new Button(t('glass.heat.btn'), {
       kiosk: this.env.ctx.kiosk,
+      layout: this.env.ctx.layout,
       name: 'glass.heat.btn',
       width: 460,
       // the pick is timed: it lands on pointerdown, not on release

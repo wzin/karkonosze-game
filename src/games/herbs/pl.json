@@ -44,7 +44,8 @@
     "sneeze": "Apsik!",
     "grind": {
       "h": "Utrzyj zioła",
-      "p": "Krąż palcem po moździerzu"
+      "p": "Krąż palcem po moździerzu",
+      "timeUp": "Czas minął! Zlewamy to, co już utarte."
     },
     "sum": {
       "h": "Wszystkie leki gotowe"

@@ -1,6 +1,7 @@
-import { Container, Graphics, Rectangle, Sprite, Text, type DestroyOptions } from 'pixi.js';
+import { Container, Graphics, Sprite, Text, type DestroyOptions } from 'pixi.js';
 import { sprite, type AssetRegistry } from '../../core/Assets';
-import { Theme } from '../../ui/Theme';
+import type { ViewLayout } from '../../core/Layout';
+import { LiveHitBox, Theme } from '../../ui/Theme';
 import { mixColor, registerDevTarget, softDotTexture, vesselTextures } from './fx';
 import type { ShapeId } from './rules';
 
@@ -166,7 +167,8 @@ export class Toast extends Container {
 
 /**
  * A pickable item standing on its bottom centre (0, 0): a jar or a mould. Lifts on hover, dips on
- * press, fires onPick on tap. The hit area covers item and caption, at least hitMin each way.
+ * press, fires onPick on tap. The hit area covers item and caption, at least effectiveHitMin each way
+ * (more on a small screen, so never under 44 CSS px).
  */
 export class Tile extends Container {
   onPick?: () => void;
@@ -178,7 +180,15 @@ export class Tile extends Container {
   private readonly itemH: number;
   private picked = false;
 
-  constructor(opts: { view: Container; height: number; width: number; caption: string; name: string; kiosk: boolean }) {
+  constructor(opts: {
+    view: Container;
+    height: number;
+    width: number;
+    caption: string;
+    name: string;
+    kiosk: boolean;
+    layout: ViewLayout;
+  }) {
     super();
     this.itemH = opts.height;
     this.lift.addChild(opts.view);
@@ -196,10 +206,9 @@ export class Tile extends Container {
     caption.position.set(0, 8);
     this.addChild(this.lift, caption);
 
-    const min = Theme.size.hitMin(opts.kiosk);
-    const w = Math.max(opts.width + 24, caption.width + 12, min);
-    const h = Math.max(opts.height + 50, min);
-    this.hitArea = new Rectangle(-w / 2, -opts.height - 12, w, h);
+    const w = Math.max(opts.width + 24, caption.width + 12);
+    const h = opts.height + 50;
+    this.hitArea = new LiveHitBox(() => ({ x: -w / 2, y: -opts.height - 12, w, h }), opts.kiosk, opts.layout);
     this.eventMode = 'static';
     this.cursor = 'pointer';
     this.on('pointerover', () => (this.hoverTarget = 1));

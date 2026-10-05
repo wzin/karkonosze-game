@@ -7,7 +7,8 @@ import { expect, test as base, type Page } from '@playwright/test';
  * Hutnik z Józefiny shift is played through like a player would (pointer on the named buttons).
  *
  * Canvas text cannot be read, so the tests follow the dev hooks: `window.__bk.sceneId` (SceneManager),
- * `window.__bk.buttons[name]()` (centre of a named Button / marker / tile in CSS px) and
+ * `window.__bk.buttons[name]()` (centre of a named Button / marker / tile in CSS px, and the size of a
+ * Button's or marker's hit box on screen) and
  * `window.__bkGlass` (the glass scene's live state). Headless WebGL runs on SwiftShader at a few
  * frames per second and the game clamps dt to 0.1 s, so game time crawls: every wait polls state
  * (per animation frame) or counts game seconds, never wall-clock sleeps.
@@ -23,6 +24,8 @@ const STEP_TIMEOUT = 90_000;
  * (measured: ~2 under SwiftShader, at 8 fps and at 3 fps alike). The timed moves aim this far ahead.
  */
 const LEAD_FRAMES = 2;
+/** Smallest touch target on screen, CSS px (ui/Theme MIN_TOUCH_CSS). */
+const MIN_TOUCH_CSS = 44;
 
 interface Point {
   x: number;
@@ -46,7 +49,7 @@ interface GlassDebug {
 
 /** The dev hooks, for typing the functions that run in the page. */
 interface Hooks {
-  __bk?: { sceneId: string | null; buttons?: Record<string, () => Point> };
+  __bk?: { sceneId: string | null; buttons?: Record<string, () => Point & { width?: number; height?: number }> };
   __bkGlass?: GlassDebug;
   __smokeStill?: Record<string, { x: number; y: number; frames: number } | undefined>;
   /** The previous frame's needle / radius, for the timed moves' lead. */
@@ -123,6 +126,22 @@ async function centre(page: Page, name: string): Promise<Point> {
   const p = (await handle.jsonValue()) as Point;
   await page.evaluate((n) => delete (window as unknown as Hooks).__smokeStill?.[n], name);
   return p;
+}
+
+/**
+ * Checks that a registered target's hit box measures at least MIN_TOUCH_CSS each way on screen, once
+ * it has stopped moving, and notes the size in the test's annotations.
+ */
+async function expectTouchable(page: Page, name: string): Promise<void> {
+  await centre(page, name);
+  const size = await page.evaluate((n) => {
+    const t = (window as unknown as Hooks).__bk?.buttons?.[n]?.();
+    return t ? { width: t.width ?? 0, height: t.height ?? 0 } : null;
+  }, name);
+  expect(size, `${name} is registered`).not.toBeNull();
+  test.info().annotations.push({ type: 'hit box', description: `${name}: ${size?.width.toFixed(1)} x ${size?.height.toFixed(1)} CSS px` });
+  expect(size?.width, `${name} hit width (CSS px)`).toBeGreaterThanOrEqual(MIN_TOUCH_CSS);
+  expect(size?.height, `${name} hit height (CSS px)`).toBeGreaterThanOrEqual(MIN_TOUCH_CSS);
 }
 
 async function tap(page: Page, name: string): Promise<void> {
@@ -298,6 +317,9 @@ for (const vp of VIEWPORTS) {
       // the markers are up and the panorama has drawn a few frames
       await centre(page, 'hub.szklarska');
       await page.screenshot({ path: shot(desktop ? 'hub' : vp.name) });
+      // on the phone the design is drawn at ~0.2 scale: hit boxes must still be 44 CSS px
+      await expectTouchable(page, 'hub.mute');
+      await expectTouchable(page, 'hub.szklarska');
     });
 
     test(`rotate hint is ${desktop ? 'hidden' : 'shown'}`, async ({ page }) => {
@@ -312,11 +334,16 @@ for (const vp of VIEWPORTS) {
       }
     });
 
-    test('Szklarska marker opens Hutnik', async ({ page }) => {
+    test('Szklarska marker opens Hutnik, with touch-sized buttons', async ({ page }) => {
       await open(page);
       await waitScene(page, 'hub');
       await tap(page, 'hub.szklarska');
       await waitScene(page, 'game:glass');
+      await glassStep(page, 'intro');
+      // the intro card has finished coming in
+      await glassSeconds(page, 0.8);
+      await expectTouchable(page, 'glass.start');
+      await expectTouchable(page, 'topbar.back');
     });
 
     for (const [hash, scene] of [

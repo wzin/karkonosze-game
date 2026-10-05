@@ -235,6 +235,7 @@ export default class MineScene extends Scene {
       audio,
       muteLabel: i18n.t('ui.mute'),
       kiosk,
+      layout: this.ctx.layout,
     });
     this.oilBar = new OilBar(i18n.t('mine.hud.oil'));
     this.oilBar.position.set((W - OilBar.W) / 2 + 30, TopBar.HEIGHT + 22);
@@ -848,7 +849,8 @@ export default class MineScene extends Scene {
   // ---------------------------------------------------------------- ui helpers
 
   private button(label: string, name: string, onPress: () => void, variant: 'primary' | 'quiet' = 'primary'): Button {
-    return new Button(label, { name, variant, kiosk: this.ctx.kiosk, onTap: () => this.ctx.audio.play('ui.tap'), onPress });
+    const { kiosk, layout, audio } = this.ctx;
+    return new Button(label, { name, variant, kiosk, layout, onTap: () => audio.play('ui.tap'), onPress });
   }
 
   /** A dark card around `views` stacked and centred, centred on (x, y). */

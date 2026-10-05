@@ -5,7 +5,7 @@ vi.hoisted(() => {
   HTMLCanvasElement.prototype.getContext = (() => null) as typeof HTMLCanvasElement.prototype.getContext;
 });
 
-import { CanvasTextMetrics, type FederatedPointerEvent } from 'pixi.js';
+import { CanvasTextMetrics, Container, type FederatedPointerEvent } from 'pixi.js';
 import { Button } from './Button';
 import { HoldButton } from './HoldButton';
 
@@ -80,16 +80,40 @@ it('is not locked by a press whose pointerup never came', () => {
 
 it('grows the hit area of a small kiosk button to 96 px', () => {
   const b = new Button('', { width: 40, height: 40, kiosk: true });
-  expect(b.hitArea).toMatchObject({ x: -28, y: -28, width: 96, height: 96 });
+  expect(b.hitRect).toEqual({ x: -28, y: -28, width: 96, height: 96 });
+  expect(b.hitArea?.contains(-27, -27)).toBe(true);
+  expect(b.hitArea?.contains(-29, 20)).toBe(false);
+});
+
+it('keeps the hit area at least 44 CSS px at the live fit scale, and follows a resize', () => {
+  const layout = { scale: 1 };
+  const b = new Button('', { width: 72, height: 72, layout });
+  expect(b.hitRect).toEqual({ x: 0, y: 0, width: 72, height: 72 });
+  expect(b.hitArea?.contains(-20, 36)).toBe(false);
+  layout.scale = 0.36; // an 844×390 phone
+  expect(b.hitRect).toEqual({ x: -25.5, y: -25.5, width: 123, height: 123 });
+  expect(b.hitArea?.contains(-20, 36)).toBe(true);
 });
 
 it('registers a named button for the dev smoke tests and forgets it on destroy', () => {
   const b = new Button('Go', { name: 'test.go' });
   b.position.set(100, 50);
   const { w, h } = b.box;
-  expect(window.__bk?.buttons?.['test.go']()).toEqual({ x: 100 + w / 2, y: 50 + h / 2 });
+  expect(window.__bk?.buttons?.['test.go']()).toEqual({ x: 100 + w / 2, y: 50 + h / 2, width: w, height: h });
   b.destroy();
   expect(window.__bk?.buttons?.['test.go']).toBeUndefined();
+});
+
+it('reports the hit box size on screen (CSS px) to the dev registry', () => {
+  const layout = { scale: 0.36 };
+  const root = new Container();
+  root.scale.set(layout.scale);
+  const b = new Button('', { width: 72, height: 72, layout, name: 'test.icon' });
+  root.addChild(b);
+  const r = window.__bk?.buttons?.['test.icon']();
+  expect(r?.width).toBeCloseTo(123 * 0.36);
+  expect(r?.height).toBeGreaterThanOrEqual(44);
+  b.destroy();
 });
 
 it('holds from pointerdown until pointerup', () => {

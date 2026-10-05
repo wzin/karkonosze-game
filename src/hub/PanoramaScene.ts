@@ -101,6 +101,7 @@ export default class PanoramaScene extends Scene {
       games: GAMES,
       save: this.ctx.save.load(),
       obstacles: [grow(rectOf(heading), 12), grow(rectOf(sound), 12)],
+      layout: this.ctx.layout,
       onTap: () => this.ctx.audio.play('ui.tap'),
       onPick: (place, kind) => this.pick(place, kind),
     });
@@ -166,6 +167,7 @@ export default class PanoramaScene extends Scene {
     this.card = new ConceptCard(place, {
       soon: this.ctx.i18n.t('ui.soon'),
       kiosk: this.ctx.kiosk,
+      layout: this.ctx.layout,
       onTap: () => this.ctx.audio.play('ui.tap'),
       onClose: () => this.card?.close(),
     });
@@ -263,7 +265,7 @@ export default class PanoramaScene extends Scene {
 
   /** Icon only: a label would run into the moon painted in the sky. */
   private buildSoundButton(): Button {
-    const { audio, kiosk } = this.ctx;
+    const { audio, kiosk, layout } = this.ctx;
     const speaker = new Graphics();
     drawSpeaker(speaker, audio.muted);
     const button = new Button('', {
@@ -271,6 +273,7 @@ export default class PanoramaScene extends Scene {
       height: SOUND_BUTTON_H,
       icon: speaker,
       kiosk,
+      layout,
       name: 'hub.mute',
       onTap: () => audio.play('ui.tap'),
       onPress: () => {

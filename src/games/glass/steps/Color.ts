@@ -66,6 +66,7 @@ export class ColorStep extends Step {
         caption: t(`glass.minerals.${m.id}.name`),
         name: `glass.jar.${m.id}`,
         kiosk: ctx.kiosk,
+        layout: ctx.layout,
       });
       tile.position.set(LAYOUT.rowX(i), LAYOUT.rowBottom - 40);
       tile.onPick = () => this.choose(m.id);

@@ -5,7 +5,10 @@ interface Window {
   __bk?: {
     /** Active scene id, published by SceneManager. */
     sceneId: string | null;
-    /** Named Buttons: each returns the button's centre on screen in CSS px. */
-    buttons?: Record<string, () => { x: number; y: number }>;
+    /**
+     * Named Buttons, hub markers and glass tiles: each returns the target's centre on screen in CSS px
+     * and, for Buttons and markers, the size of its hit box on screen (CSS px).
+     */
+    buttons?: Record<string, () => { x: number; y: number; width?: number; height?: number }>;
   };
 }

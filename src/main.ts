@@ -72,18 +72,25 @@ async function main(): Promise<void> {
 
   const root = new Container();
   app.stage.addChild(root);
-  const fit = () => fitToWindow(root);
+  // one object, updated in place: hit areas read its scale on every test
+  const layout = { scale: 1 };
+  const fit = () => fitToWindow(root, layout);
   window.addEventListener('resize', fit);
   fit();
 
-  const idle = new IdleTimer(IDLE_SECONDS, () => ctx.go('hub'));
+  // the next visitor starts with the sound on, whatever the last one did with the speaker
+  const idle = new IdleTimer(IDLE_SECONDS, () => {
+    ctx.audio.resetMute();
+    ctx.go('hub');
+  });
   const scenes = new SceneManager(root, app.ticker, () => idle.touch());
   const ctx: SceneContext = {
     app,
     i18n,
     kiosk: route.kiosk,
+    layout,
     assets: new AssetRegistry(gfx ?? { assets: {} }),
-    audio: new Audio(MOMENTS, AUDIO_BASE, new Set(Object.keys(sounds?.clips ?? {}))),
+    audio: new Audio(MOMENTS, AUDIO_BASE, new Set(Object.keys(sounds?.clips ?? {})), { persist: !route.kiosk }),
     save: new Save(),
     go(sceneId, params) {
       if (route.kiosk && sceneId !== 'hub') idle.start();
@@ -104,8 +111,9 @@ async function main(): Promise<void> {
   ctx.go(start.sceneId, start.params);
 }
 
-function fitToWindow(root: Container): void {
+function fitToWindow(root: Container, layout: { scale: number }): void {
   const f = fitScale(window.innerWidth, window.innerHeight);
+  layout.scale = f.scale;
   root.scale.set(f.scale);
   root.position.set(f.x, f.y);
   document.body.classList.toggle('portrait', f.portrait && f.scale * DESIGN.w < MIN_SCENE_WIDTH);

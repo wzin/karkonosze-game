@@ -41,6 +41,13 @@ describe('markers', () => {
     expect(gameFor(GAMES, 'jelenia')).toBeNull();
   });
 
+  it('keeps the game field of content places (read by nothing, the registry decides) in step with GAMES', () => {
+    const places = content.places as { id: string; game?: string }[];
+    const fromContent = places.filter((p) => p.game).map((p) => `${p.id}:${p.game}`);
+    const fromRegistry = GAMES.map((g) => `${g.placeId}:${g.id}`);
+    expect(fromContent.sort()).toEqual(fromRegistry.sort());
+  });
+
   it('tells the hub, game and concept markers apart', () => {
     expect(markerKind({ id: 'staniszow', hub: true }, GAMES)).toBe('hub');
     expect(markerKind({ id: 'kowary' }, GAMES)).toBe('game');

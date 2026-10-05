@@ -53,6 +53,7 @@ export class ShapeStep extends Step {
         caption: t(`glass.shapes.${id}`),
         name: `glass.shape.${id}`,
         kiosk: ctx.kiosk,
+        layout: ctx.layout,
       });
       tile.position.set(LAYOUT.rowX(i), LAYOUT.rowBottom - 40);
       tile.onPick = () => this.choose(id);

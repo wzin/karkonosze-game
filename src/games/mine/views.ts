@@ -3,7 +3,7 @@ import { GlowFilter } from 'pixi-filters/glow';
 import { sprite, type AssetRegistry } from '../../core/Assets';
 import { DESIGN } from '../../core/Layout';
 import { Theme } from '../../ui/Theme';
-import { HITS, dist, type OreType, type Vein } from './rules';
+import { HITS, PIP, VEIN_SIZE, dist, pipY, type OreType, type Vein } from './rules';
 
 type Rng = () => number;
 type Point = { x: number; y: number };
@@ -11,9 +11,10 @@ type Point = { x: number; y: number };
 export const VEIN_SCALE = 0.5;
 /** Smallest tap target around a vein, px (the brief asks for at least 160). */
 export const VEIN_HIT_MIN = 180;
-const VEIN_ART: Record<OreType, { alias: string; w: number; h: number; tint: number }> = {
-  iron: { alias: 'mine/vein_iron', w: 512, h: 356, tint: 0x8a5a3a },
-  uranium: { alias: 'mine/vein_uranium', w: 379, h: 400, tint: 0x5a7a4a },
+/** The art (its on-screen size at VEIN_SCALE is `VEIN_SIZE` in rules.ts) and the placeholder tint. */
+const VEIN_ART: Record<OreType, { alias: string; tint: number }> = {
+  iron: { alias: 'mine/vein_iron', tint: 0x8a5a3a },
+  uranium: { alias: 'mine/vein_uranium', tint: 0x5a7a4a },
 };
 const URANIUM_GLOW = 0x8dff5a;
 /** Glow alpha on a lit uranium vein. */
@@ -93,8 +94,8 @@ export class VeinView extends Container {
     const type = vein.type;
     this.position.set(vein.x, vein.y);
     const spec = VEIN_ART[type];
-    const w = spec.w * VEIN_SCALE;
-    this.artH = spec.h * VEIN_SCALE;
+    const w = VEIN_SIZE[type].w;
+    this.artH = VEIN_SIZE[type].h;
     this.art = sprite(assets, spec.alias, { w, h: this.artH, tint: spec.tint });
     if (assets.has(spec.alias)) this.art.scale.set(VEIN_SCALE);
     this.art.anchor.set(0.5);
@@ -112,7 +113,8 @@ export class VeinView extends Container {
       this.art.filters = [this.glow];
     }
     this.addChild(this.art, this.cracks);
-    this.pips.position.set(vein.x, vein.y + this.artH / 2 + 20);
+    // under the vein, or over it near the bottom edge (see pipY)
+    this.pips.position.set(vein.x, pipY(vein.y, type));
     this.pips.alpha = 0;
     this.pips.eventMode = 'none';
     pipLayer.addChild(this.pips);
@@ -178,7 +180,7 @@ export class VeinView extends Container {
   private drawPips(hitsLeft: number): void {
     const gap = 28;
     const w = gap * (HITS - 1) + 32;
-    this.pips.clear().roundRect(-w / 2, -16, w, 32, 16).fill({ color: Theme.color.night, alpha: 0.7 });
+    this.pips.clear().roundRect(-w / 2, -PIP.h / 2, w, PIP.h, PIP.h / 2).fill({ color: Theme.color.night, alpha: 0.7 });
     for (let i = 0; i < HITS; i++) {
       const x = (i - (HITS - 1) / 2) * gap;
       this.pips.circle(x, 0, 8);

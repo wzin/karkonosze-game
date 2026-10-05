@@ -2,7 +2,10 @@ import { describe, it, expect } from 'vitest';
 import { mulberry32 } from '../../core/Rng';
 import {
   HITS,
+  PIP,
+  PIP_FLOOR,
   ROCK_ZONES,
+  VEIN_SIZE,
   VEIN_AREA,
   VEIN_GAP,
   dist,
@@ -11,6 +14,7 @@ import {
   isLit,
   levelConfig,
   minedCount,
+  pipY,
   starsFor,
   type Vein,
 } from './rules';
@@ -119,6 +123,31 @@ describe('levelConfig', () => {
 
   it('is deterministic for a seed', () => {
     expect(levelConfig(3, mulberry32(42))).toEqual(levelConfig(3, mulberry32(42)));
+  });
+});
+
+describe('pipY', () => {
+  it('hangs the hit pips under the vein art, or over it near the bottom of the screen', () => {
+    const half = VEIN_SIZE.uranium.h / 2;
+    expect(pipY(500, 'uranium')).toBe(500 + half + PIP.offset);
+    expect(pipY(980, 'uranium')).toBe(980 - half - PIP.offset);
+  });
+
+  it('leaves room for the pips of every vein inside the 1080 px screen, for levels 1-3 and any seed', () => {
+    expect(PIP_FLOOR).toBeLessThanOrEqual(1080);
+    for (let seed = 1; seed <= 300; seed++) {
+      for (const index of LEVELS) {
+        for (const v of levelConfig(index, mulberry32(seed)).veins) {
+          const y = pipY(v.y, v.type);
+          const where = `seed ${seed} level ${index} ${v.type} vein at ${v.x},${v.y}: pips at ${y}`;
+          expect(y - PIP.h / 2, where).toBeGreaterThanOrEqual(0);
+          expect(y + PIP.h / 2, where).toBeLessThanOrEqual(PIP_FLOOR);
+          // beside the art, never over it
+          const half = VEIN_SIZE[v.type].h / 2;
+          expect(y - PIP.h / 2 >= v.y + half || y + PIP.h / 2 <= v.y - half, where).toBe(true);
+        }
+      }
+    }
   });
 });
 
