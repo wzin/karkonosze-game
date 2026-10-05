@@ -56,22 +56,85 @@ def test_ultra_band_gets_the_land_fraction_hint():
     assert "bottom 75 percent" in g.full_prompt(a, M)
 
 
-def test_choose_restores_an_earlier_attempt(monkeypatch, tmp_path):
+def _choose_env(monkeypatch, tmp_path):
+    """Lock and raw/ in tmp_path; download_png writes a 4x4 image whose red channel encodes the url."""
     from PIL import Image
     monkeypatch.setattr(g, "RAW", tmp_path)
     monkeypatch.setattr(g, "LOCK", tmp_path / "manifest.lock.json")
     monkeypatch.setattr(g, "raw_path", lambda i, suffix=".png": tmp_path / f"{i}{suffix}")
+    urls = {"u1": 10, "u2": 20, "r1": 111, "r2": 122}
+    downloaded = []
+
+    def fake_download(url, dest):
+        downloaded.append(url)
+        Image.new("RGB", (4, 4), (urls[url], 0, 0)).save(dest)
+        return (4, 4)
+    monkeypatch.setattr(g, "download_png", fake_download)
     (tmp_path / "t").mkdir()
-    for n, colour in ((1, (10, 0, 0)), (2, (20, 0, 0))):
-        Image.new("RGB", (4, 4), colour).save(tmp_path / f"t/a.a{n}.png")
+    return downloaded
+
+
+def _red(path):
+    from PIL import Image
+    return Image.open(path).getpixel((0, 0))[0]
+
+
+def test_choose_restores_an_earlier_attempt_from_its_copy(monkeypatch, tmp_path):
+    from PIL import Image
+    downloaded = _choose_env(monkeypatch, tmp_path)
+    Image.new("RGB", (4, 4), (10, 0, 0)).save(tmp_path / "t/a.a1.png")   # copy of u1
     Image.new("RGB", (4, 4), (20, 0, 0)).save(tmp_path / "t/a.png")
     (tmp_path / "t/a.cut.png").write_bytes(b"stale")
-    a1 = {"model": "m1", "url": "u1", "prompt": "p1", "repairs": [{"shift_down": 5}]}
+    a1 = {"model": "m1", "url": "u1", "prompt": "p1"}
     a2 = {"model": "m2", "url": "u2", "prompt": "p2", "note": "re-roll"}
     g.update_lock("t/a", lambda e: e.update({**a2, "attempts": [a1, a2], "cutout": {"x": 1}}))
     g.choose("t/a", 1, "attempt 1 reads better")
     e = g.read_lock()["t/a"]
-    assert e["model"] == "m1" and e["chosen"] == 1 and e["chosen_note"] == "attempt 1 reads better"
-    assert e["repairs"] == [{"shift_down": 5}] and "cutout" not in e and len(e["attempts"]) == 2
-    assert Image.open(tmp_path / "t/a.png").getpixel((0, 0)) == (10, 0, 0)
+    assert e["model"] == "m1" and e["url"] == "u1" and e["chosen"] == 1
+    assert e["chosen_note"] == "attempt 1 reads better" and "repairs" not in e
+    assert "cutout" not in e and len(e["attempts"]) == 2
+    assert _red(tmp_path / "t/a.png") == 10 and downloaded == []      # the raw is u1's image
     assert not (tmp_path / "t/a.cut.png").exists()
+
+
+def test_choose_restores_a_repaired_attempt_from_the_repair_url(monkeypatch, tmp_path):
+    from PIL import Image
+    downloaded = _choose_env(monkeypatch, tmp_path)
+    Image.new("RGB", (4, 4), (10, 0, 0)).save(tmp_path / "t/a.a1.png")   # taken before the repair
+    a1 = {"model": "m1", "url": "u1", "prompt": "p1",
+          "repairs": [{"url": "r2", "shift_down": 50}, {"url": "r1", "shift_down": 5}]}
+    a2 = {"model": "m2", "url": "u2", "prompt": "p2"}
+    g.update_lock("t/a", lambda e: e.update({**a2, "attempts": [a1, a2]}))
+    g.choose("t/a", 1)
+    e = g.read_lock()["t/a"]
+    assert downloaded == ["r1"] and _red(tmp_path / "t/a.png") == 111
+    assert e["repairs"][-1]["url"] == "r1"                              # lock and raw agree
+
+
+def test_choose_keeps_top_level_repairs_on_the_attempt_they_fixed(monkeypatch, tmp_path):
+    from PIL import Image
+    downloaded = _choose_env(monkeypatch, tmp_path)
+    Image.new("RGB", (4, 4), (10, 0, 0)).save(tmp_path / "t/a.a1.png")
+    Image.new("RGB", (4, 4), (20, 0, 0)).save(tmp_path / "t/a.a2.png")
+    a1 = {"model": "m1", "url": "u1", "prompt": "p1"}
+    a2 = {"model": "m2", "url": "u2", "prompt": "p2"}
+    # attempt 2 is chosen and was repaired afterwards: repair.py records on the top only
+    g.update_lock("t/a", lambda e: e.update({**a2, "attempts": [a1, a2], "repairs": [{"url": "r2"}]}))
+    g.choose("t/a", 1)
+    e = g.read_lock()["t/a"]
+    assert "repairs" not in e and e["attempts"][1]["repairs"] == [{"url": "r2"}]
+    assert _red(tmp_path / "t/a.png") == 10
+    g.choose("t/a", 2)                                                  # back: the repaired image
+    e = g.read_lock()["t/a"]
+    assert downloaded == ["r2"] and _red(tmp_path / "t/a.png") == 122 and e["repairs"] == [{"url": "r2"}]
+
+
+def test_choose_rejects_an_unknown_id_a_bad_spec_and_a_missing_attempt(monkeypatch, tmp_path):
+    import pytest
+    _choose_env(monkeypatch, tmp_path)
+    g.update_lock("t/a", lambda e: e.update({"model": "m1", "url": "u1", "attempts": [{"model": "m1", "url": "u1"}]}))
+    for argv, msg in ((["--choose", "t/nope=1"], "no entry"), (["--choose", "t/a=x"], "expects ID=N"),
+                      (["--choose", "t/a"], "expects ID=N"), (["--choose", "t/a=3"], "attempts 1..1")):
+        with pytest.raises(SystemExit) as ex:
+            g.main(argv)
+        assert msg in str(ex.value), argv

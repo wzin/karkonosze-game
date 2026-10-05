@@ -63,7 +63,8 @@ Trasy: `flux` (domyślna) → `fal-ai/flux-pro/v1.1` (`safety_tolerance: "5"`, `
 `attempts` to wszystkie próby po kolei (z `note` = powód re-rolla); pola na wierzchu = wybrana próba: ostatnia,
 albo ta z `chosen` (numer od 1, ustawiany przez `generate.py --choose ID=N`, z uzasadnieniem w `chosen_note`).
 Każda próba zostaje też lokalnie jako `raw/<id>.a<N>.png` (nie w repo), więc wybór wcześniejszej nie wymaga sieci
-(bez kopii `--choose` pobiera obraz z `url` próby).
+(bez kopii `--choose` pobiera obraz z `url` próby). Próba z `repairs` jest odtwarzana z `url` ostatniej naprawy,
+bo `repair.py` nadpisuje `raw/<id>.png` po zrobieniu kopii — surowy obraz zawsze odpowiada temu, co opisuje lock.
 `cutout` opisuje wycięcie (model/metoda, statystyki dziur, `paper_crop`, `sky_drift`, `rim_mode`), `repairs` poprawki z `repair.py`;
 przy nowej próbie `repairs` przechodzą do próby, którą naprawiały.
 

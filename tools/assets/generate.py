@@ -210,10 +210,8 @@ def generate_one(asset: dict, m: dict, note: str | None) -> dict:
     number = []
 
     def apply(entry):
-        attempts = entry.get("attempts", [])
-        if entry.get("repairs") and attempts:   # repairs belong to the attempt they fixed
-            attempts[entry.get("chosen", len(attempts)) - 1]["repairs"] = entry["repairs"]
-        attempts = attempts + [attempt]
+        stash_repairs(entry)
+        attempts = entry.get("attempts", []) + [attempt]
         number.append(len(attempts))
         entry.clear()
         entry.update({k: v for k, v in attempt.items() if k != "note"})
@@ -223,21 +221,43 @@ def generate_one(asset: dict, m: dict, note: str | None) -> dict:
     return {**attempt, "number": number[0]}
 
 
+def stash_repairs(entry: dict) -> None:
+    """Top-level `repairs` (repair.py) belong to the chosen attempt: keep them on that attempt
+    before the top of the entry is replaced by another attempt."""
+    attempts = entry.get("attempts", [])
+    if entry.get("repairs") and attempts:
+        attempts[entry.get("chosen", len(attempts)) - 1]["repairs"] = entry["repairs"]
+
+
 def choose(asset_id: str, n: int, note: str | None = None) -> dict:
-    """Make attempt n (1-based) the chosen one again: restore its raw PNG (the per-attempt copy,
-    else download its URL), copy its fields to the top of the lock entry and drop the stale cutout."""
-    attempts = read_lock()[asset_id]["attempts"]
+    """Make attempt n (1-based) the chosen one again: restore its raw PNG, copy its fields to the
+    top of the lock entry and drop the stale cutout.
+
+    The raw must be the image the lock describes. A repaired attempt is restored from its last
+    repair's url (repair.py rewrites raw/<id>.png after the per-attempt copy was taken, so that
+    copy and the attempt url are the unrepaired image); otherwise from raw/<id>.a<N>.png, or the
+    attempt url when there is no copy.
+    """
+    lock = read_lock()
+    if asset_id not in lock:
+        raise SystemExit(f"--choose: {asset_id!r} has no entry in {LOCK.name}")
+    entry = lock[asset_id]
+    stash_repairs(entry)
+    attempts = entry.get("attempts", [])
     if not 1 <= n <= len(attempts):
-        raise SystemExit(f"{asset_id} has attempts 1..{len(attempts)}, not {n}")
+        raise SystemExit(f"--choose: {asset_id} has attempts 1..{len(attempts)}, not {n}")
     at = attempts[n - 1]
     dest, copy = raw_path(asset_id), raw_path(asset_id, f".a{n}.png")
-    if copy.exists():
+    if at.get("repairs"):
+        download_png(at["repairs"][-1]["url"], dest)
+    elif copy.exists():
         shutil.copyfile(copy, dest)
     else:
         download_png(at["url"], dest)
     raw_path(asset_id, ".cut.png").unlink(missing_ok=True)
 
     def apply(entry):
+        stash_repairs(entry)
         kept = entry["attempts"]
         entry.clear()
         entry.update({k: v for k, v in at.items() if k not in ("note", "repairs")})
@@ -264,7 +284,9 @@ def main(argv=None) -> int:
     m = load_manifest()
     if args.choose:
         for spec in args.choose:
-            aid, _, n = spec.rpartition("=")
+            aid, sep, n = spec.rpartition("=")
+            if not (sep and aid and n.isdigit()):
+                raise SystemExit(f"--choose expects ID=N with N an attempt number from 1, got {spec!r}")
             at = choose(aid, int(n), args.note)
             print(f"chose {aid} attempt {n}: {at['model']} {at.get('returned_size')}")
         return 0
