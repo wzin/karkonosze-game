@@ -46,14 +46,19 @@ export class SceneManager {
   async go(id: string, params: Record<string, string> = {}): Promise<void> {
     const factory = this.factories.get(id);
     if (!factory) throw new Error(`[scenes] unknown scene "${id}"`);
-    if (!this.ctx) throw new Error('[scenes] setContext() must be called before go()');
+    const ctx = this.ctx;
+    if (!ctx) throw new Error('[scenes] setContext() must be called before go()');
     const navigation = ++this.navigation;
     this.leaveCurrent();
+    // Safety net after the old scene's exit(): no loop of it (playing, or waiting for its clip) may
+    // outlive it. It runs before the next scene's init() and enter(), so it never stops their sounds;
+    // one-shots ring out, like the tap on the button that brought us here.
+    ctx.audio.stopAll({ keepOneShots: true });
     this.loader.visible = true;
 
     let scene: Scene | undefined;
     try {
-      scene = await factory(this.ctx);
+      scene = await factory(ctx);
       await scene.init(params);
     } catch (err) {
       scene?.destroy({ children: true });

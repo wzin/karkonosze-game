@@ -10,5 +10,7 @@ interface Window {
      * and, for Buttons and markers, the size of its hit box on screen (CSS px).
      */
     buttons?: Record<string, () => { x: number; y: number; width?: number; height?: number }>;
+    /** Every clip Audio has created, with Howler's view of whether it is playing (core/Audio). */
+    audio?: () => import('./core/Audio').ClipDebug[];
   };
 }
