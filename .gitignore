@@ -7,3 +7,4 @@ tools/assets/.venv
 tools/smoke/test-results
 tools/smoke/playwright-report
 .claude/worktrees/
+.superpowers/
