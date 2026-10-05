@@ -217,6 +217,7 @@ export default class HerbsScene extends Scene {
       audio,
       muteLabel: i18n.t('ui.mute'),
       kiosk,
+      layout: this.ctx.layout,
     });
     this.addChild(pills, this.progress, this.recipePanel, this.overlay, this.bar);
   }
@@ -671,6 +672,7 @@ export default class HerbsScene extends Scene {
       name,
       variant,
       kiosk: this.ctx.kiosk,
+      layout: this.ctx.layout,
       onTap: () => this.ctx.audio.play('ui.tap'),
       onPress,
     });

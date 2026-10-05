@@ -1,7 +1,7 @@
 import { Container, Graphics, Rectangle, Text, type DestroyOptions } from 'pixi.js';
-import { DESIGN } from '../core/Layout';
+import { DESIGN, type ViewLayout } from '../core/Layout';
 import { Stars } from '../ui/Stars';
-import { Theme } from '../ui/Theme';
+import { Theme, effectiveHitMin } from '../ui/Theme';
 import { DEPTH, type Depth, type Parallax } from './Parallax';
 import {
   labelLines,
@@ -56,6 +56,7 @@ const GROUND: Record<string, Depth> = {
 
 /** Dot radius: the marker circle is 22 px across. */
 const DOT_R = 11;
+/** Side of the square hit area round the dot, design px; more on a small screen (effectiveHitMin). */
 const HIT = 96;
 const BADGE_SIZE = 28;
 /** Stars(3, 28) is 2 × 1.2 × 28 + 28 wide. */
@@ -78,6 +79,8 @@ export interface MarkersOpts {
   save: SaveLike;
   /** Areas the labels keep clear of (title, sound button). */
   obstacles: Rect[];
+  /** `ctx.layout`: the dot hit areas never map to under 44 CSS px. */
+  layout: ViewLayout;
   onPick: (place: Place, kind: MarkerKind) => void;
   /** Every pointerdown on a marker; the scene plays `ui.tap` here. */
   onTap?: () => void;
@@ -92,7 +95,9 @@ export class Markers extends Container {
     super();
     for (const place of opts.places) {
       const kind = markerKind(place, opts.games);
-      const marker = new Marker(place, kind, markerBadge(opts.save, opts.games, place.id));
+      const marker = new Marker(place, kind, markerBadge(opts.save, opts.games, place.id), opts.layout, (m, x, y) =>
+        this.ownsDot(m, x, y),
+      );
       marker.on('pointerdown', () => opts.onTap?.());
       marker.on('pointertap', () => opts.onPick(place, kind));
       this.list.push(marker);
@@ -136,6 +141,15 @@ export class Markers extends Container {
     for (const m of this.list) m.unregister();
     super.destroy(options);
   }
+
+  /**
+   * Whether `m` has the nearest dot to (x, y) (this container's space) among the markers whose dot
+   * square holds the point: where the squares of close markers overlap, the nearer dot takes the tap.
+   */
+  private ownsDot(m: Marker, x: number, y: number): boolean {
+    const d = Math.hypot(x - m.x, y - m.y);
+    return this.list.every((o) => o === m || !o.dotHit(x - o.x, y - o.y) || Math.hypot(x - o.x, y - o.y) >= d);
+  }
 }
 
 function rank(kind: MarkerKind): number {
@@ -157,6 +171,9 @@ class Marker extends Container {
     readonly place: Place,
     readonly kind: MarkerKind,
     stars: number,
+    private readonly layout: ViewLayout,
+    /** Markers.ownsDot, in the parent's space. */
+    private readonly ownsDot: (m: Marker, x: number, y: number) => boolean,
   ) {
     super();
     this.factor = DEPTH[GROUND[place.id] ?? 'mid'];
@@ -194,7 +211,24 @@ class Marker extends Container {
     this.on('pointerover', () => (this.hovered = true));
     this.on('pointerout', () => (this.hovered = false));
     this.setLabel(DOT_R + 12, -this.caption.cy, 'right');
-    this.unregister = registerDevTarget(`hub.${place.id}`, () => this.toGlobal({ x: 0, y: 0 }));
+    this.unregister = registerDevTarget(`hub.${place.id}`, () => {
+      const half = this.dotSide() / 2;
+      const c = this.toGlobal({ x: 0, y: 0 });
+      const a = this.toGlobal({ x: -half, y: -half });
+      const z = this.toGlobal({ x: half, y: half });
+      return { x: c.x, y: c.y, width: Math.abs(z.x - a.x), height: Math.abs(z.y - a.y) };
+    });
+  }
+
+  /** Side of the square dot hit area now: HIT, or more on a small screen. */
+  dotSide(): number {
+    return Math.max(HIT, effectiveHitMin(false, this.layout.scale));
+  }
+
+  /** Whether (px, py), in this marker's space, is inside its dot square. */
+  dotHit(px: number, py: number): boolean {
+    const half = this.dotSide() / 2;
+    return px >= -half && px < half && py >= -half && py < half;
   }
 
   /** Puts the label's top-left corner at (x, y) from the dot; the hit area covers dot and label. */
@@ -203,8 +237,11 @@ class Marker extends Container {
     this.caption.align(side);
     const pad = 8;
     const box = new Rectangle(this.caption.x - pad, this.caption.y - pad, this.caption.w + pad * 2, this.caption.h + pad * 2);
-    const dot = new Rectangle(-HIT / 2, -HIT / 2, HIT, HIT);
-    this.hitArea = { contains: (px: number, py: number) => dot.contains(px, py) || box.contains(px, py) };
+    // the dot square is sized on every test (it grows on a phone) and yields to a nearer dot
+    this.hitArea = {
+      contains: (px: number, py: number) =>
+        box.contains(px, py) || (this.dotHit(px, py) && this.ownsDot(this, this.x + px, this.y + py)),
+    };
   }
 
   update(dt: number, t: number): void {
@@ -262,14 +299,20 @@ function captionStyle(fontSize: number, fontWeight: '700' | '800', fill: number)
   };
 }
 
-/** Dev only: smoke tests find a marker's centre (CSS px) as `window.__bk.buttons['hub.<placeId>']`. */
-function registerDevTarget(name: string, center: () => { x: number; y: number }): () => void {
+/**
+ * Dev only: smoke tests find a marker's centre and dot hit-box size (CSS px) as
+ * `window.__bk.buttons['hub.<placeId>']`.
+ */
+function registerDevTarget(
+  name: string,
+  target: () => { x: number; y: number; width: number; height: number },
+): () => void {
   if (!import.meta.env.DEV) return () => {};
   const bk = (window.__bk ??= { sceneId: null });
   const buttons = (bk.buttons ??= {});
   const locate = () => {
-    const p = center();
-    return { x: p.x, y: p.y };
+    const t = target();
+    return { x: t.x, y: t.y, width: t.width, height: t.height };
   };
   buttons[name] = locate;
   return () => {

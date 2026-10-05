@@ -1,6 +1,14 @@
 /** Design space: every scene is laid out in these coordinates and scaled to fit the viewport. */
 export const DESIGN = { w: 1920, h: 1080 } as const;
 
+/**
+ * The live fit of the design space on screen: `scale` CSS px per design px. main.ts owns the one
+ * instance (`SceneContext.layout`) and updates it in place on every resize, so readers stay current.
+ */
+export interface ViewLayout {
+  readonly scale: number;
+}
+
 export interface Fit {
   scale: number;
   x: number;

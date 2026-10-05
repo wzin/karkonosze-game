@@ -82,6 +82,7 @@ export class ResultStep extends Step {
 
     const button = new Button(t(this.last ? 'glass.finish' : 'glass.next'), {
       kiosk: ctx.kiosk,
+      layout: ctx.layout,
       name: 'glass.next',
       onTap: () => ctx.audio.play('ui.tap'),
       onPress: () => {

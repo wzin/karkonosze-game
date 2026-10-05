@@ -57,7 +57,7 @@ export class BlowStep extends Step {
     this.ring.alpha = 0;
     this.drawRing('idle');
 
-    this.button = new HoldButton(t('glass.blow.btn'), { kiosk: ctx.kiosk, name: 'glass.blow.btn', width: 560 });
+    this.button = new HoldButton(t('glass.blow.btn'), { kiosk: ctx.kiosk, layout: ctx.layout, name: 'glass.blow.btn', width: 560 });
     this.button.position.set(960 - this.button.box.w / 2, 908);
     this.button.onHoldStart = () => this.holdStart();
     this.button.onHoldEnd = () => this.holdEnd();

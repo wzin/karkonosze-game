@@ -41,6 +41,9 @@ Adres czytany jest raz, przy starcie (brak obsługi `hashchange`).
 - `?kiosk=1` włącza tryb kiosku i łączy się z hashem (`/?kiosk=1#kowary`): cele dotykowe co najmniej 96 px (poza
   kioskiem 64 px), po 60 s bez dotyku w grze powrót do panoramy (zapis zostaje, w panoramie licznik nie działa),
   brak linków zewnętrznych. Strona nigdy się nie przewija, także poza kioskiem.
+- Te minima są w pikselach projektu (1920 x 1080). Na małym ekranie scena jest pomniejszona (telefon 844 x 390: skala
+  ok. 0,36), więc pola dotyku przycisków, paska górnego, markerów i słoików/form rosną tak, żeby na ekranie nigdy nie
+  miały mniej niż 44 px CSS (`effectiveHitMin` w `src/ui/Theme.ts`, skala w `ctx.layout`, aktualna po obrocie).
 
 Postęp (najlepsze gwiazdki, data, flaga terenowa) leży w `localStorage` pod `bk.save.v1`, wyciszenie pod
 `bk.muted`. W kiosku wyciszenie nie trafia do storage'u: trwa tylko w pamięci i znika, gdy licznik bezczynności

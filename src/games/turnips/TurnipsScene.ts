@@ -106,6 +106,7 @@ export default class TurnipsScene extends Scene {
       audio,
       muteLabel: i18n.t('ui.mute'),
       kiosk,
+      layout: this.ctx.layout,
     });
     this.progress = new RoundProgress(ROUNDS, 520);
     this.progress.position.set((DESIGN.w - 520) / 2, TopBar.HEIGHT + 18);
@@ -154,6 +155,7 @@ export default class TurnipsScene extends Scene {
     const start = new Button(this.t('intro.start'), {
       name: 'turnips.start',
       kiosk: this.ctx.kiosk,
+      layout: this.ctx.layout,
       width: 360,
       onTap: () => this.ctx.audio.play('ui.tap'),
       onPress: () => {
@@ -261,6 +263,7 @@ export default class TurnipsScene extends Scene {
     const again = new Button(this.t('again'), {
       name: 'turnips.again',
       kiosk,
+      layout: this.ctx.layout,
       onTap: () => audio.play('ui.tap'),
       onPress: () => this.ctx.go('game:turnips', this.params),
     });
@@ -268,6 +271,7 @@ export default class TurnipsScene extends Scene {
       name: 'turnips.back',
       variant: 'quiet',
       kiosk,
+      layout: this.ctx.layout,
       onTap: () => audio.play('ui.tap'),
       onPress: () => this.ctx.go('hub'),
     });
@@ -372,6 +376,7 @@ export default class TurnipsScene extends Scene {
       const tile = new AnswerTile(value, {
         name: `turnips.answer.${i}`,
         kiosk,
+        layout: this.ctx.layout,
         onTap: () => audio.play('ui.tap'),
       });
       tile.position.set(x0 + i * (TILE.w + TILE_GAP), tilesY);
@@ -429,6 +434,7 @@ export default class TurnipsScene extends Scene {
     const next = new Button(i18n.t('ui.next'), {
       name: 'turnips.next',
       kiosk,
+      layout: this.ctx.layout,
       onTap: () => audio.play('ui.tap'),
       onPress: () => {
         next.enabled = false;

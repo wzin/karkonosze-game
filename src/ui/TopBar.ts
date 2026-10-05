@@ -1,6 +1,6 @@
 import { Container, Graphics, Text } from 'pixi.js';
 import type { Audio } from '../core/Audio';
-import { DESIGN } from '../core/Layout';
+import { DESIGN, type ViewLayout } from '../core/Layout';
 import { Button } from './Button';
 import { Theme } from './Theme';
 
@@ -12,6 +12,8 @@ export interface TopBarOpts {
   audio: Audio;
   muteLabel: string;
   kiosk: boolean;
+  /** `ctx.layout`: keeps the back and sound buttons at least 44 CSS px to the touch on a phone. */
+  layout: ViewLayout;
 }
 
 const BUTTON_H = 72;
@@ -30,7 +32,7 @@ export class TopBar extends Container {
 
   constructor(opts: TopBarOpts) {
     super();
-    const { audio, kiosk } = opts;
+    const { audio, kiosk, layout } = opts;
     const tap = () => audio.play('ui.tap');
 
     const bg = new Graphics()
@@ -44,6 +46,7 @@ export class TopBar extends Container {
       height: BUTTON_H,
       icon: chevron(),
       kiosk,
+      layout,
       onTap: tap,
       onPress: opts.onBack,
       name: 'topbar.back',
@@ -56,6 +59,7 @@ export class TopBar extends Container {
       height: BUTTON_H,
       icon: this.speaker,
       kiosk,
+      layout,
       onTap: tap,
       onPress: () => {
         audio.setMuted(!audio.muted);

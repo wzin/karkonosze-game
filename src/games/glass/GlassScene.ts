@@ -171,6 +171,7 @@ export default class GlassScene extends Scene {
       audio,
       muteLabel: t('ui.mute'),
       kiosk,
+      layout: this.ctx.layout,
     });
     this.progress = new RoundProgress(ORDERS, 520);
     this.progress.position.set((DESIGN.w - 520) / 2, TopBar.HEIGHT + 12);

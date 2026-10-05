@@ -2,14 +2,14 @@ import {
   Container,
   Graphics,
   Point,
-  Rectangle,
   Sprite,
   Text,
   Texture,
   type DestroyOptions,
   type FederatedPointerEvent,
 } from 'pixi.js';
-import { Theme, hitBox } from './Theme';
+import type { ViewLayout } from '../core/Layout';
+import { LiveHitBox, Theme, type HitBox } from './Theme';
 
 export interface ButtonOpts {
   width?: number;
@@ -18,6 +18,8 @@ export interface ButtonOpts {
   /** A texture (fitted to the button) or a view drawn around its own (0, 0), e.g. a Graphics icon. */
   icon?: Texture | Container;
   kiosk?: boolean;
+  /** The live fit scale (`ctx.layout`): the hit area then never maps to under 44 CSS px on screen. */
+  layout?: ViewLayout;
   onPress?: () => void;
   /** Runs on every pointerdown, before the release; scenes play the `ui.tap` moment here. */
   onTap?: () => void;
@@ -40,7 +42,8 @@ const VARIANTS = {
 /**
  * Rounded pill with a label and an optional icon, laid out from its top-left corner. pointerdown
  * presses it (scale 0.96, `onTap`), release over it fires `onPress`, release elsewhere only resets.
- * The hit area grows to `Theme.size.hitMin(kiosk)` around small buttons.
+ * The hit area grows around small buttons to `effectiveHitMin(kiosk, layout.scale)`: 96 / 64 design
+ * px, or more on a small screen, so it is never under 44 CSS px; it follows a resize by itself.
  */
 export class Button extends Container {
   onPress?: () => void;
@@ -51,6 +54,7 @@ export class Button extends Container {
   private readonly icon: Container | null;
   private readonly variant: Variant;
   private readonly unregister: () => void;
+  private readonly hit: LiveHitBox;
   private w = 0;
   private readonly h: number;
   private isEnabled = true;
@@ -88,11 +92,11 @@ export class Button extends Container {
     this.on('pointerup', (e) => this.pressEnd(e, true));
     this.on('pointerupoutside', (e) => this.pressEnd(e, false));
     this.on('pointercancel', (e) => this.pressEnd(e, false));
+    this.hit = new LiveHitBox(() => ({ w: this.w, h: this.h }), opts.kiosk ?? false, opts.layout);
+    this.hitArea = this.hit;
 
     this.layout();
-    this.unregister = opts.name
-      ? registerDevButton(opts.name, () => this.toGlobal(new Point(this.w / 2, this.h / 2)))
-      : () => {};
+    this.unregister = opts.name ? registerDevButton(opts.name, () => this.screenTarget()) : () => {};
   }
 
   setLabel(s: string): void {
@@ -116,6 +120,11 @@ export class Button extends Container {
   /** Layout size (without the hit-area margin or the primary lip). */
   get box(): { w: number; h: number } {
     return { w: this.w, h: this.h };
+  }
+
+  /** The hit area as it stands now (it grows when the screen shrinks), in the button's own space. */
+  get hitRect(): HitBox {
+    return this.hit.box;
   }
 
   override destroy(options?: DestroyOptions): void {
@@ -173,8 +182,15 @@ export class Button extends Container {
 
     this.face.position.set(this.w / 2, h / 2);
     this.drawBackground();
-    const hit = hitBox(this.w, h, this.opts.kiosk ?? false);
-    this.hitArea = new Rectangle(hit.x, hit.y, hit.width, hit.height);
+  }
+
+  /** Centre and hit-box size on screen (CSS px), for the dev registry. */
+  private screenTarget(): DevTarget {
+    const b = this.hit.box;
+    const c = this.toGlobal(new Point(this.w / 2, this.h / 2));
+    const a = this.toGlobal(new Point(b.x, b.y));
+    const z = this.toGlobal(new Point(b.x + b.width, b.y + b.height));
+    return { x: c.x, y: c.y, width: Math.abs(z.x - a.x), height: Math.abs(z.y - a.y) };
   }
 
   private drawBackground(): void {
@@ -197,14 +213,24 @@ function fitIcon(tex: Texture, size: number): Sprite {
   return sprite;
 }
 
-/** Dev only: lets the smoke tests find a button's centre on screen (CSS px). Returns the unregister. */
-function registerDevButton(name: string, center: () => { x: number; y: number }): () => void {
+interface DevTarget {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+/**
+ * Dev only: lets the smoke tests find a button's centre and hit-box size on screen (CSS px).
+ * Returns the unregister.
+ */
+function registerDevButton(name: string, target: () => DevTarget): () => void {
   if (!import.meta.env.DEV) return () => {};
   const bk = (window.__bk ??= { sceneId: null });
   const buttons = (bk.buttons ??= {});
   const locate = () => {
-    const p = center();
-    return { x: p.x, y: p.y };
+    const t = target();
+    return { x: t.x, y: t.y, width: t.width, height: t.height };
   };
   buttons[name] = locate;
   return () => {

@@ -59,6 +59,7 @@ export class Intro extends Container {
 
     const start = new Button(t('glass.intro.start'), {
       kiosk: ctx.kiosk,
+      layout: ctx.layout,
       name: 'glass.start',
       width: 420,
       onTap: () => ctx.audio.play('ui.tap'),
@@ -130,6 +131,7 @@ export class Summary extends Container {
 
     const again = new Button(t('glass.again'), {
       kiosk: ctx.kiosk,
+      layout: ctx.layout,
       name: 'glass.again',
       onTap: () => ctx.audio.play('ui.tap'),
       onPress: () => {
@@ -139,6 +141,7 @@ export class Summary extends Container {
     });
     const back = new Button(t('ui.back'), {
       kiosk: ctx.kiosk,
+      layout: ctx.layout,
       variant: 'quiet',
       name: 'glass.back',
       onTap: () => ctx.audio.play('ui.tap'),

@@ -1,5 +1,5 @@
 import { Container, Graphics, Rectangle, Text, TextStyle } from 'pixi.js';
-import { DESIGN } from '../core/Layout';
+import { DESIGN, type ViewLayout } from '../core/Layout';
 import { Button } from '../ui/Button';
 import { Theme } from '../ui/Theme';
 import type { Place } from './Markers';
@@ -9,6 +9,8 @@ export interface ConceptCardOpts {
   /** The "coming soon" chip (`ui.soon`). */
   soon: string;
   kiosk: boolean;
+  /** `ctx.layout`, for the close button's hit area. */
+  layout: ViewLayout;
   onClose: () => void;
   /** Every pointerdown on the close button; the scene plays `ui.tap` here. */
   onTap?: () => void;
@@ -81,6 +83,7 @@ export class ConceptCard extends Container {
       height: CLOSE,
       icon: cross(),
       kiosk: opts.kiosk,
+      layout: opts.layout,
       onTap: opts.onTap,
       onPress: opts.onClose,
       name: 'hub.card.close',
