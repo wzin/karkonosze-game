@@ -1,8 +1,11 @@
 import type { Container } from 'pixi.js';
 import { DESIGN } from '../core/Layout';
 
-/** Largest shift (design px) of a layer with factor 1, and how fast the shift follows the pointer (1/s). */
-export const PARALLAX = { amplitude: 40, rate: 3 } as const;
+/**
+ * Largest shift (design px) of a layer with factor 1, and how fast the shift follows the pointer (1/s):
+ * small and unhurried, so the panorama drifts rather than swings.
+ */
+export const PARALLAX = { amplitude: 30, rate: 2.5 } as const;
 
 /** Parallax factors of the panorama layers; the sky stays put. */
 export const DEPTH = { far: 0.15, mid: 0.3, valley: 0.5 } as const;

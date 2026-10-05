@@ -1,5 +1,7 @@
-import { Container, Graphics, Point, Rectangle, Sprite, Text, type Texture } from 'pixi.js';
+import { Container, Graphics, Point, Rectangle, Sprite, Text, type DestroyOptions, type Texture } from 'pixi.js';
 import { sprite } from '../../core/Assets';
+import { FogFilter } from '../../core/fx/FogFilter';
+import { MistBand, bob as mistBob } from '../../core/fx/Mist';
 import { DESIGN } from '../../core/Layout';
 import { mulberry32, shuffle } from '../../core/Rng';
 import { Scene } from '../../core/Scene';
@@ -32,24 +34,39 @@ type Phase = 'intro' | 'walk' | 'gathered' | 'grind' | 'pour' | 'result' | 'summ
 
 const ROUNDS = 3;
 const GATHER_SECONDS = 40;
-/** Parallax speeds in px/s while walking. */
+/** Parallax speeds in px/s while walking; the mist between the far view and the forest is slower still. */
 const MID_SPEED = 60;
 const NEAR_SPEED = 140;
+const MIST_SPEED = 26;
+/** The mist also drifts on its own, walking or not. */
+const MIST_DRIFT = 5;
 /** The mid band's lower edge hides behind the opaque stony path of the near band. */
 const MID_BOTTOM = 960;
-/**
- * The near band is enlarged so its grass reaches up to the farthest lane (y 700) and its stony path
- * runs under the Laborant's feet; at scale 1 the top lane would float in front of the forest.
- */
+/** The near band is enlarged so its stony path runs under the Laborant's feet. */
 const NEAR_SCALE = 1.35;
+/**
+ * Ground line of the near band (design y), measured on herbs/strip_near (2048×448, bottom-aligned at
+ * NEAR_SCALE): its meadow is over 90 % opaque from texture row 256 and solid from row 271 across the
+ * whole width; the line is taken at row 262, so 1080 − (448 − 262) × 1.35 ≈ 830. Higher up the band is
+ * grass blades with the forest showing through, which is where plants used to hover. Remeasure when
+ * the art changes.
+ */
+export const GROUND_Y = 830;
+/**
+ * The three lanes are three depths of the meadow along the ground line, not three heights in the air:
+ * the far lane stands just above it, smaller and paled by the mist; the near one lower and larger.
+ * Plants stand on the bottom edge of their art (anchor 0.5, 1) and lanes are drawn far to near.
+ */
+const LANES = [
+  { y: GROUND_Y - 20, scale: 0.85, tint: 0xc8d2d6 },
+  { y: GROUND_Y + 20, scale: 1, tint: 0xe6ebec },
+  { y: GROUND_Y + 60, scale: 1.15, tint: 0xffffff },
+] as const;
 /** Plants ride in from the right, past the Laborant, and leave on the left in PLANT_TRAVEL s. */
 const PLANT_FROM = 2000;
 const PLANT_TO = -200;
 const PLANT_TRAVEL = 14;
 const PLANT_SPEED = (PLANT_FROM - PLANT_TO) / PLANT_TRAVEL;
-const LANE_Y = [700, 800, 900] as const;
-/** Farther lanes are drawn a little smaller. */
-const LANE_SCALE = [0.86, 0.95, 1.05] as const;
 const PLANT_BOX = { w: 210, h: 230 };
 const PLANT_HIT = { w: 160, h: 200 };
 const LABORANT = { x: 420, y: 760, h: 420, frame: 0.3, bob: 6, hop: 46 };
@@ -59,6 +76,12 @@ const FLASH_SECONDS = 0.2;
 /** Order of the "did you know" facts: the dziewięćsił one goes with the bruise recipe. */
 const FACT_QUEUE = [0, 1, 3];
 const FACT_BY_RECIPE: Partial<Record<Recipe['id'], number>> = { stluczenia: 2 };
+/**
+ * Morning mist: one band drifting between the far view and the forest (the hub's mist art when it is
+ * loaded, else a soft stand-in), and fog settling on the forest's lower half.
+ */
+const MIST = { alias: 'hub/mist_1', y: 600, height: 300, alpha: 0.27, tint: 0xe9f0f2, bob: 6, period: 17 };
+const MID_FOG = { density: 0.2, bottom: 0.45, color: [0.86, 0.9, 0.92] as [number, number, number] };
 
 interface LivePlant {
   id: PlantId;
@@ -96,6 +119,8 @@ export default class HerbsScene extends Scene {
   // world
   private mid!: MirrorBand;
   private near!: MirrorBand;
+  private mist!: MistBand;
+  private readonly fog = new FogFilter();
   private readonly lanes = [new Container(), new Container(), new Container()];
   private readonly fly = new Container();
   private laborant!: Sprite;
@@ -150,6 +175,9 @@ export default class HerbsScene extends Scene {
   update(dt: number): void {
     this.t += dt;
     this.tweens.update(dt);
+    this.mist.scroll(MIST_DRIFT * dt);
+    this.mist.y = MIST.y + mistBob(this.t, MIST.bob, MIST.period);
+    this.fog.time = this.t;
     if (this.walking) this.walk(dt);
     this.laborant.y = LABORANT.y + this.bob() - this.hop;
     this.mortar?.update(dt);
@@ -164,6 +192,11 @@ export default class HerbsScene extends Scene {
     if (import.meta.env.DEV && window.__bk) delete (window.__bk as BkHerbs).herbs;
   }
 
+  override destroy(options?: DestroyOptions): void {
+    super.destroy(options);
+    this.fog.destroy();
+  }
+
   // ---------------------------------------------------------------- building
 
   private buildWorld(): void {
@@ -171,8 +204,22 @@ export default class HerbsScene extends Scene {
     const far = sprite(assets, 'herbs/bg_far', { w: DESIGN.w, h: DESIGN.h, tint: 0x9cc3b0 });
     this.mid = new MirrorBand(assets, 'herbs/strip_mid', { w: 2048, h: 640, tint: 0x7f9f86 });
     this.mid.y = MID_BOTTOM - this.mid.bandHeight;
+    // the fog stays put while the band scrolls inside it; its area is the band's on-screen part
+    this.fog.density = MID_FOG.density;
+    this.fog.bottom = MID_FOG.bottom;
+    this.fog.color = MID_FOG.color;
+    this.mid.filters = [this.fog];
+    this.mid.filterArea = new Rectangle(0, 0, DESIGN.w, this.mid.bandHeight);
     this.near = new MirrorBand(assets, 'herbs/strip_near', { w: 2048, h: 448, tint: 0xb9b48a }, NEAR_SCALE);
     this.near.y = DESIGN.h - this.near.bandHeight;
+    this.mist = new MistBand(assets, {
+      alias: MIST.alias,
+      height: MIST.height,
+      minWidth: DESIGN.w,
+      alpha: MIST.alpha,
+      tint: MIST.tint,
+    });
+    this.mist.y = MIST.y;
 
     this.frames = [assets.texture('herbs/laborant_1'), assets.texture('herbs/laborant_2')];
     this.laborant = fit(sprite(assets, 'herbs/laborant_1', { w: 240, h: LABORANT.h, tint: 0x8a7a66 }), 1000, LABORANT.h);
@@ -196,7 +243,7 @@ export default class HerbsScene extends Scene {
     this.flash.alpha = 0;
     this.flash.eventMode = 'none';
 
-    this.addChild(far, this.mid, this.near, ...this.lanes, shadow, this.basket, this.laborant, this.fly, this.flash);
+    this.addChild(far, this.mist, this.mid, this.near, ...this.lanes, shadow, this.basket, this.laborant, this.fly, this.flash);
   }
 
   private buildHud(): void {
@@ -279,15 +326,22 @@ export default class HerbsScene extends Scene {
 
   private spawn(s: Spawn): void {
     const view = new Container();
-    view.position.set(PLANT_FROM, LANE_Y[s.lane]);
-    const k = LANE_SCALE[s.lane];
+    const lane = LANES[s.lane];
+    view.position.set(PLANT_FROM, lane.y);
+    const k = lane.scale;
     const art = fit(
       sprite(this.ctx.assets, `herbs/plant_${s.plant}`, { w: 200, h: 240, tint: 0x6d9a52 }),
       PLANT_BOX.w * k,
       PLANT_BOX.h * k,
     );
-    art.anchor.set(0.5, 0.985);
-    const shadow = new Graphics().ellipse(0, -2, art.width * 0.42, 12 * k).fill({ color: Theme.color.night, alpha: 0.2 });
+    // the plant stands on the bottom edge of its art; the soft shadow seats it in the meadow
+    art.anchor.set(0.5, 1);
+    art.tint = lane.tint;
+    const shadow = new Graphics()
+      .ellipse(0, -3, art.width * 0.5, 15 * k)
+      .fill({ color: Theme.color.night, alpha: 0.12 })
+      .ellipse(0, -3, art.width * 0.3, 8 * k)
+      .fill({ color: Theme.color.night, alpha: 0.2 });
     view.addChild(shadow, art);
     view.eventMode = 'static';
     view.cursor = 'pointer';
@@ -334,7 +388,7 @@ export default class HerbsScene extends Scene {
     const view = plant.view;
     view.eventMode = 'none';
     this.fly.addChild(view);
-    const from = { x: view.x, y: view.y - plant.art.height * 0.4 };
+    const from = { x: view.x, y: view.y - plant.art.height * 0.5 };
     view.position.set(from.x, from.y);
     plant.art.anchor.set(0.5, 0.5);
     plant.shadow.visible = false;
@@ -451,6 +505,7 @@ export default class HerbsScene extends Scene {
 
   private walk(dt: number): void {
     this.walkT += dt;
+    this.mist.scroll(MIST_SPEED * dt);
     this.mid.scroll(MID_SPEED * dt);
     this.near.scroll(NEAR_SPEED * dt);
     this.laborant.texture = this.frames[Math.floor(this.walkT / LABORANT.frame) % 2];

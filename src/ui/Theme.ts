@@ -18,6 +18,8 @@ export const Theme = {
     night: 0x141a26,
     star: 0xffcf66,
     bad: 0xc2304a,
+    /** Cool grey-blue of morning mist: the colder UI accents of the misty scenes (herbs). */
+    mist: 0xbfd0d6,
   },
   size: { button: { h: 96, minW: 240, radius: 28 }, hitMin: (kiosk: boolean) => (kiosk ? 96 : 64) },
   text: {
