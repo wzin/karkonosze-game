@@ -55,7 +55,8 @@ dalej z pamięci.
 - `src/main.ts`: start (Pixi, fonty, manifesty assetów, router, menedżer scen, licznik bezczynności kiosku)
 - `src/core/`: `Scene`/`SceneManager`, `Layout` (przestrzeń 1920×1080, skalowanie „fit”), `Router`, `Save`, `I18n`,
   `Audio` + `moments.ts` (nazwy momentów → klipy), `Assets` (manifest → tekstury, placeholdery), `Kiosk`, `Rng`
-- `src/core/fx/`: filtry GLSL: `HeatHazeFilter`, `FogFilter`, `LampLightFilter`, `WeatherFilter`
+- `src/core/fx/`: filtry GLSL: `HeatHazeFilter`, `FogFilter`, `LampLightFilter`, `WeatherFilter`, `AerialFilter`
+  (oddala główny grzbiet w hubie: zmiękczona krawędź bez jasnej obwódki i zmierzchowa mgiełka) oraz pasma mgły `Mist`
 - `src/ui/`: wspólne elementy: przyciski (`Button`, `HoldButton`), `TopBar`, `SpeechBubble`, `FactCard`, `Stars`,
   `RoundProgress`, `Portrait`, `Loader`, `Theme`
 - `src/hub/`: panorama: `PanoramaScene`, `Markers`, `Parallax`, `ConceptCard`

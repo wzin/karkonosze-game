@@ -30,24 +30,24 @@ export interface Place {
 
 /**
  * The layer under each marker's x, y in content/pl.json, so the marker moves with its own ground:
- * the main ridge (Śnieżka and its slopes, the Jakuszyce shoulder), the foothills (Grodna, Chojnik,
- * the forests at both ends) or the valley floor. Recheck it when the coordinates move. Places not
- * listed stand on the foothills.
+ * the main ridge (Śnieżka, its slopes and the Kowary side, the Jakuszyce shoulder), the foothills
+ * (Grodna, Chojnik, the ridge foot at Szklarska, the forests at both ends) or the valley floor.
+ * Recheck it when the coordinates move. Places not listed stand on the foothills.
  */
 const GROUND: Record<string, Depth> = {
   sniezka: 'far',
   lomniczka: 'far',
   wang: 'far',
   karpacz: 'far',
+  kowary: 'far',
   jakuszyce: 'far',
   walonowie: 'mid',
   staniszow: 'mid',
   chojnik: 'mid',
   szklarska: 'mid',
-  kowary: 'mid',
   jeziorka: 'mid',
-  myslakowice: 'mid',
   kamienna: 'valley',
+  myslakowice: 'valley',
   palace: 'valley',
   jelenia: 'valley',
   cieplice: 'valley',

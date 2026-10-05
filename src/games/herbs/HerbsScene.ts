@@ -45,22 +45,23 @@ const MID_BOTTOM = 960;
 /** The near band is enlarged so its stony path runs under the Laborant's feet. */
 const NEAR_SCALE = 1.35;
 /**
- * Ground line of the near band (design y), measured on herbs/strip_near (2048×448, bottom-aligned at
- * NEAR_SCALE): its meadow is over 90 % opaque from texture row 256 and solid from row 271 across the
- * whole width; the line is taken at row 262, so 1080 − (448 − 262) × 1.35 ≈ 830. Higher up the band is
- * grass blades with the forest showing through, which is where plants used to hover. Remeasure when
- * the art changes.
+ * Ground line of the near band (design y), measured on herbs/strip_near (2048×388, bottom-aligned at
+ * NEAR_SCALE, so its top is at 1080 − 388 × 1.35 ≈ 556): the meadow's grass meets the beaten path
+ * along a dark edge at texture rows 219–224 across the width, and the pale path runs from row 224 to
+ * ≈ 300 (soil below). The line is taken at row 224: 556 + 224 × 1.35 ≈ 858. Above it are grass, moss
+ * and stones with mist between them, where plants would hover. Remeasure when the art changes.
  */
-export const GROUND_Y = 830;
+export const GROUND_Y = 858;
 /**
- * The three lanes are three depths of the meadow along the ground line, not three heights in the air:
- * the far lane stands just above it, smaller and paled by the mist; the near one lower and larger.
- * Plants stand on the bottom edge of their art (anchor 0.5, 1) and lanes are drawn far to near.
+ * The three lanes are three depths of the ground, not three heights in the air: the far lane stands
+ * on the meadow's edge, smaller and paled by the mist; the middle and near ones on the path, lower
+ * and larger, still behind the Laborant (his feet are at y ≈ 966). Plants stand on the bottom edge of
+ * their art (anchor 0.5, 1) and lanes are drawn far to near.
  */
 const LANES = [
-  { y: GROUND_Y - 20, scale: 0.85, tint: 0xc8d2d6 },
-  { y: GROUND_Y + 20, scale: 1, tint: 0xe6ebec },
-  { y: GROUND_Y + 60, scale: 1.15, tint: 0xffffff },
+  { y: GROUND_Y + 2, scale: 0.85, tint: 0xc8d2d6 },
+  { y: GROUND_Y + 34, scale: 1, tint: 0xe6ebec },
+  { y: GROUND_Y + 66, scale: 1.15, tint: 0xffffff },
 ] as const;
 /** Plants ride in from the right, past the Laborant, and leave on the left in PLANT_TRAVEL s. */
 const PLANT_FROM = 2000;
@@ -69,6 +70,10 @@ const PLANT_TRAVEL = 14;
 const PLANT_SPEED = (PLANT_FROM - PLANT_TO) / PLANT_TRAVEL;
 const PLANT_BOX = { w: 210, h: 230 };
 const PLANT_HIT = { w: 160, h: 200 };
+/**
+ * The walk frames are fitted to `h` whatever their pixel size: the 517×984 period frames (figure in
+ * rows 9–974) stand 412 px tall with the feet at y ≈ 966, as the earlier 524×915 ones did.
+ */
 const LABORANT = { x: 420, y: 760, h: 420, frame: 0.3, bob: 6, hop: 46 };
 const BASKET = { x: 215, bottom: 1010, w: 190 };
 const FLY_SECONDS = 0.4;
@@ -210,7 +215,7 @@ export default class HerbsScene extends Scene {
     this.fog.color = MID_FOG.color;
     this.mid.filters = [this.fog];
     this.mid.filterArea = new Rectangle(0, 0, DESIGN.w, this.mid.bandHeight);
-    this.near = new MirrorBand(assets, 'herbs/strip_near', { w: 2048, h: 448, tint: 0xb9b48a }, NEAR_SCALE);
+    this.near = new MirrorBand(assets, 'herbs/strip_near', { w: 2048, h: 388, tint: 0xb9b48a }, NEAR_SCALE);
     this.near.y = DESIGN.h - this.near.bandHeight;
     this.mist = new MistBand(assets, {
       alias: MIST.alias,
