@@ -4,15 +4,21 @@
     .venv/bin/python pack.py --check    # checks only (works without raw/, e.g. in CI)
 
 Per asset (target = `out` or `size` from manifest.yaml):
-  scene  -> raw/<id>.png, cover-fit to the target, WebP q84, no alpha
+  scene  -> raw/<id>.png, light paper margin cropped (see paper_margin), cover-fit to the target,
+            WebP q84, no alpha
   object -> raw/<id>.cut.png, trim to the alpha bbox at raw resolution, fit into the target box
             (never upscaling the raw), 8 px transparent margin, WebP q88
-  band   -> raw/<id>.cut.png, fit to the target width, trim the keyed sky, crop the bottom
-            if still taller than the target (nearer layers cover it), WebP q88
+  band   -> raw/<id>.cut.png, keyed-out paper margins at the sides and bottom cropped (see
+            band_margin), fit to the target width, trim the keyed sky, crop the bottom if still
+            taller than the target (nearer layers cover it), WebP q88
+  wisp   -> packed like an object (raw/<id>.cut.png from the luma key)
 Frames that share a `ref` (route: edit) share one union bbox and scale, so they stay aligned.
+`fade_x: true` (or a fraction of the width, default 0.25) multiplies the packed alpha by a
+smoothstep ramp at the left and right ends, so a mist wisp has no visible ends.
 """
 import argparse, json, pathlib, sys
 
+import numpy as np
 from PIL import Image, ImageOps
 
 from generate import HERE, kind, load_manifest, raw_path, target_size
@@ -21,6 +27,11 @@ ROOT = HERE.parent.parent
 OUT = ROOT / "public" / "assets" / "gfx"
 MANIFEST_JSON = OUT / "manifest.json"
 MARGIN, ALPHA_MIN = 8, 3
+FADE_X = 0.25              # fade_x: true -> each end fades over this share of the width
+# nano-banana-pro sometimes paints the picture on a sheet of paper with a light margin around it
+PAPER_TOL, PAPER_MAX, PAPER_INSET, PAPER_MIN_LUMA = 20.0, 0.08, 6, 170.0
+BAND_MARGIN_MAX, BAND_SOLID, BAND_INSET_MAX = 0.06, 0.97, 0.01
+LUMA = np.array([0.299, 0.587, 0.114], np.float32)
 BUDGET_BYTES, MAX_SIDE = 40 * 1024 * 1024, 4096
 
 
@@ -44,17 +55,105 @@ def source(asset: dict):
     return raw_path(asset["id"], ".png" if mode(asset) == "scene" else ".cut.png")
 
 
+def paper_margin(rgb: np.ndarray):
+    """(left, top, right, bottom) px of a flat light paper margin around a painting, or None.
+
+    A line counts as paper when >= 90 % of its pixels are within PAPER_TOL of the corner
+    colour. Only a light colour on all four sides is a margin (a flat dark sky along the
+    top alone is not); PAPER_INSET more px go with it, to drop the ragged painted edge.
+    """
+    h, w = rgb.shape[:2]
+    c = rgb.astype(np.float32)
+    k = 8
+    corners = np.concatenate([c[:k, :k].reshape(-1, 3), c[:k, -k:].reshape(-1, 3),
+                              c[-k:, :k].reshape(-1, 3), c[-k:, -k:].reshape(-1, 3)])
+    paper = np.median(corners, axis=0)
+    if float(paper @ LUMA) < PAPER_MIN_LUMA:
+        return None
+    near = np.linalg.norm(c - paper, axis=2) < PAPER_TOL
+
+    def run(lines):
+        n = 0
+        for line in lines:
+            if line.mean() < 0.9:
+                break
+            n += 1
+        return n
+    lx, ly = int(w * PAPER_MAX), int(h * PAPER_MAX)
+    m = (run(near[:, x] for x in range(lx)), run(near[y] for y in range(ly)),
+         run(near[:, w - 1 - x] for x in range(lx)), run(near[h - 1 - y] for y in range(ly)))
+    if min(m) < 3:
+        return None
+    return tuple(v + PAPER_INSET for v in m)
+
+
 def pack_scene(asset: dict) -> Image.Image:
-    return ImageOps.fit(Image.open(source(asset)).convert("RGB"), target_size(asset), Image.LANCZOS)
+    im = Image.open(source(asset)).convert("RGB")
+    m = paper_margin(np.asarray(im))
+    if m:
+        im = im.crop((m[0], m[1], im.width - m[2], im.height - m[3]))
+    return ImageOps.fit(im, target_size(asset), Image.LANCZOS)
+
+
+def band_margin(alpha: np.ndarray) -> tuple[int, int, int]:
+    """(x0, x1, y1) of the solid land in a keyed band whose land does not reach the sides or
+    the bottom (painted as a picture on paper: the margin was keyed out with the sky).
+
+    Coverage is measured over the land's lower rows (rows more than half opaque, lower two
+    thirds of them). Leading columns / trailing rows under 50 % opaque are the margin; up to
+    BAND_INSET_MAX more go with them until the land is BAND_SOLID opaque (the ragged edge).
+    A band that touches its edges, or a "margin" wider than BAND_MARGIN_MAX, is left alone.
+    """
+    h, w = alpha.shape
+    op = alpha >= 250
+    rows = np.flatnonzero(op.mean(axis=1) > 0.5)
+    if len(rows) < 3:
+        return 0, w, h
+
+    def cut(cov: np.ndarray, limit: int, inset: int) -> int:
+        n = 0
+        while n < len(cov) and cov[n] < 0.5:
+            n += 1
+        if n == 0 or n > limit:
+            return 0
+        k = 0
+        while n + k < len(cov) and cov[n + k] < BAND_SOLID and k < inset:
+            k += 1
+        return n + k
+    col = op[rows[len(rows) // 3:]].mean(axis=0)
+    lim, ins = int(w * BAND_MARGIN_MAX), max(1, int(w * BAND_INSET_MAX))
+    x0, x1 = cut(col, lim, ins), w - cut(col[::-1], lim, ins)
+    row = op[:, x0:x1].mean(axis=1)
+    y1 = h - cut(row[::-1], int(h * BAND_MARGIN_MAX * 2), max(1, int(h * BAND_INSET_MAX)))
+    return x0, x1, y1
 
 
 def pack_band(asset: dict) -> Image.Image:
     tw, th = target_size(asset)
     im = Image.open(source(asset)).convert("RGBA")
+    x0, x1, y1 = band_margin(np.asarray(im.getchannel("A")))
+    im = im.crop((x0, 0, x1, y1))
     im = resize_rgba(im, (tw, max(1, round(im.height * tw / im.width))))
     box = alpha_bbox(im)
     top = max(0, box[1] - MARGIN) if box else 0
     return im.crop((0, top, tw, min(im.height, top + th)))
+
+
+def fade_x(im: Image.Image, frac: float = FADE_X) -> Image.Image:
+    """Multiply the alpha by a smoothstep ramp from 0 at the left/right edge to 1 at frac*width in."""
+    rgba = np.array(im.convert("RGBA"))
+    x = (np.arange(im.width, dtype=np.float32) + 0.5) / im.width
+    t = np.clip(np.minimum(x, 1.0 - x) / frac, 0.0, 1.0)
+    ramp = t * t * (3.0 - 2.0 * t)
+    rgba[..., 3] = np.round(rgba[..., 3].astype(np.float32) * ramp[None, :]).astype(np.uint8)
+    return Image.fromarray(rgba, "RGBA")
+
+
+def fade_fraction(asset: dict) -> float | None:
+    v = asset.get("fade_x")
+    if not v:
+        return None
+    return FADE_X if v is True else float(v)
 
 
 def pack_objects(group: list[dict]) -> dict[str, Image.Image]:
@@ -124,6 +223,10 @@ def pack() -> int:
             images[aid] = pack_band(a)
         else:
             images.update(pack_objects([by_id[i] for i in group_of.get(aid, [aid])]))
+    for a in assets:
+        frac = fade_fraction(a)
+        if frac and a["id"] in images:
+            images[a["id"]] = fade_x(images[a["id"]], frac)
     entries, kept, missing = {}, [], []
     for a in assets:
         aid = a["id"]

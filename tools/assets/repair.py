@@ -6,8 +6,9 @@ The raw is moved down by PX on a canvas of the same size (the new top strip is
 filled with the median colour of the old top row, the bottom PX rows are
 dropped), then the edit model paints the missing part. The result replaces
 raw/<id>.png; the step is recorded under "repairs" in raw/manifest.lock.json
-(it is not a new attempt: the chosen attempt stays the same). Re-run cutout.py
---force ID afterwards.
+(it is not a new attempt: the chosen attempt stays the same; generate.py moves the
+record onto that attempt when another one is generated or chosen, and `--choose` restores a
+repaired attempt from the repair's url). Re-run cutout.py --force ID afterwards.
 """
 import argparse, datetime, math, sys
 
