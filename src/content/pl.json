@@ -25,8 +25,8 @@
       "region": "ridge",
       "lore": "Szkło topiono tu już w średniowieczu. Huty pożerały lasy, bo do wytopu trzeba było potażu z popiołu drzewnego, stąd „poręba” w nazwie. W 1842 roku Franz Pohl założył hutę Józefina, a jej kryształy jeździły na dwory całej Europy.",
       "mech": "klienci składają zamówienia na naczynie. Rozgrzewasz szkło w piecu w dobrym momencie, dmuchasz je do właściwej wielkości, barwisz tlenkiem metalu i formujesz. Kolor zależy od minerału: kobalt daje błękit, złoto rubin, uran zielonkawą poświatę.",
-      "x": 1690,
-      "y": 650,
+      "x": 1640,
+      "y": 548,
       "game": "glass"
     },
     {
@@ -37,7 +37,7 @@
       "lore": "Od średniowiecza po Izerach chodzili Walonowie, poszukiwacze złota, kamieni i rud. Drogi do skarbów znaczyli tajemnymi znakami kutymi w skałach i zapisywali w „księgach walońskich”.",
       "mech": "odczytujesz znaki na głazach i wybierasz, w którą stronę iść. Dobra ścieżka kończy się kryształem górskim lub ametystem, zła prowadzi w mgłę.",
       "x": 1855,
-      "y": 640
+      "y": 625
     },
     {
       "id": "jakuszyce",
@@ -46,8 +46,8 @@
       "region": "ridge",
       "lore": "Na Polanie Jakuszyckiej od 1976 roku odbywa się największy bieg narciarski w Polsce. Śnieg leży tu najdłużej w Sudetach.",
       "mech": "rytmiczne stukanie w dwa boki ekranu to odpychanie kijkami. Trafiasz w rytm, biegniesz szybciej. Mijasz Halę Szrenicką i gonisz Ducha Gór na nartach.",
-      "x": 1640,
-      "y": 575
+      "x": 1850,
+      "y": 450
     },
     {
       "id": "chojnik",
@@ -56,8 +56,8 @@
       "region": "ridge",
       "lore": "Legenda mówi, że księżniczka Kunegunda obiecała rękę temu, kto objedzie konno mury zamku nad przepaścią. Udało się tylko jednemu rycerzowi, który potem… odjechał.",
       "mech": "przechylając ekran lub przesuwając palcem utrzymujesz równowagę konia na wąskim murze. Wiatr od Śnieżki wieje coraz mocniej.",
-      "x": 1360,
-      "y": 640
+      "x": 1480,
+      "y": 600
     },
     {
       "id": "sniezka",
@@ -66,8 +66,8 @@
       "region": "sniezka",
       "lore": "Duch Gór porwał na szczyt księżniczkę Emmę. Żeby uciec, poprosiła, by policzył wszystkie rzepy na polu. Gdy liczył, zbiegła w dolinę. Od tej pory wołają na niego Liczyrzepa, choć on tego nie znosi.",
       "mech": "grasz Duchem Gór. Rzepy wyskakują z ziemi i chowają się, Ty je liczysz i podajesz wynik. Emma w tle ucieka, a pogoda na szczycie zmienia się co kilka sekund.",
-      "x": 485,
-      "y": 420,
+      "x": 300,
+      "y": 300,
       "game": "turnips"
     },
     {
@@ -77,8 +77,8 @@
       "region": "sniezka",
       "lore": "Laboranci karkonoscy zbierali zioła na zboczach i robili z nich leki, które sprzedawano w całych Prusach. Ostatni z nich, Ernst August Zölfel, zmarł w 1884 roku.",
       "mech": "dostajesz receptę i wspinasz się po zboczu, zbierając właściwe rośliny: arnikę, goryczkę, dziewięćsił. Potem mieszasz je w moździerzu w dobrej kolejności.",
-      "x": 630,
-      "y": 595,
+      "x": 420,
+      "y": 505,
       "game": "herbs"
     },
     {
@@ -88,8 +88,8 @@
       "region": "sniezka",
       "lore": "Drewniany kościół Wang zbudowano w XII wieku nad norweskim jeziorem Vang. W 1842 roku rozebrano go, przewieziono statkiem i wozami i złożono na nowo pod Śnieżką.",
       "mech": "układanka. Ponumerowane belki i smocze głowy przyjeżdżają na wozach, Ty je przeciągasz na właściwe miejsca. Pod koniec wschodzi słońce nad gotowym kościołem.",
-      "x": 360,
-      "y": 505
+      "x": 225,
+      "y": 395
     },
     {
       "id": "lomniczka",
@@ -98,8 +98,8 @@
       "region": "sniezka",
       "lore": "Łomniczka rodzi się w Kotle Łomniczki pod Śnieżką, skacze przez Dziki Wodospad w Karpaczu i w dolinie łączy się z Łomnicą, a potem z Bobrem. Jedna rzeka przechodzi przez pół panoramy.",
       "mech": "prowadzisz łódeczkę z kory w dół rzeki. Omijasz głazy, łapiesz liście i mijasz prawdziwe miejsca po drodze. Łączy ze sobą inne gry z panoramy.",
-      "x": 565,
-      "y": 485
+      "x": 612,
+      "y": 440
     },
     {
       "id": "staniszow",
@@ -108,8 +108,8 @@
       "region": "kotlina",
       "lore": "Henryk XXXVIII Reuss postawił w 1806 roku na Grodnej sztuczną ruinę zamku, żeby mieć skąd patrzeć na góry. To stąd rozciąga się ta panorama i tu zaczyna się gra terenowa.",
       "mech": "przez lunetę szukasz na panoramie podpowiedzianych miejsc: „kaplica na najwyższym szczycie”, „zamek na skale”. Trafione miejsce odblokowuje jego grę.",
-      "x": 460,
-      "y": 640,
+      "x": 322,
+      "y": 692,
       "hub": true
     },
     {
@@ -119,8 +119,8 @@
       "region": "kotlina",
       "lore": "W XVII i XVIII wieku miasto bogaciło się na cienkich woalach z lnu, które kupcy zwani „Schleierherren” wysyłali aż do Ameryki. Herb miasta to jeleń, od legendy o Bolesławie Krzywoustym.",
       "mech": "krosno. Przeciągasz nitki wątku w rytmie wzoru, który pokazuje się na chwilę. Im równiejsza tkanina, tym dalej płynie statek z Twoim woalem.",
-      "x": 1000,
-      "y": 960
+      "x": 960,
+      "y": 940
     },
     {
       "id": "cieplice",
@@ -129,8 +129,8 @@
       "region": "kotlina",
       "lore": "Najgorętsze źródła w Polsce. Legenda mówi, że ranny jeleń księcia wszedł do ciepłej wody i wyszedł zdrowy. Potem kąpali się tu joannici, Schaffgotschowie i goście z całej Europy.",
       "mech": "mieszasz gorącą wodę ze źródła z zimną z Kamiennej tak, żeby każdy gość miał swoją temperaturę. Jeleń lubi gorąco, hrabina letnio, dzieci chłodno.",
-      "x": 1215,
-      "y": 860
+      "x": 1290,
+      "y": 885
     },
     {
       "id": "siedlecin",
@@ -139,8 +139,8 @@
       "region": "kotlina",
       "lore": "W wieży książęcej z XIV wieku zachowały się jedyne na świecie średniowieczne malowidła o rycerzu Lancelocie. Siedemset lat czekały pod tynkiem.",
       "mech": "delikatnie ścierasz palcem tynk, odsłaniając fresk. Zbyt mocno, a farba się kruszy. Odsłonięte sceny opowiadają historię Lancelota kawałek po kawałku.",
-      "x": 1400,
-      "y": 925
+      "x": 1600,
+      "y": 960
     },
     {
       "id": "myslakowice",
@@ -149,8 +149,8 @@
       "region": "kotlina",
       "lore": "W 1837 roku do Mysłakowic przybyli protestanci z Zillertal w Tyrolu, wygnani z domów za wiarę. Król pruski dał im ziemię, a oni zbudowali tu swoje tyrolskie domy, które stoją do dziś.",
       "mech": "prowadzisz wędrowną rodzinę z Alp przez mapę. Na postojach budujesz dom z klocków: balkon, szeroki dach, kamienie na gontach, żeby wiatr nie zerwał.",
-      "x": 720,
-      "y": 760
+      "x": 480,
+      "y": 850
     },
     {
       "id": "palace",
@@ -159,8 +159,8 @@
       "region": "kotlina",
       "lore": "W Kotlinie stoi ponad trzydzieści pałaców i dworów. W XIX wieku przyjeżdżała tu pruska arystokracja, a hrabia von Reden w Bukowcu założył park, który udawał dziką naturę.",
       "mech": "projektujesz park. Sadzisz aleje, ustawiasz altany i mostki tak, żeby z okien pałacu zawsze było widać Śnieżkę. Gość ocenia widok z każdego okna.",
-      "x": 770,
-      "y": 870
+      "x": 250,
+      "y": 905
     },
     {
       "id": "kowary",
@@ -169,8 +169,8 @@
       "region": "east",
       "lore": "Od XII wieku kopano tu rudę żelaza, a nazwa miasta pochodzi od kowali. Po wojnie, w latach 1948–1963, w tajemnicy wydobywano uran. Dziś sztolnie można zwiedzać z lampą w ręku.",
       "mech": "w ciemnym korytarzu widzisz tylko krąg światła lampy. Szukasz żył rudy, uważasz na kapiącą wodę i strop. Licznik Geigera trzeszczy coraz głośniej, gdy jesteś blisko.",
-      "x": 235,
-      "y": 700,
+      "x": 140,
+      "y": 520,
       "game": "mine"
     },
     {
@@ -180,8 +180,8 @@
       "region": "east",
       "lore": "Cztery jeziorka w dawnych wyrobiskach pirytu mają różne kolory: Purpurowe, Błękitne, Zielone i Żółte. Barwi je to, co zostało w skale po kopalni.",
       "mech": "mieszanie kolorów. Dolewasz do wody minerały i dobierasz odcień do prawdziwego jeziorka. To ta sama chemia, co barwienie szkła w Szklarskiej.",
-      "x": 95,
-      "y": 650
+      "x": 60,
+      "y": 620
     },
     {
       "id": "kamienna",
@@ -190,8 +190,8 @@
       "region": "east",
       "lore": "Cały wschód Kotliny żył z lnu. W Chełmsku Śląskim stoi rząd drewnianych domów tkaczy z 1707 roku, zwanych „Dwunastu Apostołów”. W każdym mieszkała rodzina z krosnem.",
       "mech": "od pola do płótna. Układasz we właściwej kolejności etapy: siew, roszenie, międlenie, przędzenie, tkanie, bielenie na łące. Każdy etap to jeden gest palcem.",
-      "x": 90,
-      "y": 830
+      "x": 70,
+      "y": 790
     }
   ]
 }

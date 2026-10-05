@@ -51,10 +51,13 @@ float fbm(vec2 p) {
 }
 `;
 
-/** Fog that thickens from `bottom` (area uv y) down to the bottom edge, broken up by drifting fbm. */
+/**
+ * Fog that thickens from `bottom` (area uv y) to full `density` at `end` (1: the bottom edge) and
+ * stays there below it, broken up by drifting fbm.
+ */
 const FOG_AMOUNT = `
-float fogAmount(vec2 uv, float density, float bottom, float drift, float time) {
-  return clamp(density * smoothstep(bottom, 1.0, uv.y) * (0.6 + 0.4 * fbm(uv * 3.0 + time * drift)), 0.0, 1.0);
+float fogAmount(vec2 uv, float density, float bottom, float end, float drift, float time) {
+  return clamp(density * smoothstep(bottom, end, uv.y) * (0.6 + 0.4 * fbm(uv * 3.0 + time * drift)), 0.0, 1.0);
 }
 `;
 
@@ -79,6 +82,36 @@ void main() {
   finalColor = c;
 }`;
 
+/**
+ * Aerial perspective for a far cut-out layer. Edge: each pixel keeps its alpha as far as the mean
+ * alpha of a ring `uWidth` input px around it is high, so the outermost pixel row (where a pale fringe
+ * of the old background tends to sit) fades out and the next one is feathered; the kept edge also
+ * darkens by up to `uDarken`. Inside the shape the mean is 1 and nothing changes. Then `uHaze` of
+ * `uHazeColor` veils every pixel. Premultiplied alpha: scaling the whole colour fades a pixel without
+ * shifting its hue, and the haze is scaled by alpha so clear pixels stay clear.
+ */
+export const AERIAL_FRAG = `${HEADER}
+uniform float uWidth;
+uniform float uDarken;
+uniform float uHaze;
+uniform vec3 uHazeColor;
+float alphaAt(vec2 px) {
+  return texture(uTexture, clamp(vTextureCoord + px * uInputSize.zw, uInputClamp.xy, uInputClamp.zw)).a;
+}
+void main() {
+  vec4 c = texture(uTexture, vTextureCoord);
+  float w = uWidth;
+  float d = w * 0.7071;
+  float sum = c.a
+    + alphaAt(vec2(w, 0.0)) + alphaAt(vec2(-w, 0.0)) + alphaAt(vec2(0.0, w)) + alphaAt(vec2(0.0, -w))
+    + alphaAt(vec2(d, d)) + alphaAt(vec2(-d, d)) + alphaAt(vec2(d, -d)) + alphaAt(vec2(-d, -d));
+  float keep = smoothstep(0.4, 0.9, sum / 9.0);
+  vec4 o = c * keep;
+  o.rgb *= mix(1.0 - uDarken, 1.0, keep);
+  o.rgb = mix(o.rgb, uHazeColor * o.a, uHaze);
+  finalColor = o;
+}`;
+
 /** Valley fog: `uColor` mixed in below `uBottom`, drifting with `uTime * uDrift`. */
 export const FOG_FRAG = `${HEADER}
 uniform float uTime;
@@ -86,11 +119,12 @@ uniform float uDensity;
 uniform vec3 uColor;
 uniform float uDrift;
 uniform float uBottom;
+uniform float uEnd;
 ${NOISE}
 ${FOG_AMOUNT}
 void main() {
   vec4 c = texture(uTexture, vTextureCoord);
-  float fog = fogAmount(areaUv(), uDensity, uBottom, uDrift, uTime);
+  float fog = fogAmount(areaUv(), uDensity, uBottom, uEnd, uDrift, uTime);
   finalColor = mix(c, vec4(uColor, 1.0) * c.a, fog);
 }`;
 
@@ -153,7 +187,7 @@ void main() {
   vec2 uv = areaUv();
   vec4 c = texture(uTexture, vTextureCoord);
   if (uMode == 1) {
-    float fog = fogAmount(uv, uIntensity, -0.6, 0.04, uTime);
+    float fog = fogAmount(uv, uIntensity, -0.6, 1.0, 0.04, uTime);
     c = mix(c, vec4(0.86, 0.88, 0.9, 1.0) * c.a, fog);
   } else if (uMode == 2) {
     float r = rainLayer(uv, 220.0, 1.6, 0.0) + 0.6 * rainLayer(uv, 140.0, 1.1, 7.0);

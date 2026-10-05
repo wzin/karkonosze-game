@@ -1,5 +1,6 @@
 import { Container, Graphics, Rectangle, Sprite, Text, Texture, type DestroyOptions, type FederatedPointerEvent } from 'pixi.js';
 import { sprite } from '../core/Assets';
+import { AerialFilter } from '../core/fx/AerialFilter';
 import { FogFilter } from '../core/fx/FogFilter';
 import { MistBand, bob } from '../core/fx/Mist';
 import { DESIGN } from '../core/Layout';
@@ -14,29 +15,47 @@ import { DEPTH, Parallax, type Depth } from './Parallax';
 import { gameFor, type MarkerKind, type Rect } from './rules';
 
 /**
- * Where the layers sit, in design px: the one table to retune when the art changes (the coming main
- * ridge is taller and more massive: raise `far`, then the ghost's feet and the upper mist with it).
- * The sky is lifted so its dusk glow shows above the main ridge (its own painted hills stay hidden
- * behind `ridge_far`); each cut-out layer is centred, scaled a little past the screen width so the
- * parallax never uncovers an edge, and placed by its top edge; mist bands are placed by their centre
- * line, Duch Gór by his feet (hidden behind Śnieżka's cone, x ≈ 490).
+ * Where the layers sit, in design px: the one table to retune when the art changes. Each cut-out
+ * layer is centred and drawn `width` × the design width whatever its pixel size (ridge_far is 2560
+ * wide: 0.7575×), aspect kept; the overhang, (width − 1) × 960 px a side, beats the largest parallax
+ * shift (PARALLAX.amplitude × DEPTH: 4.5, 9, 15 px), so no edge ever shows. Layers are placed by their
+ * top edge: the main ridge's skyline runs from y ≈ 228 (Śnieżka's chapel, x ≈ 300) to 388 (left edge),
+ * the foothills' Chojnik keep tops out at ≈ 410 and Grodna's tower at ≈ 640, the valley's crowns at
+ * ≈ 780 with the town below. The sky is lifted a little so its plum band sits behind the skyline
+ * and the moon stays clear of the sound button. Mist bands are placed by their centre line, Duch Gór
+ * by his feet (hidden behind the ridge right of Śnieżka).
  */
 const PLACE = {
-  skyLift: 140,
-  far: { y: 330, scale: 1.01 },
-  mid: { y: 440, scale: 1.02 },
-  valley: { y: 700, scale: 1.08 },
-  ghost: { x: 500, y: 640 },
-  /** Mist centre lines: at the foot of the main ridge, along the foothills, over the valley floor. */
-  mist: [585, 770, 985],
+  skyLift: 60,
+  far: { y: 220, width: 1.01 },
+  mid: { y: 400, width: 1.012 },
+  valley: { y: 770, width: 1.02 },
+  ghost: { x: 620, y: 600 },
+  /** Mist centre lines: at the foot of the main ridge, between the foothills and the valley, low over the river. */
+  mist: [550, 790, 1010],
 } as const;
+/**
+ * The main ridge sinks into the dusk: a cool multiply (`tint`), then the AerialFilter veils it with a
+ * `haze` share of dusk lavender, which lifts its darks and lowers its contrast, so it reads lighter
+ * than the dark foothill forests yet no brighter than the sky glow above its skyline. The same filter
+ * feathers the skyline by `feather` screen px (the cut-out left a pale one-pixel fringe there) and
+ * darkens the kept edge by `darken`.
+ */
+const FAR_DUSK = {
+  tint: 0xb9c2d6,
+  haze: 0.1,
+  hazeColor: [0.46, 0.44, 0.58] as [number, number, number],
+  feather: 1,
+  darken: 0.3,
+};
 
 const LAYERS: Record<Depth, string> = { far: 'hub/ridge_far', mid: 'hub/ridge_mid', valley: 'hub/valley' };
 /** Only his upper half shows above the ridge, faint and slowly breathing. */
 const GHOST = { height: 470, alpha: 0.2, breath: 0.02, period: 7 };
+/** Faint and high, clear of the skyline: the painted sky carries the drama, these only drift. */
 const CLOUDS = [
-  { alias: 'hub/cloud_1', x: 1180, y: 230, scale: 0.46, speed: 11, alpha: 0.28, tint: 0xa9a3c6 },
-  { alias: 'hub/cloud_2', x: 220, y: 380, scale: 0.5, speed: 15, alpha: 0.4, tint: 0xc2b6cf },
+  { alias: 'hub/cloud_1', x: 1180, y: 150, scale: 0.42, speed: 11, alpha: 0.1, tint: 0xa9a3c6 },
+  { alias: 'hub/cloud_2', x: 820, y: 235, scale: 0.36, speed: 15, alpha: 0.12, tint: 0xc2b6cf },
 ];
 interface MistSpec {
   alias: string;
@@ -54,27 +73,30 @@ interface MistSpec {
 }
 /**
  * Dusk mist, in PLACE.mist order: each band drifts right on the wind, swings gently up and down and
- * rides the parallax between its two planes. Tinted to the dusk sky like the fog; the stand-in
- * streak (until the art lands) reads as mist at these alphas too.
+ * rides the parallax between its two planes. Tinted to the dusk sky like the fog. The mist art is
+ * itself see-through (luma-keyed), so these alphas stack on top of its own.
  */
 const MISTS: MistSpec[] = [
-  { alias: 'hub/mist_1', after: 'far', factor: 0.22, height: 300, speed: 7, alpha: 0.35, bob: 6, period: 23 },
-  { alias: 'hub/mist_2', after: 'mid', factor: 0.4, height: 260, speed: 10, alpha: 0.3, bob: 5, period: 19 },
-  { alias: 'hub/mist_1', after: 'valley', factor: 0.6, height: 240, speed: 14, alpha: 0.22, bob: 4, period: 29 },
+  { alias: 'hub/mist_1', after: 'far', factor: 0.22, height: 300, speed: 6, alpha: 0.35, bob: 6, period: 23 },
+  { alias: 'hub/mist_2', after: 'mid', factor: 0.4, height: 240, speed: 10, alpha: 0.3, bob: 5, period: 19 },
+  { alias: 'hub/mist_1', after: 'valley', factor: 0.6, height: 220, speed: 14, alpha: 0.22, bob: 4, period: 29 },
 ];
-const MIST_TINT = 0xd6d2ec;
+/** The mist art is already a cool grey-blue; only a breath of lavender, or it would darken what it veils. */
+const MIST_TINT = 0xeeecf8;
 /** Each mist copy overhangs both screen edges by this much, more than any parallax shift. */
 const MIST_OVERHANG = 64;
 const STAR_COUNT = 40;
 const STAR_FIELD = { top: 10, bottom: 420 };
-type FogSpec = { density: number; bottom: number };
+type FogSpec = { density: number; bottom: number; end?: number };
 /**
- * Dusk fog tinted to the sky, on the foothills and over the valley floor. Both filter the whole
- * screen (so `bottom` is a screen uv: the fog starts there and thickens to the lower edge).
+ * Dusk fog tinted to the sky, low on the foothills and over the valley floor. Both filter the whole
+ * screen, so `bottom` and `end` are screen uv: the fog starts at `bottom` and is full at `end` (the
+ * lower edge when left out). The foothills' fog is full by y ≈ 820, where the valley covers them, so
+ * it lies in their lower part only and leaves Chojnik and Grodna clear.
  */
 const FOG: Partial<Record<Depth, FogSpec>> = {
-  mid: { density: 0.55, bottom: 0.42 },
-  valley: { density: 0.35, bottom: 0.55 },
+  mid: { density: 0.3, bottom: 0.55, end: 0.76 },
+  valley: { density: 0.3, bottom: 0.62 },
 };
 const FOG_COLOR: [number, number, number] = [0.8, 0.78, 0.88];
 /** Dark edges over the landscape, under the markers and title: `alpha` at the corners. */
@@ -114,6 +136,7 @@ let gestureSeen = false;
 export default class PanoramaScene extends Scene {
   private readonly parallax = new Parallax();
   private readonly fogs: FogFilter[] = [];
+  private readonly aerials: AerialFilter[] = [];
   private readonly twinkles: Twinkle[] = [];
   private readonly clouds: Cloud[] = [];
   private readonly mists: Mist[] = [];
@@ -209,6 +232,7 @@ export default class PanoramaScene extends Scene {
   override destroy(options?: DestroyOptions): void {
     super.destroy(options);
     for (const fog of this.fogs) fog.destroy();
+    for (const aerial of this.aerials) aerial.destroy();
   }
 
   private pick(place: Place, kind: MarkerKind): void {
@@ -244,19 +268,32 @@ export default class PanoramaScene extends Scene {
 
   /** A landscape layer on the parallax; with fog, the fog stays still over it (its area is the screen). */
   private buildLayer(depth: Depth): Container {
-    const { y, scale } = PLACE[depth];
+    const { y, width } = PLACE[depth];
     const s = sprite(this.ctx.assets, LAYERS[depth]);
     s.anchor.set(0.5, 0);
-    s.scale.set(s.scale.x * scale, s.scale.y * scale);
+    // width-fitted, whatever the art's pixel size (a placeholder is fitted the same way)
+    const k = (DESIGN.w * width) / s.width;
+    s.scale.set(s.scale.x * k, s.scale.y * k);
     s.position.set(DESIGN.w / 2, y);
     const view = new Container();
     view.addChild(s);
+    if (depth === 'far') {
+      s.tint = FAR_DUSK.tint;
+      const aerial = new AerialFilter();
+      aerial.width = FAR_DUSK.feather;
+      aerial.darken = FAR_DUSK.darken;
+      aerial.haze = FAR_DUSK.haze;
+      aerial.hazeColor = FAR_DUSK.hazeColor;
+      view.filters = [aerial];
+      this.aerials.push(aerial);
+    }
     this.parallax.add(view, DEPTH[depth]);
     const spec = FOG[depth];
     if (!spec) return view;
     const fog = new FogFilter();
     fog.density = spec.density;
     fog.bottom = spec.bottom;
+    if (spec.end !== undefined) fog.end = spec.end;
     fog.color = FOG_COLOR;
     this.fogs.push(fog);
     const still = new Container();

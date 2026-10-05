@@ -66,11 +66,12 @@ describe('markers', () => {
     expect(sentenceCase('')).toBe('');
   });
 
-  it('places every marker of the content inside the design space', () => {
+  it('places every marker of the content inside the design space, below the title', () => {
     for (const p of content.places) {
       expect(p.x, p.id).toBeGreaterThan(40);
       expect(p.x, p.id).toBeLessThan(1880);
-      expect(p.y, p.id).toBeGreaterThan(300);
+      // Śnieżka's marker sits on its summit, the highest point of the panorama (≈ 290)
+      expect(p.y, p.id).toBeGreaterThan(220);
       expect(p.y, p.id).toBeLessThan(1040);
     }
   });
