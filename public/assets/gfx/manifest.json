@@ -7,8 +7,8 @@
   },
   "hub/ridge_far": {
    "src": "gfx/hub/ridge_far.webp",
-   "w": 1920,
-   "h": 768
+   "w": 2560,
+   "h": 759
   },
   "hub/ridge_mid": {
    "src": "gfx/hub/ridge_mid.webp",
@@ -18,7 +18,17 @@
   "hub/valley": {
    "src": "gfx/hub/valley.webp",
    "w": 1920,
-   "h": 469
+   "h": 493
+  },
+  "hub/mist_1": {
+   "src": "gfx/hub/mist_1.webp",
+   "w": 2048,
+   "h": 373
+  },
+  "hub/mist_2": {
+   "src": "gfx/hub/mist_2.webp",
+   "w": 1308,
+   "h": 384
   },
   "hub/cloud_1": {
    "src": "gfx/hub/cloud_1.webp",
@@ -223,7 +233,7 @@
   "herbs/strip_near": {
    "src": "gfx/herbs/strip_near.webp",
    "w": 2048,
-   "h": 448
+   "h": 388
   },
   "herbs/plant_arnika": {
    "src": "gfx/herbs/plant_arnika.webp",
@@ -277,13 +287,13 @@
   },
   "herbs/laborant_1": {
    "src": "gfx/herbs/laborant_1.webp",
-   "w": 524,
-   "h": 915
+   "w": 517,
+   "h": 984
   },
   "herbs/laborant_2": {
    "src": "gfx/herbs/laborant_2.webp",
-   "w": 524,
-   "h": 915
+   "w": 517,
+   "h": 984
   },
   "herbs/mortar": {
    "src": "gfx/herbs/mortar.webp",

@@ -1284,24 +1284,22 @@
   }
  },
  "herbs/bg_far": {
-  "model": "fal-ai/flux-pro/v1.1",
-  "seed": 1803294022,
-  "url": "https://v3b.fal.media/files/b/0aad11e3/Pcqrepa0m--ffcdtDDBIr_7148d52b089a430cbd83b89e99282d8c.jpg",
-  "gen_size": [
-   1440,
-   832
-  ],
-  "prompt": "Morning view up a forested mountain slope toward a distant conical summit with a tiny chapel on top, spruce forest, mist in the valley, soft sunlight, no path in the foreground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
-  "route": "flux",
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad2b36/U4QRrZgRigrWL3mdI1Ila_2nhnVvn0.png",
+  "aspect_ratio": "16:9",
+  "resolution": "2K",
+  "prompt": "Cool misty early morning view up a forested mountain slope toward a distant conical summit with a tiny chapel on top, half hidden in mist; several receding planes of dark spruce forest separated by bands of pale mist; the foreground is a plain, quiet high meadow of grass and moss without any path, no people. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
+  "route": "nano",
   "size": [
    1920,
    1080
   ],
   "returned_size": [
-   1440,
-   832
+   2752,
+   1536
   ],
-  "generated_at": "2026-10-04T20:11:17+00:00",
+  "generated_at": "2026-10-05T14:12:28+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -1323,28 +1321,45 @@
     ],
     "generated_at": "2026-10-04T20:11:17+00:00",
     "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b36/U4QRrZgRigrWL3mdI1Ila_2nhnVvn0.png",
+    "aspect_ratio": "16:9",
+    "resolution": "2K",
+    "prompt": "Cool misty early morning view up a forested mountain slope toward a distant conical summit with a tiny chapel on top, half hidden in mist; several receding planes of dark spruce forest separated by bands of pale mist; the foreground is a plain, quiet high meadow of grass and moss without any path, no people. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     2752,
+     1536
+    ],
+    "generated_at": "2026-10-05T14:12:28+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
    }
   ]
  },
  "herbs/laborant_1": {
-  "model": "fal-ai/flux-pro/v1.1",
-  "seed": 792632177,
-  "url": "https://v3b.fal.media/files/b/0aad11e5/7wgDDXEPbLOdFy6a0_ic__eea8d4cb17ba416cacc13c35381d458c.jpg",
-  "gen_size": [
-   1024,
-   1376
-  ],
-  "prompt": "An 18th century mountain herbalist walking to the right with a wicker basket and a walking staff, long coat, wide hat, round spectacles, side view, storybook character. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
-  "route": "flux",
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad2b37/JmFaElhYNHFLNJCkwEmGi_bNHCuMmH.png",
+  "aspect_ratio": "3:4",
+  "resolution": "1K",
+  "prompt": "A full-length figure of an 18th-century mountain herbalist walking to the right, seen exactly from the side in profile, the whole figure from hat to shoes: a lean, weathered middle-aged man in a long dark brown wool frock coat reaching below the knees, a buttoned dark green waistcoat, a white neckcloth, dark knee breeches, grey wool stockings and low black leather shoes with square metal buckles, a black tricorn hat; a wicker basket of herbs carried on his back on leather straps and a long wooden walking staff in his front hand. Mid-stride: his front leg steps forward, his back leg pushes off. No modern boots, no trousers. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with a clean paper-cut silhouette, fine painterly detail, natural proportions, low-saturation muted palette of moss green, slate, dark umber and dim ochre, soft diffused light, no text, no letters, no watermark.",
+  "route": "nano",
   "size": [
    768,
    1024
   ],
   "returned_size": [
-   1024,
-   1376
+   896,
+   1200
   ],
-  "generated_at": "2026-10-04T20:11:41+00:00",
+  "generated_at": "2026-10-05T14:12:41+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -1366,30 +1381,49 @@
     ],
     "generated_at": "2026-10-04T20:11:41+00:00",
     "note": "attempt 2: subject-first prompt order (style sentence moved to the end); attempt 1 painted a whole landscape"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b37/JmFaElhYNHFLNJCkwEmGi_bNHCuMmH.png",
+    "aspect_ratio": "3:4",
+    "resolution": "1K",
+    "prompt": "A full-length figure of an 18th-century mountain herbalist walking to the right, seen exactly from the side in profile, the whole figure from hat to shoes: a lean, weathered middle-aged man in a long dark brown wool frock coat reaching below the knees, a buttoned dark green waistcoat, a white neckcloth, dark knee breeches, grey wool stockings and low black leather shoes with square metal buckles, a black tricorn hat; a wicker basket of herbs carried on his back on leather straps and a long wooden walking staff in his front hand. Mid-stride: his front leg steps forward, his back leg pushes off. No modern boots, no trousers. Single subject centered on a plain flat light grey background, whole object fully visible, no cast shadow, no ground. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with a clean paper-cut silhouette, fine painterly detail, natural proportions, low-saturation muted palette of moss green, slate, dark umber and dim ochre, soft diffused light, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     768,
+     1024
+    ],
+    "returned_size": [
+     896,
+     1200
+    ],
+    "generated_at": "2026-10-05T14:12:41+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
    }
   ],
   "cutout": {
    "model": "fal-ai/birefnet",
-   "url": "https://v3b.fal.media/files/b/0aad126a/p2j2cf7l-v-sLcmosEFeF_7hFOFp9M.png",
-   "hull_low_ratio": 0.414,
-   "enclosed_hole_px": 56076,
-   "kept_bg_hole_px": 56063,
-   "filled_px": 13,
-   "object_px": 236371,
+   "url": "https://v3b.fal.media/files/b/0aad2b8f/91Bs72FlsdlPNvFVTB5uE_Jb8NJ4jD.png",
+   "hull_low_ratio": 0.4592,
+   "enclosed_hole_px": 10234,
+   "kept_bg_hole_px": 10234,
+   "filled_px": 0,
+   "object_px": 209506,
    "bg": [
-    253,
-    253,
-    253
+    211,
+    212,
+    207
    ],
-   "generated_at": "2026-10-04T20:33:51+00:00"
+   "generated_at": "2026-10-05T14:26:37+00:00"
   }
  },
  "herbs/laborant_2": {
   "model": "fal-ai/nano-banana-pro/edit",
   "seed": null,
-  "url": "https://v3b.fal.media/files/b/0aad1241/OeNonL-arm5aBPjiuOu3Y_y1VTbAH7.png",
-  "ref_url": "https://v3b.fal.media/files/b/0aad1241/hhuZQSetHFm74rgqEkLjk_laborant_1.png",
-  "prompt": "Same character, same style and colors, next frame of the walk cycle: other leg forward, staff lifted. Keep exactly the same character design, face, clothing colors, proportions, art style, scale and framing, and the same plain light background, no cast shadow.",
+  "url": "https://v3b.fal.media/files/b/0aad2b8b/EVHErBR-_bF89LBRKJ4bb_WE0b7nT1.png",
+  "ref_url": "https://v3b.fal.media/files/b/0aad2b8b/IH0jvmfMF58wkvsHyoW7E_laborant_1.png",
+  "prompt": "Edit only his legs so that this becomes the opposite step of the walk: the leg that is now behind him (on the left of the picture, the one with the buttons at the knee of the breeches) swings forward and plants its heel on the right, in front of him, and the leg that is now in front moves back to the left, behind him, pushing off from its toes. The legs cross over, so this time the near leg with the knee buttons is the front leg. Keep the upper body, coat, basket, staff, hat, face and colours exactly as they are. Keep exactly the same character design, face, clothing colors, proportions, art style, scale and framing, and the same plain light background, no cast shadow.",
   "route": "edit",
   "size": [
    768,
@@ -1399,7 +1433,7 @@
    896,
    1200
   ],
-  "generated_at": "2026-10-04T20:27:18+00:00",
+  "generated_at": "2026-10-05T14:26:15+00:00",
   "attempts": [
    {
     "model": "fal-ai/nano-banana-pro/edit",
@@ -1436,22 +1470,76 @@
     ],
     "generated_at": "2026-10-04T20:27:18+00:00",
     "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro/edit",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b5f/0iWXzWkNUu_NRLv2OzimH_BaxvTcVH.png",
+    "ref_url": "https://v3b.fal.media/files/b/0aad2b5f/vqHQhD4GhhvXiJ6DzRGuq_laborant_1.png",
+    "prompt": "The same man in the next frame of his walk cycle, still walking to the right in exact side view: now his other leg is forward and the first leg is behind, and the staff is planted a little further ahead. The same 18th-century clothes: long dark coat, waistcoat, knee breeches, stockings, buckled shoes, tricorn hat, wicker basket on his back. Keep exactly the same character design, face, clothing colors, proportions, art style, scale and framing, and the same plain light background, no cast shadow.",
+    "route": "edit",
+    "size": [
+     768,
+     1024
+    ],
+    "returned_size": [
+     896,
+     1200
+    ],
+    "generated_at": "2026-10-05T14:18:55+00:00",
+    "note": "re-roll: painted on paper with a margin / fog in the band sky / brush-stroke mist; ridge_far: darker dusk haze"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro/edit",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b71/o9x85TCAbWNVzAT9DhUrX_6NztWSJp.png",
+    "ref_url": "https://v3b.fal.media/files/b/0aad2b71/SGb4_Ye72XPtBHrhtUUCA_laborant_1.png",
+    "prompt": "The next frame of this man's walk cycle, still walking to the right in exact side view, with the legs swapped: his near leg, the one with the row of buttons at the knee of the breeches, now steps forward in front with the heel touching the ground, and his far leg is now behind him, pushing off from the toes. The staff tip is planted a little further ahead. Everything else stays the same: long dark coat, waistcoat, knee breeches, stockings, buckled shoes, tricorn hat, wicker basket. Keep exactly the same character design, face, clothing colors, proportions, art style, scale and framing, and the same plain light background, no cast shadow.",
+    "route": "edit",
+    "size": [
+     768,
+     1024
+    ],
+    "returned_size": [
+     896,
+     1200
+    ],
+    "generated_at": "2026-10-05T14:21:54+00:00",
+    "note": "re-roll: strips painted on paper / haze in the sky; laborant_2 same leg forward; ridge_far: flux ultra for comparison"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro/edit",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b8b/EVHErBR-_bF89LBRKJ4bb_WE0b7nT1.png",
+    "ref_url": "https://v3b.fal.media/files/b/0aad2b8b/IH0jvmfMF58wkvsHyoW7E_laborant_1.png",
+    "prompt": "Edit only his legs so that this becomes the opposite step of the walk: the leg that is now behind him (on the left of the picture, the one with the buttons at the knee of the breeches) swings forward and plants its heel on the right, in front of him, and the leg that is now in front moves back to the left, behind him, pushing off from its toes. The legs cross over, so this time the near leg with the knee buttons is the front leg. Keep the upper body, coat, basket, staff, hat, face and colours exactly as they are. Keep exactly the same character design, face, clothing colors, proportions, art style, scale and framing, and the same plain light background, no cast shadow.",
+    "route": "edit",
+    "size": [
+     768,
+     1024
+    ],
+    "returned_size": [
+     896,
+     1200
+    ],
+    "generated_at": "2026-10-05T14:26:15+00:00",
+    "note": "re-roll: a3 and a4 kept the same leg in front (knee buttons on the rear leg); legs described in picture terms"
    }
   ],
   "cutout": {
    "model": "fal-ai/birefnet",
-   "url": "https://v3b.fal.media/files/b/0aad126b/yqGLg6shTcT5KcCyeaoZm_BlQ6yUjY.png",
-   "hull_low_ratio": 0.4853,
-   "enclosed_hole_px": 844,
-   "kept_bg_hole_px": 842,
-   "filled_px": 2,
-   "object_px": 185970,
+   "url": "https://v3b.fal.media/files/b/0aad2b8f/7pnUbj96aMLqZAXDkZVtr_9H8oVA2n.png",
+   "hull_low_ratio": 0.48,
+   "enclosed_hole_px": 13807,
+   "kept_bg_hole_px": 13807,
+   "filled_px": 0,
+   "object_px": 207663,
    "bg": [
-    254,
-    254,
-    254
+    212,
+    213,
+    207
    ],
-   "generated_at": "2026-10-04T20:33:52+00:00"
+   "generated_at": "2026-10-05T14:26:36+00:00"
   }
  },
  "herbs/mortar": {
@@ -2311,10 +2399,10 @@
  "herbs/strip_mid": {
   "model": "fal-ai/nano-banana-pro",
   "seed": null,
-  "url": "https://v3b.fal.media/files/b/0aad123b/WVUU-5RZJ_rtTkF9AIrfM_itUjjvOB.png",
+  "url": "https://v3b.fal.media/files/b/0aad2b5b/OOVcOsuMTPuVFIr3AKS3Z_wqIROx6K.png",
   "aspect_ratio": "21:9",
   "resolution": "2K",
-  "prompt": "A long horizontal band of spruce forest edge with mossy boulders and ferns, seen exactly from the side like a flat theatre backdrop, morning light, no perspective, no distant mountains. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 60 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "prompt": "A long horizontal band of misty spruce forest edge seen exactly from the side like a flat theatre backdrop: a row of tall dark spruces of different heights whose pointed tops stand fully visible, large mossy granite boulders and ferns at their foot, cool morning mist between the trunks, no perspective, no view deep into the forest, no distant mountains. The land fills the picture edge to edge with no border, no frame and no paper margin; the sky above it is completely empty and flat, with no clouds and no fog. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 60 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
   "route": "nano",
   "size": [
    2048,
@@ -2324,7 +2412,7 @@
    3168,
    1344
   ],
-  "generated_at": "2026-10-04T20:26:21+00:00",
+  "generated_at": "2026-10-05T14:18:28+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -2365,31 +2453,96 @@
     ],
     "generated_at": "2026-10-04T20:26:21+00:00",
     "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b36/xSsYUZquWU_AO_rHRisGP_nDlqFNkU.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A long horizontal band of misty spruce forest edge with large mossy granite boulders and ferns at its foot, seen exactly from the side like a flat theatre backdrop, tall dark spruces of different heights, cool morning mist between the trunks, no perspective, no distant mountains. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 60 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2048,
+     640
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:12:45+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b5b/OOVcOsuMTPuVFIr3AKS3Z_wqIROx6K.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A long horizontal band of misty spruce forest edge seen exactly from the side like a flat theatre backdrop: a row of tall dark spruces of different heights whose pointed tops stand fully visible, large mossy granite boulders and ferns at their foot, cool morning mist between the trunks, no perspective, no view deep into the forest, no distant mountains. The land fills the picture edge to edge with no border, no frame and no paper margin; the sky above it is completely empty and flat, with no clouds and no fog. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 60 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2048,
+     640
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:18:28+00:00",
+    "note": "re-roll: painted on paper with a margin / fog in the band sky / brush-stroke mist; ridge_far: darker dusk haze"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b6d/TeImFpB6Ls3OjZbQcfNRw_F7GCrxm0.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A long horizontal band of spruce forest edge seen exactly from the side like a flat theatre backdrop: a row of tall dark spruces of different heights whose pointed tops stand fully visible, large mossy granite boulders and ferns at their foot; between the trunks the forest interior is dim, shadowy blue-green with soft low morning mist, clearly darker than the sky. No perspective, no view deep into the forest, no distant mountains. The land fills the picture edge to edge with no border, no frame and no paper margin. The sky above the land is one uniform, flat, light grey from the top edge down to the skyline, with no haze, no glow, no clouds and no fog near the horizon. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 60 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache with a fine paper grain with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2048,
+     640
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:21:31+00:00",
+    "note": "re-roll: strips painted on paper / haze in the sky; laborant_2 same leg forward; ridge_far: flux ultra for comparison"
    }
   ],
+  "chosen": 4,
+  "chosen_note": "a4: spruce edge with visible tops, painted on a sheet (margin cropped by paper_sides), key_pockets off; a3 and a5 framed pictures with the sky inside the frame",
   "cutout": {
    "model": "local sky key (cutout.py)",
    "method": "key",
    "bg": [
-    219,
-    220,
-    224
+    212,
+    213,
+    213
    ],
-   "tolerance": 10.2,
-   "sky_ratio": 0.5488,
-   "sky_pocket_px": 6851,
-   "rim_px_removed": 43137,
+   "tolerance": 11.2,
+   "sky_ratio": 0.3658,
+   "sky_pocket_px": 0,
+   "sky_drift": 1.7,
+   "paper_crop": [
+    62,
+    3106,
+    1284
+   ],
+   "rim_px_removed": 31190,
    "eroded_px": 3,
-   "generated_at": "2026-10-04T21:15:19+00:00"
+   "generated_at": "2026-10-05T14:25:17+00:00"
   }
  },
  "herbs/strip_near": {
   "model": "fal-ai/nano-banana-pro",
   "seed": null,
-  "url": "https://v3b.fal.media/files/b/0aad123b/yOiSKHDvwl7oIyh6hlBK-_0v4xIQR4.png",
+  "url": "https://v3b.fal.media/files/b/0aad2b5b/SWTGum1UvnJYiBIDfFGbt_lLGDwqJU.png",
   "aspect_ratio": "21:9",
   "resolution": "2K",
-  "prompt": "A long horizontal band of mountain meadow with a stony footpath running along it, grass tufts and small rocks, seen exactly from the side like a flat theatre backdrop, no perspective, no distant mountains; the top edge of the band is just the tips of the grass. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 40 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, fresh morning palette of pale gold, sage green and sky blue, gentle rounded shapes, clean silhouettes, no text, no letters.",
+  "prompt": "A long, perfectly horizontal strip of mountain meadow edge seen exactly from the side like a flat theatre backdrop, no perspective: along the top, low tussocks of grass, moss and small grey stones; in the lower third a level, beaten earth footpath with a few flat stones runs straight across the whole width, its upper edge forming one clear, straight, horizontal ground line; below the path a thin strip of dark soil and stones. No distant mountains; the top edge of the band is just the tips of the grass. The land fills the picture edge to edge with no border, no frame and no paper margin; the sky above it is completely empty and flat, with no clouds and no fog. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 40 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
   "route": "nano",
   "size": [
    2048,
@@ -2399,7 +2552,7 @@
    3168,
    1344
   ],
-  "generated_at": "2026-10-04T20:26:21+00:00",
+  "generated_at": "2026-10-05T14:18:31+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -2461,22 +2614,83 @@
     ],
     "generated_at": "2026-10-04T20:26:21+00:00",
     "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b37/GorQpV6jigg1Erd56fC9b_7L44uCDi.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A long, perfectly horizontal strip of mountain meadow edge seen exactly from the side like a flat theatre backdrop, no perspective: along the top, low tussocks of grass, moss and small grey stones; in the lower third a level, beaten earth footpath with a few flat stones runs straight across the whole width, its upper edge forming one clear, straight, horizontal ground line; below the path a thin strip of dark soil and stones. No distant mountains; the top edge of the band is just the tips of the grass. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 40 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2048,
+     448
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:12:26+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b5b/SWTGum1UvnJYiBIDfFGbt_lLGDwqJU.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A long, perfectly horizontal strip of mountain meadow edge seen exactly from the side like a flat theatre backdrop, no perspective: along the top, low tussocks of grass, moss and small grey stones; in the lower third a level, beaten earth footpath with a few flat stones runs straight across the whole width, its upper edge forming one clear, straight, horizontal ground line; below the path a thin strip of dark soil and stones. No distant mountains; the top edge of the band is just the tips of the grass. The land fills the picture edge to edge with no border, no frame and no paper margin; the sky above it is completely empty and flat, with no clouds and no fog. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 40 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2048,
+     448
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:18:31+00:00",
+    "note": "re-roll: painted on paper with a margin / fog in the band sky / brush-stroke mist; ridge_far: darker dusk haze"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b6d/pf_razy6nZf_Es3LmmrlA_wfqnTR2D.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A long, perfectly horizontal strip of mountain meadow edge seen exactly from the side like a flat theatre backdrop, no perspective: along the top, low tussocks of grass, moss and small grey stones; in the lower third a level, beaten earth footpath with a few flat stones runs straight across the whole width, its upper edge forming one clear, straight, horizontal ground line; below the path a thin strip of dark soil and stones. No distant mountains; the top edge of the band is just the tips of the grass. The land fills the picture edge to edge with no border, no frame and no paper margin. The sky above the land is one uniform, flat, light grey from the top edge down to the skyline, with no haze, no glow, no clouds and no fog near the horizon. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 40 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache with a fine paper grain with subtle layered paper-cut depth between the planes, fine painterly detail, cool misty early morning, low-saturation muted palette of grey-green moss, slate blue, pale ochre and cold silver light, soft diffused light, haze and mist between the layers, quiet and serious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2048,
+     448
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:21:32+00:00",
+    "note": "re-roll: strips painted on paper / haze in the sky; laborant_2 same leg forward; ridge_far: flux ultra for comparison"
    }
   ],
+  "chosen": 5,
+  "chosen_note": "a5: flat sky with haze towards the skyline (keyed by the per-row sky colour); a4 fog clouds in the sky, a6 two strips stacked",
   "cutout": {
    "model": "local sky key (cutout.py)",
    "method": "key",
    "bg": [
-    211,
-    212,
-    211
+    220,
+    221,
+    223
    ],
    "tolerance": 10.2,
-   "sky_ratio": 0.5144,
-   "sky_pocket_px": 3400,
-   "rim_px_removed": 43824,
+   "sky_ratio": 0.6209,
+   "sky_pocket_px": 0,
+   "sky_drift": 20.8,
+   "paper_crop": null,
+   "rim_px_removed": 15067,
    "eroded_px": 3,
-   "generated_at": "2026-10-04T21:15:24+00:00"
+   "generated_at": "2026-10-05T14:24:50+00:00"
   }
  },
  "hub/cloud_1": {
@@ -2730,23 +2944,175 @@
    "generated_at": "2026-10-04T20:33:01+00:00"
   }
  },
- "hub/ridge_far": {
+ "hub/mist_1": {
   "model": "fal-ai/nano-banana-pro",
   "seed": null,
-  "url": "https://v3b.fal.media/files/b/0aad1238/z9vD_pb0YWsCp539xDVNQ_LpE0sgCb.png",
+  "url": "https://v3b.fal.media/files/b/0aad2b5b/ZI_WUzpxf5rnTjWLnEooy_rhIHTS8c.png",
   "aspect_ratio": "21:9",
   "resolution": "2K",
-  "prompt": "A very wide, long mountain ridge seen from far away across a valley to the north, shaped like the real Karkonosze main ridge: a long ridge with a gently rounded, almost level plateau top and smooth soft slopes running from the left edge to the right edge. In the left third of the image rises one smooth, broad conical summit like Snezka, clearly higher than the ridge, topped with a tiny round stone chapel and two small saucer shaped towers. No rocky cliffs, no jagged alpine peaks, no other mountains behind. Dark spruce forest at the foot, hazy blue distance. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 75 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "prompt": "One long, thin, soft horizontal veil of drifting mountain mist, about six times wider than tall, stretching across the whole width of the picture through the middle: a few overlapping translucent streaks, denser in the middle, thinning out towards both ends like smoke. Only the mist, on a plain flat solid pure black background, nothing else in the picture: no land, no trees, no moon, no stars, no horizon. Soft, diffuse and airy like real fog or smoke, translucent with smooth gradual gradients, no visible brush strokes, no bristle marks, no hard edges, pale cool grey-white, no text, no letters, no watermark.",
   "route": "nano",
   "size": [
-   1920,
-   768
+   2048,
+   512
   ],
   "returned_size": [
    3168,
    1344
   ],
-  "generated_at": "2026-10-04T20:25:54+00:00",
+  "generated_at": "2026-10-05T14:18:25+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b31/GoMt2z7q3zNZCvOBoP1Xf_z4nNplMl.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "One long, thin, soft horizontal wisp of drifting mountain mist stretching across the whole width of the picture: a few layered streaks, denser and brighter in the middle, thinning and fraying out towards both ends. Only the mist, on a plain flat solid pure black background, nothing else in the picture: no land, no trees, no moon, no stars, no horizon. Soft painterly gouache dry-brush texture, feathered edges that fade out gradually, pale cool grey-white, low contrast, no hard outlines, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2048,
+     512
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:11:49+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b5b/ZI_WUzpxf5rnTjWLnEooy_rhIHTS8c.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "One long, thin, soft horizontal veil of drifting mountain mist, about six times wider than tall, stretching across the whole width of the picture through the middle: a few overlapping translucent streaks, denser in the middle, thinning out towards both ends like smoke. Only the mist, on a plain flat solid pure black background, nothing else in the picture: no land, no trees, no moon, no stars, no horizon. Soft, diffuse and airy like real fog or smoke, translucent with smooth gradual gradients, no visible brush strokes, no bristle marks, no hard edges, pale cool grey-white, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2048,
+     512
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:18:25+00:00",
+    "note": "re-roll: painted on paper with a margin / fog in the band sky / brush-stroke mist; ridge_far: darker dusk haze"
+   }
+  ],
+  "cutout": {
+   "model": "local luma key (cutout.py)",
+   "method": "luma",
+   "bg": [
+    1,
+    1,
+    1
+   ],
+   "floor": 8.5,
+   "top": 127.4,
+   "mean_alpha": 0.1334,
+   "mist_colour": [
+    87,
+    95,
+    108
+   ],
+   "generated_at": "2026-10-05T14:19:25+00:00"
+  }
+ },
+ "hub/mist_2": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad2b5b/XaWBXRgdrfxAM9eKr7cLY_z2eKJdXL.png",
+  "aspect_ratio": "21:9",
+  "resolution": "2K",
+  "prompt": "A soft, low horizontal bank of valley fog, about four times wider than tall, lying across the middle of the picture: two or three overlapping translucent drifting layers with soft, diffuse, slightly ragged upper edges, thinning out towards both ends like smoke. Only the mist, on a plain flat solid pure black background, nothing else in the picture: no land, no trees, no moon, no stars, no horizon. Soft, diffuse and airy like real fog or smoke, translucent with smooth gradual gradients, no visible brush strokes, no bristle marks, no hard edges, pale cool grey-white, no text, no letters, no watermark.",
+  "route": "nano",
+  "size": [
+   1536,
+   384
+  ],
+  "returned_size": [
+   3168,
+   1344
+  ],
+  "generated_at": "2026-10-05T14:18:28+00:00",
+  "attempts": [
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b30/_3XUoPnGmZXxe0BGQzq4n_xC3qUmgN.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A soft horizontal band of low valley fog: two or three overlapping drifting streaks with ragged, feathered upper edges, a little thicker along the bottom, thinning out towards both ends. Only the mist, on a plain flat solid pure black background, nothing else in the picture: no land, no trees, no moon, no stars, no horizon. Soft painterly gouache dry-brush texture, feathered edges that fade out gradually, pale cool grey-white, low contrast, no hard outlines, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1536,
+     384
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:11:13+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b5b/XaWBXRgdrfxAM9eKr7cLY_z2eKJdXL.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A soft, low horizontal bank of valley fog, about four times wider than tall, lying across the middle of the picture: two or three overlapping translucent drifting layers with soft, diffuse, slightly ragged upper edges, thinning out towards both ends like smoke. Only the mist, on a plain flat solid pure black background, nothing else in the picture: no land, no trees, no moon, no stars, no horizon. Soft, diffuse and airy like real fog or smoke, translucent with smooth gradual gradients, no visible brush strokes, no bristle marks, no hard edges, pale cool grey-white, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1536,
+     384
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:18:28+00:00",
+    "note": "re-roll: painted on paper with a margin / fog in the band sky / brush-stroke mist; ridge_far: darker dusk haze"
+   }
+  ],
+  "cutout": {
+   "model": "local luma key (cutout.py)",
+   "method": "luma",
+   "bg": [
+    1,
+    1,
+    1
+   ],
+   "floor": 6.0,
+   "top": 158.8,
+   "mean_alpha": 0.2253,
+   "mist_colour": [
+    108,
+    123,
+    126
+   ],
+   "generated_at": "2026-10-05T14:19:25+00:00"
+  }
+ },
+ "hub/ridge_far": {
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad2b5b/8Vcadx2skjQiRl_e271Z__7TFHjqM5.png",
+  "aspect_ratio": "21:9",
+  "resolution": "2K",
+  "prompt": "A wide panorama of the whole main ridge of the Giant Mountains (Karkonosze) seen from far away to the north: a high, massive mountain wall stretching across the entire width of the picture. From left to right: near the left edge the highest summit, a tall, steep, bare cone of grey rock scree, with a tiny round baroque stone chapel with a small turret and two small saucer-shaped observatory towers on its pointed top; right of it the ridge drops into a steep glacial cirque with a dark rock wall; then a long, high, almost level plateau whose north face is cut by two more glacial cirques with dark rock walls; then a broad, rounded dome summit; then two deep glacial cirques side by side with steep rock walls, with a tall slender transmitter tower standing on their upper rim; then another rounded summit; and at the far right end a rounded summit with a small mountain hut on top. Bare rocky tops and dwarf pine above the tree line, dark spruce forest on the lower slopes dissolving into mist at the foot. Deep dusk light: the whole range lies in cool blue-violet shadow, softened by atmospheric haze as seen from many kilometres away, low contrast, simplified distant detail. The painting fills the whole picture edge to edge with no border or frame. No labels, no text. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 75 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+  "route": "nano",
+  "size": [
+   2560,
+   1024
+  ],
+  "returned_size": [
+   3168,
+   1344
+  ],
+  "generated_at": "2026-10-05T14:18:30+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -2806,46 +3172,107 @@
      1344
     ],
     "generated_at": "2026-10-04T20:25:54+00:00",
-    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
-   }
-  ],
-  "repairs": [
+    "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit",
+    "repairs": [
+     {
+      "model": "fal-ai/nano-banana-pro/edit",
+      "prompt": "The tiny round stone chapel on top of the summit had its roof cut off by the picture's top edge; there is now empty sky above it. Paint the chapel's missing small conical roof in exactly the same paper-cut gouache style and colors. Change nothing else: keep every shape, color, texture and the plain flat light grey sky exactly as they are.",
+      "shift_down": 110,
+      "input_url": "https://v3b.fal.media/files/b/0aad125f/so4Uo8OyjoSAVk05JFv9r_ridge_far.shifted.png",
+      "url": "https://v3b.fal.media/files/b/0aad1260/ZUusACSqxMuM--V6EPgV5_HGstE72m.png",
+      "returned_size": [
+       3168,
+       1344
+      ],
+      "generated_at": "2026-10-04T20:32:32+00:00"
+     }
+    ]
+   },
    {
-    "model": "fal-ai/nano-banana-pro/edit",
-    "prompt": "The tiny round stone chapel on top of the summit had its roof cut off by the picture's top edge; there is now empty sky above it. Paint the chapel's missing small conical roof in exactly the same paper-cut gouache style and colors. Change nothing else: keep every shape, color, texture and the plain flat light grey sky exactly as they are.",
-    "shift_down": 110,
-    "input_url": "https://v3b.fal.media/files/b/0aad125f/so4Uo8OyjoSAVk05JFv9r_ridge_far.shifted.png",
-    "url": "https://v3b.fal.media/files/b/0aad1260/ZUusACSqxMuM--V6EPgV5_HGstE72m.png",
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b30/Dy0TbLsXnuLu4e1Xtju82_fFUquxm0.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A wide panorama of the whole main ridge of the Giant Mountains (Karkonosze) seen from far away to the north: a high, massive mountain wall stretching across the entire width of the picture. From left to right: near the left edge the highest summit, a tall, steep, bare cone of grey rock scree, with a tiny round baroque stone chapel with a small turret and two small saucer-shaped observatory towers on its pointed top; right of it the ridge drops into a steep glacial cirque with a dark rock wall; then a long, high, almost level plateau whose north face is cut by two more glacial cirques with dark rock walls; then a broad, rounded dome summit; then two deep glacial cirques side by side with steep rock walls, with a tall slender transmitter tower standing on their upper rim; then another rounded summit; and at the far right end a rounded summit with a small mountain hut on top. Bare rocky tops and dwarf pine above the tree line, dark spruce forest on the lower slopes dissolving into mist at the foot. No labels, no text. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 75 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2560,
+     1024
+    ],
     "returned_size": [
      3168,
      1344
     ],
-    "generated_at": "2026-10-04T20:32:32+00:00"
+    "generated_at": "2026-10-05T14:11:22+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b5b/8Vcadx2skjQiRl_e271Z__7TFHjqM5.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A wide panorama of the whole main ridge of the Giant Mountains (Karkonosze) seen from far away to the north: a high, massive mountain wall stretching across the entire width of the picture. From left to right: near the left edge the highest summit, a tall, steep, bare cone of grey rock scree, with a tiny round baroque stone chapel with a small turret and two small saucer-shaped observatory towers on its pointed top; right of it the ridge drops into a steep glacial cirque with a dark rock wall; then a long, high, almost level plateau whose north face is cut by two more glacial cirques with dark rock walls; then a broad, rounded dome summit; then two deep glacial cirques side by side with steep rock walls, with a tall slender transmitter tower standing on their upper rim; then another rounded summit; and at the far right end a rounded summit with a small mountain hut on top. Bare rocky tops and dwarf pine above the tree line, dark spruce forest on the lower slopes dissolving into mist at the foot. Deep dusk light: the whole range lies in cool blue-violet shadow, softened by atmospheric haze as seen from many kilometres away, low contrast, simplified distant detail. The painting fills the whole picture edge to edge with no border or frame. No labels, no text. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 75 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     2560,
+     1024
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:18:30+00:00",
+    "note": "re-roll: painted on paper with a margin / fog in the band sky / brush-stroke mist; ridge_far: darker dusk haze"
+   },
+   {
+    "model": "fal-ai/flux-pro/v1.1-ultra",
+    "seed": 3685215182,
+    "url": "https://v3b.fal.media/files/b/0aad2b6e/7Wb474GAutWEODdcEL390_e502e8415b8a4e079959eaffa3f7a975.png",
+    "aspect_ratio": "21:9",
+    "prompt": "A wide panorama of the whole main ridge of the Giant Mountains (Karkonosze) seen from far away to the north: a high, massive mountain wall stretching across the entire width of the picture. From left to right: near the left edge the highest summit, a tall, steep, bare cone of grey rock scree, with a tiny round baroque stone chapel with a small turret and two small saucer-shaped observatory towers on its pointed top; right of it the ridge drops into a steep glacial cirque with a dark rock wall; then a long, high, almost level plateau whose north face is cut by two more glacial cirques with dark rock walls; then a broad, rounded dome summit; then two deep glacial cirques side by side with steep rock walls, with a tall slender transmitter tower standing on their upper rim; then another rounded summit; and at the far right end a rounded summit with a small mountain hut on top. Bare rocky tops and dwarf pine above the tree line, dark spruce forest on the lower slopes dissolving into mist at the foot. Deep dusk light: the whole range lies in cool blue-violet shadow, softened by atmospheric haze as seen from many kilometres away, low contrast, simplified distant detail. The painting fills the whole picture edge to edge with no border or frame. No labels, no text. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 75 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache with a fine paper grain with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+    "route": "ultra",
+    "size": [
+     2560,
+     1024
+    ],
+    "returned_size": [
+     3136,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:21:14+00:00",
+    "note": "re-roll: strips painted on paper / haze in the sky; laborant_2 same leg forward; ridge_far: flux ultra for comparison"
    }
   ],
+  "chosen": 5,
+  "chosen_note": "a5 (nano, dusk haze, full-bleed, landmark order right) over a4 (nano, daylight, paper margin) and a6 (flux ultra: snowy Alps under a blue sky)",
   "cutout": {
    "model": "local sky key (cutout.py)",
    "method": "key",
    "bg": [
-    220,
-    220,
-    225
+    194,
+    192,
+    196
    ],
-   "tolerance": 10.2,
-   "sky_ratio": 0.2637,
+   "tolerance": 12.7,
+   "sky_ratio": 0.4147,
    "sky_pocket_px": 0,
-   "rim_px_removed": 8908,
+   "sky_drift": 3.0,
+   "paper_crop": null,
+   "rim_px_removed": 2,
    "eroded_px": 3,
-   "generated_at": "2026-10-04T21:15:20+00:00"
+   "rim_mode": "light",
+   "generated_at": "2026-10-05T14:29:38+00:00"
   }
  },
  "hub/ridge_mid": {
   "model": "fal-ai/nano-banana-pro",
   "seed": null,
-  "url": "https://v3b.fal.media/files/b/0aad1238/FWwv6CtC5mkXOw__jaKAx_V6WuDxMI.png",
+  "url": "https://v3b.fal.media/files/b/0aad2b2f/szKUc-sPzT40nmxvTCAW0_3Mjp5VVE.png",
   "aspect_ratio": "21:9",
   "resolution": "2K",
-  "prompt": "A band of low, rounded forested foothills seen from the side like a flat theatre backdrop, spruce and beech forest in evening light. Right of center, a small medieval castle ruin with broken walls and one roofless round tower stands on a rocky granite outcrop. Left of center, a tiny ruined stone tower stands on a rounded wooded hill. No mountains behind the hills. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 65 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "prompt": "A band of rounded, forested foothills seen from the side like a flat theatre backdrop at misty dusk, dark spruce and beech forest, thin mist lying in the hollows between the hills. Right of center, on a steep wooded hill crowned by a granite rock outcrop, stands a medieval castle ruin with broken stone walls and one tall roofless round keep tower. Left of center, on a lower rounded wooded hill, stands a small ruined stone watchtower. No mountains behind the hills. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 65 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
   "route": "nano",
   "size": [
    1920,
@@ -2855,7 +3282,7 @@
    3168,
    1344
   ],
-  "generated_at": "2026-10-04T20:25:53+00:00",
+  "generated_at": "2026-10-05T14:11:26+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -2895,43 +3322,62 @@
     ],
     "generated_at": "2026-10-04T20:25:53+00:00",
     "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b2f/szKUc-sPzT40nmxvTCAW0_3Mjp5VVE.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "A band of rounded, forested foothills seen from the side like a flat theatre backdrop at misty dusk, dark spruce and beech forest, thin mist lying in the hollows between the hills. Right of center, on a steep wooded hill crowned by a granite rock outcrop, stands a medieval castle ruin with broken stone walls and one tall roofless round keep tower. Left of center, on a lower rounded wooded hill, stands a small ruined stone watchtower. No mountains behind the hills. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 65 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     640
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:11:26+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
    }
   ],
   "cutout": {
    "model": "local sky key (cutout.py)",
    "method": "key",
    "bg": [
-    193,
-    193,
-    197
+    182,
+    184,
+    188
    ],
-   "tolerance": 10.2,
-   "sky_ratio": 0.4303,
+   "tolerance": 13.3,
+   "sky_ratio": 0.4172,
    "sky_pocket_px": 0,
-   "rim_px_removed": 33707,
+   "sky_drift": 2.4,
+   "paper_crop": null,
+   "rim_px_removed": 3455,
    "eroded_px": 3,
-   "generated_at": "2026-10-04T21:15:20+00:00"
+   "generated_at": "2026-10-05T14:24:45+00:00"
   }
  },
  "hub/sky": {
-  "model": "fal-ai/flux-pro/v1.1",
-  "seed": 2727959415,
-  "url": "https://v3b.fal.media/files/b/0aad1222/vuVyUh7O-EUYI7v0aL-AJ_99ee775f1a434b2fae2d776d928a649c.jpg",
-  "gen_size": [
-   1440,
-   832
-  ],
-  "prompt": "A clear evening sky just after sunset filling the entire picture from edge to edge: a smooth gradient from deep indigo at the top through violet to warm apricot along the bottom edge, a few thin wispy high clouds, a small pale full moon in the upper right. Nothing but sky, no land, no hills, no trees. Paper-cut storybook illustration with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouette, no text, no letters, no watermark.",
-  "route": "flux",
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad2b30/rJMmxDr0iDujYaOZeWU1C_04gNKYkd.png",
+  "aspect_ratio": "16:9",
+  "resolution": "2K",
+  "prompt": "A dramatic dusk sky filling the entire picture from the top edge to the bottom edge, nothing but sky: deep indigo at the top fading through violet and dusky plum to a faint pale afterlight just above the bottom edge, dense layered low clouds in the lower half softly lit from below, thinner veils of cloud higher up, a small pale moon in the upper right. There is no horizon line and no ground: no land, no mountains, no hills, no trees and no dark silhouettes along the bottom; the bottom edge is cloud and pale light. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper, fine painterly detail, low-saturation muted palette of deep indigo, slate blue, dusky plum and dim ochre, soft diffused light, quiet and mysterious mood, no text, no letters, no watermark.",
+  "route": "nano",
   "size": [
    1920,
    1080
   ],
   "returned_size": [
-   1440,
-   832
+   2752,
+   1536
   ],
-  "generated_at": "2026-10-04T20:21:45+00:00",
+  "generated_at": "2026-10-05T14:11:13+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -2973,16 +3419,35 @@
     ],
     "generated_at": "2026-10-04T20:21:45+00:00",
     "note": "attempt 2: object style without 'scene' wording / band framing for strips / rewritten subject (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b30/rJMmxDr0iDujYaOZeWU1C_04gNKYkd.png",
+    "aspect_ratio": "16:9",
+    "resolution": "2K",
+    "prompt": "A dramatic dusk sky filling the entire picture from the top edge to the bottom edge, nothing but sky: deep indigo at the top fading through violet and dusky plum to a faint pale afterlight just above the bottom edge, dense layered low clouds in the lower half softly lit from below, thinner veils of cloud higher up, a small pale moon in the upper right. There is no horizon line and no ground: no land, no mountains, no hills, no trees and no dark silhouettes along the bottom; the bottom edge is cloud and pale light. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper, fine painterly detail, low-saturation muted palette of deep indigo, slate blue, dusky plum and dim ochre, soft diffused light, quiet and mysterious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     2752,
+     1536
+    ],
+    "generated_at": "2026-10-05T14:11:13+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
    }
   ]
  },
  "hub/valley": {
   "model": "fal-ai/nano-banana-pro",
   "seed": null,
-  "url": "https://v3b.fal.media/files/b/0aad1238/E5y7QR4iVNaF8eyS5lgH2_yKWRBaha.png",
+  "url": "https://v3b.fal.media/files/b/0aad2b5b/sF4Kmjm2qb5GieIyWHxEh_XqgXNmiF.png",
   "aspect_ratio": "21:9",
   "resolution": "2K",
-  "prompt": "Foreground of a wide valley at dusk: meadows and fields, a winding river, a small old town with red roofs and a tall church tower in the center, orchards and country roads, warm window lights. Seen from a low hill, the valley forms one horizontal band whose far edge is a low, gentle line of trees and meadows, with no hills or mountains behind it. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 55 percent of the picture. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
+  "prompt": "Foreground of a wide valley at misty dusk seen from a low hill: dark meadows and fields, a slow winding river, a small old town of slate and muted red roofs with a tall church tower in the center, a few windows lit faintly in dim ochre, dark orchards and hedgerows, low fog pooling along the river and between the houses. The valley forms one horizontal band whose far edge is a soft, irregular line of dark tree crowns and hedgerows, with no hills or mountains behind it. The land fills the picture edge to edge with no border, no frame and no paper margin; the sky above it is completely empty and flat, with no clouds and no fog. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 55 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
   "route": "nano",
   "size": [
    1920,
@@ -2992,7 +3457,7 @@
    3168,
    1344
   ],
-  "generated_at": "2026-10-04T20:25:58+00:00",
+  "generated_at": "2026-10-05T14:18:29+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -3032,22 +3497,62 @@
     ],
     "generated_at": "2026-10-04T20:25:58+00:00",
     "note": "route nano (fal-ai/nano-banana-pro): flux kept drawing alpine/perspective landscapes resp. a mortar instead of a pestle / scenery around the spirit"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b2f/qNTVTpfulRRTEQcwkbjsB_uYHP0lQy.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "Foreground of a wide valley at misty dusk seen from a low hill: dark meadows and fields, a slow winding river, a small old town of slate and muted red roofs with a tall church tower in the center, a few windows lit faintly in dim ochre, dark orchards and hedgerows, low fog pooling along the river and between the houses. The valley forms one horizontal band whose far edge is a low, gentle line of dark trees and meadows, with no hills or mountains behind it. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 55 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     560
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:11:28+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b5b/sF4Kmjm2qb5GieIyWHxEh_XqgXNmiF.png",
+    "aspect_ratio": "21:9",
+    "resolution": "2K",
+    "prompt": "Foreground of a wide valley at misty dusk seen from a low hill: dark meadows and fields, a slow winding river, a small old town of slate and muted red roofs with a tall church tower in the center, a few windows lit faintly in dim ochre, dark orchards and hedgerows, low fog pooling along the river and between the houses. The valley forms one horizontal band whose far edge is a soft, irregular line of dark tree crowns and hedgerows, with no hills or mountains behind it. The land fills the picture edge to edge with no border, no frame and no paper margin; the sky above it is completely empty and flat, with no clouds and no fog. The land spans the full width of the image and touches the left, right and bottom edges; above it is an empty, plain, flat light grey sky with nothing in it. The land occupies only the bottom 55 percent of the picture. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     560
+    ],
+    "returned_size": [
+     3168,
+     1344
+    ],
+    "generated_at": "2026-10-05T14:18:29+00:00",
+    "note": "re-roll: painted on paper with a margin / fog in the band sky / brush-stroke mist; ridge_far: darker dusk haze"
    }
   ],
   "cutout": {
    "model": "local sky key (cutout.py)",
    "method": "key",
    "bg": [
-    228,
-    229,
-    235
+    201,
+    201,
+    201
    ],
-   "tolerance": 13.3,
-   "sky_ratio": 0.526,
+   "tolerance": 11.2,
+   "sky_ratio": 0.4374,
    "sky_pocket_px": 0,
-   "rim_px_removed": 39008,
+   "sky_drift": 1.7,
+   "paper_crop": null,
+   "rim_px_removed": 3485,
    "eroded_px": 3,
-   "generated_at": "2026-10-04T21:15:20+00:00"
+   "generated_at": "2026-10-05T14:24:44+00:00"
   }
  },
  "mine/bat": {
@@ -3822,24 +4327,22 @@
   }
  },
  "turnips/bg": {
-  "model": "fal-ai/flux-pro/v1.1",
-  "seed": 2525783781,
-  "url": "https://v3b.fal.media/files/b/0aad1240/DsJhXj7mdKldGjVW021Sn_37c8b6e433214288bf8f510d12bb7c9f.jpg",
-  "gen_size": [
-   1440,
-   832
-  ],
-  "prompt": "A high mountain meadow on a broad, almost flat plateau at dusk. On a rounded hilltop in the upper left stands a small round stone chapel with a domed roof, and beside it a small observatory of two stacked saucer shaped discs. A stone path winds up across the meadow from the lower left toward the hilltop. The whole lower third of the picture is an empty vegetable field of dark soil furrows running across the image. Dramatic clouds. Illustrated as a layered paper-cut storybook scene with soft gouache texture, muted dusk palette of slate blue, moss green, ochre and plum, gentle rounded shapes, clean silhouettes, no text, no letters, no watermark.",
-  "route": "flux",
+  "model": "fal-ai/nano-banana-pro",
+  "seed": null,
+  "url": "https://v3b.fal.media/files/b/0aad2b36/m2ijVuiy_pxzTHwCVRSDx_J6iZVDSG.png",
+  "aspect_ratio": "16:9",
+  "resolution": "2K",
+  "prompt": "A view up to the summit of Snezka, the highest mountain of the Giant Mountains, at misty dusk. In the upper left third of the picture rises a steep conical summit covered entirely with grey granite boulder scree, bare rock with no grass on it; on its top stand a small round baroque stone chapel with a domed roof and a small turret, and beside it an observatory of two stacked flat saucer-shaped discs. A stone path zigzags down the scree slope. Below the summit lies a high mountain meadow of dark tussock grass and low dwarf pines, with mist drifting across the slope; dramatic heavy clouds in the sky. The whole lower forty percent of the picture is a vegetable field in the foreground: dark, freshly turned soil in long parallel furrows running across the image from left to right, empty, no plants, no people. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+  "route": "nano",
   "size": [
    1920,
    1080
   ],
   "returned_size": [
-   1440,
-   832
+   2752,
+   1536
   ],
-  "generated_at": "2026-10-04T20:26:43+00:00",
+  "generated_at": "2026-10-05T14:12:44+00:00",
   "attempts": [
    {
     "model": "fal-ai/flux-pro/v1.1",
@@ -3882,6 +4385,25 @@
     ],
     "generated_at": "2026-10-04T20:26:43+00:00",
     "note": "attempt 2: object style without 'scene' wording, subject-first; rewritten prompt where the subject was wrong (see README Decyzje)"
+   },
+   {
+    "model": "fal-ai/nano-banana-pro",
+    "seed": null,
+    "url": "https://v3b.fal.media/files/b/0aad2b36/m2ijVuiy_pxzTHwCVRSDx_J6iZVDSG.png",
+    "aspect_ratio": "16:9",
+    "resolution": "2K",
+    "prompt": "A view up to the summit of Snezka, the highest mountain of the Giant Mountains, at misty dusk. In the upper left third of the picture rises a steep conical summit covered entirely with grey granite boulder scree, bare rock with no grass on it; on its top stand a small round baroque stone chapel with a domed roof and a small turret, and beside it an observatory of two stacked flat saucer-shaped discs. A stone path zigzags down the scree slope. Below the summit lies a high mountain meadow of dark tussock grass and low dwarf pines, with mist drifting across the slope; dramatic heavy clouds in the sky. The whole lower forty percent of the picture is a vegetable field in the foreground: dark, freshly turned soil in long parallel furrows running across the image from left to right, empty, no plants, no people. Painted as a serious, atmospheric illustration for a book of old mountain legends, not a cartoon and not childish: matte gouache on textured paper with subtle layered paper-cut depth between the planes, fine painterly detail, deep misty dusk, low-saturation muted palette of slate blue, moss green, dusky plum and dim ochre, soft diffused light, haze and mist between the layers, quiet and mysterious mood, no text, no letters, no watermark.",
+    "route": "nano",
+    "size": [
+     1920,
+     1080
+    ],
+    "returned_size": [
+     2752,
+     1536
+    ],
+    "generated_at": "2026-10-05T14:12:44+00:00",
+    "note": "iteration 1: owner feedback - serious, misty, muted art direction (plan 2026-10-05, Strumien B)"
    }
   ]
  },

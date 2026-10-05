@@ -1,6 +1,6 @@
 # Synthetic checks for the birefnet repair step (no network).
 import numpy as np
-from cutout import label, convex_hull_mask, repair, defringe, key_sky, peel_rim
+from cutout import label, convex_hull_mask, repair, defringe, key_sky, peel_rim, key_luma, paper_sides
 
 BG = (200, 200, 200)
 
@@ -126,3 +126,63 @@ def test_defringe_removes_grey_from_half_transparent_edge():
     rgb = np.full((1, 1, 3), 115, np.uint8)        # 50 % of (30,30,30) over grey 200
     out = defringe(rgb, np.array([[128]], np.uint8), np.array(BG, np.float32))
     assert abs(int(out[0, 0, 0]) - 30) <= 3
+
+
+def test_luma_key_gives_mist_on_black_a_soft_alpha_and_its_own_colour():
+    h, w = 60, 200
+    rgb = np.zeros((h, w, 3), np.uint8); rgb[:] = (8, 8, 10)
+    x = np.arange(w)
+    dens = np.clip(1 - np.abs(x - 100) / 70, 0, 1)        # dense in the middle, fading out
+    for y in range(20, 40):
+        rgb[y] = (np.array([8, 8, 10]) + dens[:, None] * (np.array([220, 222, 235]) - [8, 8, 10])).astype(np.uint8)
+    col, a, s = key_luma(rgb)
+    assert s["method"] == "luma"
+    assert a[5, 100] == 0 and a[50, 10] == 0               # background gone
+    assert a[30, 100] == 255 and 0 < a[30, 60] < 255        # dense core opaque, flanks half-transparent
+    assert a[30, 160] < a[30, 130] < a[30, 100]
+    assert abs(int(col[30, 60, 2]) - 235) <= 12             # un-mixed back to the mist colour, not grey
+
+
+def test_key_sky_follows_haze_that_lightens_towards_the_skyline():
+    # flat sky 205 at the top lightening to 225 just above the land: past the tolerance (~10)
+    h, w = 200, 160
+    rgb = np.zeros((h, w, 3), np.uint8)
+    for y in range(h):
+        rgb[y] = int(205 + 20 * y / 140)
+    rgb[140:] = (60, 80, 60)
+    alpha, s = key_sky(rgb)
+    assert alpha[135, 80] == 0 and alpha[150, 80] == 255     # haze keyed down to the land
+    assert s["sky_drift"] > 15
+
+
+def test_pale_mist_below_the_skyline_is_not_keyed_as_drifting_sky():
+    rgb = np.zeros((200, 160, 3), np.uint8); rgb[:] = (205, 205, 208)
+    rgb[80:] = (60, 80, 60)
+    rgb[120:160, 30:130] = (207, 207, 210)                   # sky-coloured mist bank inside the land
+    alpha, _ = key_sky(rgb, pockets=False)
+    assert alpha[140, 80] == 255
+    alpha, _ = key_sky(rgb)                                   # with pockets on it would be punched out
+    assert alpha[140, 80] == 0
+
+
+def test_paper_sides_finds_the_margin_of_a_band_painted_on_a_sheet():
+    rgb = np.zeros((300, 400, 3), np.uint8); rgb[:] = (240, 238, 232)    # white sheet
+    rgb[:, 20:380] = (205, 205, 208)                                     # grey sky inside the painting
+    rgb[150:270, 20:380] = (60, 80, 60)                                  # land, 30 px of sheet below
+    rgb[270:] = (240, 238, 232)
+    x0, x1, y1 = paper_sides(rgb)
+    assert 20 <= x0 <= 30 and 370 <= x1 <= 380 and 260 <= y1 <= 270
+    land = rgb.copy(); land[150:] = (60, 80, 60)                         # land reaching the bottom
+    land[:, :20] = land[:, 380:] = (60, 80, 60)
+    assert paper_sides(land) is None
+
+
+def test_light_peel_keeps_a_thin_dark_mast_that_the_full_peel_erodes():
+    rgb = np.zeros((200, 200, 3), np.uint8); rgb[:] = (205, 205, 208)
+    rgb[120:] = (70, 75, 100)
+    rgb[40:120, 98:104] = (70, 75, 100)                        # 6 px wide dark transmitter mast
+    alpha, s = key_sky(rgb)
+    full, _ = peel_rim(rgb, alpha, s["bg"])
+    light, _ = peel_rim(rgb, alpha, s["bg"], light=True)
+    assert full[60, 100] == 0 and light[60, 100] == 255
+    assert light[20, 100] == 0 and light[160, 100] == 255

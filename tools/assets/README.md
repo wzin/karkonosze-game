@@ -21,6 +21,7 @@ Klucz: `FAL_KEY` ze środowiska albo linia `fal: <klucz>` w `~/.api_keys` (`falk
 .venv/bin/python generate.py                        # wszystko, co nie ma raw/<id>.png (4 wątki, tabela OK/FAIL)
 .venv/bin/python generate.py --only hub/            # tylko id z prefiksem
 .venv/bin/python generate.py --force hub/sky --force hub/valley --note "powód"   # re-roll tylko tych id
+.venv/bin/python generate.py --choose hub/ridge_far=5 --note "dlaczego"         # wybór wcześniejszej próby
 .venv/bin/python cutout.py [--only PREFIX] [--force ID ...]   # raw/<id>.cut.png dla cutout: true
 .venv/bin/python pack.py                            # WebP + manifest.json (scalane z istniejącym), potem kontrola
 .venv/bin/python pack.py --check                    # sama kontrola (działa bez raw/, np. w CI)
@@ -34,10 +35,13 @@ Z katalogu głównego repo testy: `tools/assets/.venv/bin/python -m pytest tools
 ## Manifest
 
 Globalnie: `style` (zdanie stylu dla scen, z briefu), `style_object` (to samo bez „layered … scene”),
-`cutout_suffix`, `band_suffix`, `edit_suffix` (klatki postaci), `edit_suffix_scene` (tło przemalowane z tła-siostry). Asset: `id` (`<kategoria>/<nazwa>`, to też alias w grze),
-`style` (`dusk|dark|morning`), `size` (płótno generacji, wielokrotność 16, ≤ 2048), opcjonalnie
-`out` (rozmiar wyjściowy, gdy inny niż `size`), `cutout: true`, `kind` (`scene|object|band`),
-`route` (`flux|nano|edit`), `ref` (dla `edit`), `prompt`.
+`cutout_suffix`, `band_suffix`, `wisp_suffix` (mgła na czarnym tle), `edit_suffix` (klatki postaci), `edit_suffix_scene` (tło przemalowane z tła-siostry). Asset: `id` (`<kategoria>/<nazwa>`, to też alias w grze),
+`style` (`dusk|dark|morning` — pierwszy zestaw; `mist_dusk|mist_morning` — iteracja 1; `wisp` — smugi mgły), `size` (płótno generacji, wielokrotność 16, ≤ 2048), opcjonalnie
+`out` (rozmiar wyjściowy, gdy inny niż `size`, może być > 2048, np. `hub/ridge_far` 2560), `cutout: true`, `kind` (`scene|object|band|wisp`),
+`route` (`flux|ultra|nano|edit`), `ref` (dla `edit`), `prompt`, oraz opcje wycinania/pakowania:
+`fade_x: true` (albo ułamek szerokości, domyślnie 0,25: alfa mnożona przez gładką rampę na lewym i prawym końcu, smugi mgły nie mają widocznych końców),
+`peel_rim: light` (pas malarski bez papierowej krawędzi: bez zdzierania obwódki, erozja tylko pikseli w kolorze nieba, więc cienki ciemny maszt czy iglica zostają),
+`key_pockets: false` (bez kluczowania zamkniętych „kieszeni” nieba: blada mgła między pniami nie zostaje wycięta w dziury).
 
 Prompt = temat → ramka (`cutout_suffix` / `band_suffix`) → zdanie stylu:
 
@@ -46,22 +50,31 @@ Prompt = temat → ramka (`cutout_suffix` / `band_suffix`) → zdanie stylu:
 | `scene` | bez `cutout` | — | `style` | brak (tło 1920×1080) |
 | `object` | `cutout: true` | `cutout_suffix` | `style_object` | `fal-ai/birefnet` + naprawa dziur |
 | `band` | jawnie | `band_suffix` | `style` | lokalne kluczowanie płaskiego nieba (`cutout.py`) |
+| `wisp` | jawnie | `wisp_suffix` | `style_object` | lokalne kluczowanie luminancji (jasna mgła na czarnym tle → miękka alfa) |
 
 Trasy: `flux` (domyślna) → `fal-ai/flux-pro/v1.1` (`safety_tolerance: "5"`, `enable_safety_checker: false`);
+`ultra` → `fal-ai/flux-pro/v1.1-ultra` (najbliższe `aspect_ratio`, ok. 4 MP; do porównań z nano przy dużych planach);
 `nano` → `fal-ai/nano-banana-pro` (tekst→obraz, najbliższe `aspect_ratio`, 1K/2K);
 `edit` → `fal-ai/nano-banana-pro/edit` z `image_urls: [upload(raw/<ref>.png)]`, awaryjnie `fal-ai/flux-pro/kontext`.
 
 ## Lock (`raw/manifest.lock.json`)
 
 `{ id: { model, prompt, seed, url, size, gen_size|aspect_ratio, returned_size, route, generated_at, attempts: [...], cutout: {...}, repairs: [...] } }`.
-`attempts` to wszystkie próby po kolei (z `note` = powód re-rolla); pola na wierzchu = ostatnia próba = wybrana.
-`cutout` opisuje wycięcie (model/metoda, statystyki dziur), `repairs` poprawki z `repair.py`.
+`attempts` to wszystkie próby po kolei (z `note` = powód re-rolla); pola na wierzchu = wybrana próba: ostatnia,
+albo ta z `chosen` (numer od 1, ustawiany przez `generate.py --choose ID=N`, z uzasadnieniem w `chosen_note`).
+Każda próba zostaje też lokalnie jako `raw/<id>.a<N>.png` (nie w repo), więc wybór wcześniejszej nie wymaga sieci
+(bez kopii `--choose` pobiera obraz z `url` próby).
+`cutout` opisuje wycięcie (model/metoda, statystyki dziur, `paper_crop`, `sky_drift`, `rim_mode`), `repairs` poprawki z `repair.py`;
+przy nowej próbie `repairs` przechodzą do próby, którą naprawiały.
 
 ## Pakowanie
 
-- scene: cover-fit do `out`/`size`, WebP q84 bez alfy.
+- scene: najpierw odcięcie jasnego marginesu „kartki” (`paper_margin`: jasny kolor narożników na wszystkich
+  czterech bokach + 6 px), potem cover-fit do `out`/`size`, WebP q84 bez alfy.
 - object: przycięcie do bbox alfy w rozdzielczości surowej, dopasowanie do pudełka `size` (bez powiększania ponad surowe piksele), margines 8 px, WebP q88. Klatki animacji (`route: edit` + `ref`) mają wspólny bbox i skalę, więc się nie przesuwają.
-- band: dopasowanie do szerokości, obcięcie nieba, ewentualne obcięcie dołu (zasłaniają go bliższe warstwy).
+- band: odcięcie wykluczowanych marginesów po bokach i u dołu (`band_margin`, gdy ląd nie sięga krawędzi),
+  dopasowanie do szerokości, obcięcie nieba, ewentualne obcięcie dołu (zasłaniają go bliższe warstwy).
+- wisp: jak object (przycięcie do bboxa alfy z kluczowania luminancji), potem `fade_x`.
 - Scalanie: `pack.py` wczytuje istniejący `manifest.json`, przepakowuje tylko assety, których źródło jest w `raw/`
   (klatki animacji tylko gdy są wszystkie), pozostałe wpisy zostawia, usuwa wpisy id, których nie ma już w
   `manifest.yaml`, i wypisuje `repacked N, kept M`. `raw/` nie jest w repo, więc na czystym klonie `pack.py` nie
@@ -166,7 +179,76 @@ Cienie rzucane birefnet usuwa sam (rzepa, kamień, słoiki).
 **Słabsze, ale zostają (brak budżetu prób albo akceptowalne):** `mine/pickaxe` (kilof z jednym ostrzem i obuchem),
 `mine/bg_2` (mała wisząca lampka pod stropem; przy ambient 0.06 prawie niewidoczna), `herbs/pestle` (na prawym dole
 1-pikselowy jasnoniebieski ślad po papierowej chmurce z tła), `turnips/emma_2` (ręce zamienione, nogi prawie jak w klatce 1; kilka jasnych drobinek pod rąbkiem),
-`hub/cloud_1` (biała), `hub/sky` (wzgórza na dole, zasłonięte), `herbs/bg_far` (słaby ślad ścieżki u dołu
-mimo „no path”), `turnips/mound` (raczej kretowisko z dziurą niż kopczyk). Styl: flux dał część obiektów jako wektorowy
+`hub/cloud_1` (biała), `turnips/mound` (raczej kretowisko z dziurą niż kopczyk). Styl: flux dał część obiektów jako wektorowy
 clip-art (słoiki, portrety), nano wyraźniej trzyma „paper-cut + gwasz”; w obrębie zestawów (słoiki, portrety,
 kształty szkła, rośliny) styl jest spójny.
+
+### Iteracja 1 (2026-10-05, uwagi właściciela)
+
+Plan: `docs/superpowers/plans/2026-10-05-iteration-1.md` („Kierunek artystyczny”, „Strumień B”). Przemalowane:
+`hub/sky`, `hub/ridge_far`, `hub/ridge_mid`, `hub/valley`, `turnips/bg`, `herbs/bg_far`, `herbs/strip_mid`,
+`herbs/strip_near`, `herbs/laborant_1`, `herbs/laborant_2`; nowe: `hub/mist_1`, `hub/mist_2`. Reszta zestawu bez zmian
+(nadal style `dusk|dark|morning`).
+
+**Styl `mist_dusk` / `mist_morning`.** Mniej dziecięco, poważniej i tajemniczo: „serious, atmospheric illustration for
+a book of old mountain legends, not a cartoon and not childish”, gwasz z subtelną głębią warstw paper-cut, przygaszona
+paleta (łupek, mech, śliwka, ochra), miękkie światło, mgła między planami. Bez „storybook” i „gentle rounded shapes”,
+które ciągnęły w stronę dziecięcej ilustracji. Wszystkie nowe obrazy idą przez nano-banana-pro w 2K (tła 2752×1536,
+pasy 3168×1344, pack zmniejsza), bo flux v1.1 daje najwyżej 1440 px, a w tym zadaniu liczy się wierność.
+Pierwsze sformułowanie „matte gouache **on textured paper**” sprawiło, że nano 5 z 14 obrazów namalowało jako obraz na
+kartce z białym marginesem (`ridge_far` #4, `valley` #3, `turnips/bg` #3, `strip_mid` #3, #4), także przy dopisanym
+„no border”; teraz „with a fine paper grain”. Wybrane próby z pierwszej fali mają w locku dawne brzmienie stylu.
+Margines z obrazów, które zostały, odcinają skrypty: `pack.paper_margin` (sceny), `cutout.paper_sides` i
+`pack.band_margin` (pasy).
+
+**Kluczowanie pasów.** (1) nano rozjaśnia „płaskie” niebo w mgiełkę ku linii horyzontu (`strip_near` #5: 220 → 232 na
+800 px, poza tolerancją ~11), co zostawiało biały pas nad trawą; `key_sky` porównuje teraz niebo połączone z górną
+krawędzią z kolorem *danego wiersza* (`sky_profile`: śledzi powolny dryf, dopóki wiersz jest w większości gładkim
+niebem, potem zamrożony), kieszenie nadal z kolorem z góry. (2) Kieszenie nieba ≥ 150 px wycinały dziury w bladej mgle
+między pniami (`strip_mid` #4) → `key_pockets: false`. (3) Pełne `peel_rim` erodowało 3 px od nieba i zjadało maszt
+nadajnika na Śnieżnych Kotłach (6 px szerokości), iglicę kaplicy i obrys kopuł obserwatorium; bez niego krawędź miała
+jasne kropki z ziarna papieru (alfa < 0,2 odmieszana wzmacnia szum) → `peel_rim: light` dla `ridge_far`. Pozostałe pasy
+zostały przy pełnym `peel_rim` (sprawdzone na złożeniu; `halo.py`: brzeg ≤ wnętrze dla wszystkich pięciu).
+
+**Smugi mgły (`kind: wisp`).** birefnet daje mgle twardą maskę, więc mgła jest malowana jasno na czarnym tle, a
+`cutout.key_luma` liczy alfę z luminancji (tło = ciemna część brzegu, próg = szum tła × 1,5, góra = 99,5 percentyl),
+kolor odmieszany od tła. Potem `fade_x: true` w `pack.py`: alfa × smoothstep od 0 na krawędzi do 1 na 25 % szerokości
+z każdej strony (smugi wychodziły poza kadr, końce byłyby ucięte). Pierwsza próba (styl „dry-brush”) dała pociągnięcia
+pędzla z włosiem zamiast mgły; druga ze stylem „soft, diffuse … like real fog or smoke, no visible brush strokes”.
+
+**Wybór prób (`--choose`).** `generate.py` zapisuje każdą próbę jako `raw/<id>.a<N>.png`, a `--choose ID=N` przywraca
+wcześniejszą (obraz + pola na wierzchu locka + `chosen`, `chosen_note`). Prompt w `manifest.yaml` dla wybranych
+prób przywrócony do tematu tej próby; zdanie stylu jest już nowe (wyżej).
+
+**Re-rolle iteracji 1 (powód → wynik):**
+
+- `hub/sky` 1× (#3): dramatyczne niebo indygo → fiolet → śliwka, gęste niskie chmury, sierp księżyca, bez lądu na dole.
+- `hub/ridge_far` 3× (#4–#6), wybrana #5: #4 nano dobre, ale dzienne światło i biały margin; #5 nano z dopiskiem o
+  zmierzchu: cały grzbiet w kolejności — stożek Śnieżki z kaplicą i kopułami obserwatorium, urwisko kotła, płaskowyż z
+  kotłami, kopuła, maszt na krawędzi kotłów, kolejne kotły, schronisko na Szrenicy po prawej, mgła u stóp; #6
+  `flux-pro/v1.1-ultra`: ośnieżone Alpy pod błękitnym niebem, odrzucone. Pack 2560 px (z 3168 surowych, ostre).
+- `hub/ridge_mid` 1× (#3): Chojnik na skale (prawo od środka), wieża Grodnej (lewo), mgła w kotlinach; nad nimi
+  dalsze, blade wzgórza (nie góry; zasłaniają tylko stopę `ridge_far`).
+- `hub/valley` 2× (#3 obraz na kartce z prostą górną krawędzią → #4): miasteczko z wieżą kościoła, słabe okna w ochrze,
+  rzeka, mgła w dolinie, nieregularna linia koron drzew na górze.
+- `hub/mist_1`, `hub/mist_2` 2×: pędzel z włosiem → miękka mgła/dym.
+- `turnips/bg` 1× (#3): stożek z gołoborza (bez trawy), kaplica z kopułką i latarnią, dwa „spodki” obserwatorium,
+  zygzakowata kamienna ścieżka, kosodrzewina, mgła, ciężkie chmury; bruzdy w dolnych ~34 % (rzędy kopczyków
+  `FIELD` y 836–1028 leżą w nich). Margines kartki odcięty przez `paper_margin`.
+- `herbs/bg_far` 1× (#2): chłodny mglisty poranek, plany świerków rozdzielone mgłą, szczyt z kaplicą w chmurze.
+- `herbs/strip_mid` 3× (#3–#5), wybrana #4: wszystkie trzy jako obraz na kartce; #3 i #5 z niebem *wewnątrz* ramki
+  (nie do wycięcia), #4 z niebem poza nią → `paper_sides` + `key_pockets: false`.
+- `herbs/strip_near` 3× (#4–#6), wybrana #5: #4 kłęby mgły na niebie, #6 dwa pasy jeden nad drugim; #5: trawa i
+  kamienie na górze, ubita ścieżka z płaskimi kamieniami: górna krawędź ścieżki = linia gruntu na ~59 % wysokości
+  spakowanego pasa (y ≈ 228 z 388), pod nią gleba.
+- `herbs/laborant_1` 1× (#2, nano): XVIII-wieczny laborant z profilu, idzie w prawo: trikorn, długi brązowy surdut,
+  zielona kamizelka, halsztuk, spodnie do kolan, szare pończochy, trzewiki z klamrami, kosz z ziołami, laska.
+- `herbs/laborant_2` 3× (#3–#5 edit), wybrana #5: #3 i #4 tylko szerszy krok, z przodu ta sama noga (guziki przy
+  kolanie na tylnej nodze); #5 z opisem nóg w kadrze („noga z guzikami przy kolanie idzie do przodu”): nogi zamienione.
+
+**Słabsze, ale zostają:** `hub/valley` (kilka jasnych plamek w koronach drzew na linii nieba, ~2 px po spakowaniu),
+`hub/ridge_mid` (blade dalsze wzgórza z delikatnie jaśniejszą krawędzią), `herbs/strip_mid` (pojedyncze blade łaty mgły
+między czubkami świerków; tło gry jest tam jasne), `hub/ridge_far` (kotły bardziej strome i skaliste niż w rzeczywistości;
+grzbiet jaśniejszy od nieba — do przyciemnienia tintem w scenie). Styl: przemalowane warstwy są malarskie i półrealistyczne,
+`ridge_mid` bardziej „wycinankowy”; na złożeniu hubu (niebo + trzy pasy + mgły na ciemnym tle 1920×1080) czyta się
+to jako jeden mglisty krajobraz.

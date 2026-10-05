@@ -2,7 +2,8 @@
 
     .venv/bin/python cutout.py [--only PREFIX] [--force ID ...]
 
-raw/<id>.png -> raw/<id>.cut.png (RGBA, same size as the raw image).
+raw/<id>.png -> raw/<id>.cut.png (RGBA, same size as the raw image; a band painted as a
+picture on a sheet of paper loses the paper margin first, see paper_sides).
 
 Objects go through fal-ai/birefnet, then we guard against its known failure on
 dark subjects: parts of the interior turn semi-transparent. An enclosed hole
@@ -14,6 +15,8 @@ fill, but on concave plants and figures it is always met, so the per-hole test
 decides. Background-coloured holes (inside a basket handle) and holes birefnet
 cut confidently to zero (inside a cable loop) stay transparent.
 Landscape bands (kind: band) are keyed instead: birefnet finds no object in them.
+Mist wisps (kind: wisp) are painted light on flat black and keyed by luminance, so
+their alpha is soft everywhere (birefnet would give a hard-edged blob).
 Edge pixels are un-mixed from the background colour to avoid a grey halo.
 """
 import argparse, datetime, io, os, sys, traceback
@@ -39,6 +42,10 @@ KEY_BLUR, KEY_GRAD, KEY_DIST, KEY_POCKET = 2.0, 5.0, 45.0, 150
 # Light paper rim along the keyed skyline (raw px): see peel_rim.
 RIM_DEPTH, RIM_DIST, RIM_CHROMA, RIM_OPEN, RIM_ERODE, RIM_ISLAND, RIM_SPECK = 16, 65.0, 20.0, 7, 3, 2500, 400
 RIM_KEEP_AREA = 3000       # a light, neutral region thicker than 2*RIM_OPEN and this big is content
+# Mist on black (kind: wisp): alpha ramps from the background noise floor to the bright end.
+LUMA_FLOOR, LUMA_TOP_PCT, LUMA_MIN_FG = 6.0, 99.5, 0.05
+LUMA_W = np.array([0.299, 0.587, 0.114], np.float32)
+PAPER_TOL, PAPER_MIN_LUMA, PAPER_INSET = 20.0, 170.0, 6   # band painted on a sheet: see paper_sides
 
 
 def label(mask: np.ndarray) -> tuple[np.ndarray, int]:
@@ -166,11 +173,63 @@ def defringe(rgb: np.ndarray, alpha: np.ndarray, bg: np.ndarray) -> np.ndarray:
     return out.astype(np.uint8)
 
 
-def key_sky(rgb: np.ndarray) -> tuple[np.ndarray, dict]:
+def sky_profile(s: np.ndarray, grad: np.ndarray, bg: np.ndarray, tol: float) -> np.ndarray:
+    """Sky colour per row (H x 3). nano often lightens the "flat" sky into a haze towards the
+    skyline (220 -> 232 over 800 px, past the tolerance); the reference follows that slow drift
+    row by row while the row is still mostly smooth sky, and is frozen from the first row that
+    is mostly land, so pale content below the skyline is still judged against the sky."""
+    prof = np.empty((s.shape[0], 3), np.float32)
+    cur, frozen = bg.astype(np.float32), False
+    for y in range(s.shape[0]):
+        if not frozen:
+            ok = (grad[y] < KEY_GRAD) & (np.linalg.norm(s[y] - cur, axis=1) < tol)
+            if ok.mean() >= 0.5:
+                cur = np.median(s[y][ok], axis=0)
+            else:
+                frozen = True
+        prof[y] = cur
+    return prof
+
+
+def paper_sides(rgb: np.ndarray):
+    """(x0, x1, y1) inside a light paper margin at the left, right and bottom of a band, or None.
+
+    nano sometimes paints the band as a picture on a sheet of paper: a white margin that is
+    not the sky colour, so the key keeps it. It is recognised from the two bottom corners
+    (light, alike); a column is margin when >= 90 % of its lower 40 % is that paper colour,
+    a row when >= 90 % of it is. PAPER_INSET more px go with it (the ragged painted edge).
+    """
+    h, w = rgb.shape[:2]
+    c = rgb.astype(np.float32)
+    k = 8
+    bl, br = np.median(c[-k:, :k].reshape(-1, 3), axis=0), np.median(c[-k:, -k:].reshape(-1, 3), axis=0)
+    paper = (bl + br) / 2
+    if float(paper @ LUMA_W) < PAPER_MIN_LUMA or np.linalg.norm(bl - br) > PAPER_TOL:
+        return None
+    near = np.linalg.norm(c - paper, axis=2) < PAPER_TOL
+
+    def run(frac: np.ndarray, limit: float) -> int:
+        n = 0
+        while n < min(limit, len(frac)) and frac[n] >= 0.9:
+            n += 1
+        return n
+    cols = near[h * 3 // 5:].mean(axis=0)
+    left, right = run(cols, w * 0.08), run(cols[::-1], w * 0.08)
+    bottom = run(near[:, left:w - right].mean(axis=1)[::-1], h * 0.15)
+    if max(left, right, bottom) < 3:
+        return None
+    pad = lambda v: v + PAPER_INSET if v >= 3 else 0
+    return pad(left), w - pad(right), h - pad(bottom)
+
+
+def key_sky(rgb: np.ndarray, pockets: bool = True) -> tuple[np.ndarray, dict]:
     """Alpha for a landscape band: remove the flat sky connected to the top edge.
 
     birefnet returns an empty mask for landscapes (no salient object), so bands
-    are generated under a plain light grey sky and keyed here instead.
+    are generated under a plain light grey sky and keyed here instead. The sky
+    connected to the top is judged against a per-row colour (sky_profile); enclosed
+    pockets against the top colour, and only when `pockets` (kind: band assets with
+    pale mist between trunks set `key_pockets: false`, the mist would be punched out).
     """
     s = np.asarray(Image.fromarray(rgb).filter(ImageFilter.GaussianBlur(KEY_BLUR))).astype(np.float32)
     grad = np.zeros(s.shape[:2], np.float32)
@@ -184,14 +243,21 @@ def key_sky(rgb: np.ndarray) -> tuple[np.ndarray, dict]:
     # nano skies are flat to ~2 levels while pale pastel trees sit only 25-30 away
     noise = float(np.percentile(np.linalg.norm(top - bg, axis=1), 90))
     tol = float(np.clip(3 * noise + 6, 8, KEY_DIST))
-    cand = (grad < KEY_GRAD) & (np.linalg.norm(s - bg, axis=2) < tol)
-    lab, n = label(cand)
-    area = np.bincount(lab.ravel(), minlength=n + 1)
-    is_sky = area >= KEY_POCKET              # enclosed sky pockets between trees / grass blades
-    is_sky[np.unique(lab[0])] = True         # everything connected to the top edge
-    is_sky[0] = False
-    sky = is_sky[lab]
-    pocket_px = int((sky & ~np.isin(lab, np.unique(lab[0]))).sum())
+    prof = sky_profile(s, grad, bg, tol)
+    top_cand = (grad < KEY_GRAD) & (np.linalg.norm(s - prof[:, None, :], axis=2) < tol)
+    tl, _ = label(top_cand)
+    top_ids = np.unique(tl[0])
+    sky = np.isin(tl, top_ids[top_ids > 0])  # everything connected to the top edge
+    pocket_px = 0
+    if pockets:                              # enclosed sky pockets between trees / grass blades
+        cand = (grad < KEY_GRAD) & (np.linalg.norm(s - bg, axis=2) < tol)
+        lab, n = label(cand & ~sky)
+        area = np.bincount(lab.ravel(), minlength=n + 1)
+        is_pocket = area >= KEY_POCKET
+        is_pocket[0] = False
+        pocket = is_pocket[lab]
+        pocket_px = int(pocket.sum())
+        sky |= pocket
     # soft edge from the un-blurred distance in a thin band around the sky
     zone = sky.copy()
     for _ in range(int(KEY_BLUR * 2) + 1):
@@ -199,11 +265,44 @@ def key_sky(rgb: np.ndarray) -> tuple[np.ndarray, dict]:
         z[1:] |= zone[:-1]; z[:-1] |= zone[1:]; z[:, 1:] |= zone[:, :-1]; z[:, :-1] |= zone[:, 1:]
         zone = z
     zone &= ~sky
-    d_raw = np.linalg.norm(rgb.astype(np.float32) - bg, axis=2)
+    d_raw = np.linalg.norm(rgb.astype(np.float32) - prof[:, None, :], axis=2)
     alpha = np.where(sky, 0, 255).astype(np.float32)
     alpha[zone] = 255 * np.clip((d_raw[zone] - tol) / 24, 0, 1)
     return alpha.astype(np.uint8), {"method": "key", "bg": [int(v) for v in bg], "tolerance": round(tol, 1),
-                                    "sky_ratio": round(float(sky.mean()), 4), "sky_pocket_px": pocket_px}
+                                    "sky_ratio": round(float(sky.mean()), 4), "sky_pocket_px": pocket_px,
+                                    "sky_drift": round(float(np.linalg.norm(prof[-1] - bg)), 1)}
+
+
+def key_luma(rgb: np.ndarray) -> tuple[np.ndarray, np.ndarray, dict]:
+    """Alpha and colour for light mist painted on a flat dark background (kind: wisp).
+
+    alpha = (luma - background - floor) / (bright end - background - floor), clipped to 0..1,
+    where floor covers the background's own noise (paper grain) and the bright end is a high
+    percentile of the picture. The colour is un-mixed from the background so the wisp keeps
+    its own pale tint; nearly transparent pixels take the mean colour of the dense mist.
+    """
+    c = rgb.astype(np.float32)
+    luma = c @ LUMA_W
+    # the mist may run off an edge, so the background is the dark part of the border only
+    edge = np.concatenate([c[0], c[-1], c[:, 0], c[:, -1]])
+    edge_l = edge @ LUMA_W
+    bg_l = float(np.percentile(edge_l, 20))
+    quiet = np.abs(edge_l - bg_l) < 30
+    bg = np.median(edge[quiet], axis=0)
+    bg_l = float(bg @ LUMA_W)
+    floor = max(LUMA_FLOOR, float(np.percentile(np.abs(edge_l[quiet] - bg_l), 95)) * 1.5)
+    top = float(np.percentile(luma, LUMA_TOP_PCT))
+    span = max(top - bg_l - floor, 1.0)
+    a = np.clip((luma - bg_l - floor) / span, 0.0, 1.0)
+    dense = a > 0.5
+    mean = c[dense].mean(axis=0) if dense.any() else np.full(3, 230, np.float32)
+    un = (c - (1.0 - a[..., None]) * bg) / np.maximum(a[..., None], LUMA_MIN_FG)
+    w = np.clip(a / 0.25, 0, 1)[..., None]            # thin mist: blend towards the dense colour
+    col = np.clip(w * un + (1 - w) * mean, 0, 255).astype(np.uint8)
+    alpha = np.round(a * 255).astype(np.uint8)
+    return col, alpha, {"method": "luma", "bg": [int(v) for v in bg], "floor": round(floor, 1),
+                        "top": round(top, 1), "mean_alpha": round(float(a.mean()), 4),
+                        "mist_colour": [int(v) for v in mean]}
 
 
 def grow(mask: np.ndarray, r: int) -> np.ndarray:
@@ -216,7 +315,7 @@ def grow(mask: np.ndarray, r: int) -> np.ndarray:
     return out
 
 
-def peel_rim(rgb: np.ndarray, alpha: np.ndarray, bg) -> tuple[np.ndarray, int]:
+def peel_rim(rgb: np.ndarray, alpha: np.ndarray, bg, light: bool = False) -> tuple[np.ndarray, int]:
     """Remove the light paper edge left along a keyed skyline, then erode the alpha.
 
     Paper-cut layers have a light, almost neutral rim (up to ~15 px at raw size)
@@ -227,12 +326,17 @@ def peel_rim(rgb: np.ndarray, alpha: np.ndarray, bg) -> tuple[np.ndarray, int]:
     small sheen patches on fir tips) is cleared. Small floating islands are
     dropped, tiny holes inside the land are restored, and the alpha is eroded by
     RIM_ERODE px from the sky side only (4-neighbour, so no square notches).
+
+    light=True (manifest `peel_rim: light`) is for painterly bands without a paper
+    edge: no rim peel, and the erosion takes only pixels close to the sky colour (the
+    keyed edge's grain speckles), so a dark mast or chapel spire a few px wide stays.
     """
     c = rgb.astype(np.float32)
     sky = alpha == 0
     near = grow(sky, RIM_DEPTH) & (alpha > 0)
     chroma = c.max(axis=2) - c.min(axis=2)
-    cand = near & (np.linalg.norm(c - np.asarray(bg, np.float32), axis=2) < RIM_DIST) & (chroma < RIM_CHROMA)
+    skylike = np.linalg.norm(c - np.asarray(bg, np.float32), axis=2) < RIM_DIST
+    cand = near & skylike & (chroma < RIM_CHROMA) & (not light)
     thick = grow(~grow(~cand, RIM_OPEN), RIM_OPEN) & cand      # opening of cand
     tl, tn = label(thick)                                      # only big light objects are kept;
     keep = np.bincount(tl.ravel(), minlength=tn + 1) >= RIM_KEEP_AREA   # small thick bits are sheen
@@ -261,8 +365,12 @@ def peel_rim(rgb: np.ndarray, alpha: np.ndarray, bg) -> tuple[np.ndarray, int]:
     tiny = (a == 0) & ~seed & (alpha > 0)
     a[tiny] = alpha[tiny]
     inner = grow(seed, RIM_ERODE)
+    if light:
+        inner &= skylike | seed
     a[inner] = 0
     soft = grow(inner, 1) & ~inner
+    if light:
+        soft &= skylike
     a[soft] = np.minimum(a[soft], 128)
     return a, int((rim & ~tiny).sum())
 
@@ -270,11 +378,24 @@ def peel_rim(rgb: np.ndarray, alpha: np.ndarray, bg) -> tuple[np.ndarray, int]:
 def cut_one(asset: dict) -> dict:
     src = raw_path(asset["id"])
     dest = raw_path(asset["id"], ".cut.png")
+    if kind(asset) == "wisp":
+        rgb, a, stats = key_luma(np.asarray(Image.open(src).convert("RGB")))
+        Image.fromarray(np.dstack([rgb, a]), "RGBA").save(dest)
+        info = {"model": "local luma key (cutout.py)", **stats,
+                "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")}
+        update_lock(asset["id"], lambda e: e.__setitem__("cutout", info))
+        return info
     if kind(asset) == "band":
         rgb = np.asarray(Image.open(src).convert("RGB"))
-        a, stats = key_sky(rgb)
-        a, stats["rim_px_removed"] = peel_rim(rgb, a, stats["bg"])
+        crop = paper_sides(rgb)
+        if crop:
+            rgb = np.ascontiguousarray(rgb[:crop[2], crop[0]:crop[1]])
+        a, stats = key_sky(rgb, pockets=asset.get("key_pockets", True))
+        stats["paper_crop"] = list(crop) if crop else None
+        rim = asset.get("peel_rim", True)    # true | light (painterly band, no paper edge)
+        a, stats["rim_px_removed"] = peel_rim(rgb, a, stats["bg"], light=rim == "light")
         stats["eroded_px"] = RIM_ERODE
+        stats["rim_mode"] = "light" if rim == "light" else "full"
         rgb = defringe(rgb, a, np.array(stats["bg"], np.float32))
         Image.fromarray(np.dstack([rgb, a]), "RGBA").save(dest)
         info = {"model": "local sky key (cutout.py)", **stats,
@@ -329,6 +450,7 @@ def main(argv=None) -> int:
             try:
                 s = f.result()
                 results[a["id"]] = ("OK", f"sky key, sky={s['sky_ratio']:.2f}" if s.get("method") == "key" else
+                                    f"luma key, mean alpha={s['mean_alpha']:.2f}" if s.get("method") == "luma" else
                                     f"hull_low={s['hull_low_ratio']:.2f} filled={s['filled_px']} kept_bg_holes={s['kept_bg_hole_px']}")
             except Exception as e:
                 results[a["id"]] = ("FAIL", repr(e)[:160])
