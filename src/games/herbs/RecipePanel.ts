@@ -14,7 +14,8 @@ const BAR = { inset: 28, y: PANEL.h - 24, h: 10 };
 
 /**
  * The recipe card under the TopBar: the recipe line, one 90 px miniature per herb with its name and
- * a tick once it is in the basket, and the time left as a shrinking bar. Top-left origin.
+ * a tick once it is in the basket, and the time left as a shrinking bar. Top-left origin. Cool mist
+ * accents (edge, names, bar) instead of the warm ember of the other cards: it hangs in a misty morning.
  */
 export class RecipePanel extends Container {
   private readonly line: Text;
@@ -35,7 +36,7 @@ export class RecipePanel extends Container {
     this.line = new Text({ text: '', style });
     this.line.anchor.set(0.5, 0);
     this.line.position.set(PANEL.w / 2, 16);
-    this.addChild(panel(PANEL.w, PANEL.h), this.line, this.slots, this.bar);
+    this.addChild(panel(PANEL.w, PANEL.h, 0.82, Theme.color.mist), this.line, this.slots, this.bar);
   }
 
   show(recipe: Recipe): void {
@@ -46,12 +47,12 @@ export class RecipePanel extends Container {
     recipe.herbs.forEach((id, i) => {
       const slot = new Container();
       slot.position.set(x0 + i * SLOT_W, ICON_Y);
-      const disc = new Graphics().circle(0, 0, ICON / 2 + 6).fill({ color: Theme.color.paper, alpha: 0.14 });
+      const disc = new Graphics().circle(0, 0, ICON / 2 + 6).fill({ color: Theme.color.mist, alpha: 0.14 });
       const icon = fit(sprite(this.assets, `herbs/plant_${id}`, { w: 200, h: 240, tint: 0x6d9a52 }), ICON, ICON);
       icon.anchor.set(0.5);
       const name = new Text({
         text: this.i18n.t(`herbs.plants.${id}`),
-        style: { fontFamily: Theme.font.body, fontWeight: '800', fontSize: 22, fill: Theme.color.emberSoft },
+        style: { fontFamily: Theme.font.body, fontWeight: '800', fontSize: 22, fill: Theme.color.mist },
       });
       name.anchor.set(0, 0.5);
       // the name sits right of the icon so the panel stays short
@@ -81,11 +82,11 @@ export class RecipePanel extends Container {
   setTime(left: number): void {
     const w = PANEL.w - BAR.inset * 2;
     const k = Math.max(0, Math.min(1, left));
-    const color = k < 0.25 ? Theme.color.bad : Theme.color.ember;
+    const color = k < 0.25 ? Theme.color.bad : Theme.color.mist;
     this.bar
       .clear()
       .roundRect(BAR.inset, BAR.y, w, BAR.h, BAR.h / 2)
-      .fill({ color: Theme.color.paper, alpha: 0.15 });
+      .fill({ color: Theme.color.mist, alpha: 0.15 });
     if (k > 0) this.bar.roundRect(BAR.inset, BAR.y, Math.max(BAR.h, w * k), BAR.h, BAR.h / 2).fill(color);
   }
 }

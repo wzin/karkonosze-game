@@ -126,9 +126,9 @@ describe('layoutLabels', () => {
 describe('parallax', () => {
   it('moves layers against the pointer, up to the amplitude at the edges', () => {
     expect(parallaxTarget(960, 540)).toEqual({ x: 0, y: 0 });
-    expect(parallaxTarget(1920, 1080)).toEqual({ x: -40, y: -40 });
-    expect(parallaxTarget(0, 540)).toEqual({ x: 40, y: 0 });
-    expect(parallaxTarget(-500, 3000)).toEqual({ x: 40, y: -40 });
+    expect(parallaxTarget(1920, 1080)).toEqual({ x: -30, y: -30 });
+    expect(parallaxTarget(0, 540)).toEqual({ x: 30, y: 0 });
+    expect(parallaxTarget(-500, 3000)).toEqual({ x: 30, y: -30 });
   });
 
   it('eases towards the target at the given rate, never overshooting', () => {

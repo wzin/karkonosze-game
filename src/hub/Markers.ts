@@ -288,14 +288,15 @@ class Caption extends Container {
   }
 }
 
+/** Soft labels for the dusk: the fill a touch see-through, a thinner dark edge, a low shadow. */
 function captionStyle(fontSize: number, fontWeight: '700' | '800', fill: number) {
   return {
     fontFamily: Theme.font.body,
     fontWeight,
     fontSize,
-    fill,
-    stroke: { color: Theme.color.night, width: 6, join: 'round' as const },
-    dropShadow: { color: Theme.color.night, alpha: 0.5, blur: 4, distance: 2, angle: Math.PI / 2 },
+    fill: { color: fill, alpha: 0.9 },
+    stroke: { color: Theme.color.night, width: 4.5, alpha: 0.85, join: 'round' as const },
+    dropShadow: { color: Theme.color.night, alpha: 0.45, blur: 5, distance: 2, angle: Math.PI / 2 },
   };
 }
 

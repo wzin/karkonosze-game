@@ -67,12 +67,12 @@ export function tickBadge(r = 22): Graphics {
     .stroke({ color: Theme.color.paper, width: r * 0.22, cap: 'round', join: 'round' });
 }
 
-/** Dark rounded panel with the UI kit's ember edge and drop shadow, from (0, 0). */
-export function panel(w: number, h: number, alpha = 0.82): Graphics {
+/** Dark rounded panel with the UI kit's ember edge (or `edge`) and drop shadow, from (0, 0). */
+export function panel(w: number, h: number, alpha = 0.82, edge: number = Theme.color.ember): Graphics {
   return new Graphics()
     .roundRect(0, 6, w, h, 24)
     .fill({ color: Theme.color.night, alpha: 0.35 })
     .roundRect(0, 0, w, h, 24)
     .fill({ color: Theme.color.night, alpha })
-    .stroke({ color: Theme.color.ember, alpha: 0.6, width: 2 });
+    .stroke({ color: edge, alpha: 0.6, width: 2 });
 }
