@@ -107,7 +107,7 @@ Dokładna lista zgodności ze specyfikacją i luk: [`docs/superpowers/specs/2026
 
 ## Deployment (Komodo, homecloud)
 
-Produkcja: https://karkonosze-game.ziniewicz.eu — stack Komodo `karkonosze-game` z tego repo
+Produkcja: https://karkonosze-game.ziniewicz.eu — stack Komodo `karkonosze-game` (id `6ac4d72b8de22702fe415a1e`) z tego repo
 (`compose.yaml`, obraz budowany z `Dockerfile`: pnpm build → Caddy serwuje `dist/`).
 Routing i ochrona są w repo `homecloud` (`traefik/dynamic/karkonosze-game.yml`,
 `security/crowdsec/parsers/karkonosze-game-assets.yaml`). Push na `main` uruchamia webhook
