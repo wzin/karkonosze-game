@@ -1,0 +1,30 @@
+:80 {
+    root * /srv
+    encode zstd gzip
+
+    header {
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    # Vite hashes the bundle filenames under /app/, so they can be cached hard.
+    @hashed path /app/*
+    header @hashed Cache-Control "public, max-age=31536000, immutable"
+
+    # Game art, audio and fonts keep their names across regenerations: cache for a day.
+    @media path /assets/* /fonts/*
+    header @media Cache-Control "public, max-age=86400"
+
+    # The page and the asset manifests must always be fresh.
+    header /index.html Cache-Control "no-cache"
+    header /assets/gfx/manifest.json Cache-Control "no-cache"
+    header /assets/audio/manifest.json Cache-Control "no-cache"
+
+    file_server
+
+    log {
+        output stdout
+        format console
+    }
+}

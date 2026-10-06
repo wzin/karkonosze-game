@@ -104,3 +104,16 @@ leżą w `public/fonts/`.
 - 13 miejsc to same karty koncepcji.
 
 Dokładna lista zgodności ze specyfikacją i luk: [`docs/superpowers/specs/2026-10-04-audit.md`](docs/superpowers/specs/2026-10-04-audit.md).
+
+## Deployment (Komodo, homecloud)
+
+Produkcja: https://karkonosze-game.ziniewicz.eu — stack Komodo `karkonosze-game` z tego repo
+(`compose.yaml`, obraz budowany z `Dockerfile`: pnpm build → Caddy serwuje `dist/`).
+Routing i ochrona są w repo `homecloud` (`traefik/dynamic/karkonosze-game.yml`,
+`security/crowdsec/parsers/karkonosze-game-assets.yaml`). Push na `main` uruchamia webhook
+Komodo; stack musi mieć włączone „Force deploy”, bo obraz buduje się ze źródeł i sam
+`compose.yaml` się nie zmienia. Lokalny test obrazu:
+
+```bash
+docker build -t karkonosze-game:local . && docker run --rm -p 8089:80 karkonosze-game:local
+```

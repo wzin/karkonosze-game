@@ -1,0 +1,22 @@
+# Baśnie Karkonoszy — static PixiJS game served by Caddy.
+# Deployed on: mail.ziniewicz.eu via Komodo (stack "karkonosze-game", repo wzin/karkonosze-game).
+# Routed by homecloud/traefik/dynamic/karkonosze-game.yml -> http://karkonosze-game:80.
+# The image builds the bundle from source, so the Komodo webhook needs "Force deploy" ON
+# (a code-only push leaves this file unchanged; see homecloud/AI.md).
+
+services:
+  web:
+    build: .
+    container_name: karkonosze-game
+    restart: unless-stopped
+    networks:
+      - traefik_proxy
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  traefik_proxy:
+    external: true

@@ -1,0 +1,10 @@
+node_modules
+dist
+docs/screenshots
+.superpowers
+.claude
+tools/assets/raw
+tools/assets/.venv
+tools/smoke/test-results
+tools/smoke/playwright-report
+*.log
